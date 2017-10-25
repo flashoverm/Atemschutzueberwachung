@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1.0">
+
+        <include
+            android:id="@+id/viewUpperLeft"
+            layout="@layout/monitor_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_margin="2dp"/>
+
+        <include
+            android:id="@+id/viewUpperRight"
+            layout="@layout/monitor_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_margin="2dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1.0">
+
+        <include
+            android:id="@+id/viewBottomLeft"
+            layout="@layout/monitor_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/viewUpperLeft"
+            android:layout_weight="1.0"
+            android:layout_margin="2dp"/>
+
+        <include
+            android:id="@+id/viewBottomRight"
+            layout="@layout/monitor_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/viewUpperRight"
+            android:layout_weight="1.0"
+            android:layout_margin="2dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

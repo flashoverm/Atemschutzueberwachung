@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:padding="2dp"
+        android:text="10:51"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/truppname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:padding="2dp"
+        android:paddingBottom="6dp"
+        android:text="Atemschutztrupp 1"
+        android:textAlignment="textEnd"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/lastPressure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/truppname"
+        android:layout_toRightOf="@+id/time"
+        android:layout_toStartOf="@+id/leaderPressure"
+        android:paddingRight="1dp"
+        android:paddingTop="2dp"
+        android:text="Druck bei:"
+        android:textAlignment="textEnd"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/lastPressureTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/truppname"
+        android:paddingRight="3dp"
+        android:paddingTop="2dp"
+        android:text="Rückzug"
+        android:textAlignment="textEnd"
+        android:textSize="10sp"
+        android:layout_toEndOf="@+id/textView2" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lastPressure"
+        android:layout_alignBottom="@+id/lastPressure"
+        android:paddingRight="3dp"
+        android:paddingTop="2dp"
+        android:text="15 Min"
+        android:textAlignment="textEnd"
+        android:textSize="10sp"
+        android:layout_toEndOf="@+id/lastPressure" />
+
+    <TextView
+        android:id="@+id/leaderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastPressure"
+        android:padding="2dp"
+        android:text="Huber"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/manName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/leaderName"
+        android:padding="2dp"
+        android:text="Schulz"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/leaderPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:text="150 bar"
+        android:textSize="10sp"
+        android:layout_below="@+id/lastPressure"
+        android:layout_toStartOf="@+id/manPressure"
+        android:layout_marginEnd="11dp" />
+
+    <TextView
+        android:id="@+id/manPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/lastPressure"
+        android:padding="2dp"
+        android:text="140 bar"
+        android:textAlignment="textEnd"
+        android:textSize="10sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/leaderPressure"
+        android:layout_toEndOf="@+id/textView2" />
+
+</RelativeLayout>
