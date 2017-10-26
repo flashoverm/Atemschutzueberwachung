@@ -3,12 +3,12 @@ package de.thral.atemschutzueberwachung;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Overview extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_menu);
 
 
     }
