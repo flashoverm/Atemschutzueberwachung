@@ -4,171 +4,91 @@
     android:layout_height="match_parent"
     android:background="@drawable/border">
 
-    <RelativeLayout
-        android:id="@+id/infoScreen"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/buttonBottom"
-        android:layout_toStartOf="@+id/buttonSite">
+        android:orientation="vertical"
+        android:layout_toStartOf="@+id/buttonSide">
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:padding="6dp"
-            android:text="10:52"
-            android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/truppname"
+        <include
+            android:layout="@layout/monitor_detail_infoscreen"
+            android:id="@+id/infoScreen"
+            android:layout_above="@+id/buttonBottom"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:padding="6dp"
-            android:paddingBottom="9dp"
-            android:text="Atemschutztrupp 1"
-            android:textAlignment="textEnd"
-            android:textSize="19sp" />
+            android:layout_height="match_parent" />
 
-
-        <TextView
-            android:id="@+id/lastPressure"
+        <LinearLayout
+            android:id="@+id/buttonBottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/truppname"
-            android:layout_toRightOf="@+id/time"
-            android:layout_toStartOf="@+id/lastPressureTime"
-            android:paddingRight="3dp"
-            android:paddingTop="4dp"
-            android:text="Letzter Druck"
-            android:textAlignment="textEnd" />
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/buttonSide"
+            android:orientation="horizontal"
+            android:layout_weight="3">
 
-        <TextView
-            android:id="@+id/lastPressureTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/truppname"
-            android:paddingRight="6dp"
-            android:paddingTop="4dp"
-            android:text="(15min):"
-            android:textAlignment="textEnd" />
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:text="Einsatzbeginn" />
 
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/leader"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lastPressure"
-            android:padding="6dp"
-            android:text="Truppführer:" />
-
-        <TextView
-            android:id="@+id/leaderName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lastPressure"
-            android:layout_toEndOf="@+id/leader"
-            android:padding="6dp"
-            android:text="Huber" />
-
-        <TextView
-            android:id="@+id/leaderPressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/lastPressure"
-            android:padding="6dp"
-            android:text="150 bar" />
-
-
-        <TextView
-            android:id="@+id/man"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/leader"
-            android:padding="6dp"
-            android:text="Truppmann:" />
-
-        <TextView
-            android:id="@+id/manName"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/leader"
-            android:layout_toEndOf="@+id/leader"
-            android:padding="6dp"
-            android:text="Schulz" />
-
-        <TextView
-            android:id="@+id/manPressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/leaderPressure"
-            android:padding="6dp"
-            android:text="140 bar"
-            android:textAlignment="textEnd" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/buttonSite"
+        android:id="@+id/buttonSide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonBottom"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/button7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/buttonX"
+            android:layout_alignStart="@+id/buttonX"
             android:layout_weight="1"
-            android:text="Button" />
+            android:layout_margin="5dp"
+            android:text="Ankunft Ziel" />
+
+        <Button
+            android:id="@+id/buttonX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button7"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="Druck eingeben" />
 
         <Button
             android:id="@+id/button6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/buttonX"
+            android:layout_alignStart="@+id/button5"
+            android:layout_below="@+id/buttonX"
             android:layout_weight="1"
-            android:text="Button" />
+            android:layout_margin="5dp"
+            android:text="Rückzug" />
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/buttonX"
+            android:layout_alignStart="@+id/buttonX"
+            android:layout_below="@+id/button6"
             android:layout_weight="1"
-            android:text="Button" />
+            android:layout_margin="5dp"
+            android:text="Einsatzende" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/buttonBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.0"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
 </RelativeLayout>
