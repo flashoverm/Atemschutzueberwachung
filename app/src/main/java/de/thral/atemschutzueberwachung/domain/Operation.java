@@ -1,9 +1,8 @@
-package de.thral.atemschutzueberwachung.Monitoring;
+package de.thral.atemschutzueberwachung.domain;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import de.thral.atemschutzueberwachung.Draegerman.Draegerman;
 
 /**
  * Created by Markus Thral on 26.10.2017.
@@ -11,11 +10,12 @@ import de.thral.atemschutzueberwachung.Draegerman.Draegerman;
 
 public class Operation {
 
+    public static final int MAX_SQUAD_COUNT = 4;
+
     private String operation;
     private String location;
     private String observer;
     private String unit;
-
     private final long startTime;
     private long endTime;
 
@@ -23,6 +23,7 @@ public class Operation {
 
     public Operation(){
         this.startTime = System.currentTimeMillis();
+        this.squadList = new ArrayList<>();
     }
 
     public List<Squad> getSquadList() {
@@ -53,30 +54,43 @@ public class Operation {
         return endTime;
     }
 
-    public List<Squad> getActiveSquads() {
-        List<Squad> activeSquads = new ArrayList<>();
+    public Squad[] getActiveSquads() {
+        Squad[] activeSquads = new Squad[MAX_SQUAD_COUNT];
+        int i=0;
         for(Squad squad:squadList){
-            if(!squad.getLastEventType().equals(Event.Type.End)){
-                activeSquads.add(squad);
+            if(squad.getState() != EventType.End){
+                activeSquads[i] = squad;
+                i++;
             }
+        }
+        for(i=i; i<MAX_SQUAD_COUNT; i++){
+            activeSquads[i] = null;
         }
         return activeSquads;
     }
 
-    public boolean addSquad(Draegerman leader, int initialPressureLeader,
-                            Draegerman member, int initialPressureMember,
-                            Squad.OperationTime operationTime, Squad.Order order) {
-
-        if(getActiveSquads().size() <4){
-            this.squadList.add(new Squad(leader, initialPressureLeader, member,
-                    initialPressureMember, operationTime, order));
+    public boolean registerSquad(Squad squad) {
+        Squad[] active = getActiveSquads();
+        for(int i=0; i<MAX_SQUAD_COUNT; i++) {
+            if (active[i] == null) {
+                this.squadList.add(squad);
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean completeOperation(String operation, String location,
+    public boolean complete(String operation, String location,
                                      String observer, String unit) {
-        if(getActiveSquads().size() == 0){
+        boolean squadsActive = false;
+        Squad[] active = getActiveSquads();
+        for(int i=0; i<MAX_SQUAD_COUNT; i++){
+            if(active[i] != null){
+                squadsActive = true;
+                break;
+            }
+        }
+        if(!squadsActive){
             this.operation = operation;
             this.location = location;
             this.observer = observer;
@@ -85,6 +99,15 @@ public class Operation {
             return true;
         }
         return false;
+    }
+
+    public String getFilename() {
+        return toString().replace(':', '-');
+    }
+
+    @Override
+    public String toString() {
+        return new Timestamp(startTime).toString() + " - " + operation + " - " + location;
     }
 
 }

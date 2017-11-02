@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="ral3000">#a72920</color>
+    <color name="ral3024">#ff2d21</color>
+    <color name="ral3026">#ff2a1b</color>
+    <color name="background">#259b9b9b</color>
+    <color name="white">#ffffff</color>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>

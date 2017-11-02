@@ -4,18 +4,27 @@
 
     <application
         android:allowBackup="true"
+        android:name="AtemschutzueberwachungApplication"
         android:icon="@drawable/atemschutz"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MenuActivity"
+        <activity android:name=".activity.MenuActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.MonitoringOverviewActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity android:name=".activity.MonitoringDetailActivity"
+            android:screenOrientation="landscape">
+
         </activity>
     </application>
 

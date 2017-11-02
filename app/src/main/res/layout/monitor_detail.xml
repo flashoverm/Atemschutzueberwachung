@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/border">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
 
 
         <include
-            android:layout="@layout/monitor_detail_infoscreen"
+            layout="@layout/monitor_detail_infoscreen"
             android:id="@+id/infoScreen"
             android:layout_above="@+id/buttonBottom"
             android:layout_weight="1"
@@ -30,7 +30,7 @@
             android:layout_weight="3">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/buttonStart"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
@@ -50,42 +50,43 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/buttonArrive"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/buttonX"
-            android:layout_alignStart="@+id/buttonX"
-            android:layout_weight="1"
+            android:layout_alignEnd="@+id/buttonEnterPressure"
+            android:layout_alignStart="@+id/buttonEnterPressure"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="Ankunft Ziel" />
 
         <Button
-            android:id="@+id/buttonX"
+            android:id="@+id/buttonEnterPressure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button7"
-            android:layout_weight="1"
+            android:layout_below="@+id/buttonArrive"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="Druck eingeben" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/buttonRetreat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/buttonX"
-            android:layout_alignStart="@+id/button5"
-            android:layout_below="@+id/buttonX"
+            android:layout_alignEnd="@+id/buttonEnterPressure"
+            android:layout_alignStart="@+id/buttonEnd"
+            android:layout_below="@+id/buttonEnterPressure"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:text="Rückzug" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/buttonEnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/buttonX"
-            android:layout_alignStart="@+id/buttonX"
-            android:layout_below="@+id/button6"
+            android:layout_alignEnd="@+id/buttonEnterPressure"
+            android:layout_alignStart="@+id/buttonEnterPressure"
+            android:layout_below="@+id/buttonRetreat"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:text="Einsatzende" />

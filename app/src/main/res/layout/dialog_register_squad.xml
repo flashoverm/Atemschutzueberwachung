@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="12dp"
+    android:paddingTop="6dp">
+
+    <TextView
+        android:id="@+id/squadname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/leaderText"
+        android:padding="11dp"
+        android:text="@string/squadnameText"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/leaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/memberText"
+        android:layout_below="@+id/squadname"
+        android:gravity="bottom"
+        android:padding="11dp"
+        android:text="@string/leaderText"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/memberText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/orderText"
+        android:layout_below="@+id/leaderText"
+        android:gravity="bottom"
+        android:padding="11dp"
+        android:text="@string/memberText"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/orderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/memberText"
+        android:layout_marginStart="8dp"
+        android:gravity="bottom"
+        android:padding="11dp"
+        android:text="@string/orderText"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/edit_squadname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squadname"
+        android:layout_alignStart="@+id/edit_leader"
+        android:layout_alignTop="@+id/squadname"
+        android:ems="13"
+        android:inputType="textPersonName"
+        android:textSize="16dp" />
+
+    <Spinner
+        android:id="@+id/edit_leader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_leaderpressure"
+        android:layout_alignStart="@+id/edit_member"
+        android:layout_marginBottom="8dp"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/edit_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_memberpressure"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/orderText"
+        android:spinnerMode="dialog" />
+
+    <EditText
+        android:id="@+id/edit_memberpressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/edit_leaderpressure"
+        android:ems="4"
+        android:inputType="numberSigned"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/edit_leaderpressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/edit_operatingtime"
+        android:ems="4"
+        android:inputType="numberSigned"
+        android:textSize="16dp" />
+
+    <Spinner
+        android:id="@+id/edit_operatingtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_squadname"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"/>
+
+    <Spinner
+        android:id="@+id/edit_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/orderText"
+        android:layout_toEndOf="@+id/orderText"
+        android:spinnerMode="dialog"
+        android:layout_marginBottom="8dp"/>
+
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_leader"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/edit_leader"
+        android:id="@+id/space2" />
+
+    <TextView
+        android:id="@+id/leaderPressureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_leaderpressure"
+        android:layout_toStartOf="@+id/edit_memberpressure"
+        android:padding="11dp"
+        android:text="@string/initialPressure"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/memberPressureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/leaderPressureText"
+        android:layout_below="@+id/leaderPressureText"
+        android:padding="11dp"
+        android:text="@string/initialPressure"
+        android:textSize="16dp" />
+
+</RelativeLayout>

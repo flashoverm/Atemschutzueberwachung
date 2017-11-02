@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp">
+
+    <Spinner
+        android:id="@+id/edit_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_leaderpressure"
+        android:layout_alignStart="@+id/edit_leaderpressure" />
+
+    <EditText
+        android:id="@+id/edit_leaderpressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/leaderpressure"
+        android:layout_toEndOf="@+id/leaderpressure"
+        android:ems="4"
+        android:inputType="numberSigned"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/edit_memberpressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/memberpressure"
+        android:layout_alignBottom="@+id/memberpressure"
+        android:layout_toEndOf="@+id/leaderpressure"
+        android:ems="4"
+        android:inputType="numberSigned"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="11dp"
+        android:text="@string/eventText" />
+
+    <TextView
+        android:id="@+id/leaderpressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/event"
+        android:padding="11dp"
+        android:text="@string/leaderText" />
+
+    <TextView
+        android:id="@+id/memberpressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/leaderpressure"
+        android:padding="11dp"
+        android:text="@string/memberText"
+        tools:layout_editor_absoluteX="16dp" />
+
+</RelativeLayout>

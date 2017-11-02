@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.Monitoring;
+package de.thral.atemschutzueberwachung.domain;
 
 /**
  * Created by Markus Thral on 21.10.2017.
@@ -6,44 +6,56 @@ package de.thral.atemschutzueberwachung.Monitoring;
 
 public class Event {
 
-    public enum Type {Register, Begin, Arrived, OneThird, TwoThirds,
-        Retreat, End, TimerStopped, TimerResumed, Other}
-
-    private final Type eventType;
-
+    private final EventType type;
     private final long remainingOperationTime;
     private final long timeStamp;
-
     private final int pressureLeader;
     private final int pressureMember;
 
-    public Event(Type eventType, int pressureLeader,
+    public Event(EventType type, int pressureLeader,
                  int pressureMember, long remainingOperationTime) {
-        this.eventType = eventType;
+        this.type = type;
         this.remainingOperationTime = remainingOperationTime;
         this.timeStamp = System.currentTimeMillis();
         this.pressureLeader = pressureLeader;
         this.pressureMember = pressureMember;
     }
 
-    public Event(Type eventType, long remainingOperationTime) {
-        this.eventType = eventType;
+    public Event(EventType type, long remainingOperationTime) {
+        this.type = type;
         this.remainingOperationTime = remainingOperationTime;
         this.timeStamp = System.currentTimeMillis();
         this.pressureLeader = -1;
         this.pressureMember = -1;
     }
 
-    public Type getEventType() {
-        return eventType;
+    public EventType getType() {
+        return type;
     }
 
     public long getRemainingOperationTime() {
         return remainingOperationTime;
     }
 
-    public long getTimeStamp() {
-        return timeStamp;
+    public String getTimeStampAsClock() {
+        String clock = "";
+
+        int seconds = (int)timeStamp/1000;
+        int minutes = seconds/60;
+        seconds = seconds - minutes*60;
+
+        if(minutes < 10){
+            clock = "0" + minutes;
+        } else {
+            clock = minutes+"";
+        }
+        clock += ":";
+        if(seconds <10){
+            clock += "0"+seconds;
+        } else {
+            clock += seconds+"";
+        }
+        return clock;
     }
 
     public int getPressureLeader() {

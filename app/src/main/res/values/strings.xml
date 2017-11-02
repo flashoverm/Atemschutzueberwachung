@@ -1,3 +1,102 @@
 <resources>
     <string name="app_name">Atemschutzueberwachung</string>
+
+    <!-- Main menu -->
+    <string name="startOperationButton">Überwachung starten</string>
+    <string name="administationButton">Verwaltung</string>
+
+    <string name="registerButton">Trupp registrieren</string>
+    <string name="endOperation">Einsatz abschließen</string>
+    <!--Operation-->
+    <string name="stateListRegister">Registriert</string>
+    <string name="stateListBegin">Gerät angeschlossen</string>
+    <string name="stateListArrive">Am Ziel</string>
+    <string name="stateListTimer">Einsatzzeitmarke erreicht</string>
+    <string name="stateListRetreat">Auf Rückzug</string>
+    <string name="stateListEnd">Einsatz beendet</string>
+    <string name="stateListPause">Pause</string>
+    <string name="stateListResume">Einsatz fortgesetzt</string>
+
+    <string name="leaderShortText">TF:</string>
+    <string name="memberShortText">TM:</string>
+
+    <string name="startButton">Start</string>
+    <string name="pauseButton">Pause</string>
+    <string name="resumeButton">Fortsetzen</string>
+    <string name="arriveButton">Ankunft Ziel</string>
+    <string name="enterPressureButton">Druck eingeben</string>
+    <string name="retreatButton">Rückzug</string>
+    <string name="endButton">Einsatzende</string>
+
+    <string name="statusText">Status:</string>
+    <string name="leaderText">Truppführer:</string>
+    <string name="memberText">Truppmann:</string>
+    <string name="pressureText">Druck bei:</string>
+    <string name="retreatAtText">Rückzug bei:</string>
+    <string name="orderTextShort">Auftrag:</string>
+
+    <!-- Dialogs -->
+    <string name="ok">OK</string>
+    <string name="cancel">Abbrechen</string>
+
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+
+    <!--Alarm- and Warning-Dialogs-->
+    <string name="timerInfoTitle">Einsatz</string>
+    <string name="startSquadText">Einsatz beginnen?</string>
+    <string name="pauseSquadText">Einsatz pausieren?</string>
+    <string name="resumeSquadText">Einsatz fortsetzen?</string>
+
+    <string name="pressureWarningTitle">Rückzugsweg</string>
+    <string name="returnPressureWarningText">Mindestdruck für Rückzugsweg fast erreicht!</string>
+    <string name="returnPressureAlarmText">Achtung!\n\nMindestdruck für Rückzugsweg unterschritten!\nSicherungstrupp alamieren!</string>
+
+    <string name="timerWarningTitle">Einsatzzeit</string>
+    <string name="timerWarningText"> hat seine Einsatzzeit überschritten!</string>
+
+    <string name="endOperationTitle">Einsatz abschließen</string>
+    <string name="endOperationWarning">Noch nicht alle Trupps haben ihren Einsatz beendet!</string>
+
+    <string name="deleteWarningTitle">Löschen</string>
+    <string name="deleteWarningText">Wirklich löschen?</string>
+
+    <!--Register Dialog-->
+    <string name="registerSquadTitle">Trupp registrieren</string>
+    <string name="squadnameText">Funkrufname:</string>
+
+    <string name="operationTimeDebug">6 Minuten</string>
+    <string name="operationTimeShort">20 Minuten</string>
+    <string name="operationTimeNormal">30 Minuten</string>
+    <string name="operationTimeLong">60 Minuten</string>
+
+    <string name="orderText">Einsatzauftrag:</string>
+    <string name="initialPressure">Druck:</string>
+
+    <string name="orderListExplore">Erkunden/Messen</string>
+    <string name="orderListFirefighting">Brandbekämpfung</string>
+    <string name="orderListSearch">Personensuche</string>
+    <string name="orderListHazmat">Gefahrguteinsatz</string>
+    <string name="orderListProtection">Sicherungstrupp</string>
+    <string name="orderListOther">Sonstiges/Zubringer</string>
+
+    <!--Pressure Dialog-->
+    <string name="enterPressureTitle">Druck eingeben</string>
+    <string name="eventText">Ereignis:</string>
+
+    <string name="eventListRegister">Registrierung</string>
+    <string name="eventListBegin">Einsatzbeginn</string>
+    <string name="eventListArrive">Ankunft Ziel</string>
+    <string name="eventListTimer">Einsatzzeit</string>
+    <string name="eventListRetreat">Rückzug</string>
+    <string name="eventListEnd">Einsatzende</string>
+    <string name="eventListPause">Pausieren</string>
+    <string name="eventListResume">Fortsetzen</string>
+
+    <!--End Operation Dialog-->
+    <string name="oberserverText">Überwacher:</string>
+    <string name="operationText">Einsatz:</string>
+    <string name="locationText">Einsatzort:</string>
+    <string name="unitText">Einheit:</string>
+
 </resources>
