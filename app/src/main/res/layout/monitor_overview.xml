@@ -1,174 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/border">
+    android:orientation="vertical"
+    android:padding="6dp">
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:padding="6dp"
-        android:text="10:52"
-        android:textSize="36sp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="8dp"
+        android:text="10:52 "
+        android:textSize="42sp" />
 
     <TextView
-        android:id="@+id/truppname"
+        android:id="@+id/squadname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:padding="6dp"
+        android:layout_toEndOf="@+id/timer"
+        android:padding="2dp"
         android:text="Atemschutztrupp 1"
         android:textAlignment="textEnd"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/leaderReturnPressure"
+        android:layout_below="@+id/squadname"
+        android:text="state"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/lastPressure"
-        android:layout_width="match_parent"
+        android:id="@+id/lastPressureText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lastPressureTime"
+        android:layout_alignBottom="@+id/lastPressureTime"
+        android:layout_toStartOf="@+id/lastPressureTime"
         android:padding="6dp"
         android:text="Druck bei:"
-        android:textAlignment="textEnd"
-        android:layout_below="@+id/space2"
-        android:layout_toStartOf="@+id/manReturnPressure" />
+        android:textAlignment="textEnd" />
 
     <TextView
         android:id="@+id/lastPressureTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/returnText"
+        android:layout_alignBottom="@+id/returnText"
+        android:layout_toStartOf="@+id/returnText"
         android:padding="6dp"
         android:text="15 Min."
-        android:textAlignment="center"
-        android:layout_alignBaseline="@+id/lastPressure"
-        android:layout_alignBottom="@+id/lastPressure"
-        android:layout_toEndOf="@+id/lastPressure" />
+        android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/textReturn"
+        android:id="@+id/returnText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/state"
         android:padding="6dp"
-        android:text="Rückzug"
-        android:textAlignment="center"
-        android:layout_alignBaseline="@+id/lastPressureTime"
-        android:layout_alignBottom="@+id/lastPressureTime"
-        android:layout_alignParentEnd="true" />
+        android:text="Rückzug:"
+        android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/leader"
-        android:layout_width="100dp"
+        android:id="@+id/leaderText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lastPressureText"
+        android:padding="4dp"
         android:text="Truppführer:"
-        android:padding="6dp"
-        android:layout_below="@+id/space4"
-        android:layout_alignParentStart="true" />
+        android:textAlignment="textStart" />
 
     <TextView
         android:id="@+id/leaderName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="Huber"
-        android:layout_alignBaseline="@+id/leader"
-        android:layout_alignBottom="@+id/leader"
-        android:layout_toEndOf="@+id/leader" />
-
-    <TextView
-        android:id="@+id/leaderPressure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="150 bar"
-        android:textAlignment="center"
-        android:layout_alignBaseline="@+id/leaderReturnPressure"
-        android:layout_alignBottom="@+id/leaderReturnPressure"
-        android:layout_alignParentEnd="true" />
-
-
-    <TextView
-        android:id="@+id/man"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Truppmann:"
-        android:padding="6dp"
-        android:layout_below="@+id/space3"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/manName"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Schulz"
-        android:padding="6dp"
-        android:layout_alignBaseline="@+id/man"
-        android:layout_alignBottom="@+id/man"
-        android:layout_toEndOf="@+id/man" />
-
-    <TextView
-        android:id="@+id/manPressure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="140 bar"
-        android:textAlignment="center"
-        android:layout_alignBaseline="@+id/manReturnPressure"
-        android:layout_alignBottom="@+id/manReturnPressure"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_alignBaseline="@+id/leaderText"
+        android:layout_alignBottom="@+id/leaderText"
+        android:layout_toEndOf="@+id/leaderText"
+        android:padding="4dp"
+        android:text="Huber" />
 
     <TextView
         android:id="@+id/leaderReturnPressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="150 bar"
-        android:textAlignment="center"
-        android:layout_alignTop="@+id/leaderName"
-        android:layout_alignEnd="@+id/lastPressureTime" />
+        android:layout_alignBaseline="@+id/leaderPressure"
+        android:layout_alignBottom="@+id/leaderPressure"
+        android:layout_alignParentEnd="true"
+        android:padding="4dp"
+        android:text="150"
+        android:textAlignment="center" />
+
 
     <TextView
-        android:id="@+id/manReturnPressure"
+        android:id="@+id/memberText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="140 bar"
-        android:textAlignment="center"
-        android:layout_alignBaseline="@+id/manName"
-        android:layout_alignBottom="@+id/manName"
-        android:layout_toStartOf="@+id/space" />
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="8dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/manPressure"
-        android:layout_marginBottom="8dp"
-        android:layout_toStartOf="@+id/leaderPressure" />
-
-    <Space
-        android:id="@+id/space2"
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/truppname"
-        android:layout_marginStart="25dp" />
+        android:layout_below="@+id/leaderText"
+        android:layout_toStartOf="@+id/leaderName"
+        android:padding="4dp"
+        android:text="Truppmann:" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:layout_below="@+id/leader"
-        android:layout_marginStart="29dp"
-        android:layout_toEndOf="@+id/space2"
-        android:id="@+id/space3" />
+    <TextView
+        android:id="@+id/memberName"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/memberText"
+        android:layout_alignBottom="@+id/memberText"
+        android:layout_toEndOf="@+id/memberText"
+        android:padding="4dp"
+        android:text="Schulz"
+        android:textAlignment="textStart" />
 
-    <Space
-        android:id="@+id/space4"
+    <TextView
+        android:id="@+id/memberReturnPressure"
         android:layout_width="wrap_content"
-        android:layout_height="5dp"
-        android:layout_below="@+id/lastPressure"
-        android:layout_toEndOf="@+id/space3" />
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/memberPressure"
+        android:layout_alignBottom="@+id/memberPressure"
+        android:layout_alignParentEnd="true"
+        android:padding="4dp"
+        android:text="140"
+        android:textAlignment="center" />
+
+
+    <TextView
+        android:id="@+id/leaderPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/memberReturnPressure"
+        android:layout_alignEnd="@+id/memberPressure"
+        android:layout_toEndOf="@+id/lastPressureText"
+        android:padding="4dp"
+        android:text="150"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/memberPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/memberName"
+        android:layout_alignBottom="@+id/memberName"
+        android:layout_toEndOf="@+id/lastPressureText"
+        android:layout_toStartOf="@+id/returnText"
+        android:padding="4dp"
+        android:text="140"
+        android:textAlignment="center" />
+
 
 </RelativeLayout>
