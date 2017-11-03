@@ -106,5 +106,5 @@
     <string name="toastNoObserver">Namen des Überwachers eingeben!</string>
     <string name="toastNoOperation">Einsatz eingeben!</string>
     <string name="toastNoLocation">Einsatzort eingeben!</string>
-    <string name="toastLeaderMemberEqual">Truppführer und -mann identisch!</string>
+    <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
 </resources>
