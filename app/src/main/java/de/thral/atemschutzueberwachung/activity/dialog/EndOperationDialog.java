@@ -9,12 +9,13 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.R;
-
-/**
- * Created by Markus Thral on 29.10.2017.
- */
+import de.thral.atemschutzueberwachung.domain.Draegerman;
+import de.thral.atemschutzueberwachung.domain.OperatingTime;
+import de.thral.atemschutzueberwachung.domain.Order;
+import de.thral.atemschutzueberwachung.domain.Squad;
 
 public class EndOperationDialog extends DialogFragment {
 
@@ -40,18 +41,11 @@ public class EndOperationDialog extends DialogFragment {
         locationEdit = (EditText) view.findViewById(R.id.edit_location);
         unitEdit = (EditText) view.findViewById(R.id.edit_unit);
 
-
         builder.setView(view)
                 .setTitle(getResources().getString(R.string.registerSquadTitle))
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        String observer = observerEdit.getText().toString();
-                        String operation = operationEdit.getText().toString();
-                        String location = locationEdit.getText().toString();
-                        String unit = unitEdit.getText().toString();
-
-                        listener.onOperationEnd(observer, operation, location, unit);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -60,7 +54,44 @@ public class EndOperationDialog extends DialogFragment {
                     }
                 });
 
-        return builder.create();
+        AlertDialog dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                final AlertDialog endOperation = (AlertDialog) dialogInterface;
+                endOperation.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String observer = observerEdit.getText().toString();
+                                String operation = operationEdit.getText().toString();
+                                String location = locationEdit.getText().toString();
+                                String unit = unitEdit.getText().toString();
+
+
+                                if(observer.equals("")){
+                                    Toast.makeText(getActivity(), R.string.toastNoObserver,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if(operation.equals("")){
+                                    Toast.makeText(getActivity(), R.string.toastNoOperation,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if(location.equals("")){
+                                    Toast.makeText(getActivity(), R.string.toastNoLocation,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                listener.onOperationEnd(observer, operation, location, unit);
+                                endOperation.dismiss();
+                            }
+                        });
+            }
+        });
+        return dialog;
     }
 
     @Override

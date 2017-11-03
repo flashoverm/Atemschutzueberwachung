@@ -13,15 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.domain.EventType;
-
-/**
- * Created by Markus Thral on 29.10.2017.
- */
 
 public class EnterPressureDialog extends DialogFragment {
 
@@ -68,11 +63,6 @@ public class EnterPressureDialog extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        int leader = Integer.parseInt(leaderPressure.getText().toString());
-                        int member = Integer.parseInt(memberPressure.getText().toString());
-                        String event = spinner.getSelectedItem().toString();
-                        listener.onEnteredPressure(
-                                EventType.getEventType(getActivity(), event), leader, member);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -80,7 +70,39 @@ public class EnterPressureDialog extends DialogFragment {
                         EnterPressureDialog.this.getDialog().cancel();
                     }
                 });
-        return builder.create();
+        AlertDialog dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                final AlertDialog enterPressure = (AlertDialog) dialogInterface;
+                enterPressure.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String leader = leaderPressure.getText().toString();
+                                String member = memberPressure.getText().toString();
+                                String event = spinner.getSelectedItem().toString();
+
+                                if(leader.equals("")){
+                                    Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if(member.equals("")){
+                                    Toast.makeText(getActivity(), R.string.toastNoPressureMember,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                listener.onEnteredPressure(
+                                        EventType.getEventType(getActivity(), event),
+                                        Integer.parseInt(leader), Integer.parseInt(member));
+                                enterPressure.dismiss();
+                            }
+                        });
+            }
+        });
+        return dialog;
     }
 
     @Override
@@ -95,7 +117,6 @@ public class EnterPressureDialog extends DialogFragment {
     }
 
     public static EnterPressureDialog newInstance(Context context, EventType event) {
-
         Bundle args = new Bundle();
         args.putString(EVENT_KEY, event.toString(context));
 
