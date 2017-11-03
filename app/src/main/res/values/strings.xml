@@ -20,7 +20,7 @@
     <string name="leaderShortText">TF:</string>
     <string name="memberShortText">TM:</string>
 
-    <string name="startButton">Start</string>
+    <string name="startButton">Einsatzbeginn</string>
     <string name="pauseButton">Pause</string>
     <string name="resumeButton">Fortsetzen</string>
     <string name="arriveButton">Ankunft Ziel</string>
@@ -99,4 +99,12 @@
     <string name="locationText">Einsatzort:</string>
     <string name="unitText">Einheit:</string>
 
+    <!--Toasts-->
+    <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
+    <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
+    <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>
+    <string name="toastNoObserver">Namen des Überwachers eingeben!</string>
+    <string name="toastNoOperation">Einsatz eingeben!</string>
+    <string name="toastNoLocation">Einsatzort eingeben!</string>
+    <string name="toastLeaderMemberEqual">Truppführer und -mann identisch!</string>
 </resources>

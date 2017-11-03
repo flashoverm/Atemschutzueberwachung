@@ -9,9 +9,12 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.activity.adapter.DraegermanSpinnerAdapter;
@@ -83,31 +86,64 @@ public class RegisterSquadDialog extends DialogFragment {
                 .setTitle(getResources().getString(R.string.registerSquadTitle))
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        String squadnameText = squadName.getText().toString();
-                        Draegerman leader = (Draegerman)leaderSpinner.getSelectedItem();
-                        int initLeaderPressure = Integer.parseInt(leaderPressure.getText().toString());
-                        Draegerman member = (Draegerman)memberSpinner.getSelectedItem();
-                        int initMemberPressure = Integer.parseInt(memberPressure.getText().toString());
-                        String operatingTime = operatingTimeSpinner.getSelectedItem().toString();
-                        String order = orderSpinner.getSelectedItem().toString();
-
-                        Squad squad = new Squad(
-                                squadnameText,
-                                leader, initLeaderPressure,
-                                member, initMemberPressure,
-                                OperatingTime.getOperatingTime(getActivity(), operatingTime),
-                                Order.getOrder(getActivity(), order)
-                        );
-                        listener.onSquadRegistered(squad);
-                    }
-                })
+                    public void onClick(DialogInterface dialog, int id) {}})
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         RegisterSquadDialog.this.getDialog().cancel();
                     }
                 });
-        return builder.create();
+        AlertDialog dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                final AlertDialog registerDialog = (AlertDialog) dialogInterface;
+                registerDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String squadnameText = squadName.getText().toString();
+                        Draegerman leader = (Draegerman)leaderSpinner.getSelectedItem();
+                        String initLeaderPressure = leaderPressure.getText().toString();
+                        Draegerman member = (Draegerman)memberSpinner.getSelectedItem();
+                        String initMemberPressure = memberPressure.getText().toString();
+                        String operatingTime = operatingTimeSpinner.getSelectedItem().toString();
+                        String order = orderSpinner.getSelectedItem().toString();
+
+                        if(squadnameText.equals("")){
+                            Toast.makeText(getActivity(), R.string.toastNoSquadname,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if(initLeaderPressure.equals("")){
+                            Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if(initMemberPressure.equals("")){
+                            Toast.makeText(getActivity(), R.string.toastNoPressureMember,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if(leader.equals(member)){
+                            Toast.makeText(getActivity(), R.string.toastLeaderMemberEqual,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        Squad squad = new Squad(
+                                squadnameText,
+                                leader, Integer.parseInt(initLeaderPressure),
+                                member, Integer.parseInt(initMemberPressure),
+                                OperatingTime.getOperatingTime(getActivity(), operatingTime),
+                                Order.getOrder(getActivity(), order)
+                        );
+                        listener.onSquadRegistered(squad);
+                        registerDialog.dismiss();
+                    }
+                });
+            }
+        });
+        return dialog;
     }
 
     @Override
