@@ -15,8 +15,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,7 +28,7 @@ import de.thral.atemschutzueberwachung.domain.Squad;
 
 public abstract class MonitoringActivity extends AppCompatActivity {
 
-    protected void initInfoView(RelativeLayout layout, Squad squad){
+    protected void initInfoView(ViewGroup layout, Squad squad){
         TextView timer = (TextView)layout.findViewById(R.id.timer);
         TextView squadname = (TextView)layout.findViewById(R.id.squadname);
         TextView state = (TextView)layout.findViewById(R.id.state);
@@ -45,7 +47,7 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         }
     }
 
-    protected void updateReturnPressure(RelativeLayout layout, Squad squad){
+    protected void updateReturnPressure(ViewGroup layout, Squad squad){
         TextView leaderReturnPressure = (TextView)layout.findViewById(R.id.leaderReturnPressure);
         TextView memberReturnPressure = (TextView)layout.findViewById(R.id.memberReturnPressure);
 
@@ -61,7 +63,7 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         }
     }
 
-    protected void updateOverviewPressure(RelativeLayout layout, Squad squad){
+    protected void updateOverviewPressure(ViewGroup layout, Squad squad){
         Event[] events = squad.getLastPressureValues();
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
 
@@ -80,7 +82,7 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         memberPressure.setText(events[0].getPressureMember()+"");
     }
 
-    protected void timerReachedMark(RelativeLayout layout, Squad squad, boolean expired){
+    protected void timerReachedMark(ViewGroup layout, Squad squad, boolean expired){
         if(expired){
             deactivateReminder(layout);
             activateAlarm(layout);
@@ -89,7 +91,7 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         }
     }
 
-    protected void activateAlarm(RelativeLayout layout){
+    protected void activateAlarm(ViewGroup layout){
         TextView timer = (TextView)layout.findViewById(R.id.timer);
         ValueAnimator colorAnim = ObjectAnimator.ofInt(timer, "textColor", Color.RED, Color.GRAY);
         colorAnim.setDuration(800);
@@ -98,7 +100,7 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         colorAnim.start();
     }
 
-    protected void activateReminder(RelativeLayout layout){
+    protected void activateReminder(ViewGroup layout){
         final AnimationDrawable drawable = new AnimationDrawable();
         final Handler handler = new Handler();
 
@@ -116,8 +118,8 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         }, 100);
     }
 
-    protected void deactivateReminder(RelativeLayout relativeLayout){
-        relativeLayout.setBackground(new ColorDrawable(Color.WHITE));
+    protected void deactivateReminder(ViewGroup layout){
+        layout.setBackground(new ColorDrawable(Color.WHITE));
     }
 
 }

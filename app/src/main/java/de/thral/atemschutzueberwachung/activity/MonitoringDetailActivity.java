@@ -74,8 +74,7 @@ public class MonitoringDetailActivity extends MonitoringActivity
 
     private RelativeLayout getLayoutOf(Squad squad){
         if(squad == selected){
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.detail);
-            return (RelativeLayout) layout.findViewById(R.id.infoScreen);
+            return (RelativeLayout) findViewById(R.id.detail);
         } else if(squad == overview[0]) {
             return (RelativeLayout) findViewById(R.id.overview_small_1);
         } else if(squad == overview[1]) {
