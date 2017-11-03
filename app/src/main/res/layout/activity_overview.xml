@@ -20,15 +20,13 @@
                 android:id="@+id/overview_1"
                 layout="@layout/monitor_overview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
             <include
                 android:id="@+id/register_1"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
         </ViewFlipper>
         <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,15 +39,13 @@
                 android:id="@+id/overview_2"
                 layout="@layout/monitor_overview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
             <include
                 android:id="@+id/register_2"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
         </ViewFlipper>
     </LinearLayout>
@@ -69,15 +65,13 @@
                 android:id="@+id/overview_3"
                 layout="@layout/monitor_overview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
             <include
                 android:id="@+id/register_3"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
         </ViewFlipper>
         <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
@@ -90,22 +84,19 @@
                 android:id="@+id/overview_4"
                 layout="@layout/monitor_overview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
             <include
                 android:id="@+id/register_4"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
             <include
                 android:id="@+id/end_4"
                 layout="@layout/monitor_overview_end"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"/>
+                android:layout_height="match_parent"/>
 
         </ViewFlipper>
     </LinearLayout>

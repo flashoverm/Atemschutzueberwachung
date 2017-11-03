@@ -3,7 +3,10 @@ package de.thral.atemschutzueberwachung.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -44,15 +47,15 @@ public class MonitoringOverviewActivity extends MonitoringActivity
         initView();
     }
 
-    private RelativeLayout getLayoutOf(Squad squad){
+    private ViewGroup getLayoutOf(Squad squad){
         if(squad == overview[0]){
-            return (RelativeLayout) findViewById(R.id.overview_1);
+            return (LinearLayout) findViewById(R.id.overview_1);
         } else if(squad == overview[1]) {
-            return (RelativeLayout) findViewById(R.id.overview_2);
+            return (LinearLayout) findViewById(R.id.overview_2);
         } else if(squad == overview[2]) {
-            return (RelativeLayout) findViewById(R.id.overview_3);
+            return (LinearLayout) findViewById(R.id.overview_3);
         } else if(squad == overview[3]) {
-            return (RelativeLayout) findViewById(R.id.overview_4);
+            return (LinearLayout) findViewById(R.id.overview_4);
         }
         return null;
     }
@@ -76,19 +79,19 @@ public class MonitoringOverviewActivity extends MonitoringActivity
 
     private void initOverview(final int overviewNumber){
         Squad squad = overview[overviewNumber-1];
-        RelativeLayout layout = null;
+        ViewGroup layout = null;
         ViewFlipper flipper = null;
         switch(overviewNumber){
-            case 1: layout = (RelativeLayout) findViewById(R.id.overview_1);
+            case 1: layout = (GridLayout) findViewById(R.id.overview_1);
                     flipper = (ViewFlipper)findViewById(R.id.flipper_1);
                     break;
-            case 2: layout = (RelativeLayout) findViewById(R.id.overview_2);
+            case 2: layout = (GridLayout) findViewById(R.id.overview_2);
                     flipper = (ViewFlipper)findViewById(R.id.flipper_2);
                     break;
-            case 3: layout = (RelativeLayout) findViewById(R.id.overview_3);
+            case 3: layout = (GridLayout) findViewById(R.id.overview_3);
                     flipper = (ViewFlipper)findViewById(R.id.flipper_3);
                     break;
-            case 4: layout = (RelativeLayout) findViewById(R.id.overview_4);
+            case 4: layout = (GridLayout) findViewById(R.id.overview_4);
                     flipper = (ViewFlipper)findViewById(R.id.flipper_4);
                     if(onNoRegisteredSquad(flipper)){ return; }
                     break;
@@ -117,7 +120,7 @@ public class MonitoringOverviewActivity extends MonitoringActivity
 
                 @Override
                 public void onTimerUpdate(Squad squad) {
-                    RelativeLayout layout = getLayoutOf(squad);
+                    ViewGroup layout = getLayoutOf(squad);
                     TextView timer = (TextView) layout.findViewById(R.id.timer);
                     timer.setText(squad.getTimerValueAsClock());
                 }

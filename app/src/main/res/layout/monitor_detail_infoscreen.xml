@@ -64,7 +64,7 @@
         android:layout_below="@+id/state"
         android:layout_toEndOf="@+id/orderText"
         android:padding="3dp"
-        android:text="TextView" />
+        android:text="Brandbekämpfung" />
 
     <TableLayout
         android:layout_width="match_parent"
