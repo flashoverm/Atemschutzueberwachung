@@ -41,9 +41,8 @@ public abstract class MonitoringActivity extends AppCompatActivity {
         leader.setText(squad.getLeader().getDisplayName());
         member.setText(squad.getMember().getDisplayName());
 
-        updateReturnPressure(layout, squad);
         if(squad.getTimerValue() == 0){
-            activateAlarm(layout);
+            //activateAlarm(layout);
         }
     }
 
@@ -62,26 +61,7 @@ public abstract class MonitoringActivity extends AppCompatActivity {
             memberReturnPressure.setVisibility(View.INVISIBLE);
         }
     }
-
-    protected void updateOverviewPressure(ViewGroup layout, Squad squad){
-        Event[] events = squad.getLastPressureValues();
-        int time = (int)events[0].getRemainingOperationTime()/1000/60;
-
-        TextView pressureTime = (TextView) layout.findViewById(R.id.lastPressureTime);
-        if(pressureTime == null){
-            TextView leaderPressureTime = (TextView)layout.findViewById(R.id.leaderPressureTime);
-            TextView memberPressureTime = (TextView)layout.findViewById(R.id.memberPressureTime);
-            leaderPressureTime.setText(time+"");
-            memberPressureTime.setText(time+"");
-        } else {
-            pressureTime.setText(time+" Min.");
-        }
-        TextView leaderPressure = (TextView)layout.findViewById(R.id.leaderPressure);
-        TextView memberPressure = (TextView)layout.findViewById(R.id.memberPressure);
-        leaderPressure.setText(events[0].getPressureLeader()+"");
-        memberPressure.setText(events[0].getPressureMember()+"");
-    }
-
+/*
     protected void timerReachedMark(ViewGroup layout, Squad squad, boolean expired){
         if(expired){
             deactivateReminder(layout);
@@ -121,5 +101,5 @@ public abstract class MonitoringActivity extends AppCompatActivity {
     protected void deactivateReminder(ViewGroup layout){
         layout.setBackground(new ColorDrawable(Color.WHITE));
     }
-
+*/
 }

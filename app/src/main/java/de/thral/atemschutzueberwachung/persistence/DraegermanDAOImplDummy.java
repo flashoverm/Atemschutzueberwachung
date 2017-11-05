@@ -15,23 +15,16 @@ public class DraegermanDAOImplDummy implements DraegermanDAO {
 
     public DraegermanDAOImplDummy(){
         list = new ArrayList<>();
-        list.add(new Draegerman("Markus", "Thral"));
-        list.add(new Draegerman("Sebastian", "Dürschmidt"));
-        list.add(new Draegerman("Tobias", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
-        list.add(new Draegerman("Michael", "Wagner"));
+        list.add(new Draegerman("träger1", "Atemschutz 1"));
+        list.add(new Draegerman("träger2", "Atemschutz 2"));
+        list.add(new Draegerman("träger3", "Atemschutz 3"));
+        list.add(new Draegerman("träger4", "Atemschutz 4"));
+        list.add(new Draegerman("träger5", "Atemschutz 5"));
+        list.add(new Draegerman("träger6", "Atemschutz 6"));
+        list.add(new Draegerman("träger7", "Atemschutz 7"));
+        list.add(new Draegerman("träger8", "Atemschutz 8"));
+        list.add(new Draegerman("träger9", "Atemschutz 9"));
+        list.add(new Draegerman("träger10", "Atemschutz 10"));
     }
 
     @Override

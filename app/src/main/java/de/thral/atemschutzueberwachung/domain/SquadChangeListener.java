@@ -6,11 +6,9 @@ package de.thral.atemschutzueberwachung.domain;
 
 public interface SquadChangeListener {
 
-    void onTimerUpdate(Squad squad);
     void onStateUpdate(Squad squad);
     void onPressureUpdate(Squad squad);
     void onCalculatedReturnPressure(Squad squad);
 
-    void onTimerReachedMark(Squad squad, boolean expired);
     void onPressureInfo(Squad squad, boolean underShot);
 }

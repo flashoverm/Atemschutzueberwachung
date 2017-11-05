@@ -23,6 +23,7 @@ public class Squad {
     private List<Event> eventList;
 
     private SquadChangeListener changeListener;
+    private TimerChangeListener timerListener;
 
     public Squad(String name, Draegerman leader, int initialPressureLeader,
                  Draegerman member, int initialPressureMember,
@@ -141,23 +142,27 @@ public class Squad {
         this.changeListener = changeListener;
     }
 
+    public void setTimerListener(TimerChangeListener timerListener){
+        this.timerListener = timerListener;
+    }
+
     private void createTimer(long startValue){
         timer = new CountDownTimer(startValue, 1000) {
             public void onTick(long millisUntilFinished) {
                 timerValue = millisUntilFinished;
-                changeListener.onTimerUpdate(Squad.this);
+                timerListener.onTimerUpdate(Squad.this);
 
                 //TODO improve complexity
                 if((timerValue/1000) == (operatingTime/1000*2/3)
                         || (timerValue/1000) == (operatingTime/1000/3)){
                     reminder = true;
-                    changeListener.onTimerReachedMark(Squad.this, false);
+                    timerListener.onTimerReachedMark(Squad.this, false);
                 }
             }
             public void onFinish() {
                 timerValue = 0;
-                changeListener.onTimerUpdate(Squad.this);
-                changeListener.onTimerReachedMark(Squad.this, true);
+                timerListener.onTimerUpdate(Squad.this);
+                timerListener.onTimerReachedMark(Squad.this, true);
             }
         };
     }

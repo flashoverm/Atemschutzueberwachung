@@ -5,47 +5,17 @@
     android:background="@color/background"
     android:weightSum="1">
 
-<LinearLayout
+    <de.thral.atemschutzueberwachung.activity.Views.DetailOverviewView
+        android:id="@+id/detailOverview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="0.75"
-        android:weightSum="3">
+        android:layout_weight="0.72"/>
 
-        <include
-            android:id="@+id/overview_small_1"
-            layout="@layout/monitor_overview_small"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1.0" />
-
-        <include
-            android:id="@+id/overview_small_2"
-            layout="@layout/monitor_overview_small"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1.0" />
-
-        <include
-            android:id="@+id/overview_small_3"
-            layout="@layout/monitor_overview_small"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/overview_1"
-            android:layout_margin="2dp"
-            android:layout_weight="1.0" />
-
-    </LinearLayout>
-
-    <include
+    <de.thral.atemschutzueberwachung.activity.Views.DetailView
         android:id="@+id/detail"
-        layout="@layout/monitor_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/overview_2"
-        android:layout_margin="2dp"
-        android:layout_weight="0.25"/>
+        android:layout_weight="0.28"/>
 
 </LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0">
+
+        <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/flipper_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+            <de.thral.atemschutzueberwachung.activity.Views.Overview
+                android:id="@+id/overview_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@+id/register_1"
+                layout="@layout/monitor_overview_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </ViewFlipper>
+        <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/flipper_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+            <de.thral.atemschutzueberwachung.activity.Views.Overview
+                android:id="@+id/overview_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@+id/register_2"
+                layout="@layout/monitor_overview_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </ViewFlipper>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0">
+
+        <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/flipper_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+            <de.thral.atemschutzueberwachung.activity.Views.Overview
+                android:id="@+id/overview_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@+id/register_3"
+                layout="@layout/monitor_overview_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </ViewFlipper>
+        <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/flipper_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+            <de.thral.atemschutzueberwachung.activity.Views.Overview
+                android:id="@+id/overview_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@+id/register_4"
+                layout="@layout/monitor_overview_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@+id/end_4"
+                layout="@layout/monitor_overview_end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </ViewFlipper>
+    </LinearLayout>
+
+</LinearLayout>
