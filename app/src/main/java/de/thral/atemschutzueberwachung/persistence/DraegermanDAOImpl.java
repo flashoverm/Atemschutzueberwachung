@@ -4,11 +4,9 @@ import java.util.List;
 
 import de.thral.atemschutzueberwachung.domain.Draegerman;
 
-/**
- * Created by Markus Thral on 01.11.2017.
- */
-
 public class DraegermanDAOImpl implements DraegermanDAO {
+
+    //TODO implement handling for equal lastnames and equal firstnames
 
     public DraegermanDAOImpl(){
 

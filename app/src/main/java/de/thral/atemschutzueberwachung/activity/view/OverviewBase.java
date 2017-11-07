@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.Views;
+package de.thral.atemschutzueberwachung.activity.view;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;

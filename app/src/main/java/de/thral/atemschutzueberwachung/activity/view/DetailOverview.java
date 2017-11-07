@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.Views;
+package de.thral.atemschutzueberwachung.activity.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -42,8 +42,10 @@ public class DetailOverview extends OverviewBase {
         Event[] events = squad.getLastPressureValues();
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
 
-        String leaderInfo = events[0].getPressureLeader()+"("+time+" Min)";
-        String memberInfo = events[0].getPressureMember()+"("+time+" Min)";
+        String leaderInfo = events[0].getPressureLeader()
+                +"("+time+" " + context.getString(R.string.minutesShort) +")/ -";
+        String memberInfo = events[0].getPressureMember()
+                +"("+time+" " + context.getString(R.string.minutesShort) +")/ -";
         if(squad.getLeaderReturnPressure() != -1
                 && squad.getMemberReturnPressure() != -1){
             leaderInfo += "/" + squad.getLeaderReturnPressure();

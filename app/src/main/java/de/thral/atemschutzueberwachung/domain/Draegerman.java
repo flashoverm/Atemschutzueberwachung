@@ -1,12 +1,6 @@
 package de.thral.atemschutzueberwachung.domain;
 
-/**
- * Created by Markus Thral on 21.10.2017.
- */
-
 public class Draegerman implements Comparable<Draegerman>{
-
-    //TODO implement handling for equal lastnames and equal firstnames
 
     private final String firstName;
     private final String lastName;

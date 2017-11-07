@@ -9,20 +9,18 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.activity.adapter.DraegermanSpinnerAdapter;
 import de.thral.atemschutzueberwachung.domain.Draegerman;
 import de.thral.atemschutzueberwachung.domain.OperatingTime;
 import de.thral.atemschutzueberwachung.domain.Order;
 import de.thral.atemschutzueberwachung.domain.Squad;
-import de.thral.atemschutzueberwachung.persistence.DraegermanDAOImplDummy;
 
 /**
  * Created by Markus Thral on 31.10.2017.
@@ -77,8 +75,10 @@ public class RegisterSquadDialog extends DialogFragment {
         ArrayAdapter<String> orderAdapter = Order.getArrayAdapter(getActivity());
         orderSpinner.setAdapter(orderAdapter);
 
-        DraegermanSpinnerAdapter draegermanSpinnerAdapter = new DraegermanSpinnerAdapter(getActivity(),
-                R.layout.listitem_spinner, new DraegermanDAOImplDummy().getAll());
+        DraegermanSpinnerAdapter draegermanSpinnerAdapter = new DraegermanSpinnerAdapter(
+                getActivity(), R.layout.listitem_spinner,
+                ((DraegermanObservationApplication)getActivity().getApplication())
+                        .getDraegermanDAO().getAll());
         leaderSpinner.setAdapter(draegermanSpinnerAdapter);
         memberSpinner.setAdapter(draegermanSpinnerAdapter);
 

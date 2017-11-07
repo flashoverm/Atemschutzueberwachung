@@ -2,15 +2,12 @@ package de.thral.atemschutzueberwachung.domain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
 import de.thral.atemschutzueberwachung.R;
-
-/**
- * Created by Markus Thral on 29.10.2017.
- */
 
 public enum EventType {
     Register(R.string.eventListRegister, R.string.stateListRegister),
@@ -48,7 +45,7 @@ public enum EventType {
                 return event;
             }
         }
-        return null;    //TODO besser as Exception?
+        throw new Resources.NotFoundException(string);
     }
 
     public static ArrayAdapter<String> getArrayAdapter(Activity context){

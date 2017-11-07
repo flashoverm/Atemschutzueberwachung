@@ -1,13 +1,15 @@
 package de.thral.atemschutzueberwachung.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import de.thral.atemschutzueberwachung.AtemschutzueberwachungApplication;
+import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.activity.Views.LayoutClickListener;
-import de.thral.atemschutzueberwachung.activity.Views.OverviewView;
+import de.thral.atemschutzueberwachung.activity.view.LayoutClickListener;
+import de.thral.atemschutzueberwachung.activity.view.OverviewView;
 import de.thral.atemschutzueberwachung.activity.dialog.EndOperationDialog;
 import de.thral.atemschutzueberwachung.activity.dialog.RegisterSquadDialog;
 import de.thral.atemschutzueberwachung.domain.Squad;
@@ -26,7 +28,7 @@ public class MonitoringOverviewActivity extends MonitoringActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        operationDAO = ((AtemschutzueberwachungApplication)getApplication()).getOperationDAO();
+        operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
         initView();
     }
 
@@ -51,8 +53,19 @@ public class MonitoringOverviewActivity extends MonitoringActivity
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        EndOperationDialog dialog = EndOperationDialog.newInstance();
-                        dialog.show(getFragmentManager(), "EndOperation");
+                        if(!operationDAO.getActive().isSquadActive()){
+                            EndOperationDialog dialog = EndOperationDialog.newInstance();
+                            dialog.show(getFragmentManager(), "EndOperation");
+                            return;
+                        }
+                        new AlertDialog.Builder(MonitoringOverviewActivity.this)
+                                .setTitle(R.string.endOperationTitle)
+                                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                    }
+                                })
+                                .setMessage(R.string.endOperationWarning)
+                                .create().show();
                     }
                 }
         );
@@ -74,11 +87,8 @@ public class MonitoringOverviewActivity extends MonitoringActivity
 
     @Override
     public void onOperationEnd(String observer, String operationType, String location, String unit) {
-        if(operationDAO.getActive().complete(operationType, location, observer, unit)){
+            operationDAO.getActive().complete(operationType, location, observer, unit);
             Intent intent = new Intent(MonitoringOverviewActivity.this, MenuActivity.class);
             startActivity(intent);
-        } else {
-            //TODO squads-active dialog
-        }
     }
 }

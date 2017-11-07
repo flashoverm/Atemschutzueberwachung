@@ -69,6 +69,16 @@ public class Operation {
         return activeSquads;
     }
 
+    public boolean isSquadActive(){
+        Squad[] active = getActiveSquads();
+        for(int i=0; i<MAX_SQUAD_COUNT; i++){
+            if(active[i] != null){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean registerSquad(Squad squad) {
         Squad[] active = getActiveSquads();
         for(int i=0; i<MAX_SQUAD_COUNT; i++) {
@@ -82,15 +92,7 @@ public class Operation {
 
     public boolean complete(String operation, String location,
                                      String observer, String unit) {
-        boolean squadsActive = false;
-        Squad[] active = getActiveSquads();
-        for(int i=0; i<MAX_SQUAD_COUNT; i++){
-            if(active[i] != null){
-                squadsActive = true;
-                break;
-            }
-        }
-        if(!squadsActive){
+        if(!isSquadActive()){
             this.operation = operation;
             this.location = location;
             this.observer = observer;

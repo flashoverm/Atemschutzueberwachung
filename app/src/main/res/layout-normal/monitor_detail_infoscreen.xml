@@ -2,9 +2,10 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/dataViewPadding">
 
-    <TextView
+<TextView
         android:id="@+id/timer"
         android:layout_column="0"
         android:layout_columnSpan="2"
@@ -72,7 +73,7 @@
         android:layout_columnWeight="1"
         android:layout_row="3"
         android:layout_rowWeight="1"
-        android:text="Druck bei:"
+        android:text="@string/pressureText"
         android:textAlignment="textEnd" />
 
     <TextView
@@ -108,7 +109,7 @@
         android:layout_columnWeight="1"
         android:layout_row="3"
         android:layout_rowWeight="1"
-        android:text="Rückzug bei:"
+        android:text="@string/retreatAtText"
         android:textAlignment="center" />
 
     <TextView
@@ -117,7 +118,7 @@
         android:layout_columnWeight="1"
         android:layout_row="4"
         android:layout_rowWeight="1"
-        android:text="Truppführer:" />
+        android:text="@string/leaderText" />
 
     <TextView
         android:id="@+id/leaderName"
@@ -170,7 +171,7 @@
         android:layout_columnWeight="1"
         android:layout_row="5"
         android:layout_rowWeight="1"
-        android:text="Truppmann:" />
+        android:text="@string/memberText" />
 
     <TextView
         android:id="@+id/memberName"

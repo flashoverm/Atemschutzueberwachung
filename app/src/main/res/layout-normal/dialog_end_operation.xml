@@ -13,7 +13,7 @@
         android:layout_alignBottom="@+id/edit_observer"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Überwacher:"
+        android:text="@string/oberserverText"
         android:padding="11dp"/>
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/observer"
         android:padding="11dp"
-        android:text="Einsatz:"/>
+        android:text="@string/operationText"/>
 
     <TextView
         android:id="@+id/location"
@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/operation"
         android:padding="11dp"
-        android:text="Einsatzort:"/>
+        android:text="@string/locationText"/>
 
     <TextView
         android:id="@+id/unit"
@@ -41,7 +41,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/location"
         android:padding="11dp"
-        android:text="Einheit:" />
+        android:text="@string/unitText" />
 
     <EditText
         android:id="@+id/edit_unit"

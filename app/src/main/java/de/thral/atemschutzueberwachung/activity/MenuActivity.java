@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 
 public class MenuActivity extends AppCompatActivity {
@@ -18,10 +19,18 @@ public class MenuActivity extends AppCompatActivity {
         Button startOperation = (Button) findViewById(R.id.startOperation);
         Button management = (Button) findViewById(R.id.administration);
 
+        if(((DraegermanObservationApplication)getApplication())
+                .getOperationDAO().getActive() != null){
+            Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
+            startActivity(intent);
+            //TODO Display Toast: OperationResumed
+        }
+
         startOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //switch to Detail
+                ((DraegermanObservationApplication)getApplication())
+                        .getOperationDAO().createOperation();
                 Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
                 startActivity(intent);
             }
@@ -30,7 +39,6 @@ public class MenuActivity extends AppCompatActivity {
         management.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO switch to administration menu
             }
         });
 

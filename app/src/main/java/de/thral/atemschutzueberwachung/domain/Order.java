@@ -2,19 +2,14 @@ package de.thral.atemschutzueberwachung.domain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
 import de.thral.atemschutzueberwachung.R;
 
-/**
- * Created by Markus Thral on 30.10.2017.
- */
-
-//TODO make parent class with all methods etc.
-
-public enum Order {
+public enum Order{
     Explore(R.string.orderListExplore),
     Firefighting(R.string.orderListFirefighting),
     Search(R.string.orderListSearch),
@@ -38,7 +33,7 @@ public enum Order {
                 return order;
             }
         }
-        return null;    //TODO besser as Exception?
+        throw new Resources.NotFoundException(string);
     }
 
     public static ArrayAdapter<String> getArrayAdapter(Activity context){

@@ -33,7 +33,10 @@
     <string name="memberText">Truppmann:</string>
     <string name="pressureText">Druck bei:</string>
     <string name="retreatAtText">Rückzug bei:</string>
+    <string name="retreatText">Rückzug:</string>
     <string name="orderTextShort">Auftrag:</string>
+
+    <string name="minutesShort">Min</string>
 
     <!-- Dialogs -->
     <string name="ok">OK</string>
@@ -65,7 +68,7 @@
     <string name="registerSquadTitle">Trupp registrieren</string>
     <string name="squadnameText">Funkrufname:</string>
 
-    <string name="operationTimeDebug">6 Minuten</string>
+    <string name="operationTimeDebug">3 Minuten</string>
     <string name="operationTimeShort">20 Minuten</string>
     <string name="operationTimeNormal">30 Minuten</string>
     <string name="operationTimeLong">60 Minuten</string>
@@ -100,6 +103,7 @@
     <string name="unitText">Einheit:</string>
 
     <!--Toasts-->
+    <string name="operationResumed">Atemschutzeinsatz wird fortgesetzt</string>
     <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
     <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
     <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>

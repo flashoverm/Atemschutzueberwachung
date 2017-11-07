@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.Views;
+package de.thral.atemschutzueberwachung.activity.view;
 
 /**
  * Created by Markus Thral on 05.11.2017.

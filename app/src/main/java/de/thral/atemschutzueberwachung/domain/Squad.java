@@ -13,10 +13,14 @@ public class Squad {
     private final String name;
     private final Draegerman leader;
     private final Draegerman member;
+    private final Order order;
+
     private int leaderReturnPressure;
     private int memberReturnPressure;
-    private final Order order;
+
     private final long operatingTime;
+    private final int secOneThird;
+    private final int secTwoThird;
     private transient CountDownTimer timer;
     private long timerValue;
     private boolean reminder;
@@ -36,6 +40,8 @@ public class Squad {
         this.memberReturnPressure = -1;
         this.eventList = new ArrayList<>();
         this.operatingTime = operatingTime.getTime()*60*1000;
+        this.secOneThird = operatingTime.getTime()*20;
+        this.secTwoThird = operatingTime.getTime()*30;
         this.reminder = false;
 
         register(initialPressureLeader, initialPressureMember);
@@ -152,9 +158,7 @@ public class Squad {
                 timerValue = millisUntilFinished;
                 timerListener.onTimerUpdate(Squad.this);
 
-                //TODO improve complexity
-                if((timerValue/1000) == (operatingTime/1000*2/3)
-                        || (timerValue/1000) == (operatingTime/1000/3)){
+                if((timerValue/1000) == secTwoThird || (timerValue/1000) == secOneThird){
                     reminder = true;
                     timerListener.onTimerReachedMark(Squad.this, false);
                 }
@@ -165,6 +169,11 @@ public class Squad {
                 timerListener.onTimerReachedMark(Squad.this, true);
             }
         };
+    }
+
+    public void runTimer(){
+        createTimer(timerValue);
+        timer.start();
     }
 
     private void register(int initialPressureLeader, int initialPressureMember){
@@ -178,8 +187,7 @@ public class Squad {
         if(!isEventExisting(EventType.Begin)){
             eventList.add(0, new Event(EventType.Begin, getTimerValue()));
             changeListener.onStateUpdate(this);
-            createTimer(timerValue);
-            timer.start();
+            runTimer();
             return true;
         }
         return false;
@@ -233,8 +241,7 @@ public class Squad {
     public boolean resumeOperation(){
         eventList.add(0, new Event(EventType.ResumeTimer, getTimerValue()));
         changeListener.onStateUpdate(this);
-        createTimer(timerValue);
-        timer.start();
+        runTimer();
         return true;
     }
 

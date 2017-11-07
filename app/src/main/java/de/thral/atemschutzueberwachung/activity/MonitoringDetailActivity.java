@@ -3,11 +3,11 @@ package de.thral.atemschutzueberwachung.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import de.thral.atemschutzueberwachung.AtemschutzueberwachungApplication;
+import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.activity.Views.DetailOverviewView;
-import de.thral.atemschutzueberwachung.activity.Views.DetailView;
-import de.thral.atemschutzueberwachung.activity.Views.LayoutClickListener;
+import de.thral.atemschutzueberwachung.activity.view.DetailOverviewView;
+import de.thral.atemschutzueberwachung.activity.view.DetailView;
+import de.thral.atemschutzueberwachung.activity.view.LayoutClickListener;
 import de.thral.atemschutzueberwachung.activity.dialog.EnterPressureDialog;
 import de.thral.atemschutzueberwachung.domain.EventType;
 import de.thral.atemschutzueberwachung.domain.Operation;
@@ -31,7 +31,7 @@ public class MonitoringDetailActivity extends MonitoringActivity
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        operationDAO = ((AtemschutzueberwachungApplication)getApplication()).getOperationDAO();
+        operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
         initSquads(intent.getExtras().getInt(DETAIL_KEY));
         initOverviews();
         initDetailView();

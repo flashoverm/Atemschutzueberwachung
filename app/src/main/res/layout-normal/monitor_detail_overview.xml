@@ -1,100 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dataViewPadding"
+    android:weightSum="1.0">
 
-    <TextView
-        android:id="@+id/timer"
-        android:layout_column="0"
-        android:layout_row="0"
-        android:layout_columnSpan="2"
-        android:layout_rowSpan="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:text="10:51"
-        android:paddingRight="3dp"
-        android:textSize="28sp" />
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
 
-    <TextView
-        android:id="@+id/squadname"
-        android:layout_column="2"
-        android:layout_row="0"
-        android:layout_columnSpan="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:maxLines="1"
-        android:text="Atemschut1"
-        android:textAlignment="textEnd"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/timer"
+            android:text="10:51"
+            android:textSize="28sp"
+            app:layout_column="0"
+            app:layout_row="0"
+            app:layout_rowSpan="2"
+            app:layout_rowWeight="1" />
 
-    <TextView
-        android:id="@+id/state"
-        android:layout_column="2"
-        android:layout_row="1"
-        android:layout_columnSpan="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:text="state"
-        android:textAlignment="textEnd"
-        android:textSize="12sp" />
+        <TextView
+            android:id="@+id/squadname"
+            android:maxLines="1"
+            android:text="Atemschutztrupp1Atemschutztrupp1Atemschutztrupp1"
+            android:layout_width="0dp"
+            app:layout_gravity="fill_horizontal"
+            android:textAlignment="textEnd"
+            android:textSize="15sp"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:layout_rowWeight="1" />
 
-    <TextView
-        android:id="@+id/leaderText"
-        android:layout_column="0"
-        android:layout_row="3"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:text="TF:"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/state"
+            android:text="state"
+            android:textSize="12sp"
+            android:layout_width="0dp"
+            app:layout_gravity="fill_horizontal"
+            android:textAlignment="textEnd"
+            app:layout_column="1"
+            app:layout_row="1"
+            app:layout_rowWeight="3" />
+    </android.support.v7.widget.GridLayout>
 
-    <TextView
-        android:id="@+id/memberText"
-        android:layout_column="0"
-        android:layout_row="4"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:text="TM:"
-        android:textSize="13sp" />
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
 
-    <TextView
-        android:id="@+id/leaderName"
-        android:layout_column="1"
-        android:layout_row="3"
-        android:layout_columnSpan="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:text="Huber"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/leaderText"
+            android:text="@string/leaderShortText"
+            android:textSize="13sp"
+            app:layout_column="0"
+            app:layout_row="0"
+            android:layout_marginEnd="@dimen/textMargin"
+            app:layout_rowWeight="1" />
 
-    <TextView
-        android:id="@+id/memberName"
-        android:layout_column="1"
-        android:layout_row="4"
-        android:layout_columnSpan="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:text="Müller"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/memberText"
+            android:text="@string/memberShortText"
+            android:textSize="13sp"
+            app:layout_column="0"
+            app:layout_row="1"
+            android:layout_marginEnd="@dimen/textMargin"
+            app:layout_rowWeight="1" />
 
-    <TextView
-        android:id="@+id/leaderPressureInfo"
-        android:layout_column="3"
-        android:layout_columnWeight="1"
-        android:layout_row="3"
-        android:layout_rowWeight="1"
-        android:text="180(30 Min)/40"
-        android:textAlignment="viewEnd"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/leaderName"
+            android:maxLines="1"
+            android:text="TestHuberTestHuberTestHuberTestHuberTestHuberTestHuberTestHuberTestHuber"
+            android:textSize="13sp"
+            android:layout_width="0dp"
+            app:layout_gravity="fill_horizontal"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:layout_rowWeight="1" />
 
-    <TextView
-        android:id="@+id/memberPressureInfo"
-        android:layout_column="3"
-        android:layout_columnWeight="1"
-        android:layout_row="4"
-        android:layout_rowWeight="1"
-        android:text="180(30 Min)/50"
-        android:textAlignment="viewEnd"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/memberName"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            app:layout_gravity="fill_horizontal"
+            android:text="MüllerMüllerMüllerMüller"
+            android:textSize="13sp"
+            app:layout_column="1"
+            app:layout_row="1"
+            app:layout_rowWeight="1" />
 
-</GridLayout>
+        <TextView
+            android:id="@+id/leaderPressureInfo"
+            android:text="180(30 Min)/40"
+            android:textSize="13sp"
+            app:layout_column="2"
+            app:layout_row="0"
+            android:layout_marginStart="@dimen/textMarginLarge"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/memberPressureInfo"
+            android:text="180(30 Min)/50"
+            android:textSize="13sp"
+            app:layout_column="2"
+            app:layout_row="1"
+            android:layout_marginStart="@dimen/textMarginLarge"
+            app:layout_rowWeight="1" />
+
+    </android.support.v7.widget.GridLayout>
+
+</LinearLayout>
+
+
+

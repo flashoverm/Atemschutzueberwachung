@@ -16,7 +16,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.thral.atemschutzueberwachung.domain.EventType;
 import de.thral.atemschutzueberwachung.domain.Operation;
+import de.thral.atemschutzueberwachung.domain.Squad;
 
 /**
  * Created by Markus Thral on 01.11.2017.
@@ -30,25 +32,44 @@ public class OperationDAOImpl implements OperationDAO {
     }.getType();
 
     private Context context;
+    private Operation activeOperation;
 
     public OperationDAOImpl(Context context){
         this.context = context;
+        this.activeOperation = loadActive();
+        if(activeOperation != null){
+            for(Squad squad : activeOperation.getActiveSquads()){
+                if(!squad.getState().equals(EventType.PauseTimer)
+                        && !squad.getState().equals(EventType.Register)){
+                    squad.runTimer();
+                }
+            }
+        }
     }
 
     @Override
     public Operation getActive() {
-       try{
+        return activeOperation;
+    }
+
+    protected Operation loadActive(){
+        try{
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new FileReader(active));
             return gson.fromJson(reader, Operation.class);
         } catch(IOException e){
-            return new Operation();
+            return null;
         }
+    }
+
+    public void createOperation(){
+        this.activeOperation = new Operation();
     }
 
     @Override
     public boolean update(Operation operation) {
+        //TODO better way than saving on every "tick"
         try{
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
             Gson gson = new Gson();

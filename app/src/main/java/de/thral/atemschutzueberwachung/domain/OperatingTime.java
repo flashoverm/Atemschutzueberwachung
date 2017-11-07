@@ -2,16 +2,13 @@ package de.thral.atemschutzueberwachung.domain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.thral.atemschutzueberwachung.R;
-
-/**
- * Created by Markus Thral on 30.10.2017.
- */
 
 public enum OperatingTime {
     Debug(R.string.operationTimeDebug, 3),
@@ -41,7 +38,7 @@ public enum OperatingTime {
                 return operatingTime;
             }
         }
-        return null;    //TODO besser as Exception?
+        throw new Resources.NotFoundException(string);
     }
 
     public static ArrayAdapter<String> getArrayAdapter(Activity context){

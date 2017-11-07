@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.Views;
+package de.thral.atemschutzueberwachung.activity.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -61,7 +61,7 @@ public class Overview extends OverviewBase {
             memberReturnPressure.setVisibility(View.INVISIBLE);
         }
 
-        if(squad.isReminderActive()){
+        if(squad.isReminderActive() && squad.getTimerValue() != 0){
             activateReminder();
         } else {
             deactivateReminder();

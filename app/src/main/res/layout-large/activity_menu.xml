@@ -18,7 +18,7 @@
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Überwachung starten"
+        android:text="@string/startOperationButton"
         android:textSize="24dp" />
 
     <Button
@@ -27,6 +27,6 @@
         android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="Verwaltung"
+        android:text="@string/administationButton"
         android:textSize="22dp" />
 </RelativeLayout>

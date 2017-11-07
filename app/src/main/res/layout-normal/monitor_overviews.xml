@@ -16,10 +16,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.Views.Overview
+            <de.thral.atemschutzueberwachung.activity.view.Overview
                 android:id="@+id/overview_1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
             <include
                 android:id="@+id/register_1"
@@ -34,10 +35,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.Views.Overview
+            <de.thral.atemschutzueberwachung.activity.view.Overview
                 android:id="@+id/overview_2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
             <include
                 android:id="@+id/register_2"
@@ -59,10 +61,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.Views.Overview
+            <de.thral.atemschutzueberwachung.activity.view.Overview
                 android:id="@+id/overview_3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
             <include
                 android:id="@+id/register_3"
@@ -77,10 +80,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.Views.Overview
+            <de.thral.atemschutzueberwachung.activity.view.Overview
                 android:id="@+id/overview_4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
             <include
                 android:id="@+id/register_4"

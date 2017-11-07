@@ -15,6 +15,7 @@ import de.thral.atemschutzueberwachung.domain.Operation;
 public interface OperationDAO {
 
     Operation getActive();
+    void createOperation();
     boolean update(Operation operation);
     boolean endOperation(Operation operation);
 

@@ -5,23 +5,26 @@
     android:layout_height="match_parent"
     android:weightSum="3">
 
-    <de.thral.atemschutzueberwachung.activity.Views.DetailOverview
+    <de.thral.atemschutzueberwachung.activity.view.DetailOverview
         android:id="@+id/overview_small_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.0" />
+        android:layout_weight="1.0"
+        android:layout_margin="@dimen/dataViewMargin"/>
 
-    <de.thral.atemschutzueberwachung.activity.Views.DetailOverview
+    <de.thral.atemschutzueberwachung.activity.view.DetailOverview
         android:id="@+id/overview_small_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.0" />
+        android:layout_weight="1.0"
+        android:layout_margin="@dimen/dataViewMargin"/>
 
-    <de.thral.atemschutzueberwachung.activity.Views.DetailOverview
+    <de.thral.atemschutzueberwachung.activity.view.DetailOverview
         android:id="@+id/overview_small_3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/overview_1"
-        android:layout_weight="1.0" />
+        android:layout_weight="1.0"
+        android:layout_margin="@dimen/dataViewMargin"/>
 
 </LinearLayout>

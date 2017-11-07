@@ -5,17 +5,18 @@
     android:background="@color/background"
     android:weightSum="1">
 
-    <de.thral.atemschutzueberwachung.activity.Views.DetailOverviewView
+    <de.thral.atemschutzueberwachung.activity.view.DetailOverviewView
         android:id="@+id/detailOverview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.72"/>
 
-    <de.thral.atemschutzueberwachung.activity.Views.DetailView
+    <de.thral.atemschutzueberwachung.activity.view.DetailView
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/overview_2"
-        android:layout_weight="0.28"/>
+        android:layout_weight="0.28"
+        android:layout_margin="@dimen/dataViewMargin"/>
 
 </LinearLayout>
