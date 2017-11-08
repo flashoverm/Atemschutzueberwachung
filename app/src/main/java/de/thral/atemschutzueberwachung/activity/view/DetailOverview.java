@@ -60,6 +60,7 @@ public class DetailOverview extends OverviewBase {
             deactivateReminder();
         }
         if(squad.getTimerValue() == 0){
+            deactivateReminder();
             activateAlarm();
         }
 

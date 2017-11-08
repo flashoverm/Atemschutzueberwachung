@@ -110,4 +110,5 @@
     <string name="toastNoOperation">Einsatz eingeben!</string>
     <string name="toastNoLocation">Einsatzort eingeben!</string>
     <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
+    <string name="toastInvalidPressure">Druck ungültig - Höher als aktueller Wert!</string>
 </resources>

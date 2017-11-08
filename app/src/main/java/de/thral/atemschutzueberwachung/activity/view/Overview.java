@@ -61,10 +61,14 @@ public class Overview extends OverviewBase {
             memberReturnPressure.setVisibility(View.INVISIBLE);
         }
 
-        if(squad.isReminderActive() && squad.getTimerValue() != 0){
+        if(squad.isReminderActive()){
             activateReminder();
         } else {
             deactivateReminder();
+        }
+        if(squad.getTimerValue() == 0){
+            deactivateReminder();
+            activateAlarm();
         }
 
         squad.setTimerListener(new TimerChangeListener() {

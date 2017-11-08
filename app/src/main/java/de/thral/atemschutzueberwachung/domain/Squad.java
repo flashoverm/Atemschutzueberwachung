@@ -117,6 +117,15 @@ public class Squad {
         return null;
     }
 
+    public Event getLastPressureValue(){
+        for(Event event : eventList) {
+            if (event.getPressureLeader() != -1) {
+                return event;
+            }
+        }
+        return null;
+    }
+
     public Event[] getLastPressureValues(){
         Event[] last = new Event[3];
         int j=0;

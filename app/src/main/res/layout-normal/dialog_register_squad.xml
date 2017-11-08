@@ -64,9 +64,9 @@
         android:id="@+id/edit_leader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edit_leaderpressure"
+        android:layout_above="@+id/edit_memberpressure"
         android:layout_alignStart="@+id/edit_member"
-        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@+id/leaderPressureText"
         android:spinnerMode="dialog" />
 
     <Spinner
@@ -74,8 +74,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/edit_memberpressure"
-        android:layout_marginBottom="8dp"
         android:layout_toEndOf="@+id/orderText"
+        android:layout_toStartOf="@+id/memberPressureText"
         android:spinnerMode="dialog" />
 
     <EditText
@@ -108,12 +108,12 @@
 
     <Spinner
         android:id="@+id/edit_order"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/orderText"
         android:layout_toEndOf="@+id/orderText"
-        android:spinnerMode="dialog"
-        android:layout_marginBottom="8dp"/>
+        android:layout_toStartOf="@+id/memberPressureText"
+        android:spinnerMode="dialog" />
 
     <Space
         android:layout_width="20dp"

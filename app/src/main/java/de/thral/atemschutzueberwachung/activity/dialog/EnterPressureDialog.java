@@ -21,7 +21,7 @@ import de.thral.atemschutzueberwachung.domain.EventType;
 public class EnterPressureDialog extends DialogFragment {
 
     public interface EnteredPressureListener{
-        public void onEnteredPressure(EventType event, int leaderPressure, int memberPressure);
+        public boolean onEnteredPressure(EventType event, int leaderPressure, int memberPressure);
     }
 
     public static final String EVENT_KEY = "event";
@@ -94,9 +94,13 @@ public class EnterPressureDialog extends DialogFragment {
                                             Toast.LENGTH_LONG).show();
                                     return;
                                 }
-                                listener.onEnteredPressure(
+                                if(!listener.onEnteredPressure(
                                         EventType.getEventType(getActivity(), event),
-                                        Integer.parseInt(leader), Integer.parseInt(member));
+                                        Integer.parseInt(leader), Integer.parseInt(member))){
+                                    Toast.makeText(getActivity(), R.string.toastInvalidPressure,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
                                 enterPressure.dismiss();
                             }
                         });

@@ -9,6 +9,7 @@ import de.thral.atemschutzueberwachung.activity.view.DetailOverviewView;
 import de.thral.atemschutzueberwachung.activity.view.DetailView;
 import de.thral.atemschutzueberwachung.activity.view.LayoutClickListener;
 import de.thral.atemschutzueberwachung.activity.dialog.EnterPressureDialog;
+import de.thral.atemschutzueberwachung.domain.Event;
 import de.thral.atemschutzueberwachung.domain.EventType;
 import de.thral.atemschutzueberwachung.domain.Operation;
 import de.thral.atemschutzueberwachung.domain.Squad;
@@ -71,19 +72,25 @@ public class MonitoringDetailActivity extends MonitoringActivity
     }
 
     @Override
-    public void onEnteredPressure(EventType event, int leaderPressure, int memberPressure) {
-        switch(event){
-            case Arrive: selected.arriveTarget(leaderPressure, memberPressure);
-                break;
-            case Timer: selected.addPressureValues(EventType.Timer, leaderPressure, memberPressure);
-                break;
-            case Retreat: selected.retreat(leaderPressure, memberPressure);
-                break;
-            case End: selected.endOperation(leaderPressure, memberPressure);
-                Intent intent = new Intent(MonitoringDetailActivity.this, MonitoringOverviewActivity.class);
-                startActivity(intent);
-                break;
+    public boolean onEnteredPressure(EventType event, int leaderPressure, int memberPressure) {
+        Event lastPressure = selected.getLastPressureValue();
+        if(lastPressure.getPressureLeader() >= leaderPressure
+                && lastPressure.getPressureMember() >= memberPressure){
+            switch(event){
+                case Arrive: selected.arriveTarget(leaderPressure, memberPressure);
+                    break;
+                case Timer: selected.addPressureValues(EventType.Timer, leaderPressure, memberPressure);
+                    break;
+                case Retreat: selected.retreat(leaderPressure, memberPressure);
+                    break;
+                case End: selected.endOperation(leaderPressure, memberPressure);
+                    Intent intent = new Intent(MonitoringDetailActivity.this, MonitoringOverviewActivity.class);
+                    startActivity(intent);
+                    break;
+            }
+            return true;
         }
+        return false;
     }
 
 }
