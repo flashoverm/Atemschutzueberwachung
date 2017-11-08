@@ -215,13 +215,16 @@ public class DetailView extends RelativeLayout{
 
     private void updateDetailPressure(Event[] events){
         if(events[2] != null){
-            pressureTime1.setText(((int)events[2].getRemainingOperationTime()/1000/60)+"");
+            pressureTime1.setText(((int)events[2].getRemainingOperationTime()/1000/60)
+                    +" "+context.getString(R.string.minutesShort));
             leaderPressure1.setText(events[2].getPressureLeader()+"");
             memberPressure1.setText(events[2].getPressureMember()+"");
-            pressureTime2.setText(((int)events[1].getRemainingOperationTime()/1000/60)+"");
+            pressureTime2.setText(((int)events[1].getRemainingOperationTime()/1000/60)
+                    +" "+context.getString(R.string.minutesShort));
             leaderPressure2.setText(events[1].getPressureLeader()+"");
             memberPressure2.setText(events[1].getPressureMember()+"");
-            pressureTime3.setText(((int)events[0].getRemainingOperationTime()/1000/60)+"");
+            pressureTime3.setText(((int)events[0].getRemainingOperationTime()/1000/60)
+                    +" "+context.getString(R.string.minutesShort));
             leaderPressure3.setText(events[0].getPressureLeader()+"");
             memberPressure3.setText(events[0].getPressureMember()+"");
             pressureTime2.setVisibility(View.VISIBLE);
@@ -231,10 +234,12 @@ public class DetailView extends RelativeLayout{
             leaderPressure3.setVisibility(View.VISIBLE);
             memberPressure3.setVisibility(View.VISIBLE);
         } else if(events[1] != null){
-            pressureTime1.setText(((int)events[1].getRemainingOperationTime()/1000/60)+"");
+            pressureTime1.setText(((int)events[1].getRemainingOperationTime()/1000/60)
+                    +" "+context.getString(R.string.minutesShort));
             leaderPressure1.setText(events[1].getPressureLeader()+"");
             memberPressure1.setText(events[1].getPressureMember()+"");
-            pressureTime2.setText(((int)events[0].getRemainingOperationTime()/1000/60)+"");
+            pressureTime2.setText(((int)events[0].getRemainingOperationTime()/1000/60)
+                    +" "+context.getString(R.string.minutesShort));
             leaderPressure2.setText(events[0].getPressureLeader()+"");
             memberPressure2.setText(events[0].getPressureMember()+"");
             pressureTime2.setVisibility(View.VISIBLE);
@@ -244,7 +249,8 @@ public class DetailView extends RelativeLayout{
             leaderPressure3.setVisibility(View.INVISIBLE);
             memberPressure3.setVisibility(View.INVISIBLE);
         } else {
-            pressureTime1.setText(((int)events[0].getRemainingOperationTime()/1000/60)+"");
+            pressureTime1.setText(((int)events[0].getRemainingOperationTime()/1000/60)
+                    +" "+context.getString(R.string.minutesShort));
             leaderPressure1.setText(events[0].getPressureLeader()+"");
             memberPressure1.setText(events[0].getPressureMember()+"");
             pressureTime2.setVisibility(View.INVISIBLE);

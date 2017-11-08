@@ -2,6 +2,24 @@
 <resources>
     <dimen name="dataViewPadding">3dp</dimen>
     <dimen name="dataViewMargin">2dp</dimen>
-    <dimen name="textMargin">2dp</dimen>
-    <dimen name="textMarginLarge">10dp</dimen>
+    <dimen name="textMargin">10dp</dimen>
+    <dimen name="textMarginHalf">5dp</dimen>
+
+    <dimen name="textSizeDetail">14dp</dimen>
+    <dimen name="textSizeDetailMedium">15dp</dimen>
+    <dimen name="textSizeDetailBig">24dp</dimen>
+    <dimen name="textSizeDetailTimer">50dp</dimen>
+
+    <dimen name="textSizeDetailOverview">13dp</dimen>
+    <dimen name="textSizeDetailOverviewMedium">13dp</dimen>
+    <dimen name="textSizeDetailOverviewBig">15dp</dimen>
+    <dimen name="textSizeDetailOverviewTimer">28dp</dimen>
+
+    <dimen name="textSizeOverview">14dp</dimen>
+    <dimen name="textSizeOverviewMedium">16dp</dimen>
+    <dimen name="textSizeOverviewBig">26dp</dimen>
+    <dimen name="textSizeOverviewTimer">38dp</dimen>
+
+    <dimen name="buttonTextSize">14dp</dimen>
+
 </resources>

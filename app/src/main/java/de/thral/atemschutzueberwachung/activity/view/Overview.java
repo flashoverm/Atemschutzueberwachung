@@ -46,7 +46,7 @@ public class Overview extends OverviewBase {
 
         Event[] events = squad.getLastPressureValues();
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
-        lastPressureTime.setText(time+" Min.");
+        lastPressureTime.setText(time+" "+context.getString(R.string.minutesShort));
         leaderPressure.setText(events[0].getPressureLeader()+"");
         memberPressure.setText(events[0].getPressureMember()+"");
 

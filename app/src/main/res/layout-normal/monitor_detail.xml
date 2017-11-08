@@ -33,7 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:text="@string/startButton" />
+                android:text="@string/startButton"
+                android:textSize="@dimen/buttonTextSize" />
 
         </LinearLayout>
 
@@ -57,7 +58,8 @@
             android:layout_alignStart="@+id/buttonEnterPressure"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="@string/arriveButton" />
+            android:text="@string/arriveButton"
+            android:textSize="@dimen/buttonTextSize" />
 
         <Button
             android:id="@+id/buttonEnterPressure"
@@ -66,7 +68,8 @@
             android:layout_below="@+id/buttonArrive"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="@string/enterPressureButton" />
+            android:text="@string/enterPressureButton"
+            android:textSize="@dimen/buttonTextSize" />
 
         <Button
             android:id="@+id/buttonRetreat"
@@ -75,9 +78,10 @@
             android:layout_alignEnd="@+id/buttonEnterPressure"
             android:layout_alignStart="@+id/buttonEnd"
             android:layout_below="@+id/buttonEnterPressure"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:text="@string/retreatButton" />
+            android:layout_weight="1"
+            android:text="@string/retreatButton"
+            android:textSize="@dimen/buttonTextSize" />
 
         <Button
             android:id="@+id/buttonEnd"
@@ -86,9 +90,10 @@
             android:layout_alignEnd="@+id/buttonEnterPressure"
             android:layout_alignStart="@+id/buttonEnterPressure"
             android:layout_below="@+id/buttonRetreat"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:text="@string/endButton" />
+            android:layout_weight="1"
+            android:text="@string/endButton"
+            android:textSize="@dimen/buttonTextSize" />
     </LinearLayout>
 
 </RelativeLayout>

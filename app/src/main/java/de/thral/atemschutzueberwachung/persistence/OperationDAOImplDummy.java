@@ -26,10 +26,8 @@ public class OperationDAOImplDummy implements OperationDAO {
     @Override
     public void createOperation() {
         activeOperation = new Operation();
-        activeOperation.registerSquad(new Squad("Trupp 1", new Draegerman("Test", "Test123456TEst123456Test"), 300, new Draegerman("Test3", "Test123456TEst"), 310, OperatingTime.Debug, Order.Firefighting));
-        activeOperation.registerSquad(new Squad("2Atemschutztrupp 1234", new Draegerman("Franz", "Atemsc1"), 310, new Draegerman("Hans", "Wurst"), 300, OperatingTime.Debug, Order.Firefighting));
-        //activeOperation.registerSquad(new Squad("Trupp 3", new Draegerman("Test", "Theo"), 310, new Draegerman("Franz", "Furz"), 300, OperatingTime.Normal, Order.Firefighting));
-        //activeOperation.registerSquad(new Squad("Trupp 4", new Draegerman("Test", "Dürsc"), 310, new Draegerman("Hans", "Wurst"), 300, OperatingTime.Normal, Order.Firefighting));
+        activeOperation.registerSquad(new Squad("Angriff 2/40/1", new Draegerman("Bernd", "Beispiel"), 300, new Draegerman("Andreas", "Atemschutzträger"), 310, OperatingTime.Debug, Order.Firefighting));
+        activeOperation.registerSquad(new Squad("Sicherung 1/21/1", new Draegerman("Max", "Mustermann"), 310, new Draegerman("Theo", "Test"), 300, OperatingTime.Debug, Order.Firefighting));
     }
 
     @Override

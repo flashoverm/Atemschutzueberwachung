@@ -10,37 +10,39 @@
     <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
+        android:layout_weight="0.48">
 
         <TextView
             android:id="@+id/timer"
             android:text="10:51"
-            android:textSize="28sp"
+            android:textSize="@dimen/textSizeDetailOverviewTimer"
             app:layout_column="0"
             app:layout_row="0"
             app:layout_rowSpan="2"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:layout_marginRight="@dimen/textMargin"/>
 
         <TextView
             android:id="@+id/squadname"
-            android:maxLines="1"
-            android:text="Atemschutztrupp1Atemschutztrupp1Atemschutztrupp1"
             android:layout_width="0dp"
-            app:layout_gravity="fill_horizontal"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Atemschutztrupp1Atemschutztrupp1Atemschutztrupp1"
             android:textAlignment="textEnd"
-            android:textSize="15sp"
+            android:textSize="@dimen/textSizeDetailOverviewBig"
             app:layout_column="1"
+            app:layout_gravity="fill_horizontal"
             app:layout_row="0"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/state"
-            android:text="state"
-            android:textSize="12sp"
             android:layout_width="0dp"
-            app:layout_gravity="fill_horizontal"
+            android:text="state"
             android:textAlignment="textEnd"
+            android:textSize="@dimen/textSizeDetailOverviewMedium"
             app:layout_column="1"
+            app:layout_gravity="fill_horizontal"
             app:layout_row="1"
             app:layout_rowWeight="3" />
     </android.support.v7.widget.GridLayout>
@@ -48,64 +50,66 @@
     <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
+        android:layout_weight="0.52">
 
         <TextView
             android:id="@+id/leaderText"
+            android:layout_marginEnd="@dimen/textMargin"
             android:text="@string/leaderShortText"
-            android:textSize="13sp"
+            android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="0"
             app:layout_row="0"
-            android:layout_marginEnd="@dimen/textMargin"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/memberText"
+            android:layout_marginEnd="@dimen/textMargin"
             android:text="@string/memberShortText"
-            android:textSize="13sp"
+            android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="0"
             app:layout_row="1"
-            android:layout_marginEnd="@dimen/textMargin"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/leaderName"
-            android:maxLines="1"
-            android:text="TestHuberTestHuberTestHuberTestHuberTestHuberTestHuberTestHuberTestHuber"
-            android:textSize="13sp"
             android:layout_width="0dp"
-            app:layout_gravity="fill_horizontal"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="TestHuberTestHuberTestHuberTestHuberTestHuberTestHuberTestHuberTestHuber"
+            android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="1"
+            app:layout_gravity="fill_horizontal"
             app:layout_row="0"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/memberName"
-            android:maxLines="1"
             android:layout_width="0dp"
-            app:layout_gravity="fill_horizontal"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="MüllerMüllerMüllerMüller"
-            android:textSize="13sp"
+            android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="1"
+            app:layout_gravity="fill_horizontal"
             app:layout_row="1"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/leaderPressureInfo"
+            android:layout_marginStart="@dimen/textMargin"
             android:text="180(30 Min)/40"
-            android:textSize="13sp"
+            android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="2"
             app:layout_row="0"
-            android:layout_marginStart="@dimen/textMarginLarge"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/memberPressureInfo"
+            android:layout_marginStart="@dimen/textMargin"
             android:text="180(30 Min)/50"
-            android:textSize="13sp"
+            android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="2"
             app:layout_row="1"
-            android:layout_marginStart="@dimen/textMarginLarge"
             app:layout_rowWeight="1" />
 
     </android.support.v7.widget.GridLayout>

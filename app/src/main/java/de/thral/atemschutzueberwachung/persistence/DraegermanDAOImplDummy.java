@@ -5,10 +5,6 @@ import java.util.List;
 
 import de.thral.atemschutzueberwachung.domain.Draegerman;
 
-/**
- * Created by Markus Thral on 28.10.2017.
- */
-
 public class DraegermanDAOImplDummy implements DraegermanDAO {
 
     List<Draegerman> list;

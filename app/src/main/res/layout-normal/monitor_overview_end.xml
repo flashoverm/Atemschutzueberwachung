@@ -8,6 +8,7 @@
         android:id="@+id/buttonEndOperation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="45dp"
         android:text="@string/endOperation"
-        android:layout_margin="45dp"/>
+        android:textSize="@dimen/buttonTextSize" />
 </RelativeLayout>
