@@ -20,16 +20,11 @@ import de.thral.atemschutzueberwachung.domain.EventType;
 import de.thral.atemschutzueberwachung.domain.Operation;
 import de.thral.atemschutzueberwachung.domain.Squad;
 
-/**
- * Created by Markus Thral on 01.11.2017.
- */
-
 public class OperationDAOImpl implements OperationDAO {
 
     private static final String ACTIVE_FILE = "active.json";
 
-       private static final Type OPERATION_TYPE = new TypeToken<List<Operation>>() {
-    }.getType();
+    private static final Type OPERATION_TYPE = new TypeToken<List<Operation>>(){}.getType();
 
     private Context context;
     private Operation activeOperation;
@@ -41,7 +36,7 @@ public class OperationDAOImpl implements OperationDAO {
             for(Squad squad : activeOperation.getActiveSquads()){
                 if(!squad.getState().equals(EventType.PauseTimer)
                         && !squad.getState().equals(EventType.Register)){
-                    squad.runTimer();
+                    //TODO squad.resumeAfterError();
                 }
             }
         }
@@ -65,16 +60,16 @@ public class OperationDAOImpl implements OperationDAO {
 
     public void createOperation(){
         this.activeOperation = new Operation();
+        update();
     }
 
     @Override
-    public boolean update(Operation operation) {
-        //TODO better way than saving on every "tick"
+    public boolean update() {
         try{
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
             Gson gson = new Gson();
             FileWriter writer = new FileWriter(active);
-            writer.append(gson.toJson(operation));
+            writer.append(gson.toJson(getActive()));
             writer.flush();
             writer.close();
             return true;

@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity;
+package de.thral.atemschutzueberwachung.ui.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +22,9 @@ public class MenuActivity extends AppCompatActivity {
         if(((DraegermanObservationApplication)getApplication())
                 .getOperationDAO().getActive() != null){
             Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
+            intent.putExtra(MonitoringOverviewActivity.KEY_RESUMED, true);
             startActivity(intent);
-            //TODO Display Toast: OperationResumed
         }
-
         startOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

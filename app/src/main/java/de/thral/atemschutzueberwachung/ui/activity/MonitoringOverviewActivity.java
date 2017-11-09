@@ -1,25 +1,31 @@
-package de.thral.atemschutzueberwachung.activity;
+package de.thral.atemschutzueberwachung.ui.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.activity.view.LayoutClickListener;
-import de.thral.atemschutzueberwachung.activity.view.OverviewView;
-import de.thral.atemschutzueberwachung.activity.dialog.EndOperationDialog;
-import de.thral.atemschutzueberwachung.activity.dialog.RegisterSquadDialog;
 import de.thral.atemschutzueberwachung.domain.Squad;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
+import de.thral.atemschutzueberwachung.ui.dialog.EndOperationDialog;
+import de.thral.atemschutzueberwachung.ui.dialog.RegisterSquadDialog;
+import de.thral.atemschutzueberwachung.ui.view.LayoutClickListener;
+import de.thral.atemschutzueberwachung.ui.view.OverviewView;
 
-public class MonitoringOverviewActivity extends MonitoringActivity
+public class MonitoringOverviewActivity extends AppCompatActivity
         implements RegisterSquadDialog.SquadRegisteredListener,
         EndOperationDialog.EndOperationListener,
         LayoutClickListener{
 
+    public static final String KEY_RESUMED = "OperationResumed";
+
+    private Context context;
     private OverviewView overviewView;
     private OperationDAO operationDAO;
 
@@ -27,6 +33,13 @@ public class MonitoringOverviewActivity extends MonitoringActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+        this.context = getApplicationContext();
+        Intent intent = getIntent();
+        if(intent.getBooleanExtra(KEY_RESUMED, false)){
+            Toast.makeText(context, context.getString(R.string.toastOperationResumed),
+                    Toast.LENGTH_LONG ).show();
+        }
 
         operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
         initView();
@@ -82,6 +95,7 @@ public class MonitoringOverviewActivity extends MonitoringActivity
     @Override
     public void onSquadRegistered(Squad registeredSquad) {
         operationDAO.getActive().registerSquad(registeredSquad);
+        operationDAO.update();
         initView();
     }
 

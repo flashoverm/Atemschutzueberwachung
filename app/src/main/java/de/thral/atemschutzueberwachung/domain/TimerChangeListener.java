@@ -7,6 +7,6 @@ package de.thral.atemschutzueberwachung.domain;
 public interface TimerChangeListener {
 
     void onTimerUpdate(Squad squad);
-    void onTimerReachedMark(Squad squad, boolean expired);
+    void onTimerReachedMark(boolean expired);
 
 }

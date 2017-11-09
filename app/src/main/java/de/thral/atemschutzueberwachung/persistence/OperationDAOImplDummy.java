@@ -31,7 +31,7 @@ public class OperationDAOImplDummy implements OperationDAO {
     }
 
     @Override
-    public boolean update(Operation operation) {
+    public boolean update() {
         return true;
     }
 

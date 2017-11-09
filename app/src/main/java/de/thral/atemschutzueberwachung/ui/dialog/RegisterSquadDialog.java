@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.dialog;
+package de.thral.atemschutzueberwachung.ui.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.activity.adapter.DraegermanSpinnerAdapter;
+import de.thral.atemschutzueberwachung.ui.adapter.DraegermanSpinnerAdapter;
 import de.thral.atemschutzueberwachung.domain.Draegerman;
 import de.thral.atemschutzueberwachung.domain.OperatingTime;
 import de.thral.atemschutzueberwachung.domain.Order;

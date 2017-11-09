@@ -16,7 +16,7 @@ public interface OperationDAO {
 
     Operation getActive();
     void createOperation();
-    boolean update(Operation operation);
+    boolean update();
     boolean endOperation(Operation operation);
 
     List<Operation> getCompletedOperations();

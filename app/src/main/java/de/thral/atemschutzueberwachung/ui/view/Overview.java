@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.view;
+package de.thral.atemschutzueberwachung.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -44,7 +44,7 @@ public class Overview extends OverviewBase {
         leaderName.setText(squad.getLeader().getDisplayName());
         memberName.setText(squad.getMember().getDisplayName());
 
-        Event[] events = squad.getLastPressureValues();
+        Event[] events = squad.getLastPressureValues(1);
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
         lastPressureTime.setText(time+" "+context.getString(R.string.minutesShort));
         leaderPressure.setText(events[0].getPressureLeader()+"");
@@ -66,11 +66,10 @@ public class Overview extends OverviewBase {
         } else {
             deactivateReminder();
         }
-        if(squad.getTimerValue() == 0){
+        if(squad.isTimerExpired()){
             deactivateReminder();
             activateAlarm();
         }
-
         squad.setTimerListener(new TimerChangeListener() {
             @Override
             public void onTimerUpdate(Squad squad) {
@@ -78,7 +77,7 @@ public class Overview extends OverviewBase {
             }
 
             @Override
-            public void onTimerReachedMark(Squad squad, boolean expired) {
+            public void onTimerReachedMark(boolean expired) {
                 timerReachedMark(expired);
             }
         });

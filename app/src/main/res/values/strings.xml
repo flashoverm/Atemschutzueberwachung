@@ -102,7 +102,7 @@
     <string name="unitText">Einheit:</string>
 
     <!--Toasts-->
-    <string name="operationResumed">Atemschutzeinsatz wird fortgesetzt</string>
+    <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
     <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
     <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
     <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>

@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.view.Overview
+            <de.thral.atemschutzueberwachung.ui.view.Overview
                 android:id="@+id/overview_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.view.Overview
+            <de.thral.atemschutzueberwachung.ui.view.Overview
                 android:id="@+id/overview_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.view.Overview
+            <de.thral.atemschutzueberwachung.ui.view.Overview
                 android:id="@+id/overview_3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -80,7 +80,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
-            <de.thral.atemschutzueberwachung.activity.view.Overview
+            <de.thral.atemschutzueberwachung.ui.view.Overview
                 android:id="@+id/overview_4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

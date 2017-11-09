@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.view;
+package de.thral.atemschutzueberwachung.ui.view;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -16,9 +16,11 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.activity.dialog.EnterPressureDialog;
-import de.thral.atemschutzueberwachung.activity.dialog.PressureWarningDialog;
+import de.thral.atemschutzueberwachung.persistence.OperationDAO;
+import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
+import de.thral.atemschutzueberwachung.ui.dialog.PressureWarningDialog;
 import de.thral.atemschutzueberwachung.domain.Event;
 import de.thral.atemschutzueberwachung.domain.EventType;
 import de.thral.atemschutzueberwachung.domain.Squad;
@@ -164,7 +166,7 @@ public class DetailView extends RelativeLayout{
         leaderName.setText(squad.getLeader().getDisplayName());
         memberName.setText(squad.getMember().getDisplayName());
 
-        if(squad.getTimerValue() == 0){
+        if(squad.isTimerExpired()){
             activateAlarm();
         }
         squad.setTimerListener(new TimerChangeListener() {
@@ -174,7 +176,7 @@ public class DetailView extends RelativeLayout{
             }
 
             @Override
-            public void onTimerReachedMark(Squad squad, boolean expired) {
+            public void onTimerReachedMark(boolean expired) {
                 if(expired){
                     activateAlarm();
                     buttonAnimation.end();
@@ -192,7 +194,7 @@ public class DetailView extends RelativeLayout{
 
             @Override
             public void onPressureUpdate(Squad squad) {
-                Event[] events = squad.getLastPressureValues();
+                Event[] events = squad.getLastPressureValues(3);
                 updateDetailPressure(events);
             }
 
@@ -208,7 +210,7 @@ public class DetailView extends RelativeLayout{
             }
         });
 
-        updateDetailPressure(squad.getLastPressureValues());
+        updateDetailPressure(squad.getLastPressureValues(3));
         updateReturnPressure();
         updateButtons();
     }
@@ -294,7 +296,6 @@ public class DetailView extends RelativeLayout{
 
         } else {
             buttonAnimation.end();
-//                    enterPressure.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
         }
     }
 
@@ -314,6 +315,7 @@ public class DetailView extends RelativeLayout{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.beginOperation();
+                                //TODO UPDATE
                             }
                         });
                 break;
@@ -322,6 +324,7 @@ public class DetailView extends RelativeLayout{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.pauseOperation();
+                                //TODO UPDATE
                             }
                         });
                 break;
@@ -330,6 +333,7 @@ public class DetailView extends RelativeLayout{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.resumeOperation();
+                                //TODO UPDATE
                             }
                         });
                 break;

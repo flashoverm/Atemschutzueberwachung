@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.adapter;
+package de.thral.atemschutzueberwachung.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

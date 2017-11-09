@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.activity.view;
+package de.thral.atemschutzueberwachung.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -77,7 +77,7 @@ public class OverviewView extends GridLayout {
                     overview[i].setVisibility(View.INVISIBLE);
                 }
 
-                if(i==4 && overview[0]==null){
+                if(i==3 && overview[0]==null){
                     overviewFlipper[i].setDisplayedChild(2);
                     endOperation = (Button) overviewFlipper[i].findViewById(R.id.buttonEndOperation);
                     endOperation.setOnClickListener(endOperationListener);
