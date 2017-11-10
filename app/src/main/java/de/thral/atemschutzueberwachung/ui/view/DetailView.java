@@ -16,9 +16,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
 import de.thral.atemschutzueberwachung.ui.dialog.PressureWarningDialog;
 import de.thral.atemschutzueberwachung.domain.Event;
@@ -29,10 +27,17 @@ import de.thral.atemschutzueberwachung.domain.TimerChangeListener;
 
 public class DetailView extends RelativeLayout{
 
+    public interface StartButtonListener {
+
+        void onStartButtonClick();
+    }
+
     private Context context;
     private View detailView;
     private View detailInfoView;
     private Squad squad;
+
+    private StartButtonListener startButtonListener;
 
     private TextView timer, squadname, state, order, leaderName, memberName, leaderReturnPressure,
             memberReturnPressure, pressureTime1, leaderPressure1, memberPressure1, pressureTime2,
@@ -62,6 +67,10 @@ public class DetailView extends RelativeLayout{
         } catch (ClassCastException e) {
             throw new ClassCastException("Can't get the fragment manager with this");
         }
+    }
+
+    public void setStartButtonClickListener(StartButtonListener listener){
+        this.startButtonListener = listener;
     }
 
     private void init(){
@@ -171,8 +180,8 @@ public class DetailView extends RelativeLayout{
         }
         squad.setTimerListener(new TimerChangeListener() {
             @Override
-            public void onTimerUpdate(Squad squad) {
-                timer.setText(squad.getTimerValueAsClock());
+            public void onTimerUpdate(String timer) {
+                DetailView.this.timer.setText(timer);
             }
 
             @Override
@@ -315,7 +324,7 @@ public class DetailView extends RelativeLayout{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.beginOperation();
-                                //TODO UPDATE
+                                startButtonListener.onStartButtonClick();
                             }
                         });
                 break;
@@ -324,7 +333,7 @@ public class DetailView extends RelativeLayout{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.pauseOperation();
-                                //TODO UPDATE
+                                startButtonListener.onStartButtonClick();
                             }
                         });
                 break;
@@ -333,7 +342,7 @@ public class DetailView extends RelativeLayout{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.resumeOperation();
-                                //TODO UPDATE
+                                startButtonListener.onStartButtonClick();
                             }
                         });
                 break;

@@ -1,5 +1,12 @@
 package de.thral.atemschutzueberwachung.persistence;
 
+import android.util.JsonWriter;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +39,14 @@ public class OperationDAOImplDummy implements OperationDAO {
 
     @Override
     public boolean update() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        System.out.println("UPDATE: ");
+        System.out.println(gson.toJson(getActive()));
         return true;
     }
 
     @Override
-    public boolean endOperation(Operation operation) {
+    public boolean endOperation() {
         return true;
     }
 

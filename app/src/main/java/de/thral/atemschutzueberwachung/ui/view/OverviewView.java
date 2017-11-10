@@ -76,8 +76,7 @@ public class OverviewView extends GridLayout {
                     overviewFlipper[i].setDisplayedChild(0);
                     overview[i].setVisibility(View.INVISIBLE);
                 }
-
-                if(i==3 && overview[0]==null){
+                if(i==3 && squads[i]==null){
                     overviewFlipper[i].setDisplayedChild(2);
                     endOperation = (Button) overviewFlipper[i].findViewById(R.id.buttonEndOperation);
                     endOperation.setOnClickListener(endOperationListener);

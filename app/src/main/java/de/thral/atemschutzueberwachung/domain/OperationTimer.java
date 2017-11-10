@@ -4,22 +4,22 @@ import android.os.CountDownTimer;
 
 public class OperationTimer {
 
-    private final Squad squad;
     private transient CountDownTimer timer;
     private long timerValue;
     private long timestampTimerStart;
     private final int secOneThird;
     private final int secTwoThird;
     private boolean reminder;
-    private TimerChangeListener timerListener;
+    private transient TimerChangeListener timerListener;
 
-    public OperationTimer(Squad squad, OperatingTime operatingTime){
-        this.squad = squad;
+    public OperationTimer(OperatingTime operatingTime){
         this.timerValue = operatingTime.getTime()*60*1000;
 
         this.secOneThird = operatingTime.getTime()*20;
         this.secTwoThird = operatingTime.getTime()*30;
         this.reminder = false;
+        System.out.println("INIT OPERATIONTIMER");
+        this.timestampTimerStart = -1;
     }
 
     public long getValue() {
@@ -60,10 +60,11 @@ public class OperationTimer {
     }
 
     public void start(){
+        System.out.println("TIMER INIT");
         timer = new CountDownTimer(timerValue, 1000) {
             public void onTick(long millisUntilFinished) {
-                timerValue = millisUntilFinished;
-                timerListener.onTimerUpdate(squad);
+                OperationTimer.this.timerValue = millisUntilFinished;
+                timerListener.onTimerUpdate(getValueAsClock());
 
                 if((timerValue/1000) == secTwoThird || (timerValue/1000) == secOneThird){
                     reminder = true;
@@ -71,11 +72,12 @@ public class OperationTimer {
                 }
             }
             public void onFinish() {
-                timerValue = 0;
-                timerListener.onTimerUpdate(squad);
+                OperationTimer.this.timerValue = 0;
+                timerListener.onTimerUpdate("00:00");
                 timerListener.onTimerReachedMark(true);
             }
         };
+        System.out.println("SAVE CURRENT TIME ON TIMRE START: " + System.currentTimeMillis());
         timestampTimerStart = System.currentTimeMillis();
         timer.start();
     }

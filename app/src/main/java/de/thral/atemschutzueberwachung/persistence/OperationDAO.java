@@ -17,7 +17,7 @@ public interface OperationDAO {
     Operation getActive();
     void createOperation();
     boolean update();
-    boolean endOperation(Operation operation);
+    boolean endOperation();
 
     List<Operation> getCompletedOperations();
     List<File> getCompletedOperationsAsFiles();

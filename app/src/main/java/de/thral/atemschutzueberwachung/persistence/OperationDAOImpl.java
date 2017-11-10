@@ -3,6 +3,7 @@ package de.thral.atemschutzueberwachung.persistence;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
@@ -23,6 +24,7 @@ import de.thral.atemschutzueberwachung.domain.Squad;
 public class OperationDAOImpl implements OperationDAO {
 
     private static final String ACTIVE_FILE = "active.json";
+    private static final String COMPLETED_FOLDER = "completed/";
 
     private static final Type OPERATION_TYPE = new TypeToken<List<Operation>>(){}.getType();
 
@@ -32,14 +34,6 @@ public class OperationDAOImpl implements OperationDAO {
     public OperationDAOImpl(Context context){
         this.context = context;
         this.activeOperation = loadActive();
-        if(activeOperation != null){
-            for(Squad squad : activeOperation.getActiveSquads()){
-                if(!squad.getState().equals(EventType.PauseTimer)
-                        && !squad.getState().equals(EventType.Register)){
-                    //TODO squad.resumeAfterError();
-                }
-            }
-        }
     }
 
     @Override
@@ -80,13 +74,19 @@ public class OperationDAOImpl implements OperationDAO {
     }
 
     @Override
-    public boolean endOperation(Operation operation) {
+    public boolean endOperation() {
         try{
-            File completed = new File(context.getFilesDir(), operation.getFilename()+".json");
+            File completedFolder = new File(context.getFilesDir(), COMPLETED_FOLDER);
+            completedFolder.mkdirs();
+            File completed = new File(completedFolder, getActive().getFilename()+".json");
             Gson gson = new Gson();
-            gson.toJson(operation, new FileWriter(completed));
+            FileWriter writer = new FileWriter(completed);
+            writer.append(gson.toJson(getActive()));
+            writer.flush();
+            writer.close();
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
             active.delete();
+            this.activeOperation = null;
             return true;
         }catch(IOException e){
             e.printStackTrace();

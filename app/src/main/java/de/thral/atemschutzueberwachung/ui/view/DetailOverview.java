@@ -66,8 +66,8 @@ public class DetailOverview extends OverviewBase {
 
         squad.setTimerListener(new TimerChangeListener() {
             @Override
-            public void onTimerUpdate(Squad squad) {
-                timer.setText(squad.getTimerValueAsClock());
+            public void onTimerUpdate(String timer) {
+                DetailOverview.this.timer.setText(timer);
             }
 
             @Override

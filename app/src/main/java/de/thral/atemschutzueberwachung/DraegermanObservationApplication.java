@@ -6,6 +6,7 @@ import de.thral.atemschutzueberwachung.domain.Draegerman;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAOImplDummy;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
+import de.thral.atemschutzueberwachung.persistence.OperationDAOImpl;
 import de.thral.atemschutzueberwachung.persistence.OperationDAOImplDummy;
 
 public class DraegermanObservationApplication extends Application {
@@ -16,7 +17,7 @@ public class DraegermanObservationApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        operationDAO = new OperationDAOImplDummy();
+        operationDAO = new OperationDAOImpl(getApplicationContext());
         draegermanDAO = new DraegermanDAOImplDummy();
     }
 

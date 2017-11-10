@@ -38,6 +38,7 @@ public class Overview extends OverviewBase {
     }
 
     public void setSquad(Squad squad){
+        System.out.println("SQUAD SET");
         timer.setText(squad.getTimerValueAsClock());
         squadname.setText(squad.getName());
         state.setText(squad.getState().getStateDescription(context));
@@ -72,8 +73,8 @@ public class Overview extends OverviewBase {
         }
         squad.setTimerListener(new TimerChangeListener() {
             @Override
-            public void onTimerUpdate(Squad squad) {
-                timer.setText(squad.getTimerValueAsClock());
+            public void onTimerUpdate(String timer) {
+                Overview.this.timer.setText(timer);
             }
 
             @Override

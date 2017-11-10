@@ -18,7 +18,7 @@ import de.thral.atemschutzueberwachung.ui.view.LayoutClickListener;
 
 public class MonitoringDetailActivity extends AppCompatActivity
         implements EnterPressureDialog.EnteredPressureListener,
-        LayoutClickListener{
+        LayoutClickListener, DetailView.StartButtonListener {
 
     public static final String DETAIL_KEY = "DETAIL";
 
@@ -61,6 +61,7 @@ public class MonitoringDetailActivity extends AppCompatActivity
 
     private void initDetailView(){
         DetailView detailView = findViewById(R.id.detail);
+        detailView.setStartButtonClickListener(this);
         detailView.setSquad(selected);
     }
 
@@ -98,4 +99,8 @@ public class MonitoringDetailActivity extends AppCompatActivity
         return false;
     }
 
+    @Override
+    public void onStartButtonClick() {
+        operationDAO.update();
+    }
 }

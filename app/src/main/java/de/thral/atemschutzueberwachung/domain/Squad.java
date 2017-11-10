@@ -19,7 +19,7 @@ public class Squad {
     private OperationTimer operationTimer;
     private List<Event> eventList;
 
-    private SquadChangeListener changeListener;
+    private transient SquadChangeListener changeListener;
 
     public Squad(String name, Draegerman leader, int initialPressureLeader,
                  Draegerman member, int initialPressureMember,
@@ -31,7 +31,7 @@ public class Squad {
         this.leaderReturnPressure = -1;
         this.memberReturnPressure = -1;
         this.eventList = new ArrayList<>();
-        this.operationTimer = new OperationTimer(this, operatingTime);
+        this.operationTimer = new OperationTimer(operatingTime);
 
         register(initialPressureLeader, initialPressureMember);
     }
@@ -195,8 +195,8 @@ public class Squad {
 
     public boolean resumeOperation(){
         eventList.add(0, new Event(EventType.ResumeTimer, operationTimer.getValue()));
-        changeListener.onStateUpdate(this);
         operationTimer.start();
+        changeListener.onStateUpdate(this);
         return true;
     }
 

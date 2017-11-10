@@ -25,9 +25,9 @@ public class PressureWarningDialog extends DialogFragment {
                     }
                 });
         if(getArguments().getBoolean(UNTERSHOT_KEY)){
-            builder.setMessage(R.string.returnPressureWarningText);
-        } else {
             builder.setMessage(R.string.returnPressureAlarmText);
+        } else {
+            builder.setMessage(R.string.returnPressureWarningText);
         }
         return builder.create();
     }

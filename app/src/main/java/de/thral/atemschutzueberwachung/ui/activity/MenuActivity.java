@@ -25,6 +25,7 @@ public class MenuActivity extends AppCompatActivity {
             intent.putExtra(MonitoringOverviewActivity.KEY_RESUMED, true);
             startActivity(intent);
         }
+
         startOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

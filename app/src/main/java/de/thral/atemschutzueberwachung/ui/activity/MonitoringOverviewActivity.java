@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
+import de.thral.atemschutzueberwachung.domain.EventType;
 import de.thral.atemschutzueberwachung.domain.Squad;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 import de.thral.atemschutzueberwachung.ui.dialog.EndOperationDialog;
@@ -35,14 +36,22 @@ public class MonitoringOverviewActivity extends AppCompatActivity
         setContentView(R.layout.activity_overview);
 
         this.context = getApplicationContext();
+        operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
         Intent intent = getIntent();
+        initView();
+
         if(intent.getBooleanExtra(KEY_RESUMED, false)){
+            for(Squad squad : operationDAO.getActive().getActiveSquads()){
+                if(squad != null){
+                    if(!squad.getState().equals(EventType.PauseTimer)
+                            && !squad.getState().equals(EventType.Register)){
+                        squad.resumeAfterError();
+                    }
+                }
+            }
             Toast.makeText(context, context.getString(R.string.toastOperationResumed),
                     Toast.LENGTH_LONG ).show();
         }
-
-        operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
-        initView();
     }
 
     @Override
@@ -102,6 +111,7 @@ public class MonitoringOverviewActivity extends AppCompatActivity
     @Override
     public void onOperationEnd(String observer, String operationType, String location, String unit) {
             operationDAO.getActive().complete(operationType, location, observer, unit);
+            operationDAO.endOperation();
             Intent intent = new Intent(MonitoringOverviewActivity.this, MenuActivity.class);
             startActivity(intent);
     }
