@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/administrationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/administationText"
+        android:textSize="56sp" />
+
+    <Button
+        android:id="@+id/operationAdministrationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/administrationText"
+        android:layout_alignStart="@+id/administrationText"
+        android:layout_below="@+id/administrationText"
+        android:layout_marginTop="50dp"
+        android:text="@string/operationAdministratoion"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/draegermanAdministrationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/operationAdministrationButton"
+        android:layout_alignStart="@+id/operationAdministrationButton"
+        android:layout_below="@+id/operationAdministrationButton"
+        android:layout_marginTop="50dp"
+        android:text="@string/draegermanAdministratoion"
+        android:textSize="18dp" />
+</RelativeLayout>
