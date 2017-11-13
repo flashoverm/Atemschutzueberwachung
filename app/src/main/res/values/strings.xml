@@ -3,10 +3,19 @@
 
     <!-- Main menu -->
     <string name="startOperationButton">Überwachung starten</string>
-    <string name="administationButton">Verwaltung</string>
+    <string name="administationText">Verwaltung</string>
 
     <string name="registerButton">Trupp registrieren</string>
     <string name="endOperation">Einsatz abschließen</string>
+
+    <!--Administration-->
+    <string name="draegermanAdministratoion">Atemschutzträger</string>
+    <string name="operationAdministratoion">Einsatzdaten</string>
+    <string name="operationAdminLabel">Verwaltung Einsatzdaten</string>
+    <string name="draegermanAdminLabel">Verwaltung Atemschutzträger</string>
+
+    <string name="folderNameExternal">Atemschutzueberwachung</string>
+
     <!--Operation-->
     <string name="stateListRegister">Registriert</string>
     <string name="stateListBegin">Gerät angeschlossen</string>
@@ -101,6 +110,10 @@
     <string name="locationText">Einsatzort:</string>
     <string name="unitText">Einheit:</string>
 
+    <!--Add Draegerman Dialog-->
+    <string name="firstnameText">Vorname:</string>
+    <string name="lastnameText">Nachname:</string>
+
     <!--Toasts-->
     <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
     <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
@@ -111,4 +124,9 @@
     <string name="toastNoLocation">Einsatzort eingeben!</string>
     <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
     <string name="toastInvalidPressure">Druck ungültig - Höher als aktueller Wert!</string>
+    <string name="toastNothingSelected">Keine Eintrag ausgewählt!</string>
+    <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
+    <string name="toastNoLastname">Kein Nachname eingetragen!</string>
+    <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
+    <string name="toastExportDeactivated">Kein Zugriff auf Speicher - Export-Funktion nicht möglich</string>
 </resources>

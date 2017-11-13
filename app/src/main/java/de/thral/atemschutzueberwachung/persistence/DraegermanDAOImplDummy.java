@@ -29,7 +29,7 @@ public class DraegermanDAOImplDummy implements DraegermanDAO {
     }
 
     @Override
-    public boolean add(Draegerman draegerman) {
+    public boolean add(Draegerman newDraegerman) {
         return false;
     }
 

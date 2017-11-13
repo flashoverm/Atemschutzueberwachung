@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp">
+
+    <EditText
+        android:id="@+id/edit_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/lastnameText"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:inputType="text"
+        android:layout_marginRight="@dimen/default_gap"/>
+
+    <EditText
+        android:id="@+id/edit_lastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lastnameText"
+        android:layout_alignBottom="@+id/lastnameText"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/lastnameText"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:inputType="text"
+        android:layout_marginRight="@dimen/default_gap" />
+
+    <TextView
+        android:id="@+id/firstnameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="11dp"
+        android:text="@string/firstnameText" />
+
+    <TextView
+        android:id="@+id/lastnameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edit_firstname"
+        android:padding="11dp"
+        android:text="@string/lastnameText" />
+
+</RelativeLayout>

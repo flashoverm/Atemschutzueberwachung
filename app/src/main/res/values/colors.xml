@@ -6,6 +6,8 @@
     <color name="ral3026">#ff2a1b</color>
     <color name="background">#259b9b9b</color>
     <color name="white">#ffffff</color>
+    <color name="darkgrey">#ff444444</color>
+    <color name="lighgrey">#ffcccccc</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

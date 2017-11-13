@@ -20,5 +20,6 @@ public interface OperationDAO {
     boolean endOperation();
 
     List<Operation> getCompletedOperations();
-    List<File> getCompletedOperationsAsFiles();
+    boolean exportOperation(Operation export);
+    boolean removeCompletedOperation(Operation operation);
 }

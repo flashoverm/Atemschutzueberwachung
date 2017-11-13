@@ -44,11 +44,21 @@
         android:text="@string/unitText" />
 
     <EditText
-        android:id="@+id/edit_unit"
+        android:id="@+id/edit_observer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/edit_location"
-        android:layout_below="@+id/edit_location"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/observer"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/edit_operation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/operation"
+        android:layout_toEndOf="@+id/observer"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="14sp" />
@@ -65,22 +75,13 @@
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/edit_operation"
+        android:id="@+id/edit_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/operation"
-        android:layout_toEndOf="@+id/observer"
+        android:layout_alignStart="@+id/edit_location"
+        android:layout_below="@+id/edit_location"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/edit_observer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/observer"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="14sp" />
 </RelativeLayout>

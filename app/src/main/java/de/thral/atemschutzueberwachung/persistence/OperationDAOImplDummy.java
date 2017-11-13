@@ -56,7 +56,12 @@ public class OperationDAOImplDummy implements OperationDAO {
     }
 
     @Override
-    public List<File> getCompletedOperationsAsFiles() {
-        return null;
+    public boolean exportOperation(Operation export) {
+        return false;
+    }
+
+    @Override
+    public boolean removeCompletedOperation(Operation operation) {
+        return true;
     }
 }

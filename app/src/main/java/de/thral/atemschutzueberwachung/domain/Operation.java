@@ -1,6 +1,9 @@
 package de.thral.atemschutzueberwachung.domain;
 
+import android.support.annotation.NonNull;
+
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +11,7 @@ import java.util.List;
  * Created by Markus Thral on 26.10.2017.
  */
 
-public class Operation {
+public class Operation implements Comparable<Operation> {
 
     public static final int MAX_SQUAD_COUNT = 4;
 
@@ -109,7 +112,12 @@ public class Operation {
 
     @Override
     public String toString() {
-        return new Timestamp(startTime).toString() + " - " + operation + " - " + location;
+        return new SimpleDateFormat("dd.MM.yyyy hh:mm").format(new Timestamp(startTime)).toString()
+                + " - " + operation + " - " + location;
     }
 
+    @Override
+    public int compareTo(Operation operation) {
+        return Long.compare(this.getStartTime(), operation.getStartTime());
+    }
 }

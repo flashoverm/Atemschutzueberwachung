@@ -11,6 +11,6 @@ import de.thral.atemschutzueberwachung.domain.Draegerman;
 public interface DraegermanDAO {
 
     List<Draegerman> getAll();
-    boolean add(Draegerman draegerman);
+    boolean add(Draegerman newDraegerman);
     boolean remove(Draegerman draegerman);
 }

@@ -4,7 +4,7 @@ public class Draegerman implements Comparable<Draegerman>{
 
     private final String firstName;
     private final String lastName;
-    private final String displayName;
+    private String displayName;
 
     public Draegerman(String firstName, String lastName){
         this.firstName = firstName;
@@ -30,9 +30,13 @@ public class Draegerman implements Comparable<Draegerman>{
         return displayName;
     }
 
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     @Override
     public String toString() {
-        return displayName;
+        return lastName + " " + firstName;
     }
 
     @Override

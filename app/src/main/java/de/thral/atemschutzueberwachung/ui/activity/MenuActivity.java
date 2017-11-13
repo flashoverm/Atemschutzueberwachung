@@ -39,6 +39,8 @@ public class MenuActivity extends AppCompatActivity {
         management.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, AdministrationActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -37,7 +37,7 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
         displayname.setTextSize(16);
 
         Draegerman draegerman = getItem(position);
-        displayname.setText(draegerman.getLastName() + " " + draegerman.getFirstName());
+        displayname.setText(draegerman.toString());
 
         return rowView;
     }
@@ -51,7 +51,7 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
         displayname.setTextSize(16);
 
         Draegerman draegerman = getItem(position);
-        displayname.setText(draegerman.getLastName() + " " + draegerman.getFirstName());
+        displayname.setText(draegerman.toString());
 
         return rowView;    }
 }
