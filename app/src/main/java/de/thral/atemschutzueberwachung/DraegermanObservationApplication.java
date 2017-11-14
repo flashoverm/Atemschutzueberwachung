@@ -1,6 +1,7 @@
 package de.thral.atemschutzueberwachung;
 
 import android.app.Application;
+import android.content.Context;
 
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAOImpl;
@@ -12,11 +13,19 @@ public class DraegermanObservationApplication extends Application {
     private OperationDAO operationDAO;
     private DraegermanDAO draegermanDAO;
 
+    private HardwareInterface hardwareInterface;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        operationDAO = new OperationDAOImpl(getApplicationContext());
-        draegermanDAO = new DraegermanDAOImpl(getApplicationContext());
+        Context context = getApplicationContext();
+        operationDAO = new OperationDAOImpl(context);
+        draegermanDAO = new DraegermanDAOImpl(context);
+        hardwareInterface = new HardwareInterface(context);
+    }
+
+    public HardwareInterface getHardwareInterface(){
+        return hardwareInterface;
     }
 
     public OperationDAO getOperationDAO(){
