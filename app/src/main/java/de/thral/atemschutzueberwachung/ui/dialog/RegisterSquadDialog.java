@@ -125,15 +125,20 @@ public class RegisterSquadDialog extends DialogFragment {
                                     Toast.LENGTH_LONG).show();
                             return;
                         }
+                        int leaderPressure = Integer.parseInt(initLeaderPressure);
+                        int memberPressure = Integer.parseInt(initMemberPressure);
+                        if(leaderPressure < 0 || memberPressure < 0){
+                            Toast.makeText(getActivity(), R.string.toastPressureUnderZero,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         if(leader.equals(member)){
                             Toast.makeText(getActivity(), R.string.toastLeaderMemberEqual,
                                     Toast.LENGTH_LONG).show();
                             return;
                         }
                         Squad squad = new Squad(
-                                squadnameText,
-                                leader, Integer.parseInt(initLeaderPressure),
-                                member, Integer.parseInt(initMemberPressure),
+                                squadnameText, leader, leaderPressure, member, memberPressure,
                                 OperatingTime.getOperatingTime(getActivity(), operatingTime),
                                 Order.getOrder(getActivity(), order)
                         );

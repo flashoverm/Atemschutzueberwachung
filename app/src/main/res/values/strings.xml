@@ -130,4 +130,5 @@
     <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
     <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
     <string name="toastExportSucceeded">Einsätze exportiert</string>
+    <string name="toastPressureUnderZero">Druck kann nicht negativ sein!</string>
 </resources>

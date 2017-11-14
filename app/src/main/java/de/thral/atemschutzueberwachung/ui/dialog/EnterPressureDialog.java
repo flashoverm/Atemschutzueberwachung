@@ -21,7 +21,7 @@ import de.thral.atemschutzueberwachung.domain.EventType;
 public class EnterPressureDialog extends DialogFragment {
 
     public interface EnteredPressureListener{
-        public boolean onEnteredPressure(EventType event, int leaderPressure, int memberPressure);
+        boolean onEnteredPressure(EventType event, int leaderPressure, int memberPressure);
     }
 
     public static final String EVENT_KEY = "event";
@@ -84,29 +84,40 @@ public class EnterPressureDialog extends DialogFragment {
                                 String member = memberPressure.getText().toString();
                                 String event = spinner.getSelectedItem().toString();
 
-                                if(leader.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
+                                if(enterPressure(leader, member,
+                                        EventType.getEventType(getActivity(), event))){
+                                    enterPressure.dismiss();
                                 }
-                                if(member.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoPressureMember,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                if(!listener.onEnteredPressure(
-                                        EventType.getEventType(getActivity(), event),
-                                        Integer.parseInt(leader), Integer.parseInt(member))){
-                                    Toast.makeText(getActivity(), R.string.toastInvalidPressure,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                enterPressure.dismiss();
                             }
                         });
             }
         });
         return dialog;
+    }
+
+    private boolean enterPressure(String leader, String member, EventType event){
+        if(leader.equals("")){
+            Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(member.equals("")){
+            Toast.makeText(getActivity(), R.string.toastNoPressureMember,
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+        int leaderPressure = Integer.parseInt(leader);
+        int memberPressure = Integer.parseInt(member);
+        if(leaderPressure < 0 || memberPressure < 0){
+            Toast.makeText(getActivity(), R.string.toastPressureUnderZero,
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(!listener.onEnteredPressure(event, leaderPressure, memberPressure)){
+            Toast.makeText(getActivity(), R.string.toastInvalidPressure, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
