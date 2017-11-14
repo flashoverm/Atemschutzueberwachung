@@ -1,5 +1,6 @@
 package de.thral.atemschutzueberwachung.persistence;
 
+import android.app.Activity;
 import android.util.JsonWriter;
 
 import com.google.gson.Gson;
@@ -53,6 +54,11 @@ public class OperationDAOImplDummy implements OperationDAO {
     @Override
     public List<Operation> getCompletedOperations() {
         return null;
+    }
+
+    @Override
+    public boolean setupStorage(Activity activity) {
+        return false;
     }
 
     @Override

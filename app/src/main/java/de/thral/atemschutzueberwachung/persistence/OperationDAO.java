@@ -1,5 +1,6 @@
 package de.thral.atemschutzueberwachung.persistence;
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.io.File;
@@ -20,6 +21,7 @@ public interface OperationDAO {
     boolean endOperation();
 
     List<Operation> getCompletedOperations();
+    boolean setupStorage(Activity activity);
     boolean exportOperation(Operation export);
     boolean removeCompletedOperation(Operation operation);
 }

@@ -1,8 +1,12 @@
 package de.thral.atemschutzueberwachung.persistence;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
 import android.os.Environment;
-import android.widget.Toast;
+import android.support.v4.app.ActivityCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -29,25 +33,12 @@ public class OperationDAOImpl implements OperationDAO {
     private File completedFolder;
     private File exportFolder;
 
-
     public OperationDAOImpl(Context context){
         this.context = context;
         this.activeOperation = loadActive();
 
         completedFolder = new File(context.getFilesDir(), COMPLETED_FOLDER);
         completedFolder.mkdirs();
-
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            exportFolder = new File(
-                    Environment.getExternalStorageDirectory(),
-                    context.getString(R.string.folderNameExternal)+"/");
-            exportFolder.mkdir();
-        } else {
-            exportFolder = null;
-            Toast.makeText(context, R.string.toastExportDeactivated, Toast.LENGTH_LONG);
-        }
-
-
     }
 
     @Override
@@ -126,17 +117,17 @@ public class OperationDAOImpl implements OperationDAO {
 
     @Override
     public boolean exportOperation(Operation export){
-        if(exportFolder != null){
-            Gson gson = new Gson();
-            File exportFile = new File(exportFolder, export.getFilename()+".json");
-            try{
-                FileWriter writer = new FileWriter(exportFile);
-                writer.append(gson.toJson(export));
-                writer.flush();
-                writer.close();
-                return true;
-            } catch(IOException e){
-            }
+        Gson gson = new Gson();
+        File exportFile = new File(exportFolder, export.getFilename()+".json");
+        try{
+            FileWriter writer = new FileWriter(exportFile);
+            writer.append(gson.toJson(export));
+            writer.flush();
+            writer.close();
+            MediaScannerConnection.scanFile(
+                    context, new String[] {exportFile.getAbsolutePath()}, null, null);
+            return true;
+        } catch(IOException e){
         }
         return false;
     }
@@ -145,5 +136,25 @@ public class OperationDAOImpl implements OperationDAO {
     public boolean removeCompletedOperation(Operation operation) {
         File completed = new File(completedFolder, operation.getFilename()+".json");
         return completed.delete();
+    }
+
+    @Override
+    public boolean setupStorage(Activity activity){
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 387);
+            return false;
+        }
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            exportFolder = new File(
+                    Environment.getExternalStorageDirectory(),
+                    context.getString(R.string.folderNameExternal) + "/");
+            if(!exportFolder.exists()){
+                return exportFolder.mkdir();
+            }
+            return true;
+        }
+        return false;
     }
 }

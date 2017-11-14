@@ -1,12 +1,15 @@
 package de.thral.atemschutzueberwachung.ui.activity;
 
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -24,6 +27,8 @@ public class OperationAdminActivity extends AppCompatActivity implements
     private OperationDAO operationDAO;
     private ListView completedOperations;
     private ArrayAdapter<Operation> adapter;
+
+    private SparseBooleanArray checked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
     public boolean onMenuItemClick(MenuItem menuItem) {
         super.onOptionsItemSelected(menuItem);
 
-        final SparseBooleanArray checked = completedOperations.getCheckedItemPositions();
+        checked = completedOperations.getCheckedItemPositions();
 
         if(checked.size() == 0){
             Toast.makeText(this, R.string.toastNothingSelected, Toast.LENGTH_LONG).show();
@@ -91,14 +96,14 @@ public class OperationAdminActivity extends AppCompatActivity implements
     }
 
     private void exportSelectedOperations(SparseBooleanArray selected){
-        for (int i = 0; i < selected.size(); i++) {
-            int position = selected.keyAt(i);
-            if (selected.valueAt(i)){
-                if(!operationDAO.exportOperation(adapter.getItem(position))){
-                    Toast.makeText(this, R.string.toastExportDeactivated, Toast.LENGTH_LONG);
-                    return;
+        if(operationDAO.setupStorage(this)){
+            for (int i = 0; i < selected.size(); i++) {
+                int position = selected.keyAt(i);
+                if (selected.valueAt(i)){
+                    operationDAO.exportOperation(adapter.getItem(position));
                 }
             }
+            Toast.makeText(this, R.string.toastExportSucceeded, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -111,6 +116,20 @@ public class OperationAdminActivity extends AppCompatActivity implements
                 adapter.addAll(operationDAO.getCompletedOperations());
                 adapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, String permissions[], int[] grantResults) {
+        if(requestCode == 387) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                exportSelectedOperations(checked);
+            } else {
+                Toast.makeText(this, R.string.toastExportDeactivated, Toast.LENGTH_LONG).show();
+            }
+            return;
         }
     }
 }

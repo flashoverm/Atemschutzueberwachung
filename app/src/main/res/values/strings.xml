@@ -128,5 +128,6 @@
     <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
     <string name="toastNoLastname">Kein Nachname eingetragen!</string>
     <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
-    <string name="toastExportDeactivated">Kein Zugriff auf Speicher - Export-Funktion nicht möglich</string>
+    <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
+    <string name="toastExportSucceeded">Einsätze exportiert</string>
 </resources>
