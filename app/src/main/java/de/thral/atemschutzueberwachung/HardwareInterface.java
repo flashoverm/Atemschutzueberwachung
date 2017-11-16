@@ -19,12 +19,15 @@ public class HardwareInterface {
     private Handler flashHandler;
     private Runnable toggleFlash;
     private boolean flashState;
+    private boolean flashBlinkState;
 
     private Vibrator vibrator;
+    private boolean vibratorState;
 
     private ToneGenerator toneGen;
     private Handler soundHandler;
     private Runnable toogleSound;
+    private boolean soundState;
 
     public HardwareInterface(Context context){
         this.context = context;
@@ -35,36 +38,6 @@ public class HardwareInterface {
         //turnOnVibration(500, 500);     //500,3000 slow 500,500 fast
         initSound();
         //turnOnSound(600, 2000); //600,6000 slow 600,2000 fast
-    }
-
-    public void turnOnFlashBlink(final long blinkDelayMillis){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            flashHandler = new Handler();
-            toggleFlash = new Runnable() {
-                public void run() {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        try {
-                            if (flashState) {
-                                cameraManager.setTorchMode(cameraID, false);
-                                flashState = false;
-                            } else {
-                                cameraManager.setTorchMode(cameraID, true);
-                                flashState = true;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    flashHandler.postDelayed(this, blinkDelayMillis);
-                }
-            };
-            flashHandler.removeCallbacks(toggleFlash);
-            flashHandler.postDelayed(toggleFlash, blinkDelayMillis);
-        }
-    }
-
-    public void turnOffFlashBlink(){
-        flashHandler.removeCallbacks(toggleFlash);
     }
 
     private void initFlash(){
@@ -81,6 +54,42 @@ public class HardwareInterface {
         }
     }
 
+    public void turnOnFlashBlink(final long blinkDelayMillis){
+        if (!flashBlinkState
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flashHandler = new Handler();
+            toggleFlash = new Runnable() {
+                public void run() {
+                    toggleFlash();
+                    flashHandler.postDelayed(this, blinkDelayMillis);
+                }
+            };
+            flashHandler.postDelayed(toggleFlash, blinkDelayMillis);
+            flashBlinkState = true;
+        }
+    }
+
+    private void toggleFlash(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            try {
+                if (flashState) {
+                    cameraManager.setTorchMode(cameraID, false);
+                    flashState = false;
+                } else {
+                    cameraManager.setTorchMode(cameraID, true);
+                    flashState = true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void turnOffFlashBlink(){
+        flashHandler.removeCallbacks(toggleFlash);
+        flashBlinkState = false;
+}
+
     private void initVibrator(){
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         if(!vibrator.hasVibrator()){
@@ -89,12 +98,15 @@ public class HardwareInterface {
     }
 
     public void turnOnVibration(long vibrateMillis, long pauseMillis){
-        vibrator.cancel();
-        vibrator.vibrate(new long[]{0, vibrateMillis, pauseMillis}, 0);
+        if(!vibratorState){
+            vibrator.vibrate(new long[]{0, vibrateMillis, pauseMillis}, 0);
+            vibratorState = true;
+        }
     }
 
     public void turnOffVibration(){
         vibrator.cancel();
+        vibratorState = false;
     }
 
     private void initSound(){
@@ -102,18 +114,21 @@ public class HardwareInterface {
     }
 
     public void turnOnSound(final int toneMillis, final int pauseMillis){
-        soundHandler = new Handler();
-        toogleSound = new Runnable() {
-            public void run() {
-                toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, toneMillis);
-                soundHandler.postDelayed(this, pauseMillis);
-            }
-        };
-        soundHandler.removeCallbacks(toogleSound);
-        soundHandler.postDelayed(toogleSound, 0);
+        if(!soundState){
+            soundHandler = new Handler();
+            toogleSound = new Runnable() {
+                public void run() {
+                    toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, toneMillis);
+                    soundHandler.postDelayed(this, pauseMillis);
+                }
+            };
+            soundHandler.postDelayed(toogleSound, 0);
+            soundState = true;
+        }
     }
 
     public void turnOffSound(){
         flashHandler.removeCallbacks(toggleFlash);
+        soundState = false;
     }
 }
