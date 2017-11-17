@@ -28,7 +28,6 @@ import de.thral.atemschutzueberwachung.domain.TimerChangeListener;
 public class DetailView extends RelativeLayout{
 
     public interface StartButtonListener {
-
         void onStartButtonClick();
     }
 
@@ -289,7 +288,7 @@ public class DetailView extends RelativeLayout{
     private void updateButtons(){
         EventType state = squad.getState();
         switch(state){
-            case Register: setButtonState(1, false, false, false, false);
+            case Register: setButtonState(1, false, false, false, true);
                 break;
             case Begin: setButtonState(2, true, true, true, true);
                 break;
@@ -297,7 +296,7 @@ public class DetailView extends RelativeLayout{
                 break;
             case Retreat: setButtonState(2, false, true, false, true);
                 break;
-            case PauseTimer: setButtonState(3, false, false, false, false);
+            case PauseTimer: setButtonState(3, false, false, false, true);
                 break;
         }
         if(squad.isReminderActive()){

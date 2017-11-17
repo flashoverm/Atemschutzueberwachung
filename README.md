@@ -1,6 +1,5 @@
 # Atemschutzueberwachung
 
-
 Improvements:
 
 - If Text is to long for TextView -> Animate horizontal translation

@@ -12,6 +12,10 @@ import android.os.Vibrator;
 
 public class HardwareInterface {
 
+    //TODO change states to mode: off -> reminder/alarm is allowed | reminder -> alarm is allowd
+    //Generalized function for reminder / alarm  //Off: Turns all of
+
+
     private Context context;
 
     private CameraManager cameraManager;

@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.File;
@@ -117,7 +118,7 @@ public class OperationDAOImpl implements OperationDAO {
 
     @Override
     public boolean exportOperation(Operation export){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File exportFile = new File(exportFolder, export.getFilename()+".json");
         try{
             FileWriter writer = new FileWriter(exportFile);

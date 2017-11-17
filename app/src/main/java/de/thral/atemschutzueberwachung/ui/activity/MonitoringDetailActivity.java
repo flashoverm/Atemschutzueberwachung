@@ -69,7 +69,6 @@ public class MonitoringDetailActivity extends AppCompatActivity
     public void onLayoutClick(int layoutNumber){
         Intent intent = new Intent(MonitoringDetailActivity.this,
                 MonitoringOverviewActivity.class);
-        //intent.putExtra(MonitoringDetailActivity.DETAIL_KEY, overviewNumber);
         startActivity(intent);
     }
 
@@ -90,8 +89,7 @@ public class MonitoringDetailActivity extends AppCompatActivity
                     break;
                 case End: selected.endOperation(leaderPressure, memberPressure);
                     operationDAO.update();
-                    Intent intent = new Intent(MonitoringDetailActivity.this, MonitoringOverviewActivity.class);
-                    startActivity(intent);
+                    this.finish();
                     break;
             }
             return true;
