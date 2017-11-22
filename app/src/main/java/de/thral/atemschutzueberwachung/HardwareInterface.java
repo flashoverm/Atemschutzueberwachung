@@ -18,6 +18,10 @@ public class HardwareInterface {
 
     private Context context;
 
+    private boolean alarmState;
+    private boolean reminderState;
+
+    private boolean flashAvailable;
     private CameraManager cameraManager;
     private String cameraID;
     private Handler flashHandler;
@@ -25,6 +29,7 @@ public class HardwareInterface {
     private boolean flashState;
     private boolean flashBlinkState;
 
+    private boolean vibratorAvailable;
     private Vibrator vibrator;
     private boolean vibratorState;
 
@@ -37,19 +42,59 @@ public class HardwareInterface {
         this.context = context;
 
         initFlash();
-        //blinkFlash(100);  //100 fastblink 1000 slowblink
         initVibrator();
-        //turnOnVibration(500, 500);     //500,3000 slow 500,500 fast
         initSound();
-        //turnOnSound(600, 2000); //600,6000 slow 600,2000 fast
+    }
+
+    public void turnOnReminder(){
+        if(!reminderState){
+            reminderState = true;
+            if(!alarmState){
+                turnOnFlashBlink(1000);
+                turnOnVibration(500, 3000);
+                turnOnSound(600, 6000);
+            }
+        }
+    }
+
+    public void turnOnAlarm(){
+        if(!alarmState){
+            if(reminderState){
+                turnOffReminder();
+            }
+            alarmState = true;
+            turnOnFlashBlink(100);
+            turnOnVibration(500, 500);
+            turnOnSound(600, 2000);
+        }
+    }
+
+    public void turnOffAlarm(){
+        if(alarmState){
+            alarmState = false;
+            turnOffFlashBlink();
+            turnOffVibration();
+            turnOffSound();
+            if(reminderState){
+                turnOnReminder();
+            }
+        }
+    }
+
+    public void turnOffReminder(){
+        if(reminderState){
+            reminderState = false;
+            if(!alarmState){
+                turnOffFlashBlink();
+                turnOffVibration();
+                turnOffSound();
+            }
+        }
     }
 
     private void initFlash(){
-        Boolean isFlashAvailable = context.getPackageManager()
+        flashAvailable = context.getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        if (!isFlashAvailable) {
-            //TODO not flashlight available
-        }
         cameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
         try {
             cameraID = cameraManager.getCameraIdList()[0];
@@ -58,8 +103,9 @@ public class HardwareInterface {
         }
     }
 
-    public void turnOnFlashBlink(final long blinkDelayMillis){
-        if (!flashBlinkState
+    private void turnOnFlashBlink(final long blinkDelayMillis){
+        if (flashAvailable
+                && !flashBlinkState
                 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             flashHandler = new Handler();
             toggleFlash = new Runnable() {
@@ -89,35 +135,37 @@ public class HardwareInterface {
         }
     }
 
-    public void turnOffFlashBlink(){
-        flashHandler.removeCallbacks(toggleFlash);
-        flashBlinkState = false;
-}
-
-    private void initVibrator(){
-        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        if(!vibrator.hasVibrator()){
-            //TODO not vibrator available
+    private void turnOffFlashBlink(){
+        if(flashAvailable && flashBlinkState){
+            flashHandler.removeCallbacks(toggleFlash);
+            flashBlinkState = false;
         }
     }
 
-    public void turnOnVibration(long vibrateMillis, long pauseMillis){
-        if(!vibratorState){
+    private void initVibrator(){
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        vibratorAvailable = vibrator.hasVibrator();
+    }
+
+    private void turnOnVibration(long vibrateMillis, long pauseMillis){
+        if(vibratorAvailable && !vibratorState){
             vibrator.vibrate(new long[]{0, vibrateMillis, pauseMillis}, 0);
             vibratorState = true;
         }
     }
 
-    public void turnOffVibration(){
-        vibrator.cancel();
-        vibratorState = false;
+    private void turnOffVibration(){
+        if(vibratorAvailable && vibratorState){
+            vibrator.cancel();
+            vibratorState = false;
+        }
     }
 
     private void initSound(){
         toneGen = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
     }
 
-    public void turnOnSound(final int toneMillis, final int pauseMillis){
+    private void turnOnSound(final int toneMillis, final int pauseMillis){
         if(!soundState){
             soundHandler = new Handler();
             toogleSound = new Runnable() {
@@ -131,8 +179,10 @@ public class HardwareInterface {
         }
     }
 
-    public void turnOffSound(){
-        flashHandler.removeCallbacks(toggleFlash);
-        soundState = false;
+    private void turnOffSound(){
+        if(soundState){
+            flashHandler.removeCallbacks(toggleFlash);
+            soundState = false;
+        }
     }
 }

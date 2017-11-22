@@ -13,12 +13,11 @@ public class OperationTimer {
     private transient TimerChangeListener timerListener;
 
     public OperationTimer(OperatingTime operatingTime){
-        this.timerValue = operatingTime.getTime()*60*1000;
+        this.timerValue = operatingTime.getTime()*60000;
 
         this.secOneThird = operatingTime.getTime()*20;
-        this.secTwoThird = operatingTime.getTime()*30;
+        this.secTwoThird = operatingTime.getTime()*40;
         this.reminder = false;
-        System.out.println("INIT OPERATIONTIMER");
         this.timestampTimerStart = -1;
     }
 
@@ -60,7 +59,6 @@ public class OperationTimer {
     }
 
     public void start(){
-        System.out.println("TIMER INIT");
         timer = new CountDownTimer(timerValue, 1000) {
             public void onTick(long millisUntilFinished) {
                 OperationTimer.this.timerValue = millisUntilFinished;
@@ -77,14 +75,15 @@ public class OperationTimer {
                 timerListener.onTimerReachedMark(true);
             }
         };
-        System.out.println("SAVE CURRENT TIME ON TIMRE START: " + System.currentTimeMillis());
         timestampTimerStart = System.currentTimeMillis();
         timer.start();
     }
 
     public void cancel(){
         timestampTimerStart = -1;
-        timer.cancel();
+        if(timer != null){
+            timer.cancel();
+        }
     }
 
     public void resumeAfterError(){

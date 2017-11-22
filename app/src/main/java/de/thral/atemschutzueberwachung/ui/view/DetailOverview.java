@@ -43,13 +43,16 @@ public class DetailOverview extends OverviewBase {
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
 
         String leaderInfo = events[0].getPressureLeader()
-                +"("+time+" " + context.getString(R.string.minutesShort) +")/ -";
+                +"("+time+" " + context.getString(R.string.minutesShort) +")/";
         String memberInfo = events[0].getPressureMember()
-                +"("+time+" " + context.getString(R.string.minutesShort) +")/ -";
+                +"("+time+" " + context.getString(R.string.minutesShort) +")/";
         if(squad.getLeaderReturnPressure() != -1
                 && squad.getMemberReturnPressure() != -1){
-            leaderInfo += "/" + squad.getLeaderReturnPressure();
-            memberInfo += "/" + squad.getMemberReturnPressure();
+            leaderInfo += squad.getLeaderReturnPressure();
+            memberInfo += squad.getMemberReturnPressure();
+        } else {
+            leaderInfo += " -";
+            memberInfo += " -";
         }
         leaderPressureInfo.setText(leaderInfo);
         memberPressureInfo.setText(memberInfo);
