@@ -3,7 +3,7 @@ package de.thral.atemschutzueberwachung.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.thral.atemschutzueberwachung.domain.Draegerman;
+import de.thral.atemschutzueberwachung.business.Draegerman;
 
 public class DraegermanDAOImplDummy implements DraegermanDAO {
 

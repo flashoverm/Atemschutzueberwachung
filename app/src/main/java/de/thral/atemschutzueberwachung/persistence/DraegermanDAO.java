@@ -2,7 +2,7 @@ package de.thral.atemschutzueberwachung.persistence;
 
 import java.util.List;
 
-import de.thral.atemschutzueberwachung.domain.Draegerman;
+import de.thral.atemschutzueberwachung.business.Draegerman;
 
 /**
  * Created by Markus Thral on 28.10.2017.

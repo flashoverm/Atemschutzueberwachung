@@ -16,7 +16,7 @@ import de.thral.atemschutzueberwachung.R;
 public class EndOperationDialog extends DialogFragment {
 
     public interface EndOperationListener {
-        public void onOperationEnd(String observer, String operation, String location, String unit);
+        void onOperationEnd(String observer, String operation, String location, String unit);
     }
 
     private EndOperationListener listener;
@@ -32,10 +32,10 @@ public class EndOperationDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_end_operation, null);
 
-        observerEdit = (EditText) view.findViewById(R.id.edit_observer);
-        operationEdit = (EditText) view.findViewById(R.id.edit_operation);
-        locationEdit = (EditText) view.findViewById(R.id.edit_location);
-        unitEdit = (EditText) view.findViewById(R.id.edit_unit);
+        observerEdit = view.findViewById(R.id.edit_observer);
+        operationEdit = view.findViewById(R.id.edit_operation);
+        locationEdit = view.findViewById(R.id.edit_location);
+        unitEdit = view.findViewById(R.id.edit_unit);
 
         builder.setView(view)
                 .setTitle(getResources().getString(R.string.registerSquadTitle))

@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.domain;
+package de.thral.atemschutzueberwachung.business;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.thral.atemschutzueberwachung.R;
 

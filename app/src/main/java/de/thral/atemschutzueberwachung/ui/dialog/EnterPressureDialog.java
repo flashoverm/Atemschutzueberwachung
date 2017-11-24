@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.EventType;
+import de.thral.atemschutzueberwachung.business.EventType;
 
 public class EnterPressureDialog extends DialogFragment {
 
@@ -48,9 +48,9 @@ public class EnterPressureDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_enter_pressure, null);
 
-        leaderPressure = (EditText) dialogView.findViewById(R.id.edit_leaderpressure);
-        memberPressure = (EditText) dialogView.findViewById(R.id.edit_memberpressure);
-        spinner = (Spinner) dialogView.findViewById(R.id.edit_event);
+        leaderPressure = dialogView.findViewById(R.id.edit_leaderpressure);
+        memberPressure = dialogView.findViewById(R.id.edit_memberpressure);
+        spinner = dialogView.findViewById(R.id.edit_event);
 
         ArrayAdapter<String> adapter = EventType.getArrayAdapter(getActivity());
         spinner.setAdapter(adapter);

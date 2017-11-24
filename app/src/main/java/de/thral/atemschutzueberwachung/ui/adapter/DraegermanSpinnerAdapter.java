@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Draegerman;
+import de.thral.atemschutzueberwachung.business.Draegerman;
 
 /**
  * Created by Markus Thral on 30.10.2017.
@@ -33,7 +33,7 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.listitem_spinner, parent, false);
-        TextView displayname = (TextView) rowView.findViewById(R.id.displayname);
+        TextView displayname = rowView.findViewById(R.id.displayname);
         displayname.setTextSize(16);
 
         Draegerman draegerman = getItem(position);
@@ -47,7 +47,7 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.listitem_spinner, parent, false);
-        TextView displayname = (TextView) rowView.findViewById(R.id.displayname);
+        TextView displayname = rowView.findViewById(R.id.displayname);
         displayname.setTextSize(16);
 
         Draegerman draegerman = getItem(position);

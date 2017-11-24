@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Squad;
+import de.thral.atemschutzueberwachung.business.Squad;
 
 public class DetailOverviewView extends LinearLayout {
 
@@ -17,20 +17,20 @@ public class DetailOverviewView extends LinearLayout {
 
     public DetailOverviewView(Context context) {
         super(context);
-        init(context);
+        init();
     }
 
     public DetailOverviewView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init();
     }
 
-    private void init(Context context){
-        overviews = inflate(context, R.layout.monitor_detail_overviews, this);
+    private void init(){
+        overviews = inflate(getContext(), R.layout.monitor_detail_overviews, this);
         overview = new DetailOverview[3];
-        overview[0] = (DetailOverview) overviews.findViewById(R.id.overview_small_1);
-        overview[1] = (DetailOverview) overviews.findViewById(R.id.overview_small_2);
-        overview[2] = (DetailOverview) overviews.findViewById(R.id.overview_small_3);
+        overview[0] = overviews.findViewById(R.id.overview_small_1);
+        overview[1] = overviews.findViewById(R.id.overview_small_2);
+        overview[2] = overviews.findViewById(R.id.overview_small_3);
     }
 
     public void setListener(LayoutClickListener layoutClickListener){

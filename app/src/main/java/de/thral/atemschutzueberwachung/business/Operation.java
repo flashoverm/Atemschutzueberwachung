@@ -1,6 +1,4 @@
-package de.thral.atemschutzueberwachung.domain;
-
-import android.support.annotation.NonNull;
+package de.thral.atemschutzueberwachung.business;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -11,7 +9,7 @@ import java.util.List;
  * Created by Markus Thral on 26.10.2017.
  */
 
-public class Operation implements Comparable<Operation> {
+public class Operation {
 
     public static final int MAX_SQUAD_COUNT = 4;
 
@@ -23,6 +21,8 @@ public class Operation implements Comparable<Operation> {
     private long endTime;
 
     private List<Squad> squadList;
+
+    private boolean isExported;
 
     public Operation(){
         this.startTime = System.currentTimeMillis();
@@ -72,6 +72,10 @@ public class Operation implements Comparable<Operation> {
         return activeSquads;
     }
 
+    public boolean isExported(){
+        return isExported;
+    }
+
     public boolean isSquadActive(){
         Squad[] active = getActiveSquads();
         for(int i=0; i<MAX_SQUAD_COUNT; i++){
@@ -106,6 +110,10 @@ public class Operation implements Comparable<Operation> {
         return false;
     }
 
+    public void export(){
+        this.isExported = true;
+    }
+
     public String getFilename() {
         return toString().replace(':', '-');
     }
@@ -114,10 +122,5 @@ public class Operation implements Comparable<Operation> {
     public String toString() {
         return new SimpleDateFormat("dd.MM.yyyy hh:mm").format(new Timestamp(startTime)).toString()
                 + " - " + operation + " - " + location;
-    }
-
-    @Override
-    public int compareTo(Operation operation) {
-        return Long.compare(this.getStartTime(), operation.getStartTime());
     }
 }

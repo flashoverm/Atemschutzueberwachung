@@ -1,26 +1,17 @@
 package de.thral.atemschutzueberwachung.persistence;
 
 import android.app.Activity;
-import android.util.JsonWriter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONObject;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-import de.thral.atemschutzueberwachung.domain.Draegerman;
-import de.thral.atemschutzueberwachung.domain.OperatingTime;
-import de.thral.atemschutzueberwachung.domain.Operation;
-import de.thral.atemschutzueberwachung.domain.Order;
-import de.thral.atemschutzueberwachung.domain.Squad;
-
-/**
- * Created by Markus Thral on 28.10.2017.
- */
+import de.thral.atemschutzueberwachung.business.Draegerman;
+import de.thral.atemschutzueberwachung.business.OperatingTime;
+import de.thral.atemschutzueberwachung.business.Operation;
+import de.thral.atemschutzueberwachung.business.Order;
+import de.thral.atemschutzueberwachung.business.Squad;
 
 public class OperationDAOImplDummy implements OperationDAO {
 
@@ -39,7 +30,7 @@ public class OperationDAOImplDummy implements OperationDAO {
     }
 
     @Override
-    public boolean update() {
+    public boolean updateActive() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         System.out.println("UPDATE: ");
         System.out.println(gson.toJson(getActive()));
@@ -52,7 +43,7 @@ public class OperationDAOImplDummy implements OperationDAO {
     }
 
     @Override
-    public List<Operation> getCompletedOperations() {
+    public List<CompleteOperation> getCompletedOperations() {
         return null;
     }
 
@@ -62,12 +53,12 @@ public class OperationDAOImplDummy implements OperationDAO {
     }
 
     @Override
-    public boolean exportOperation(Operation export) {
+    public boolean exportOperation(CompleteOperation export) {
         return false;
     }
 
     @Override
-    public boolean removeCompletedOperation(Operation operation) {
+    public boolean removeCompletedOperation(CompleteOperation operation) {
         return true;
     }
 }

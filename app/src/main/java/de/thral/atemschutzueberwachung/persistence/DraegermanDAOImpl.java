@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import de.thral.atemschutzueberwachung.domain.Draegerman;
-import de.thral.atemschutzueberwachung.domain.Operation;
+import de.thral.atemschutzueberwachung.business.Draegerman;
 
 public class DraegermanDAOImpl implements DraegermanDAO {
 
@@ -31,6 +30,11 @@ public class DraegermanDAOImpl implements DraegermanDAO {
         draegermen = loadDraegermanList();
         if(draegermen == null){
             draegermen = new ArrayList<>();
+            draegermen.add(new Draegerman("Markus", "Thral"));
+            draegermen.add(new Draegerman("Michael", "Thral"));
+            draegermen.add(new Draegerman("Hans", "Wurst"));
+            draegermen.add(new Draegerman("Bernd", "Beispiel"));
+            draegermen.add(new Draegerman("Maximilian", "Mustermann"));
             saveDraegermanList();
         }
     }

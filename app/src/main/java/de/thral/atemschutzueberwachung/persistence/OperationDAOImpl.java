@@ -10,29 +10,36 @@ import android.support.v4.app.ActivityCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Operation;
+import de.thral.atemschutzueberwachung.business.Operation;
 
 public class OperationDAOImpl implements OperationDAO {
 
     private static final String ACTIVE_FILE = "active.json";
+    private static final String COMPLETED_OPS = "completed.json";
     private static final String COMPLETED_FOLDER = "completed/";
+
+    private static final Type operationEntryListType
+            = new TypeToken<List<CompleteOperation>>(){}.getType();
 
     private Context context;
     private Operation activeOperation;
     private File completedFolder;
     private File exportFolder;
+
+    private List<CompleteOperation> completeOperations;
 
     public OperationDAOImpl(Context context){
         this.context = context;
@@ -62,18 +69,17 @@ public class OperationDAOImpl implements OperationDAO {
 
     public void createOperation(){
         this.activeOperation = new Operation();
-        update();
+        updateActive();
     }
 
     @Override
-    public boolean update() {
+    public boolean updateActive() {
         try{
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
             Gson gson = new Gson();
             FileWriter writer = new FileWriter(active);
             writer.append(gson.toJson(getActive()));
             writer.flush();
-            writer.close();
             return true;
         }catch(IOException e) {
             e.printStackTrace();
@@ -84,15 +90,20 @@ public class OperationDAOImpl implements OperationDAO {
     @Override
     public boolean endOperation() {
         try{
-            File completed = new File(completedFolder, getActive().getFilename()+".json");
-            Gson gson = new Gson();
-            FileWriter writer = new FileWriter(completed);
+            File completedFile = new File(completedFolder, getActive().getFilename()+".json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            FileWriter writer = new FileWriter(completedFile);
             writer.append(gson.toJson(getActive()));
             writer.flush();
-            writer.close();
+
+            completeOperations.add(new CompleteOperation(completedFile, activeOperation.toString()));
+            Collections.sort(completeOperations);
+            updateCompletedOperations();
+
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
             active.delete();
             this.activeOperation = null;
+
             return true;
         }catch(IOException e){
             e.printStackTrace();
@@ -101,42 +112,60 @@ public class OperationDAOImpl implements OperationDAO {
     }
 
     @Override
-    public List<Operation> getCompletedOperations() {
-        List<Operation> completedOperations = new ArrayList<>();
-        try{
-            Gson gson = new Gson();
-            JsonReader reader;
-            for(File completed : completedFolder.listFiles()){
-                reader = new JsonReader(new FileReader(completed));
-                completedOperations.add((Operation)gson.fromJson(reader, Operation.class));
+    public List<CompleteOperation> getCompletedOperations() {
+        if(completeOperations == null){
+            try{
+                File completedOperationsFile = new File(context.getFilesDir(), COMPLETED_OPS);
+                if(completedOperationsFile.exists()){
+                    Gson gson = new Gson();
+                    JsonReader reader = new JsonReader(new FileReader(completedOperationsFile));
+                    completeOperations = gson.fromJson(reader, operationEntryListType);
+                    return completeOperations;
+                }
+            } catch(IOException e){
+                e.printStackTrace();
             }
-            Collections.sort(completedOperations);
-        }catch(FileNotFoundException e){
+            return new ArrayList<>();
         }
-        return completedOperations;
+        return completeOperations;
     }
 
     @Override
-    public boolean exportOperation(Operation export){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        File exportFile = new File(exportFolder, export.getFilename()+".json");
-        try{
-            FileWriter writer = new FileWriter(exportFile);
-            writer.append(gson.toJson(export));
-            writer.flush();
-            writer.close();
+    public boolean exportOperation(CompleteOperation export){
+        List<CompleteOperation> completedOperations = getCompletedOperations();
+        CompleteOperation completed = completedOperations.get(completedOperations.indexOf(export));
+        if(completed.export(exportFolder)){
             MediaScannerConnection.scanFile(
-                    context, new String[] {exportFile.getAbsolutePath()}, null, null);
+                    context, new String[] {export.getFile().getAbsolutePath()}, null, null);
+            return updateCompletedOperations();
+        }
+        return false;
+    }
+
+    private boolean updateCompletedOperations(){
+        try{
+            File completedOperationsFile = new File(context.getFilesDir(), COMPLETED_OPS);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            FileWriter writer = new FileWriter(completedOperationsFile);
+            writer.write(gson.toJson(completeOperations));
+            writer.flush();
             return true;
         } catch(IOException e){
+            e.printStackTrace();
         }
         return false;
     }
 
     @Override
-    public boolean removeCompletedOperation(Operation operation) {
-        File completed = new File(completedFolder, operation.getFilename()+".json");
-        return completed.delete();
+    public boolean removeCompletedOperation(CompleteOperation operation) {
+        List<CompleteOperation> completedOperations = getCompletedOperations();
+        if(completedOperations.remove(operation)){
+            if(updateCompletedOperations()){
+                File completed = new File(operation.getFile().getAbsolutePath());
+                return completed.delete();
+            }
+        }
+        return false;
     }
 
     @Override

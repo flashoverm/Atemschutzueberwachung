@@ -1,6 +1,5 @@
 package de.thral.atemschutzueberwachung.ui.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,16 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Draegerman;
-import de.thral.atemschutzueberwachung.domain.Operation;
+import de.thral.atemschutzueberwachung.business.Draegerman;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
-import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 import de.thral.atemschutzueberwachung.ui.dialog.AddDraegermanDialog;
-import de.thral.atemschutzueberwachung.ui.dialog.PressureWarningDialog;
 
 public class DraegermanAdminActivity extends AppCompatActivity implements
         AddDraegermanDialog.AddDraegermanListener, MenuItem.OnMenuItemClickListener{
@@ -37,13 +31,13 @@ public class DraegermanAdminActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_draegerman);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDraegermanAdmin);
+        Toolbar toolbar = findViewById(R.id.toolbarDraegermanAdmin);
         toolbar.setTitle(R.string.draegermanAdminLabel);
         toolbar.setTitleTextColor(Color.LTGRAY);
         setSupportActionBar(toolbar);
 
         draegermanDAO = ((DraegermanObservationApplication)getApplication()).getDraegermanDAO();
-        draegermen = (ListView) findViewById(R.id.draegermanList);
+        draegermen = findViewById(R.id.draegermanList);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
                 draegermanDAO.getAll());

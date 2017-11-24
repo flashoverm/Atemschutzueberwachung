@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.domain;
+package de.thral.atemschutzueberwachung.business;
 
 /**
  * Created by Markus Thral on 21.10.2017.

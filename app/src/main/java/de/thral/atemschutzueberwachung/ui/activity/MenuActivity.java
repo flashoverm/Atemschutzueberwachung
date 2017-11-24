@@ -8,34 +8,28 @@ import android.widget.Button;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
+import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 
 public class MenuActivity extends AppCompatActivity {
+
+    private OperationDAO operationDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button startOperation = (Button) findViewById(R.id.startOperation);
-        Button management = (Button) findViewById(R.id.administration);
+        this.operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
 
-        if(((DraegermanObservationApplication)getApplication())
-                .getOperationDAO().getActive() != null){
-            Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
-            intent.putExtra(MonitoringOverviewActivity.KEY_RESUMED, true);
-            startActivity(intent);
-        }
+        Button startOperation = findViewById(R.id.startOperation);
+        Button management = findViewById(R.id.administration);
 
         startOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((DraegermanObservationApplication)getApplication())
-                        .getOperationDAO().createOperation();
-                Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
-                startActivity(intent);
+                startOperation();
             }
         });
-
         management.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,5 +38,20 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        if(operationDAO.getActive() != null){
+            startOperation();
+        }
+    }
+
+    private void startOperation(){
+        Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
+
+        if(operationDAO.getActive() == null){
+            ((DraegermanObservationApplication)getApplication())
+                    .getOperationDAO().createOperation();
+        } else {
+            intent.putExtra(MonitoringOverviewActivity.KEY_RESUMED, true);
+        }
+        startActivity(intent);
     }
 }

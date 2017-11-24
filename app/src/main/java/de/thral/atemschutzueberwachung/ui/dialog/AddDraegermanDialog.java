@@ -17,7 +17,7 @@ import de.thral.atemschutzueberwachung.R;
 public class AddDraegermanDialog extends DialogFragment {
 
     public interface AddDraegermanListener{
-        public boolean onAddDraegerman(String firstname, String lastname);
+        boolean onAddDraegerman(String firstname, String lastname);
     }
 
     private EditText firstname;
@@ -41,8 +41,8 @@ public class AddDraegermanDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_add_draegerman, null);
 
-        firstname = (EditText) dialogView.findViewById(R.id.edit_firstname);
-        lastname = (EditText) dialogView.findViewById(R.id.edit_lastname);
+        firstname = dialogView.findViewById(R.id.edit_firstname);
+        lastname = dialogView.findViewById(R.id.edit_lastname);
 
         builder.setView(dialogView)
                 .setTitle(getResources().getString(R.string.enterPressureTitle))

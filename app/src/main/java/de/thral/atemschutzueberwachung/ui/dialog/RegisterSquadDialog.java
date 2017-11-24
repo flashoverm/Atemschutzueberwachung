@@ -17,10 +17,10 @@ import android.widget.Toast;
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.ui.adapter.DraegermanSpinnerAdapter;
-import de.thral.atemschutzueberwachung.domain.Draegerman;
-import de.thral.atemschutzueberwachung.domain.OperatingTime;
-import de.thral.atemschutzueberwachung.domain.Order;
-import de.thral.atemschutzueberwachung.domain.Squad;
+import de.thral.atemschutzueberwachung.business.Draegerman;
+import de.thral.atemschutzueberwachung.business.OperatingTime;
+import de.thral.atemschutzueberwachung.business.Order;
+import de.thral.atemschutzueberwachung.business.Squad;
 
 /**
  * Created by Markus Thral on 31.10.2017.
@@ -29,7 +29,7 @@ import de.thral.atemschutzueberwachung.domain.Squad;
 public class RegisterSquadDialog extends DialogFragment {
 
     public interface SquadRegisteredListener {
-        public void onSquadRegistered(Squad registeredSquad);
+        void onSquadRegistered(Squad registeredSquad);
     }
 
     private SquadRegisteredListener listener;
@@ -59,13 +59,13 @@ public class RegisterSquadDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_register_squad, null);
 
-        squadName = (EditText) view.findViewById(R.id.edit_squadname);
-        operatingTimeSpinner = (Spinner) view.findViewById(R.id.edit_operatingtime);
-        leaderSpinner = (Spinner) view.findViewById(R.id.edit_leader);
-        leaderPressure = (EditText) view.findViewById(R.id.edit_leaderpressure);
-        memberSpinner = (Spinner) view.findViewById(R.id.edit_member);
-        memberPressure = (EditText) view.findViewById(R.id.edit_memberpressure);
-        orderSpinner = (Spinner) view.findViewById(R.id.edit_order);
+        squadName = view.findViewById(R.id.edit_squadname);
+        operatingTimeSpinner = view.findViewById(R.id.edit_operatingtime);
+        leaderSpinner = view.findViewById(R.id.edit_leader);
+        leaderPressure = view.findViewById(R.id.edit_leaderpressure);
+        memberSpinner = view.findViewById(R.id.edit_member);
+        memberPressure = view.findViewById(R.id.edit_memberpressure);
+        orderSpinner = view.findViewById(R.id.edit_order);
 
         ArrayAdapter<String> operatingTimeAdapter = OperatingTime.getArrayAdapter(getActivity());
         operatingTimeSpinner.setAdapter(operatingTimeAdapter);

@@ -3,13 +3,15 @@ package de.thral.atemschutzueberwachung.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Event;
-import de.thral.atemschutzueberwachung.domain.EventType;
-import de.thral.atemschutzueberwachung.domain.Operation;
-import de.thral.atemschutzueberwachung.domain.Squad;
+import de.thral.atemschutzueberwachung.business.Event;
+import de.thral.atemschutzueberwachung.business.EventType;
+import de.thral.atemschutzueberwachung.business.Operation;
+import de.thral.atemschutzueberwachung.business.Squad;
+import de.thral.atemschutzueberwachung.hardware.HardwareInterface;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
 import de.thral.atemschutzueberwachung.ui.view.DetailOverviewView;
@@ -26,14 +28,19 @@ public class MonitoringDetailActivity extends AppCompatActivity
     private Squad[] overviewSquads;
 
     private OperationDAO operationDAO;
+    private HardwareInterface hardwareInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         Intent intent = getIntent();
-        operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
+        this.operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
+        this.hardwareInterface = ((DraegermanObservationApplication) this.getApplication())
+                .getHardwareInterface();
         initSquads(intent.getExtras().getInt(DETAIL_KEY));
         initOverviews();
         initDetailView();
@@ -79,16 +86,16 @@ public class MonitoringDetailActivity extends AppCompatActivity
                 && lastPressure.getPressureMember() >= memberPressure){
             switch(event){
                 case Arrive: selected.arriveTarget(leaderPressure, memberPressure);
-                    operationDAO.update();
+                    operationDAO.updateActive();
                     break;
                 case Timer: selected.addPressureValues(EventType.Timer, leaderPressure, memberPressure);
-                    operationDAO.update();
+                    operationDAO.updateActive();
                     break;
                 case Retreat: selected.retreat(leaderPressure, memberPressure);
-                    operationDAO.update();
+                    operationDAO.updateActive();
                     break;
                 case End: selected.endOperation(leaderPressure, memberPressure);
-                    operationDAO.update();
+                    operationDAO.updateActive();
                     this.finish();
                     break;
             }
@@ -99,6 +106,6 @@ public class MonitoringDetailActivity extends AppCompatActivity
 
     @Override
     public void onStartButtonClick() {
-        operationDAO.update();
+        operationDAO.updateActive();
     }
 }

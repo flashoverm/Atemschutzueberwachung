@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.domain;
+package de.thral.atemschutzueberwachung.business;
 
 public class Draegerman implements Comparable<Draegerman>{
 

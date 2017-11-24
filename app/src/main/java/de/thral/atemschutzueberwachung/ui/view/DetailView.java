@@ -13,34 +13,30 @@ import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import de.thral.atemschutzueberwachung.R;
+import de.thral.atemschutzueberwachung.business.Event;
+import de.thral.atemschutzueberwachung.business.EventType;
+import de.thral.atemschutzueberwachung.business.Squad;
+import de.thral.atemschutzueberwachung.business.SquadChangeListener;
+import de.thral.atemschutzueberwachung.business.TimerChangeListener;
 import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
 import de.thral.atemschutzueberwachung.ui.dialog.PressureWarningDialog;
-import de.thral.atemschutzueberwachung.domain.Event;
-import de.thral.atemschutzueberwachung.domain.EventType;
-import de.thral.atemschutzueberwachung.domain.Squad;
-import de.thral.atemschutzueberwachung.domain.SquadChangeListener;
-import de.thral.atemschutzueberwachung.domain.TimerChangeListener;
 
-public class DetailView extends RelativeLayout{
+public class DetailView extends SquadViewBase{
 
     public interface StartButtonListener {
         void onStartButtonClick();
     }
 
-    private Context context;
     private View detailView;
-    private View detailInfoView;
-    private Squad squad;
-
     private StartButtonListener startButtonListener;
 
-    private TextView timer, squadname, state, order, leaderName, memberName, leaderReturnPressure,
-            memberReturnPressure, pressureTime1, leaderPressure1, memberPressure1, pressureTime2,
-            leaderPressure2, memberPressure2, pressureTime3, leaderPressure3, memberPressure3;
+    private TextView order, leaderReturnPressure, memberReturnPressure,
+            pressureTime1, leaderPressure1, memberPressure1,
+            pressureTime2, leaderPressure2, memberPressure2,
+            pressureTime3, leaderPressure3, memberPressure3;
     private Button start, arrive, enterPressure, retreat, end;
 
     private AlertDialog.Builder startBuilder;
@@ -48,19 +44,15 @@ public class DetailView extends RelativeLayout{
 
     public DetailView(Context context) {
         super(context);
-        this.context = context;
-        init();
     }
 
     public DetailView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
-        init();
     }
 
     private FragmentManager getFragmentManager(){
         try{
-            final Activity activity = (Activity) context;
+            final Activity activity = (Activity) getContext();
             return activity.getFragmentManager();
 
         } catch (ClassCastException e) {
@@ -72,39 +64,40 @@ public class DetailView extends RelativeLayout{
         this.startButtonListener = listener;
     }
 
-    private void init(){
-        initView();
+    @Override
+    protected void initView() {
+        initInfoView();
         initButtons();
     }
 
-    private void initView() {
-        detailView = inflate(context, R.layout.monitor_detail, this);
-        detailInfoView = detailView.findViewById(R.id.infoScreen);
-        timer = (TextView) detailInfoView.findViewById(R.id.timer);
-        squadname = (TextView) detailInfoView.findViewById(R.id.squadname);
-        state = (TextView) detailInfoView.findViewById(R.id.state);
-        order = (TextView) detailInfoView.findViewById(R.id.order);
-        leaderName = (TextView) detailInfoView.findViewById(R.id.leaderName);
-        memberName = (TextView) detailInfoView.findViewById(R.id.memberName);
-        leaderReturnPressure = (TextView) detailInfoView.findViewById(R.id.leaderReturnPressure);
-        memberReturnPressure = (TextView) detailInfoView.findViewById(R.id.memberReturnPressure);
-        pressureTime1 = (TextView) detailInfoView.findViewById(R.id.pressureTime1);
-        leaderPressure1 = (TextView) detailInfoView.findViewById(R.id.leaderPressure1);
-        memberPressure1 = (TextView) detailInfoView.findViewById(R.id.memberPressure1);
-        pressureTime2 = (TextView) detailInfoView.findViewById(R.id.pressureTime2);
-        leaderPressure2 = (TextView) detailInfoView.findViewById(R.id.leaderPressure2);
-        memberPressure2 = (TextView) detailInfoView.findViewById(R.id.memberPressure2);
-        pressureTime3 = (TextView) detailInfoView.findViewById(R.id.pressureTime3);
-        leaderPressure3 = (TextView) detailInfoView.findViewById(R.id.leaderPressure3);
-        memberPressure3 = (TextView) detailInfoView.findViewById(R.id.memberPressure3);
+    private void initInfoView() {
+        detailView = inflate(getContext(), R.layout.monitor_detail, this);
+        infoView = detailView.findViewById(R.id.infoScreen);
+        timer = infoView.findViewById(R.id.timer);
+        squadname = infoView.findViewById(R.id.squadname);
+        state = infoView.findViewById(R.id.state);
+        order = infoView.findViewById(R.id.order);
+        leaderName = infoView.findViewById(R.id.leaderName);
+        memberName = infoView.findViewById(R.id.memberName);
+        leaderReturnPressure = infoView.findViewById(R.id.leaderReturnPressure);
+        memberReturnPressure = infoView.findViewById(R.id.memberReturnPressure);
+        pressureTime1 = infoView.findViewById(R.id.pressureTime1);
+        leaderPressure1 = infoView.findViewById(R.id.leaderPressure1);
+        memberPressure1 = infoView.findViewById(R.id.memberPressure1);
+        pressureTime2 = infoView.findViewById(R.id.pressureTime2);
+        leaderPressure2 = infoView.findViewById(R.id.leaderPressure2);
+        memberPressure2 = infoView.findViewById(R.id.memberPressure2);
+        pressureTime3 = infoView.findViewById(R.id.pressureTime3);
+        leaderPressure3 = infoView.findViewById(R.id.leaderPressure3);
+        memberPressure3 = infoView.findViewById(R.id.memberPressure3);
     }
 
     private void initButtons(){
-        start = (Button) detailView.findViewById(R.id.buttonStart);
-        arrive = (Button) detailView.findViewById(R.id.buttonArrive);
-        enterPressure = (Button) detailView.findViewById(R.id.buttonEnterPressure);
-        retreat = (Button) detailView.findViewById(R.id.buttonRetreat);
-        end = (Button) detailView.findViewById(R.id.buttonEnd);
+        start = detailView.findViewById(R.id.buttonStart);
+        arrive = detailView.findViewById(R.id.buttonArrive);
+        enterPressure = detailView.findViewById(R.id.buttonEnterPressure);
+        retreat = detailView.findViewById(R.id.buttonRetreat);
+        end = detailView.findViewById(R.id.buttonEnd);
 
         buttonAnimation = ValueAnimator.ofInt(Color.RED, Color.LTGRAY);
         buttonAnimation.setDuration(1500);
@@ -118,7 +111,7 @@ public class DetailView extends RelativeLayout{
             }
         });
 
-        startBuilder = new AlertDialog.Builder(context);
+        startBuilder = new AlertDialog.Builder(getContext());
         startBuilder.setTitle(R.string.timerInfoTitle)
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -135,15 +128,16 @@ public class DetailView extends RelativeLayout{
             @Override
             public void onClick(View view) {
                 EnterPressureDialog dialog = EnterPressureDialog.newInstance(
-                        context, EventType.Arrive);
+                        getContext(), EventType.Arrive);
                 dialog.show(getFragmentManager(), "PressureDialog");
             }
         });
         enterPressure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hardwareInterface.turnOffReminder();
                 EnterPressureDialog dialog = EnterPressureDialog.newInstance(
-                        context, EventType.Timer);
+                        getContext(), EventType.Timer);
                 dialog.show(getFragmentManager(), "PressureDialog");
             }
         });
@@ -151,7 +145,7 @@ public class DetailView extends RelativeLayout{
             @Override
             public void onClick(View view) {
                 EnterPressureDialog dialog = EnterPressureDialog.newInstance(
-                        context, EventType.Retreat);
+                        getContext(), EventType.Retreat);
                 dialog.show(getFragmentManager(), "PressureDialog");
             }
         });
@@ -159,24 +153,22 @@ public class DetailView extends RelativeLayout{
             @Override
             public void onClick(View view) {
                 EnterPressureDialog dialog = EnterPressureDialog.newInstance(
-                        context, EventType.End);
+                        getContext(), EventType.End);
                 dialog.show(getFragmentManager(), "PressureDialog");
             }
         });
     }
 
+    @Override
     public void setSquad(Squad squad){
         this.squad = squad;
         timer.setText(squad.getTimerValueAsClock());
         squadname.setText(squad.getName());
-        state.setText(squad.getState().getStateDescription(context));
-        order.setText(squad.getOrder().toString(context));
+        state.setText(squad.getState().getStateDescription(getContext()));
+        order.setText(squad.getOrder().toString(getContext()));
         leaderName.setText(squad.getLeader().getDisplayName());
         memberName.setText(squad.getMember().getDisplayName());
 
-        if(squad.isTimerExpired()){
-            activateAlarm();
-        }
         squad.setTimerListener(new TimerChangeListener() {
             @Override
             public void onTimerUpdate(String timer) {
@@ -185,18 +177,14 @@ public class DetailView extends RelativeLayout{
 
             @Override
             public void onTimerReachedMark(boolean expired) {
-                if(expired){
-                    activateAlarm();
-                    buttonAnimation.end();
-                } else {
-                    buttonAnimation.start();
-                }
+                timerReachedMark(expired);
+                showAlarmMessage();
             }
         });
         squad.setChangeListener(new SquadChangeListener() {
             @Override
             public void onStateUpdate(Squad squad) {
-                state.setText(squad.getState().getStateDescription(context));
+                state.setText(squad.getState().getStateDescription(getContext()));
                 updateButtons();
             }
 
@@ -221,20 +209,22 @@ public class DetailView extends RelativeLayout{
         updateDetailPressure(squad.getLastPressureValues(3));
         updateReturnPressure();
         updateButtons();
+        setReminderAlarm();
+        showAlarmMessage();
     }
 
     private void updateDetailPressure(Event[] events){
         if(events[2] != null){
             pressureTime1.setText(((int)events[2].getRemainingOperationTime()/1000/60)
-                    +" "+context.getString(R.string.minutesShort));
+                    +" "+getContext().getString(R.string.minutesShort));
             leaderPressure1.setText(events[2].getPressureLeader()+"");
             memberPressure1.setText(events[2].getPressureMember()+"");
             pressureTime2.setText(((int)events[1].getRemainingOperationTime()/1000/60)
-                    +" "+context.getString(R.string.minutesShort));
+                    +" "+getContext().getString(R.string.minutesShort));
             leaderPressure2.setText(events[1].getPressureLeader()+"");
             memberPressure2.setText(events[1].getPressureMember()+"");
             pressureTime3.setText(((int)events[0].getRemainingOperationTime()/1000/60)
-                    +" "+context.getString(R.string.minutesShort));
+                    +" "+getContext().getString(R.string.minutesShort));
             leaderPressure3.setText(events[0].getPressureLeader()+"");
             memberPressure3.setText(events[0].getPressureMember()+"");
             pressureTime2.setVisibility(View.VISIBLE);
@@ -245,11 +235,11 @@ public class DetailView extends RelativeLayout{
             memberPressure3.setVisibility(View.VISIBLE);
         } else if(events[1] != null){
             pressureTime1.setText(((int)events[1].getRemainingOperationTime()/1000/60)
-                    +" "+context.getString(R.string.minutesShort));
+                    +" "+getContext().getString(R.string.minutesShort));
             leaderPressure1.setText(events[1].getPressureLeader()+"");
             memberPressure1.setText(events[1].getPressureMember()+"");
             pressureTime2.setText(((int)events[0].getRemainingOperationTime()/1000/60)
-                    +" "+context.getString(R.string.minutesShort));
+                    +" "+getContext().getString(R.string.minutesShort));
             leaderPressure2.setText(events[0].getPressureLeader()+"");
             memberPressure2.setText(events[0].getPressureMember()+"");
             pressureTime2.setVisibility(View.VISIBLE);
@@ -260,7 +250,7 @@ public class DetailView extends RelativeLayout{
             memberPressure3.setVisibility(View.INVISIBLE);
         } else {
             pressureTime1.setText(((int)events[0].getRemainingOperationTime()/1000/60)
-                    +" "+context.getString(R.string.minutesShort));
+                    +" "+getContext().getString(R.string.minutesShort));
             leaderPressure1.setText(events[0].getPressureLeader()+"");
             memberPressure1.setText(events[0].getPressureMember()+"");
             pressureTime2.setVisibility(View.INVISIBLE);
@@ -298,12 +288,6 @@ public class DetailView extends RelativeLayout{
                 break;
             case PauseTimer: setButtonState(3, false, false, false, true);
                 break;
-        }
-        if(squad.isReminderActive()){
-            buttonAnimation.start();
-
-        } else {
-            buttonAnimation.end();
         }
     }
 
@@ -348,11 +332,31 @@ public class DetailView extends RelativeLayout{
         }
     }
 
-    protected void activateAlarm(){
-        ValueAnimator colorAnim = ObjectAnimator.ofInt(timer, "textColor", Color.RED, Color.GRAY);
-        colorAnim.setDuration(800);
-        colorAnim.setEvaluator(new ArgbEvaluator());
-        colorAnim.setRepeatCount(ValueAnimator.INFINITE);
-        colorAnim.start();
+    private void showAlarmMessage(){
+        if(squad.isAlarmUnconfirmed()){
+            String message = getContext().getString(R.string.alarmMessageText1) + " "
+                    + squad.getName() + " " + getContext().getString(R.string.alarmMessageText2);
+            AlertDialog alarmMessage = new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.alarmMessageTitle)
+                    .setMessage(message)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            squad.confirmAlarm();
+                            hardwareInterface.turnOffAlarm();
+                        }
+                    }).create();
+            alarmMessage.show();
+        }
     }
+
+    @Override
+    protected void activateViewReminder(){
+        buttonAnimation.start();
+    }
+
+    @Override
+    protected void deactivateViewReminder(){
+        buttonAnimation.end();
+    }
+
 }

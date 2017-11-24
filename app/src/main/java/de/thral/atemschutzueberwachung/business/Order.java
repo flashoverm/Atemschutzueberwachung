@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.domain;
+package de.thral.atemschutzueberwachung.business;
 
 import android.app.Activity;
 import android.content.Context;

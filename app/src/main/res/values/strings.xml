@@ -16,6 +16,12 @@
 
     <string name="folderNameExternal">Atemschutzueberwachung</string>
 
+    <string name="iconUnexported">Neuer Einsatz</string>
+
+    <string name="toastNothingSelected">Keine Eintrag ausgewählt!</string>
+    <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
+    <string name="toastExportSucceeded">Einsätze exportiert</string>
+
     <!--Operation-->
     <string name="stateListRegister">Registriert</string>
     <string name="stateListBegin">Gerät angeschlossen</string>
@@ -63,14 +69,15 @@
     <string name="returnPressureWarningText">Mindestdruck für Rückzugsweg fast erreicht!</string>
     <string name="returnPressureAlarmText">Achtung!\n\nMindestdruck für Rückzugsweg unterschritten!\nSicherungstrupp alamieren!</string>
 
-    <string name="timerWarningTitle">Einsatzzeit</string>
-    <string name="timerWarningText"> hat seine Einsatzzeit überschritten!</string>
-
     <string name="endOperationTitle">Einsatz abschließen</string>
-    <string name="endOperationWarning">Noch nicht alle Trupps haben ihren Einsatz beendet!</string>
+        <string name="endOperationWarning">Noch nicht alle Trupps haben ihren Einsatz beendet!</string>
 
     <string name="deleteWarningTitle">Löschen</string>
     <string name="deleteWarningText">Wirklich löschen?</string>
+
+    <string name="alarmMessageTitle">Einsatzzeit</string>
+    <string name="alarmMessageText1">Der Trupp </string>
+    <string name="alarmMessageText2">hat seine Einsatzzeit überschritten!\nSicherungstrupp alamieren!</string>
 
     <!--Register Dialog-->
     <string name="registerSquadTitle">Trupp registrieren</string>
@@ -91,6 +98,10 @@
     <string name="orderListProtection">Sicherungstrupp</string>
     <string name="orderListOther">Sonstiges/Zubringer</string>
 
+    <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
+    <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
+    <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
+
     <!--Pressure Dialog-->
     <string name="enterPressureTitle">Druck eingeben</string>
     <string name="eventText">Ereignis:</string>
@@ -104,31 +115,25 @@
     <string name="eventListPause">Pausieren</string>
     <string name="eventListResume">Fortsetzen</string>
 
+    <string name="toastInvalidPressure">Druck ungültig - Höher als aktueller Wert!</string>
+    <string name="toastPressureUnderZero">Druck kann nicht negativ sein!</string>
+    <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
+    <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>
+
     <!--End Operation Dialog-->
     <string name="oberserverText">Überwacher:</string>
     <string name="operationText">Einsatz:</string>
     <string name="locationText">Einsatzort:</string>
     <string name="unitText">Einheit:</string>
+    <string name="toastNoObserver">Namen des Überwachers eingeben!</string>
+    <string name="toastNoOperation">Einsatz eingeben!</string>
+    <string name="toastNoLocation">Einsatzort eingeben!</string>
 
     <!--Add Draegerman Dialog-->
     <string name="firstnameText">Vorname:</string>
     <string name="lastnameText">Nachname:</string>
-
-    <!--Toasts-->
-    <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
-    <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
-    <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
-    <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>
-    <string name="toastNoObserver">Namen des Überwachers eingeben!</string>
-    <string name="toastNoOperation">Einsatz eingeben!</string>
-    <string name="toastNoLocation">Einsatzort eingeben!</string>
-    <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
-    <string name="toastInvalidPressure">Druck ungültig - Höher als aktueller Wert!</string>
-    <string name="toastNothingSelected">Keine Eintrag ausgewählt!</string>
     <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
     <string name="toastNoLastname">Kein Nachname eingetragen!</string>
     <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
-    <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
-    <string name="toastExportSucceeded">Einsätze exportiert</string>
-    <string name="toastPressureUnderZero">Druck kann nicht negativ sein!</string>
+
 </resources>

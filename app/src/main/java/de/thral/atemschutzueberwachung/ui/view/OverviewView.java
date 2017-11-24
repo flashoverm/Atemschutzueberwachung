@@ -8,7 +8,7 @@ import android.widget.GridLayout;
 import android.widget.ViewFlipper;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Squad;
+import de.thral.atemschutzueberwachung.business.Squad;
 
 public class OverviewView extends GridLayout {
 
@@ -23,26 +23,26 @@ public class OverviewView extends GridLayout {
 
     public OverviewView(Context context) {
         super(context);
-        init(context);
+        init();
     }
 
     public OverviewView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init();
     }
 
-    private void init(Context context){
-        overviews = inflate(context, R.layout.monitor_overviews, this);
+    private void init(){
+        overviews = inflate(getContext(), R.layout.monitor_overviews, this);
         overviewFlipper = new ViewFlipper[4];
-        overviewFlipper[0] = (ViewFlipper) overviews.findViewById(R.id.flipper_1);
-        overviewFlipper[1] = (ViewFlipper) overviews.findViewById(R.id.flipper_2);
-        overviewFlipper[2] = (ViewFlipper) overviews.findViewById(R.id.flipper_3);
-        overviewFlipper[3] = (ViewFlipper) overviews.findViewById(R.id.flipper_4);
+        overviewFlipper[0] = overviews.findViewById(R.id.flipper_1);
+        overviewFlipper[1] = overviews.findViewById(R.id.flipper_2);
+        overviewFlipper[2] = overviews.findViewById(R.id.flipper_3);
+        overviewFlipper[3] = overviews.findViewById(R.id.flipper_4);
         overview = new Overview[4];
-        overview[0] = (Overview) overviews.findViewById(R.id.overview_1);
-        overview[1] = (Overview) overviews.findViewById(R.id.overview_2);
-        overview[2] = (Overview) overviews.findViewById(R.id.overview_3);
-        overview[3] = (Overview) overviews.findViewById(R.id.overview_4);
+        overview[0] = overviews.findViewById(R.id.overview_1);
+        overview[1] = overviews.findViewById(R.id.overview_2);
+        overview[2] = overviews.findViewById(R.id.overview_3);
+        overview[3] = overviews.findViewById(R.id.overview_4);
     }
 
     public void setListener(LayoutClickListener layoutClickListener,
@@ -69,7 +69,7 @@ public class OverviewView extends GridLayout {
                     });
                 } else if (!registerDisplayed) {
                     overviewFlipper[i].setDisplayedChild(1);
-                    register = (Button) overviewFlipper[i].findViewById(R.id.buttonRegister);
+                    register = overviewFlipper[i].findViewById(R.id.buttonRegister);
                     register.setOnClickListener(registerListener);
                     registerDisplayed = true;
                 } else {
@@ -78,7 +78,7 @@ public class OverviewView extends GridLayout {
                 }
                 if(i==3 && squads[0]==null){
                     overviewFlipper[i].setDisplayedChild(2);
-                    endOperation = (Button) overviewFlipper[i].findViewById(R.id.buttonEndOperation);
+                    endOperation = overviewFlipper[i].findViewById(R.id.buttonEndOperation);
                     endOperation.setOnClickListener(endOperationListener);
                 }
             }

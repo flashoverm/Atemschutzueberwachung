@@ -3,13 +3,11 @@ package de.thral.atemschutzueberwachung.ui.activity;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -18,15 +16,16 @@ import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Operation;
+import de.thral.atemschutzueberwachung.business.Operation;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
+import de.thral.atemschutzueberwachung.ui.adapter.OperationListViewAdapter;
 
 public class OperationAdminActivity extends AppCompatActivity implements
         MenuItem.OnMenuItemClickListener{
 
     private OperationDAO operationDAO;
     private ListView completedOperations;
-    private ArrayAdapter<Operation> adapter;
+    private OperationListViewAdapter adapter;
 
     private SparseBooleanArray checked;
 
@@ -35,15 +34,15 @@ public class OperationAdminActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_operation);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarOperationAdmin);
+        Toolbar toolbar = findViewById(R.id.toolbarOperationAdmin);
         toolbar.setTitle(R.string.operationAdminLabel);
         toolbar.setTitleTextColor(Color.LTGRAY);
         setSupportActionBar(toolbar);
 
         operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
-        completedOperations = (ListView) findViewById(R.id.operationList);
+        completedOperations = findViewById(R.id.operationList);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
+        adapter = new OperationListViewAdapter(this, R.layout.listitem_operation,
                 operationDAO.getCompletedOperations());
         completedOperations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         completedOperations.setAdapter(adapter);
@@ -62,7 +61,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
     public boolean onMenuItemClick(MenuItem menuItem) {
         super.onOptionsItemSelected(menuItem);
 
-        checked = completedOperations.getCheckedItemPositions();
+        checked = adapter.getCheckedItemPositions();
 
         if(checked.size() == 0){
             Toast.makeText(this, R.string.toastNothingSelected, Toast.LENGTH_LONG).show();
@@ -101,6 +100,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
                 int position = selected.keyAt(i);
                 if (selected.valueAt(i)){
                     operationDAO.exportOperation(adapter.getItem(position));
+                    adapter.notifyDataSetChanged();
                 }
             }
             Toast.makeText(this, R.string.toastExportSucceeded, Toast.LENGTH_LONG).show();

@@ -16,8 +16,8 @@ public class AdministrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administration);
 
-        Button operationAdministrator = (Button) findViewById(R.id.operationAdministrationButton);
-        Button draegermanAdministrator = (Button) findViewById(R.id.draegermanAdministrationButton);
+        Button operationAdministrator = findViewById(R.id.operationAdministrationButton);
+        Button draegermanAdministrator = findViewById(R.id.draegermanAdministrationButton);
 
         operationAdministrator.setOnClickListener(new View.OnClickListener() {
             @Override

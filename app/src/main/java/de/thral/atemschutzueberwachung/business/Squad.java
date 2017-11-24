@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.domain;
+package de.thral.atemschutzueberwachung.business;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +123,14 @@ public class Squad {
 
     public boolean isTimerExpired(){
         return (operationTimer.getValue() == 0);
+    }
+
+    public boolean isAlarmUnconfirmed(){
+        return operationTimer.isAlarmUnconfirmed();
+    }
+
+    public void confirmAlarm(){
+        operationTimer.confirmAlarm();
     }
 
     public void resumeAfterError(){

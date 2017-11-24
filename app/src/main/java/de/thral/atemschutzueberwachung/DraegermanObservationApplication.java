@@ -1,8 +1,10 @@
 package de.thral.atemschutzueberwachung;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import de.thral.atemschutzueberwachung.hardware.HardwareInterface;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAOImpl;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
@@ -26,6 +28,12 @@ public class DraegermanObservationApplication extends Application {
 
     public HardwareInterface getHardwareInterface(){
         return hardwareInterface;
+    }
+
+    public static HardwareInterface getHardwareInterface(Context context){
+        DraegermanObservationApplication activity
+                = (DraegermanObservationApplication)((Activity)context).getApplication();
+        return activity.getHardwareInterface();
     }
 
     public OperationDAO getOperationDAO(){

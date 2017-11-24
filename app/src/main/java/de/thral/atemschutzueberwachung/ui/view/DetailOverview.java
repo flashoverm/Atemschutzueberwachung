@@ -5,11 +5,11 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Event;
-import de.thral.atemschutzueberwachung.domain.Squad;
-import de.thral.atemschutzueberwachung.domain.TimerChangeListener;
+import de.thral.atemschutzueberwachung.business.Event;
+import de.thral.atemschutzueberwachung.business.Squad;
+import de.thral.atemschutzueberwachung.business.TimerChangeListener;
 
-public class DetailOverview extends OverviewBase {
+public class DetailOverview extends SquadOverviewBase {
 
     private TextView leaderPressureInfo, memberPressureInfo;
 
@@ -21,21 +21,24 @@ public class DetailOverview extends OverviewBase {
         super(context, attrs);
     }
 
-    protected void init(){
-        overview = inflate(context, R.layout.monitor_detail_overview, this);
-        timer = (TextView) overview.findViewById(R.id.timer);
-        squadname = (TextView) overview.findViewById(R.id.squadname);
-        state = (TextView) overview.findViewById(R.id.state);
-        leaderName = (TextView) overview.findViewById(R.id.leaderName);
-        memberName = (TextView) overview.findViewById(R.id.memberName);
-        leaderPressureInfo = (TextView) overview.findViewById(R.id.leaderPressureInfo);
-        memberPressureInfo = (TextView) overview.findViewById(R.id.memberPressureInfo);
+    @Override
+    protected void initView(){
+        infoView = inflate(getContext(), R.layout.monitor_detail_overview, this);
+        timer = infoView.findViewById(R.id.timer);
+        squadname = infoView.findViewById(R.id.squadname);
+        state = infoView.findViewById(R.id.state);
+        leaderName = infoView.findViewById(R.id.leaderName);
+        memberName = infoView.findViewById(R.id.memberName);
+        leaderPressureInfo = infoView.findViewById(R.id.leaderPressureInfo);
+        memberPressureInfo = infoView.findViewById(R.id.memberPressureInfo);
     }
 
+    @Override
     public void setSquad(Squad squad){
+        this.squad = squad;
         timer.setText(squad.getTimerValueAsClock());
         squadname.setText(squad.getName());
-        state.setText(squad.getState().getStateDescription(context));
+        state.setText(squad.getState().getStateDescription(getContext()));
         leaderName.setText(squad.getLeader().getDisplayName());
         memberName.setText(squad.getMember().getDisplayName());
 
@@ -43,9 +46,9 @@ public class DetailOverview extends OverviewBase {
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
 
         String leaderInfo = events[0].getPressureLeader()
-                +"("+time+" " + context.getString(R.string.minutesShort) +")/";
+                +"("+time+" " + getContext().getString(R.string.minutesShort) +")/";
         String memberInfo = events[0].getPressureMember()
-                +"("+time+" " + context.getString(R.string.minutesShort) +")/";
+                +"("+time+" " + getContext().getString(R.string.minutesShort) +")/";
         if(squad.getLeaderReturnPressure() != -1
                 && squad.getMemberReturnPressure() != -1){
             leaderInfo += squad.getLeaderReturnPressure();
@@ -56,16 +59,6 @@ public class DetailOverview extends OverviewBase {
         }
         leaderPressureInfo.setText(leaderInfo);
         memberPressureInfo.setText(memberInfo);
-
-        if(squad.isReminderActive()){
-            activateReminder();
-        } else {
-            deactivateReminder();
-        }
-        if(squad.isTimerExpired()){
-            deactivateReminder();
-            activateAlarm();
-        }
 
         squad.setTimerListener(new TimerChangeListener() {
             @Override
@@ -78,5 +71,7 @@ public class DetailOverview extends OverviewBase {
                 timerReachedMark(expired);
             }
         });
+
+        setReminderAlarm();
     }
 }

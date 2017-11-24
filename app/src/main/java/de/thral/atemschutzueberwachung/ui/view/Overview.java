@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.domain.Event;
-import de.thral.atemschutzueberwachung.domain.Squad;
-import de.thral.atemschutzueberwachung.domain.TimerChangeListener;
+import de.thral.atemschutzueberwachung.business.Event;
+import de.thral.atemschutzueberwachung.business.Squad;
+import de.thral.atemschutzueberwachung.business.TimerChangeListener;
 
-public class Overview extends OverviewBase {
+public class Overview extends SquadOverviewBase {
 
     private TextView lastPressureTime, leaderPressure, memberPressure,
             leaderReturnPressure, memberReturnPressure;
@@ -23,31 +23,33 @@ public class Overview extends OverviewBase {
         super(context, attrs);
     }
 
-    protected void init() {
-        overview = inflate(context, R.layout.monitor_overview, this);
-        timer = (TextView)overview.findViewById(R.id.timer);
-        squadname = (TextView)overview.findViewById(R.id.squadname);
-        state = (TextView)overview.findViewById(R.id.state);
-        leaderName = (TextView)overview.findViewById(R.id.leaderName);
-        memberName = (TextView)overview.findViewById(R.id.memberName);
-        lastPressureTime = (TextView)overview.findViewById(R.id.lastPressureTime);
-        leaderPressure = (TextView)overview.findViewById(R.id.leaderPressure);
-        memberPressure = (TextView)overview.findViewById(R.id.memberPressure);
-        leaderReturnPressure = (TextView)overview.findViewById(R.id.leaderReturnPressure);
-        memberReturnPressure = (TextView)overview.findViewById(R.id.memberReturnPressure);
+    @Override
+    protected void initView() {
+        infoView = inflate(getContext(), R.layout.monitor_overview, this);
+        timer = infoView.findViewById(R.id.timer);
+        squadname = infoView.findViewById(R.id.squadname);
+        state = infoView.findViewById(R.id.state);
+        leaderName = infoView.findViewById(R.id.leaderName);
+        memberName = infoView.findViewById(R.id.memberName);
+        lastPressureTime = infoView.findViewById(R.id.lastPressureTime);
+        leaderPressure = infoView.findViewById(R.id.leaderPressure);
+        memberPressure = infoView.findViewById(R.id.memberPressure);
+        leaderReturnPressure = infoView.findViewById(R.id.leaderReturnPressure);
+        memberReturnPressure = infoView.findViewById(R.id.memberReturnPressure);
     }
 
+    @Override
     public void setSquad(Squad squad){
-        System.out.println("SQUAD SET");
+        this.squad = squad;
         timer.setText(squad.getTimerValueAsClock());
         squadname.setText(squad.getName());
-        state.setText(squad.getState().getStateDescription(context));
+        state.setText(squad.getState().getStateDescription(getContext()));
         leaderName.setText(squad.getLeader().getDisplayName());
         memberName.setText(squad.getMember().getDisplayName());
 
         Event[] events = squad.getLastPressureValues(1);
         int time = (int)events[0].getRemainingOperationTime()/1000/60;
-        lastPressureTime.setText(time+" "+context.getString(R.string.minutesShort));
+        lastPressureTime.setText(time+" "+getContext().getString(R.string.minutesShort));
         leaderPressure.setText(events[0].getPressureLeader()+"");
         memberPressure.setText(events[0].getPressureMember()+"");
 
@@ -62,15 +64,6 @@ public class Overview extends OverviewBase {
             memberReturnPressure.setVisibility(View.INVISIBLE);
         }
 
-        if(squad.isReminderActive()){
-            activateReminder();
-        } else {
-            deactivateReminder();
-        }
-        if(squad.isTimerExpired()){
-            deactivateReminder();
-            activateAlarm();
-        }
         squad.setTimerListener(new TimerChangeListener() {
             @Override
             public void onTimerUpdate(String timer) {
@@ -82,5 +75,7 @@ public class Overview extends OverviewBase {
                 timerReachedMark(expired);
             }
         });
+
+        setReminderAlarm();
     }
 }

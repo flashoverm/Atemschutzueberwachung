@@ -1,15 +1,18 @@
-package de.thral.atemschutzueberwachung.domain;
+package de.thral.atemschutzueberwachung.business;
 
 import android.os.CountDownTimer;
 
 public class OperationTimer {
 
     private transient CountDownTimer timer;
+
     private long timerValue;
     private long timestampTimerStart;
     private final int secOneThird;
     private final int secTwoThird;
+
     private boolean reminder;
+    private boolean alarmUnconfirmed;
     private transient TimerChangeListener timerListener;
 
     public OperationTimer(OperatingTime operatingTime){
@@ -50,6 +53,10 @@ public class OperationTimer {
         return reminder;
     }
 
+    public boolean isAlarmUnconfirmed(){
+        return alarmUnconfirmed;
+    }
+
     public void setTimerListener(TimerChangeListener timerListener){
         this.timerListener = timerListener;
     }
@@ -58,25 +65,38 @@ public class OperationTimer {
         this.reminder = false;
     }
 
-    public void start(){
-        timer = new CountDownTimer(timerValue, 1000) {
-            public void onTick(long millisUntilFinished) {
-                OperationTimer.this.timerValue = millisUntilFinished;
-                timerListener.onTimerUpdate(getValueAsClock());
+    public void confirmAlarm(){
+        this.alarmUnconfirmed = false;
+    }
 
-                if((timerValue/1000) == secTwoThird || (timerValue/1000) == secOneThird){
-                    reminder = true;
-                    timerListener.onTimerReachedMark(false);
+    public void start(){
+        if(timerValue != 0){
+            timer = new CountDownTimer(timerValue, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    OperationTimer.this.timerValue = millisUntilFinished;
+                    if(timerListener != null){
+                        timerListener.onTimerUpdate(getValueAsClock());
+                    }
+
+                    if((timerValue/1000) == secTwoThird || (timerValue/1000) == secOneThird){
+                        reminder = true;
+                        if(timerListener != null){
+                            timerListener.onTimerReachedMark(false);
+                        }
+                    }
                 }
-            }
-            public void onFinish() {
-                OperationTimer.this.timerValue = 0;
-                timerListener.onTimerUpdate("00:00");
-                timerListener.onTimerReachedMark(true);
-            }
-        };
-        timestampTimerStart = System.currentTimeMillis();
-        timer.start();
+                public void onFinish() {
+                    OperationTimer.this.timerValue = 0;
+                    alarmUnconfirmed = true;
+                    if(timerListener != null){
+                        timerListener.onTimerUpdate("00:00");
+                        timerListener.onTimerReachedMark(true);
+                    }
+                }
+            };
+            timestampTimerStart = System.currentTimeMillis();
+            timer.start();
+        }
     }
 
     public void cancel(){
@@ -88,7 +108,7 @@ public class OperationTimer {
 
     public void resumeAfterError(){
         if(timestampTimerStart != -1) {
-            timerValue = timerValue - (System.currentTimeMillis() - timestampTimerStart);
+            timerValue = Math.max(timerValue-(System.currentTimeMillis()-timestampTimerStart),0);
             start();
         }
     }
