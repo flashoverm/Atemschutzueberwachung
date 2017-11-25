@@ -9,8 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
@@ -24,6 +26,7 @@ public class DraegermanAdminActivity extends AppCompatActivity implements
 
     private DraegermanDAO draegermanDAO;
     private ListView draegermen;
+    private TextView noDraegerman;
     private ArrayAdapter<Draegerman> adapter;
 
     @Override
@@ -38,6 +41,8 @@ public class DraegermanAdminActivity extends AppCompatActivity implements
 
         draegermanDAO = ((DraegermanObservationApplication)getApplication()).getDraegermanDAO();
         draegermen = findViewById(R.id.draegermanList);
+        noDraegerman = findViewById(R.id.noDraegerman);
+        setVisibility();
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
                 draegermanDAO.getAll());
@@ -88,25 +93,34 @@ public class DraegermanAdminActivity extends AppCompatActivity implements
     }
 
     private void deleteSelectedDraegermen(SparseBooleanArray selected){
-        for (int i = selected.size()-1; i >= 0 ; i--) {
-            int position = selected.keyAt(i);
-            if (selected.valueAt(i)) {
-                draegermanDAO.remove(adapter.getItem(position));
-                adapter.notifyDataSetChanged();
+        for (int i = draegermen.getCount()-1; i >=0 ; i--) {
+            if (selected.get(i)) {
+                draegermanDAO.remove(adapter.getItem(i));
             }
         }
+        selected.clear();
+        adapter.notifyDataSetChanged();
+        draegermen.clearChoices();
+        setVisibility();
     }
 
     @Override
     public boolean onAddDraegerman(String firstname, String lastname) {
         if(draegermanDAO.add(new Draegerman(firstname, lastname))){
-
-            for(Draegerman man : draegermanDAO.getAll()){
-                System.out.println(man.toString());
-            }
             adapter.notifyDataSetChanged();
+            setVisibility();
             return true;
         }
         return false;
+    }
+
+    private void setVisibility(){
+        if(draegermanDAO.getAll().size() == 0){
+            noDraegerman.setVisibility(View.VISIBLE);
+            draegermen.setVisibility(View.INVISIBLE);
+        } else {
+            noDraegerman.setVisibility(View.INVISIBLE);
+            draegermen.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -10,11 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
+import de.thral.atemschutzueberwachung.persistence.CompleteOperation;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 import de.thral.atemschutzueberwachung.ui.adapter.OperationListViewAdapter;
 
@@ -23,6 +26,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
 
     private OperationDAO operationDAO;
     private ListView completedOperations;
+    private TextView noOperations;
     private OperationListViewAdapter adapter;
 
     private SparseBooleanArray checked;
@@ -39,6 +43,9 @@ public class OperationAdminActivity extends AppCompatActivity implements
 
         operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
         completedOperations = findViewById(R.id.operationList);
+        noOperations = findViewById(R.id.noOperations);
+
+        setVisibility();
 
         adapter = new OperationListViewAdapter(this, R.layout.listitem_operation_completed,
                 operationDAO.getCompletedOperations());
@@ -94,24 +101,37 @@ public class OperationAdminActivity extends AppCompatActivity implements
 
     private void exportSelectedOperations(SparseBooleanArray selected){
         if(operationDAO.setupStorage(this)){
-            for (int i = 0; i < selected.size(); i++) {
-                int position = selected.keyAt(i);
-                if (selected.valueAt(i)){
-                    operationDAO.exportOperation(adapter.getItem(position));
-                    adapter.notifyDataSetChanged();
+            for (int i = completedOperations.getCount()-1; i >=0 ; i--) {
+                if (selected.get(i)){
+                    operationDAO.exportOperation(adapter.getItem(i));
                 }
             }
             Toast.makeText(this, R.string.toastExportSucceeded, Toast.LENGTH_LONG).show();
+            adapter.notifyDataSetChanged();
+            selected.clear();
+            completedOperations.clearChoices();
         }
     }
 
     private void deleteSelectedOperations(SparseBooleanArray selected){
-        for (int i = 0; i < selected.size(); i++) {
-            int position = selected.keyAt(i);
-            if (selected.valueAt(i)){
-                operationDAO.removeCompletedOperation(adapter.getItem(position));
-                adapter.notifyDataSetChanged();
+        for (int i = completedOperations.getCount()-1; i >=0 ; i--) {
+            if (selected.get(i)){
+                operationDAO.removeCompletedOperation(adapter.getItem(i));
             }
+        }
+        adapter.notifyDataSetChanged();
+        selected.clear();
+        completedOperations.clearChoices();
+        setVisibility();
+    }
+
+    private void setVisibility(){
+        if(operationDAO.getCompletedOperations().size() == 0){
+            noOperations.setVisibility(View.VISIBLE);
+            completedOperations.setVisibility(View.INVISIBLE);
+        } else {
+            noOperations.setVisibility(View.INVISIBLE);
+            completedOperations.setVisibility(View.VISIBLE);
         }
     }
 

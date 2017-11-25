@@ -29,8 +29,8 @@ public class DraegermanDAOImpl implements DraegermanDAO {
         this.context = context;
         draegermen = loadDraegermanList();
 
-        /* Enable for Test-Data
-        if(draegermen == null){
+        /* Enable for Test-Data */
+        if(draegermen.size() == 0){
             draegermen = new ArrayList<>();
             draegermen.add(new Draegerman("Markus", "Thral"));
             draegermen.add(new Draegerman("Michael", "Thral"));
@@ -39,7 +39,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
             draegermen.add(new Draegerman("Maximilian", "Mustermann"));
             saveDraegermanList();
         }
-        */
+        //*/
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
             }
         } catch(IOException e){
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

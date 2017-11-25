@@ -25,7 +25,6 @@ public class OperationListViewAdapter extends ArrayAdapter<CompleteOperation>
 
     public OperationListViewAdapter(Context context, int resource, List<CompleteOperation> objects) {
         super(context, resource, objects);
-
         this.objects = objects;
         checkedStates = new SparseBooleanArray(objects.size());
     }
@@ -34,7 +33,6 @@ public class OperationListViewAdapter extends ArrayAdapter<CompleteOperation>
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
 
         View rowView = inflater.inflate(R.layout.listitem_operation_completed, parent, false);
         ImageView unexported = rowView.findViewById(R.id.operationUnexported);
@@ -57,21 +55,11 @@ public class OperationListViewAdapter extends ArrayAdapter<CompleteOperation>
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(b){
-            checkedStates.put((int)compoundButton.getTag(), b);
-        } else {
-            checkedStates.delete((int)compoundButton.getTag());
-        }
-
+        checkedStates.put((int)compoundButton.getTag(), b);
     }
 
     public SparseBooleanArray getCheckedItemPositions(){
         return checkedStates;
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        checkedStates = new SparseBooleanArray(objects.size());
-    }
 }

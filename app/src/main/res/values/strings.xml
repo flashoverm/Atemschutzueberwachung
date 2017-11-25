@@ -27,6 +27,9 @@
     <string name="vibration">Vibration</string>
     <string name="sound">Alarm-Ton</string>
 
+    <string name="noDraegermen">Keine Atemschutzträger vorhanden</string>
+    <string name="noCompletedOperations">Keine Einstazdaten vorhanden</string>
+
     <!--Operation-->
     <string name="stateListRegister">Registriert</string>
     <string name="stateListBegin">Gerät angeschlossen</string>

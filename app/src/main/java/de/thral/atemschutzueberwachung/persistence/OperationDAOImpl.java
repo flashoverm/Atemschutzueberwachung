@@ -48,7 +48,7 @@ public class OperationDAOImpl implements OperationDAO {
         completedFolder = new File(context.getFilesDir(), COMPLETED_FOLDER);
         completedFolder.mkdirs();
 
-        /* Enable for Test-Data
+        /* Enable for Test-Data */
         activeOperation = new Operation();
         activeOperation.complete("test1", "test1", "test1", "test1");
         endOperation();
@@ -58,7 +58,7 @@ public class OperationDAOImpl implements OperationDAO {
         activeOperation = new Operation();
         activeOperation.complete("test3", "test3", "test3", "test3");
         endOperation();
-        */
+        //*/
     }
 
     /*
