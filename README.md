@@ -6,9 +6,9 @@ Improvements:
 
 - (Implemented in V0.8) If operation is active, background light doesnt turn off
 
-- Draegerman collection with editable (TextEdit to enter foreign names) and Spinner right of it, to choose from list. Chosen draegerman is entered in the text edit
+- (Implemented in V0.9) Draegerman collection with editable (TextEdit to enter foreign names) and Spinner right of it, to choose from list. Chosen draegerman is entered in the text edit
 
-- Configuration of reminder and alarm in administration menu: Vibration yes/no, flashlight yes/no, sound yes/no
+- (Implemented in V0.9) Configuration of reminder and alarm in administration menu: Vibration yes/no, flashlight yes/no, sound yes/no
 
 
 
