@@ -89,6 +89,9 @@
     <string name="squadnameText">Funkrufname:</string>
     <string name="squadnameHint">Funkrufname</string>
 
+    <string name="leadernameHint">Truppführer</string>
+    <string name="membernameHint">Truppmann</string>
+
     <string name="operationTimeDebug">3 Minuten</string>
     <string name="operationTimeShort">20 Minuten</string>
     <string name="operationTimeNormal">30 Minuten</string>
@@ -109,6 +112,8 @@
     <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
     <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
     <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
+    <string name="toastNoLeaderName">Truppführer eintragen oder Auswahl verwenden!</string>
+    <string name="toastNoMemberName">Truppmann eintragen oder Auswahl verwenden!</string>
 
     <!--Pressure Dialog-->
     <string name="enterPressureTitle">Druck eingeben</string>

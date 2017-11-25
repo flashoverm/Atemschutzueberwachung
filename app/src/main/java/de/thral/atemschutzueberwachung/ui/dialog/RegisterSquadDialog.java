@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,9 +37,18 @@ public class RegisterSquadDialog extends DialogFragment {
 
     private EditText squadName;
     private Spinner operatingTimeSpinner;
+
+    private EditText leaderEdit;
     private Spinner leaderSpinner;
+    private ImageButton leaderEditButton;
     private EditText leaderPressure;
+    private boolean leaderEditEnabled;
+
+    private EditText memberEdit;
     private Spinner memberSpinner;
+    private ImageButton memberEditButton;
+    private boolean memberEditEnabled;
+
     private EditText memberPressure;
     private Spinner orderSpinner;
 
@@ -60,12 +70,23 @@ public class RegisterSquadDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_register_squad, null);
 
         squadName = view.findViewById(R.id.edit_squadname);
-        operatingTimeSpinner = view.findViewById(R.id.edit_operatingtime);
-        leaderSpinner = view.findViewById(R.id.edit_leader);
+        operatingTimeSpinner = view.findViewById(R.id.spinner_operatingtime);
+
+        leaderEdit = view.findViewById(R.id.edit_leadername);
+        leaderSpinner = view.findViewById(R.id.spinner_leader);
+        leaderEditButton = view.findViewById(R.id.leaderEditButton);
+        leaderEdit.setVisibility(View.INVISIBLE);
+        leaderEditEnabled = false;
+
+        memberEdit = view.findViewById(R.id.edit_membername);
+        memberSpinner = view.findViewById(R.id.spinner_member);
+        memberEditButton = view.findViewById(R.id.memberEditButton);
+        memberEdit.setVisibility(View.INVISIBLE);
+        memberEditEnabled = false;
+
         leaderPressure = view.findViewById(R.id.edit_leaderpressure);
-        memberSpinner = view.findViewById(R.id.edit_member);
         memberPressure = view.findViewById(R.id.edit_memberpressure);
-        orderSpinner = view.findViewById(R.id.edit_order);
+        orderSpinner = view.findViewById(R.id.spinner_order);
 
         ArrayAdapter<String> operatingTimeAdapter = OperatingTime.getArrayAdapter(getActivity());
         operatingTimeSpinner.setAdapter(operatingTimeAdapter);
@@ -81,6 +102,19 @@ public class RegisterSquadDialog extends DialogFragment {
                         .getDraegermanDAO().getAll());
         leaderSpinner.setAdapter(draegermanSpinnerAdapter);
         memberSpinner.setAdapter(draegermanSpinnerAdapter);
+
+        leaderEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toogleEdit(true);
+            }
+        });
+        memberEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toogleEdit(false);
+            }
+        });
 
         builder.setView(view)
                 .setTitle(getResources().getString(R.string.registerSquadTitle))
@@ -103,18 +137,49 @@ public class RegisterSquadDialog extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         String squadnameText = squadName.getText().toString();
-                        Draegerman leader = (Draegerman)leaderSpinner.getSelectedItem();
                         String initLeaderPressure = leaderPressure.getText().toString();
-                        Draegerman member = (Draegerman)memberSpinner.getSelectedItem();
                         String initMemberPressure = memberPressure.getText().toString();
                         String operatingTime = operatingTimeSpinner.getSelectedItem().toString();
                         String order = orderSpinner.getSelectedItem().toString();
+
+                        Draegerman leader;
+                        Draegerman member;
+
 
                         if(squadnameText.equals("")){
                             Toast.makeText(getActivity(), R.string.toastNoSquadname,
                                     Toast.LENGTH_LONG).show();
                             return;
                         }
+                        if(leaderEditEnabled){
+                            String leaderName = leaderEdit.getText().toString();
+                            if(leaderName.equals("")){
+                                Toast.makeText(getActivity(), R.string.toastNoLeaderName,
+                                        Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            leader = new Draegerman(leaderName);
+                        } else {
+                            leader = (Draegerman)leaderSpinner.getSelectedItem();
+                        }
+                        if(memberEditEnabled){
+                            String memberName = memberEdit.getText().toString();
+                            if(memberName.equals("")){
+                                Toast.makeText(getActivity(), R.string.toastNoMemberName,
+                                        Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            member = new Draegerman(memberName);
+                        } else {
+                            member = (Draegerman)memberSpinner.getSelectedItem();
+                        }
+
+                        if(!leaderEditEnabled && !memberEditEnabled && leader.equals(member)){
+                            Toast.makeText(getActivity(), R.string.toastLeaderMemberEqual,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                         if(initLeaderPressure.equals("")){
                             Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
                                     Toast.LENGTH_LONG).show();
@@ -132,11 +197,6 @@ public class RegisterSquadDialog extends DialogFragment {
                                     Toast.LENGTH_LONG).show();
                             return;
                         }
-                        if(leader.equals(member)){
-                            Toast.makeText(getActivity(), R.string.toastLeaderMemberEqual,
-                                    Toast.LENGTH_LONG).show();
-                            return;
-                        }
                         Squad squad = new Squad(
                                 squadnameText, leader, leaderPressure, member, memberPressure,
                                 OperatingTime.getOperatingTime(getActivity(), operatingTime),
@@ -149,6 +209,34 @@ public class RegisterSquadDialog extends DialogFragment {
             }
         });
         return dialog;
+    }
+
+    private void toogleEdit(boolean leader){
+        if(leader){
+            if(leaderEditEnabled){
+                leaderEditEnabled = false;
+                leaderEdit.setVisibility(View.INVISIBLE);
+                leaderSpinner.setVisibility(View.VISIBLE);
+                leaderEditButton.setImageResource(android.R.drawable.ic_menu_edit);
+            } else {
+                leaderEditEnabled = true;
+                leaderEdit.setVisibility(View.VISIBLE);
+                leaderSpinner.setVisibility(View.INVISIBLE);
+                leaderEditButton.setImageResource(android.R.drawable.ic_menu_close_clear_cancel);
+            }
+        } else {
+            if(memberEditEnabled){
+                memberEditEnabled = false;
+                memberEdit.setVisibility(View.INVISIBLE);
+                memberSpinner.setVisibility(View.VISIBLE);
+                memberEditButton.setImageResource(android.R.drawable.ic_menu_edit);
+            }else{
+                memberEditEnabled = true;
+                memberEdit.setVisibility(View.VISIBLE);
+                memberSpinner.setVisibility(View.INVISIBLE);
+                memberEditButton.setImageResource(android.R.drawable.ic_menu_close_clear_cancel);
+            }
+        }
     }
 
     @Override

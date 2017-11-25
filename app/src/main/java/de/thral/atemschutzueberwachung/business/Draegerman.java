@@ -18,6 +18,12 @@ public class Draegerman implements Comparable<Draegerman>{
         this.displayName = displayName;
     }
 
+    public Draegerman(String displayName){
+        this.firstName = "";
+        this.lastName = "";
+        this.displayName = displayName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
