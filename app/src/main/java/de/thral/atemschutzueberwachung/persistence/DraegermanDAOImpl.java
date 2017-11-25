@@ -28,6 +28,8 @@ public class DraegermanDAOImpl implements DraegermanDAO {
     public DraegermanDAOImpl(Context context){
         this.context = context;
         draegermen = loadDraegermanList();
+
+        /* Enable for Test-Data
         if(draegermen == null){
             draegermen = new ArrayList<>();
             draegermen.add(new Draegerman("Markus", "Thral"));
@@ -37,6 +39,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
             draegermen.add(new Draegerman("Maximilian", "Mustermann"));
             saveDraegermanList();
         }
+        */
     }
 
     @Override

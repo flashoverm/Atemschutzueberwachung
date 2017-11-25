@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingRight="12dp"
@@ -57,6 +58,7 @@
         android:layout_alignStart="@+id/edit_leader"
         android:layout_alignTop="@+id/squadname"
         android:ems="13"
+        android:hint="@string/squadnameHint"
         android:inputType="textPersonName"
         android:textSize="16dp" />
 
@@ -85,6 +87,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/edit_leaderpressure"
         android:ems="4"
+        android:hint="@string/memberPressureHint"
         android:inputType="numberSigned"
         android:textSize="16dp" />
 
@@ -95,6 +98,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/edit_operatingtime"
         android:ems="4"
+        android:hint="@string/leaderPressureHint"
         android:inputType="numberSigned"
         android:textSize="16dp" />
 

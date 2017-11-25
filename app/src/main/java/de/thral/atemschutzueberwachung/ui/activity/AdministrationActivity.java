@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
+import de.thral.atemschutzueberwachung.hardware.HardwareInterface;
 
 public class AdministrationActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class AdministrationActivity extends AppCompatActivity {
 
         Button operationAdministrator = findViewById(R.id.operationAdministrationButton);
         Button draegermanAdministrator = findViewById(R.id.draegermanAdministrationButton);
+        Button settings = findViewById(R.id.settingsButton);
 
         operationAdministrator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +36,12 @@ public class AdministrationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdministrationActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

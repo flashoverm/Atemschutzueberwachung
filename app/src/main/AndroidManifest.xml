@@ -35,6 +35,10 @@
         <activity android:name=".ui.activity.DraegermanAdminActivity"
             android:screenOrientation="landscape">
         </activity>
+        <activity android:name=".ui.activity.SettingsActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light">
+        </activity>
     </application>
 
 </manifest>

@@ -10,13 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.business.Operation;
 import de.thral.atemschutzueberwachung.persistence.OperationDAO;
 import de.thral.atemschutzueberwachung.ui.adapter.OperationListViewAdapter;
 
@@ -42,7 +40,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
         operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
         completedOperations = findViewById(R.id.operationList);
 
-        adapter = new OperationListViewAdapter(this, R.layout.listitem_operation,
+        adapter = new OperationListViewAdapter(this, R.layout.listitem_operation_completed,
                 operationDAO.getCompletedOperations());
         completedOperations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         completedOperations.setAdapter(adapter);
@@ -112,8 +110,6 @@ public class OperationAdminActivity extends AppCompatActivity implements
             int position = selected.keyAt(i);
             if (selected.valueAt(i)){
                 operationDAO.removeCompletedOperation(adapter.getItem(position));
-                adapter.clear();
-                adapter.addAll(operationDAO.getCompletedOperations());
                 adapter.notifyDataSetChanged();
             }
         }

@@ -20,6 +20,7 @@
         android:layout_alignTop="@+id/leaderpressure"
         android:layout_toEndOf="@+id/leaderpressure"
         android:ems="4"
+        android:hint="@string/leaderPressureHint"
         android:inputType="numberSigned"
         android:textSize="14sp" />
 
@@ -30,6 +31,7 @@
         android:layout_below="@+id/leaderpressure"
         android:layout_toEndOf="@+id/leaderpressure"
         android:ems="4"
+        android:hint="@string/memberPressureHint"
         android:inputType="numberSigned"
         android:textSize="14sp" />
 

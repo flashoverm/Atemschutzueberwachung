@@ -36,10 +36,10 @@ public class OperationDAOImpl implements OperationDAO {
 
     private Context context;
     private Operation activeOperation;
+    private List<CompleteOperation> completedOperations;
+
     private File completedFolder;
     private File exportFolder;
-
-    private List<CompleteOperation> completeOperations;
 
     public OperationDAOImpl(Context context){
         this.context = context;
@@ -47,7 +47,23 @@ public class OperationDAOImpl implements OperationDAO {
 
         completedFolder = new File(context.getFilesDir(), COMPLETED_FOLDER);
         completedFolder.mkdirs();
+
+        /* Enable for Test-Data
+        activeOperation = new Operation();
+        activeOperation.complete("test1", "test1", "test1", "test1");
+        endOperation();
+        activeOperation = new Operation();
+        activeOperation.complete("test2", "test2", "test2", "test2");
+        endOperation();
+        activeOperation = new Operation();
+        activeOperation.complete("test3", "test3", "test3", "test3");
+        endOperation();
+        */
     }
+
+    /*
+       Active Operation
+     */
 
     @Override
     public Operation getActive() {
@@ -96,8 +112,9 @@ public class OperationDAOImpl implements OperationDAO {
             writer.append(gson.toJson(getActive()));
             writer.flush();
 
-            completeOperations.add(new CompleteOperation(completedFile, activeOperation.toString()));
-            Collections.sort(completeOperations);
+            loadCompletedOperations();
+            completedOperations.add(new CompleteOperation(completedFile, activeOperation.toString()));
+            Collections.sort(completedOperations);
             updateCompletedOperations();
 
             File active = new File(context.getFilesDir(), ACTIVE_FILE);
@@ -111,33 +128,40 @@ public class OperationDAOImpl implements OperationDAO {
         }
     }
 
+    /*
+        Complete Operations
+     */
+
     @Override
     public List<CompleteOperation> getCompletedOperations() {
-        if(completeOperations == null){
+        loadCompletedOperations();
+        return completedOperations;
+    }
+
+    public void loadCompletedOperations() {
+        if(completedOperations == null){
             try{
                 File completedOperationsFile = new File(context.getFilesDir(), COMPLETED_OPS);
                 if(completedOperationsFile.exists()){
                     Gson gson = new Gson();
                     JsonReader reader = new JsonReader(new FileReader(completedOperationsFile));
-                    completeOperations = gson.fromJson(reader, operationEntryListType);
-                    return completeOperations;
+                    completedOperations = gson.fromJson(reader, operationEntryListType);
                 }
             } catch(IOException e){
                 e.printStackTrace();
             }
-            return new ArrayList<>();
+            completedOperations = new ArrayList<>();
         }
-        return completeOperations;
     }
 
     @Override
-    public boolean exportOperation(CompleteOperation export){
-        List<CompleteOperation> completedOperations = getCompletedOperations();
-        CompleteOperation completed = completedOperations.get(completedOperations.indexOf(export));
-        if(completed.export(exportFolder)){
-            MediaScannerConnection.scanFile(
-                    context, new String[] {export.getFile().getAbsolutePath()}, null, null);
-            return updateCompletedOperations();
+    public boolean removeCompletedOperation(CompleteOperation operation) {
+        loadCompletedOperations();
+        if(completedOperations.remove(operation)){
+            if(updateCompletedOperations()){
+                File completed = new File(operation.getFile().getAbsolutePath());
+                return completed.delete();
+            }
         }
         return false;
     }
@@ -147,7 +171,7 @@ public class OperationDAOImpl implements OperationDAO {
             File completedOperationsFile = new File(context.getFilesDir(), COMPLETED_OPS);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             FileWriter writer = new FileWriter(completedOperationsFile);
-            writer.write(gson.toJson(completeOperations));
+            writer.write(gson.toJson(completedOperations));
             writer.flush();
             return true;
         } catch(IOException e){
@@ -156,14 +180,17 @@ public class OperationDAOImpl implements OperationDAO {
         return false;
     }
 
+    /*
+        Export operation(s)
+     */
+
     @Override
-    public boolean removeCompletedOperation(CompleteOperation operation) {
-        List<CompleteOperation> completedOperations = getCompletedOperations();
-        if(completedOperations.remove(operation)){
-            if(updateCompletedOperations()){
-                File completed = new File(operation.getFile().getAbsolutePath());
-                return completed.delete();
-            }
+    public boolean exportOperation(CompleteOperation export){
+        CompleteOperation completed = completedOperations.get(completedOperations.indexOf(export));
+        if(completed.export(exportFolder)){
+            MediaScannerConnection.scanFile(
+                    context, new String[] {export.getFile().getAbsolutePath()}, null, null);
+            return updateCompletedOperations();
         }
         return false;
     }

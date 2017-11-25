@@ -14,10 +14,6 @@ import java.util.List;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.business.Draegerman;
 
-/**
- * Created by Markus Thral on 30.10.2017.
- */
-
 public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
 
     private Context context;

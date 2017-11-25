@@ -11,11 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/default_gap"
         android:layout_toEndOf="@+id/lastnameText"
-        android:textSize="14sp"
-        android:maxLines="1"
+        android:hint="@string/firstnameHint"
         android:inputType="text"
-        android:layout_marginRight="@dimen/default_gap"/>
+        android:maxLines="1"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/edit_lastname"
@@ -24,11 +25,12 @@
         android:layout_alignBaseline="@+id/lastnameText"
         android:layout_alignBottom="@+id/lastnameText"
         android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/default_gap"
         android:layout_toEndOf="@+id/lastnameText"
-        android:textSize="14sp"
-        android:maxLines="1"
+        android:hint="@string/lastnameHint"
         android:inputType="text"
-        android:layout_marginRight="@dimen/default_gap" />
+        android:maxLines="1"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/firstnameText"

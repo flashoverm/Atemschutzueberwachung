@@ -50,6 +50,7 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/observer"
         android:ems="10"
+        android:hint="@string/observerHint"
         android:inputType="textPersonName"
         android:textSize="14sp" />
 
@@ -60,6 +61,7 @@
         android:layout_alignTop="@+id/operation"
         android:layout_toEndOf="@+id/observer"
         android:ems="10"
+        android:hint="@string/operationHint"
         android:inputType="textPersonName"
         android:textSize="14sp" />
 
@@ -71,6 +73,7 @@
         android:layout_alignBottom="@+id/location"
         android:layout_alignStart="@+id/edit_operation"
         android:ems="10"
+        android:hint="@string/locationHint"
         android:inputType="textPersonName"
         android:textSize="14sp" />
 
@@ -81,6 +84,7 @@
         android:layout_alignStart="@+id/edit_location"
         android:layout_below="@+id/edit_location"
         android:ems="10"
+        android:hint="@string/unitHint"
         android:inputType="textPersonName"
         android:textSize="14sp" />
 

@@ -22,6 +22,11 @@
     <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
     <string name="toastExportSucceeded">Einsätze exportiert</string>
 
+    <string name="settings">Einstellungen</string>
+    <string name="flash">Blitzlicht</string>
+    <string name="vibration">Vibration</string>
+    <string name="sound">Alarm-Ton</string>
+
     <!--Operation-->
     <string name="stateListRegister">Registriert</string>
     <string name="stateListBegin">Gerät angeschlossen</string>
@@ -82,6 +87,7 @@
     <!--Register Dialog-->
     <string name="registerSquadTitle">Trupp registrieren</string>
     <string name="squadnameText">Funkrufname:</string>
+    <string name="squadnameHint">Funkrufname</string>
 
     <string name="operationTimeDebug">3 Minuten</string>
     <string name="operationTimeShort">20 Minuten</string>
@@ -90,6 +96,8 @@
 
     <string name="orderText">Einsatzauftrag:</string>
     <string name="initialPressure">Druck:</string>
+    <string name="leaderPressureHint">Druck TF</string>
+    <string name="memberPressureHint">Druck TM</string>
 
     <string name="orderListExplore">Erkunden/Messen</string>
     <string name="orderListFirefighting">Brandbekämpfung</string>
@@ -122,16 +130,22 @@
 
     <!--End Operation Dialog-->
     <string name="oberserverText">Überwacher:</string>
+    <string name="observerHint">Überwacher</string>
     <string name="operationText">Einsatz:</string>
+    <string name="operationHint">Einsatzart</string>
     <string name="locationText">Einsatzort:</string>
+    <string name="locationHint">Einsatzort</string>
     <string name="unitText">Einheit:</string>
+    <string name="unitHint">Einheit (Optional)</string>
     <string name="toastNoObserver">Namen des Überwachers eingeben!</string>
     <string name="toastNoOperation">Einsatz eingeben!</string>
     <string name="toastNoLocation">Einsatzort eingeben!</string>
 
     <!--Add Draegerman Dialog-->
     <string name="firstnameText">Vorname:</string>
+    <string name="firstnameHint">Vorname</string>
     <string name="lastnameText">Nachname:</string>
+    <string name="lastnameHint">Nachname</string>
     <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
     <string name="toastNoLastname">Kein Nachname eingetragen!</string>
     <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>

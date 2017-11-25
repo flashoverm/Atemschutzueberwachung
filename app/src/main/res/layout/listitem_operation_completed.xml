@@ -13,9 +13,9 @@
         android:layout_alignBottom="@+id/operationCheckBox"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/iconUnexported"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
         android:tint="@color/ral3026"
         app:srcCompat="@drawable/ic_fiber_new_black_18dp" />
 
@@ -23,13 +23,12 @@
         android:id="@+id/operationIdentifier"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:layout_alignBottom="@+id/operationUnexported"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/operationUnexported"
         android:layout_toStartOf="@+id/operationCheckBox"
         android:gravity="center_vertical"
-        android:text="TextView23456+" />
+        android:text="TextView23456+"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
 
     <CheckBox
         android:id="@+id/operationCheckBox"
