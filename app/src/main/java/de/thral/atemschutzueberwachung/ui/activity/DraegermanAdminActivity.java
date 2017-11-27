@@ -35,8 +35,6 @@ public class DraegermanAdminActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_admin_draegerman);
 
         Toolbar toolbar = findViewById(R.id.toolbarDraegermanAdmin);
-        toolbar.setTitle(R.string.draegermanAdminLabel);
-        toolbar.setTitleTextColor(Color.LTGRAY);
         setSupportActionBar(toolbar);
 
         draegermanDAO = ((DraegermanObservationApplication)getApplication()).getDraegermanDAO();

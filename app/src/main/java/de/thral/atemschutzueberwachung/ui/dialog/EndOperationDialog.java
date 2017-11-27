@@ -38,7 +38,7 @@ public class EndOperationDialog extends DialogFragment {
         unitEdit = view.findViewById(R.id.edit_unit);
 
         builder.setView(view)
-                .setTitle(getResources().getString(R.string.registerSquadTitle))
+                .setTitle(getResources().getString(R.string.endOperationTitle))
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {

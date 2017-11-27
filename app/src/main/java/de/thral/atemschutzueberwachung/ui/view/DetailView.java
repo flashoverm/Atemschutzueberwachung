@@ -192,6 +192,7 @@ public class DetailView extends SquadViewBase{
             public void onPressureUpdate(Squad squad) {
                 Event[] events = squad.getLastPressureValues(3);
                 updateDetailPressure(events);
+                deactivateViewReminder();
             }
 
             @Override

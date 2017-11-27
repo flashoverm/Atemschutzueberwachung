@@ -37,8 +37,6 @@ public class OperationAdminActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_admin_operation);
 
         Toolbar toolbar = findViewById(R.id.toolbarOperationAdmin);
-        toolbar.setTitle(R.string.operationAdminLabel);
-        toolbar.setTitleTextColor(Color.LTGRAY);
         setSupportActionBar(toolbar);
 
         operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();

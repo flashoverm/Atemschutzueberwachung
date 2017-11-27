@@ -27,7 +27,12 @@ public class MenuActivity extends AppCompatActivity {
         startOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startOperation();
+                Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
+                if(operationDAO.getActive() == null){
+                    ((DraegermanObservationApplication)getApplication())
+                            .getOperationDAO().createOperation();
+                }
+                startActivity(intent);
             }
         });
         management.setOnClickListener(new View.OnClickListener() {
@@ -39,19 +44,9 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         if(operationDAO.getActive() != null){
-            startOperation();
-        }
-    }
-
-    private void startOperation(){
-        Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
-
-        if(operationDAO.getActive() == null){
-            ((DraegermanObservationApplication)getApplication())
-                    .getOperationDAO().createOperation();
-        } else {
+            Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
             intent.putExtra(MonitoringOverviewActivity.KEY_RESUMED, true);
+            startActivity(intent);
         }
-        startActivity(intent);
     }
 }

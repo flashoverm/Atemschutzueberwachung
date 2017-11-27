@@ -36,8 +36,7 @@
             android:screenOrientation="landscape">
         </activity>
         <activity android:name=".ui.activity.SettingsActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

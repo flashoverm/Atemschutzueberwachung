@@ -114,7 +114,6 @@ public class MonitoringOverviewActivity extends AppCompatActivity
     public void onOperationEnd(String observer, String operationType, String location, String unit) {
             operationDAO.getActive().complete(operationType, location, observer, unit);
             operationDAO.endOperation();
-            Intent intent = new Intent(MonitoringOverviewActivity.this, MenuActivity.class);
-            startActivity(intent);
+            this.finish();
     }
 }

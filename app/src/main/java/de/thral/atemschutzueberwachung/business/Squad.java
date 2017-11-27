@@ -62,7 +62,7 @@ public class Squad {
 
     public EventType getState() {
         Event event;
-        for(int i=0; i<3; i++){
+        for(int i=0; i<eventList.size(); i++){
             event = eventList.get(i);
             if(event.getType() == EventType.ResumeTimer){
                 i++;
