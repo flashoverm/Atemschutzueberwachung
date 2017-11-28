@@ -94,6 +94,7 @@
 
     <string name="leadernameHint">Truppführer</string>
     <string name="membernameHint">Truppmann</string>
+    <string name="spinnerHint">Namen auswählen</string>
 
     <string name="operationTimeDebug">3 Minuten</string>
     <string name="operationTimeShort">20 Minuten</string>

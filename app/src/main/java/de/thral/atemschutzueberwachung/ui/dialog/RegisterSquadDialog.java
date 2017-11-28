@@ -23,10 +23,6 @@ import de.thral.atemschutzueberwachung.business.OperatingTime;
 import de.thral.atemschutzueberwachung.business.Order;
 import de.thral.atemschutzueberwachung.business.Squad;
 
-/**
- * Created by Markus Thral on 31.10.2017.
- */
-
 public class RegisterSquadDialog extends DialogFragment {
 
     public interface SquadRegisteredListener {
@@ -101,7 +97,9 @@ public class RegisterSquadDialog extends DialogFragment {
                 ((DraegermanObservationApplication)getActivity().getApplication())
                         .getDraegermanDAO().getAll());
         leaderSpinner.setAdapter(draegermanSpinnerAdapter);
+        leaderSpinner.setSelection(draegermanSpinnerAdapter.getCount()+1);
         memberSpinner.setAdapter(draegermanSpinnerAdapter);
+        memberSpinner.setSelection(draegermanSpinnerAdapter.getCount()+1);
 
         leaderEditButton.setOnClickListener(new View.OnClickListener() {
             @Override

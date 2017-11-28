@@ -17,10 +17,12 @@ import de.thral.atemschutzueberwachung.business.Draegerman;
 public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
 
     private Context context;
+    private List<Draegerman> content;
 
     public DraegermanSpinnerAdapter(Context context, int resource, List<Draegerman> list) {
         super(context, resource, list);
         this.context = context;
+        this.content = list;
     }
 
     @Override
@@ -32,10 +34,19 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
         TextView displayname = rowView.findViewById(R.id.displayname);
         displayname.setTextSize(16);
 
-        Draegerman draegerman = getItem(position);
-        displayname.setText(draegerman.toString());
-
+        if(position == getCount()+1){
+            displayname.setText("");
+            displayname.setHint(R.string.spinnerHint);
+        }else{
+            Draegerman draegerman = getItem(position);
+            displayname.setText(draegerman.toString());
+        }
         return rowView;
+    }
+
+    @Override
+    public int getCount() {
+        return super.getCount();
     }
 
     @Override
