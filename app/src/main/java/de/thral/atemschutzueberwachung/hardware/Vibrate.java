@@ -24,6 +24,11 @@ public class Vibrate implements Hardware {
     }
 
     @Override
+    public boolean isAvailable(){
+        return vibratorAvailable;
+    }
+
+    @Override
     public void turnOn(long activeMillis, long pauseMillis) {
         if(vibratorAvailable && !vibratorState){
             vibrator.vibrate(new long[]{0, activeMillis, pauseMillis}, 0);

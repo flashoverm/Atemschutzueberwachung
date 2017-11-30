@@ -26,15 +26,9 @@ public class HardwareInterface {
     public HardwareInterface(Context context){
         this.context = context;
         initPrefs();
-        if(flashEnabled) {
-            flash = new Flash(context);
-        }
-        if(vibrationEnabled) {
-            vibrate = new Vibrate(context);
-        }
-        if(soundEnabled){
-            sound = new Sound();
-        }
+        flash = new Flash(context);
+        vibrate = new Vibrate(context);
+        sound = new Sound();
     }
 
     private void initPrefs(){
@@ -44,6 +38,14 @@ public class HardwareInterface {
                 PREF_ENABLE_VIBRATION, Context.MODE_PRIVATE).getBoolean(PREF_ENABLE_VIBRATION, false);
         soundEnabled = context.getSharedPreferences(
                 PREF_ENABLE_SOUND, Context.MODE_PRIVATE).getBoolean(PREF_ENABLE_SOUND, false);
+    }
+
+    public boolean[] getAvailability(){
+        return new boolean[]{
+                flash.isAvailable(),
+                vibrate.isAvailable(),
+                sound.isAvailable()
+        };
     }
 
     public boolean[] getSettings(){

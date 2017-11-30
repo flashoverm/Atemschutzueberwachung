@@ -158,7 +158,13 @@ public class RegisterSquadDialog extends DialogFragment {
                             }
                             leader = new Draegerman(leaderName);
                         } else {
-                            leader = (Draegerman)leaderSpinner.getSelectedItem();
+                            if(leaderSpinner.getSelectedItemPosition() > leaderSpinner.getCount()){
+                                Toast.makeText(getActivity(), R.string.toastNoLeader,
+                                        Toast.LENGTH_LONG).show();
+                                return;
+                            } else {
+                                leader = (Draegerman)leaderSpinner.getSelectedItem();
+                            }
                         }
                         if(memberEditEnabled){
                             String memberName = memberEdit.getText().toString();
@@ -169,7 +175,13 @@ public class RegisterSquadDialog extends DialogFragment {
                             }
                             member = new Draegerman(memberName);
                         } else {
-                            member = (Draegerman)memberSpinner.getSelectedItem();
+                            if(memberSpinner.getSelectedItemPosition() > memberSpinner.getCount()) {
+                                Toast.makeText(getActivity(), R.string.toastNoMember,
+                                        Toast.LENGTH_LONG).show();
+                                return;
+                            } else {
+                                member = (Draegerman) memberSpinner.getSelectedItem();
+                            }
                         }
 
                         if(!leaderEditEnabled && !memberEditEnabled && leader.equals(member)){

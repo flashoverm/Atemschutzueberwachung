@@ -23,6 +23,11 @@ public class Sound implements Hardware {
     }
 
     @Override
+    public boolean isAvailable(){
+        return true;
+    }
+
+    @Override
     public void turnOn(final long activeMillis, final long pauseMillis) {
         if(!soundState){
             toogleSound = new Runnable() {
@@ -33,6 +38,7 @@ public class Sound implements Hardware {
                             Thread.sleep(pauseMillis);
                         }
                     } catch (Exception e){
+                        //TODO exception handling
                         e.printStackTrace();
                     }
                 }

@@ -35,9 +35,15 @@ public class Flash implements Hardware {
             try {
                 cameraID = cameraManager.getCameraIdList()[0];
             } catch (CameraAccessException e) {
+                //TODO handling
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return flashAvailable;
     }
 
     @Override
@@ -59,6 +65,7 @@ public class Flash implements Hardware {
                                 }
                             }
                         } catch (Exception e) {
+                            //TODO handling
                             e.printStackTrace();
                         }
                     }

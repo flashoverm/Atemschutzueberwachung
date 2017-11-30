@@ -79,6 +79,7 @@ public class OperationDAOImpl implements OperationDAO {
                 return gson.fromJson(reader, Operation.class);
             }
         } catch(IOException e){
+            //TODO info to user, z.B. Speicherplatz voll + log
         }
         return null;
     }
@@ -99,6 +100,7 @@ public class OperationDAOImpl implements OperationDAO {
             return true;
         }catch(IOException e) {
             e.printStackTrace();
+            //TODO info to user, z.B. Speicherplatz voll + log
             return false;
         }
     }
@@ -124,6 +126,7 @@ public class OperationDAOImpl implements OperationDAO {
             return true;
         }catch(IOException e){
             e.printStackTrace();
+            //TODO info to user, z.B. Speicherplatz voll + log
             return false;
         }
     }
@@ -148,6 +151,7 @@ public class OperationDAOImpl implements OperationDAO {
                     completedOperations = gson.fromJson(reader, operationEntryListType);
                 }
             } catch(IOException e){
+                //TODO info to user, z.B. Speicherplatz voll + log
                 e.printStackTrace();
             }
             completedOperations = new ArrayList<>();
@@ -175,6 +179,7 @@ public class OperationDAOImpl implements OperationDAO {
             writer.flush();
             return true;
         } catch(IOException e){
+            //TODO info to user, z.B. Speicherplatz voll + log
             e.printStackTrace();
         }
         return false;

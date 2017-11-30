@@ -37,6 +37,7 @@ public class CompleteOperation implements Comparable<CompleteOperation>{
             exported = true;
             return true;
         } catch(IOException e){
+            //TODO handling, inform user
             e.printStackTrace();
         }
         return false;

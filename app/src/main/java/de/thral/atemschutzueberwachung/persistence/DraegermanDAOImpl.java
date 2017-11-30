@@ -56,6 +56,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
                 return gson.fromJson(reader, DRAEGERMEN_TYPE);
             }
         } catch(IOException e){
+            //TODO info to user + log
         }
         return new ArrayList<>();
     }
@@ -97,6 +98,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
             return true;
         }catch(IOException e) {
             e.printStackTrace();
+            //TODO info to user, z.B. Speicherplatz voll + log
             return false;
         }
     }

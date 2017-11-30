@@ -115,6 +115,8 @@
 
     <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
     <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
+    <string name="toastNoLeader">Truppführer auswählen!</string>
+    <string name="toastNoMember">Truppmann auswählen!</string>
     <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
     <string name="toastNoLeaderName">Truppführer eintragen oder Auswahl verwenden!</string>
     <string name="toastNoMemberName">Truppmann eintragen oder Auswahl verwenden!</string>

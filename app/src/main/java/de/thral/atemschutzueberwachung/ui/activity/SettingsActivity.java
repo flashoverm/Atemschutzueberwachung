@@ -29,6 +29,11 @@ public class SettingsActivity extends AppCompatActivity {
         enableVibration = findViewById(R.id.enableVibration);
         enableSound = findViewById(R.id.enableSound);
 
+        boolean[] availability = hardwareInterface.getAvailability();
+        enableFlash.setEnabled(availability[0]);
+        enableVibration.setEnabled(availability[1]);
+        enableSound.setEnabled(availability[2]);
+
         boolean[] preferences = hardwareInterface.getSettings();
         enableFlash.setChecked(preferences[0]);
         enableVibration.setChecked(preferences[1]);
