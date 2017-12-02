@@ -8,10 +8,6 @@ import android.support.v7.app.AlertDialog;
 
 import de.thral.atemschutzueberwachung.R;
 
-/**
- * Created by Markus Thral on 30.10.2017.
- */
-
 public class PressureWarningDialog extends DialogFragment {
 
     public static final String UNTERSHOT_KEY = "undershot";

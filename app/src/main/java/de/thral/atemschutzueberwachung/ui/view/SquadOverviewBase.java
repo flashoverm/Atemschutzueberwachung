@@ -1,8 +1,5 @@
 package de.thral.atemschutzueberwachung.ui.view;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -12,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.business.Squad;
 
 public abstract class SquadOverviewBase extends SquadViewBase {
 

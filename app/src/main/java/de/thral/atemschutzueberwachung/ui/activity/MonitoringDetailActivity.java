@@ -1,9 +1,11 @@
 package de.thral.atemschutzueberwachung.ui.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
@@ -11,8 +13,7 @@ import de.thral.atemschutzueberwachung.business.Event;
 import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Operation;
 import de.thral.atemschutzueberwachung.business.Squad;
-import de.thral.atemschutzueberwachung.hardware.HardwareInterface;
-import de.thral.atemschutzueberwachung.persistence.OperationDAO;
+import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
 import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
 import de.thral.atemschutzueberwachung.ui.view.DetailOverviewView;
 import de.thral.atemschutzueberwachung.ui.view.DetailView;
@@ -27,8 +28,7 @@ public class MonitoringDetailActivity extends AppCompatActivity
     private Squad selected;
     private Squad[] overviewSquads;
 
-    private OperationDAO operationDAO;
-    private HardwareInterface hardwareInterface;
+    private ActiveOperationDAO activeOperationDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,8 @@ public class MonitoringDetailActivity extends AppCompatActivity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         Intent intent = getIntent();
-        this.operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
-        this.hardwareInterface = ((DraegermanObservationApplication) this.getApplication())
-                .getHardwareInterface();
+        this.activeOperationDAO = ((DraegermanObservationApplication)getApplication())
+                .getActiveOperationDAO();
         initSquads(intent.getExtras().getInt(DETAIL_KEY));
         initOverviews();
         initDetailView();
@@ -48,7 +47,7 @@ public class MonitoringDetailActivity extends AppCompatActivity
 
     private void initSquads(int selectedSquad){
         overviewSquads = new Squad[Operation.MAX_SQUAD_COUNT-1];
-        Squad[] squads = operationDAO.getActive().getActiveSquads();
+        Squad[] squads = activeOperationDAO.get().getActiveSquads();
         int j=0;
         for(int i=0; i<squads.length; i++){
             if(i+1 == selectedSquad){
@@ -86,16 +85,16 @@ public class MonitoringDetailActivity extends AppCompatActivity
                 && lastPressure.getPressureMember() >= memberPressure){
             switch(event){
                 case Arrive: selected.arriveTarget(leaderPressure, memberPressure);
-                    operationDAO.updateActive();
+                    new UpdateOperationTask().execute();
                     break;
                 case Timer: selected.addPressureValues(EventType.Timer, leaderPressure, memberPressure);
-                    operationDAO.updateActive();
+                    new UpdateOperationTask().execute();
                     break;
                 case Retreat: selected.retreat(leaderPressure, memberPressure);
-                    operationDAO.updateActive();
+                    new UpdateOperationTask().execute();
                     break;
                 case End: selected.endOperation(leaderPressure, memberPressure);
-                    operationDAO.updateActive();
+                    new UpdateOperationTask().execute();
                     this.finish();
                     break;
             }
@@ -106,6 +105,22 @@ public class MonitoringDetailActivity extends AppCompatActivity
 
     @Override
     public void onStartButtonClick() {
-        operationDAO.updateActive();
+        new UpdateOperationTask().execute();
+    }
+
+    private class UpdateOperationTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return activeOperationDAO.update();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(!result){
+                Toast.makeText(MonitoringDetailActivity.this,
+                        R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

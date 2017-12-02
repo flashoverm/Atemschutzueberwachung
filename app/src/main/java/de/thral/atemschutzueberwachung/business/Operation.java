@@ -5,10 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Markus Thral on 26.10.2017.
- */
-
 public class Operation {
 
     public static final int MAX_SQUAD_COUNT = 4;

@@ -1,16 +1,15 @@
 package de.thral.atemschutzueberwachung.persistence;
 
+import android.content.Context;
+
 import java.util.List;
 
 import de.thral.atemschutzueberwachung.business.Draegerman;
 
-/**
- * Created by Markus Thral on 28.10.2017.
- */
-
 public interface DraegermanDAO {
 
     List<Draegerman> getAll();
-    boolean add(Draegerman newDraegerman);
+    Draegerman prepareAdd(String firstname, String lastname);
+    boolean add(Draegerman draegerman, Context context);
     boolean remove(Draegerman draegerman);
 }

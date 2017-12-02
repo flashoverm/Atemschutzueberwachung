@@ -12,14 +12,18 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
+import de.thral.atemschutzueberwachung.business.Draegerman;
+import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
 
 public class AddDraegermanDialog extends DialogFragment {
 
     public interface AddDraegermanListener{
-        boolean onAddDraegerman(String firstname, String lastname);
+        boolean onAddDraegerman(Draegerman draegerman) ;
     }
 
+    private DraegermanDAO draegermanDAO;
     private EditText firstname;
     private EditText lastname;
     private AddDraegermanListener listener;
@@ -40,6 +44,9 @@ public class AddDraegermanDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_add_draegerman, null);
+
+        draegermanDAO = ((DraegermanObservationApplication)getActivity().getApplication())
+                .getDraegermanDAO();
 
         firstname = dialogView.findViewById(R.id.edit_firstname);
         lastname = dialogView.findViewById(R.id.edit_lastname);
@@ -79,10 +86,17 @@ public class AddDraegermanDialog extends DialogFragment {
                                             Toast.LENGTH_LONG).show();
                                     return;
                                 }
-                                if(!listener.onAddDraegerman(firstnameString, lastnameString)){
+                                Draegerman add = draegermanDAO.prepareAdd(
+                                        firstnameString, lastnameString);
+                                if(add == null) {
                                     String toast = firstnameString + " " + lastnameString + " "
                                             + getString(R.string.toastDraegermanAlreadyExisiting);
                                     Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if (!listener.onAddDraegerman(add)) {
+                                    Toast.makeText(getActivity(), R.string.toastDraegermanAddError,
+                                            Toast.LENGTH_LONG).show();
                                     return;
                                 }
                                 enterPressure.dismiss();

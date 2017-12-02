@@ -2,7 +2,7 @@ package de.thral.atemschutzueberwachung.hardware;
 
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.os.Handler;
+import android.util.Log;
 
 public class Sound implements Hardware {
 
@@ -33,13 +33,14 @@ public class Sound implements Hardware {
             toogleSound = new Runnable() {
                 public void run() {
                     try {
-                        while(soundState){
-                            toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, (int) activeMillis);
+                        while(soundState && !Thread.currentThread().isInterrupted()){
+                            toneGen.startTone(
+                                    ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, (int) activeMillis);
                             Thread.sleep(pauseMillis);
                         }
-                    } catch (Exception e){
-                        //TODO exception handling
-                        e.printStackTrace();
+                    } catch (InterruptedException e){
+                        Log.e("HARDWARE", e.getMessage());
+                        Thread.currentThread().interrupt();
                     }
                 }
             };

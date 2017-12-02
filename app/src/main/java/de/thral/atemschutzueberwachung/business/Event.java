@@ -1,9 +1,5 @@
 package de.thral.atemschutzueberwachung.business;
 
-/**
- * Created by Markus Thral on 21.10.2017.
- */
-
 public class Event {
 
     private final EventType type;

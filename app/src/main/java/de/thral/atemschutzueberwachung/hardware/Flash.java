@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
+import android.util.Log;
 
 public class Flash implements Hardware {
 
@@ -35,8 +36,8 @@ public class Flash implements Hardware {
             try {
                 cameraID = cameraManager.getCameraIdList()[0];
             } catch (CameraAccessException e) {
-                //TODO handling
-                e.printStackTrace();
+                Log.e("HARDWARE", e.getMessage());
+                flashAvailable = false;
             }
         }
     }
@@ -53,7 +54,8 @@ public class Flash implements Hardware {
                 public void run() {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         try {
-                            while(flashBlinkState || flashState){
+                            while((flashBlinkState || flashState)
+                                    && !Thread.currentThread().isInterrupted()){
                                 if (flashState) {
                                     cameraManager.setTorchMode(cameraID, false);
                                     flashState = false;
@@ -64,9 +66,11 @@ public class Flash implements Hardware {
                                     Thread.sleep(activeMillis);
                                 }
                             }
-                        } catch (Exception e) {
-                            //TODO handling
-                            e.printStackTrace();
+                        } catch (CameraAccessException e) {
+                            Log.e("HARDWARE", e.getMessage());
+                        } catch (InterruptedException e){
+                            Log.e("HARDWARE", e.getMessage());
+                            Thread.currentThread().interrupt();
                         }
                     }
                 }

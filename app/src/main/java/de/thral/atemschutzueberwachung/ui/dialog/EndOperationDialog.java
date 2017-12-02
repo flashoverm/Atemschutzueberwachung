@@ -97,7 +97,7 @@ public class EndOperationDialog extends DialogFragment {
             listener = (EndOperationDialog.EndOperationListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement EnteredPressureListener");
+                    + " must implement EndOperationListener");
         }
     }
 

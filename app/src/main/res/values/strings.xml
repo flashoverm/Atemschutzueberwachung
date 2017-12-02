@@ -21,6 +21,8 @@
     <string name="toastNothingSelected">Keine Eintrag ausgewählt!</string>
     <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
     <string name="toastExportSucceeded">Einsätze exportiert</string>
+    <string name="toastExportFailed">Fehler beim Export!</string>
+    <string name="toastDeletingFailed">Fehler beim Löschen!</string>
 
     <string name="settings">Einstellungen</string>
     <string name="flash">Blitzlicht</string>
@@ -28,7 +30,7 @@
     <string name="sound">Alarm-Ton</string>
 
     <string name="noDraegermen">Keine Atemschutzträger vorhanden</string>
-    <string name="noCompletedOperations">Keine Einstazdaten vorhanden</string>
+    <string name="noCompletedOperations">Keine Einsatzdaten vorhanden</string>
 
     <!--Operation-->
     <string name="stateListRegister">Registriert</string>
@@ -68,6 +70,8 @@
     <string name="no">Nein</string>
 
     <!--Alarm- and Warning-Dialogs-->
+    <string name="toastOperationNotSaved">Warnung: Der Einsatz wird nicht gespeichert</string>
+
     <string name="timerInfoTitle">Einsatz</string>
     <string name="startSquadText">Einsatz beginnen?</string>
     <string name="pauseSquadText">Einsatz pausieren?</string>
@@ -160,5 +164,6 @@
     <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
     <string name="toastNoLastname">Kein Nachname eingetragen!</string>
     <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
+    <string name="toastDraegermanAddError">Atemschutzträger konnte nicht hinzugefügt werden!</string>
 
 </resources>

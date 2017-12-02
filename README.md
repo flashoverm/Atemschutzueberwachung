@@ -4,6 +4,10 @@ Improvements:
 
 - If Text is to long for TextView -> Animate horizontal translation
 
+- Autocomplete on entering leader- or member name at registration
+
+- Check initial pressure (+/- 10%)
+
 - (Implemented in V0.8) If operation is active, background light doesnt turn off
 
 - (Implemented in V0.9) Draegerman collection with editable (TextEdit to enter foreign names) and Spinner right of it, to choose from list. Chosen draegerman is entered in the text edit

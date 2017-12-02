@@ -1,6 +1,8 @@
 package de.thral.atemschutzueberwachung.persistence;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.business.Draegerman;
 
 public class DraegermanDAOImpl implements DraegermanDAO {
@@ -27,79 +30,91 @@ public class DraegermanDAOImpl implements DraegermanDAO {
 
     public DraegermanDAOImpl(Context context){
         this.context = context;
-        draegermen = loadDraegermanList();
-
-        /* Enable for Test-Data
-        if(draegermen.size() == 0){
-            draegermen = new ArrayList<>();
-            draegermen.add(new Draegerman("Markus", "Thral"));
-            draegermen.add(new Draegerman("Michael", "Thral"));
-            draegermen.add(new Draegerman("Hans", "Wurst"));
-            draegermen.add(new Draegerman("Bernd", "Beispiel"));
-            draegermen.add(new Draegerman("Maximilian", "Mustermann"));
-            saveDraegermanList();
-        }
-        */
     }
 
     @Override
     public List<Draegerman> getAll() {
+        load();
         return draegermen;
     }
 
-    private List<Draegerman> loadDraegermanList(){
-        try{
+    private void load(){
+        if(draegermen == null){
             File draegermenFile = new File(context.getFilesDir(), DRAEGERMEN);
             if(draegermenFile.exists()){
                 Gson gson = new Gson();
-                JsonReader reader = new JsonReader(new FileReader(draegermenFile));
-                return gson.fromJson(reader, DRAEGERMEN_TYPE);
+                try(JsonReader reader = new JsonReader(new FileReader(draegermenFile))){
+                    draegermen =  gson.fromJson(reader, DRAEGERMEN_TYPE);
+                    return;
+                } catch(IOException e){
+                    //File not existing -> Initialize list
+                }
             }
-        } catch(IOException e){
-            //TODO info to user + log
+            draegermen = new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     @Override
-    public boolean add(Draegerman newDraegerman) {
+    public Draegerman prepareAdd(String firstname, String lastname) {
+        load();
+        Draegerman draegerman = new Draegerman(firstname, lastname);
         for(Draegerman existing : draegermen){
-            if(existing.equals(newDraegerman)){
-                return false;
+            if(existing.equals(draegerman)){
+                return null;
             }
-            if(existing.getLastName().equals(newDraegerman.getLastName())){
+            if(existing.getLastName().equals(draegerman.getLastName())){
                 existing.setDisplayName(existing.toString());
-                newDraegerman.setDisplayName(newDraegerman.toString());
+                draegerman.setDisplayName(draegerman.toString());
             }
         }
-        draegermen.add(newDraegerman);
-        Collections.sort(draegermen);
-        saveDraegermanList();
-        return true;
+        return draegerman;
     }
 
     @Override
-    public boolean remove(Draegerman draegerman) {
-        if(draegermen.remove(draegerman)){
-            saveDraegermanList();
+    public boolean add(final Draegerman newDraegerman, final Context context){
+        if(draegermen.add(newDraegerman)){
+            Collections.sort(draegermen);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        save();
+                    }catch(IOException e){
+                        draegermen.remove(newDraegerman);
+                        Toast.makeText(context,
+                                R.string.toastDraegermanAddError, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }).start();
             return true;
         }
         return false;
     }
 
-    private boolean saveDraegermanList(){
-        try{
-            File draegermenFile = new File(context.getFilesDir(), DRAEGERMEN);
-            Gson gson = new Gson();
-            FileWriter writer = new FileWriter(draegermenFile);
+    @Override
+    public boolean remove(Draegerman draegerman) {
+        load();
+        if(draegermen.remove(draegerman)){
+            try{
+                save();
+                return true;
+            }catch(IOException e){
+                draegermen.add(draegerman);
+            }
+        }
+        //not found/could not save
+        return false;
+    }
+
+    private void save() throws IOException {
+        File draegermenFile = new File(context.getFilesDir(), DRAEGERMEN);
+        Gson gson = new Gson();
+        try(FileWriter writer = new FileWriter(draegermenFile)){
             writer.append(gson.toJson(draegermen));
             writer.flush();
-            writer.close();
-            return true;
         }catch(IOException e) {
-            e.printStackTrace();
-            //TODO info to user, z.B. Speicherplatz voll + log
-            return false;
+            Log.e("PERSISTENCE", e.getMessage());
+            throw e;
         }
     }
 }

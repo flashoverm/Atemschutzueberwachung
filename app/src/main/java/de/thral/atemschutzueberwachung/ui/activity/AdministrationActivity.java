@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.hardware.HardwareInterface;
 
 public class AdministrationActivity extends AppCompatActivity {
 

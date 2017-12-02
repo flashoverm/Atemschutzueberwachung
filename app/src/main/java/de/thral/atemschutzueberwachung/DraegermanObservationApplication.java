@@ -5,15 +5,18 @@ import android.app.Application;
 import android.content.Context;
 
 import de.thral.atemschutzueberwachung.hardware.HardwareInterface;
+import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
+import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAOImpl;
+import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAO;
+import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAOImpl;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAOImpl;
-import de.thral.atemschutzueberwachung.persistence.OperationDAO;
-import de.thral.atemschutzueberwachung.persistence.OperationDAOImpl;
 
 public class DraegermanObservationApplication extends Application {
 
-    private OperationDAO operationDAO;
+    private ActiveOperationDAO activeOperationDAO;
     private DraegermanDAO draegermanDAO;
+    private CompleteOperationsDAO completeOperationsDAO;
 
     private HardwareInterface hardwareInterface;
 
@@ -21,8 +24,9 @@ public class DraegermanObservationApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Context context = getApplicationContext();
-        operationDAO = new OperationDAOImpl(context);
+        activeOperationDAO = new ActiveOperationDAOImpl(context);
         draegermanDAO = new DraegermanDAOImpl(context);
+        completeOperationsDAO = new CompleteOperationsDAOImpl(context);
         hardwareInterface = new HardwareInterface(context);
     }
 
@@ -36,11 +40,15 @@ public class DraegermanObservationApplication extends Application {
         return activity.getHardwareInterface();
     }
 
-    public OperationDAO getOperationDAO(){
-        return operationDAO;
+    public ActiveOperationDAO getActiveOperationDAO(){
+        return activeOperationDAO;
     }
 
     public DraegermanDAO getDraegermanDAO(){
         return draegermanDAO;
+    }
+
+    public CompleteOperationsDAO getCompleteOperationsDAO() {
+        return completeOperationsDAO;
     }
 }

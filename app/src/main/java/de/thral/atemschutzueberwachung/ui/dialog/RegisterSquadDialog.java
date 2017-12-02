@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
-import de.thral.atemschutzueberwachung.ui.adapter.DraegermanSpinnerAdapter;
 import de.thral.atemschutzueberwachung.business.Draegerman;
 import de.thral.atemschutzueberwachung.business.OperatingTime;
 import de.thral.atemschutzueberwachung.business.Order;
 import de.thral.atemschutzueberwachung.business.Squad;
+import de.thral.atemschutzueberwachung.ui.adapter.DraegermanSpinnerAdapter;
 
 public class RegisterSquadDialog extends DialogFragment {
 
@@ -256,7 +256,7 @@ public class RegisterSquadDialog extends DialogFragment {
             listener = (RegisterSquadDialog.SquadRegisteredListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement EnteredPressureListener");
+                    + " must implement SquadRegisteredListener");
         }
     }
 

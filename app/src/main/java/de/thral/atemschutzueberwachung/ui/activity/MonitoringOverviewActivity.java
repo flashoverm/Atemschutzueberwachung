@@ -1,8 +1,8 @@
 package de.thral.atemschutzueberwachung.ui.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +14,8 @@ import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Squad;
-import de.thral.atemschutzueberwachung.persistence.OperationDAO;
+import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
+import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAO;
 import de.thral.atemschutzueberwachung.ui.dialog.EndOperationDialog;
 import de.thral.atemschutzueberwachung.ui.dialog.RegisterSquadDialog;
 import de.thral.atemschutzueberwachung.ui.view.LayoutClickListener;
@@ -27,9 +28,9 @@ public class MonitoringOverviewActivity extends AppCompatActivity
 
     public static final String KEY_RESUMED = "OperationResumed";
 
-    private Context context;
     private OverviewView overviewView;
-    private OperationDAO operationDAO;
+    private ActiveOperationDAO activeOperationDAO;
+    private CompleteOperationsDAO completeOperationsDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,14 @@ public class MonitoringOverviewActivity extends AppCompatActivity
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        this.context = getApplicationContext();
-        operationDAO = ((DraegermanObservationApplication)getApplication()).getOperationDAO();
+        activeOperationDAO = ((DraegermanObservationApplication)getApplication())
+                .getActiveOperationDAO();
+        completeOperationsDAO = ((DraegermanObservationApplication)getApplication())
+                .getCompleteOperationsDAO();
+
         Intent intent = getIntent();
         if(intent.getBooleanExtra(KEY_RESUMED, false)){
-            for(Squad squad : operationDAO.getActive().getActiveSquads()){
+            for(Squad squad : activeOperationDAO.get().getActiveSquads()){
                 if(squad != null){
                     if(!squad.getState().equals(EventType.PauseTimer)
                             && !squad.getState().equals(EventType.Register)){
@@ -50,8 +54,8 @@ public class MonitoringOverviewActivity extends AppCompatActivity
                     }
                 }
             }
-            Toast.makeText(context, context.getString(R.string.toastOperationResumed),
-                    Toast.LENGTH_LONG ).show();
+            Toast.makeText(getApplicationContext(),
+                    R.string.toastOperationResumed, Toast.LENGTH_LONG ).show();
         }
         initView();
     }
@@ -77,7 +81,7 @@ public class MonitoringOverviewActivity extends AppCompatActivity
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!operationDAO.getActive().isSquadActive()){
+                        if(!activeOperationDAO.get().isSquadActive()){
                             EndOperationDialog dialog = EndOperationDialog.newInstance();
                             dialog.show(getFragmentManager(), "EndOperation");
                             return;
@@ -93,7 +97,7 @@ public class MonitoringOverviewActivity extends AppCompatActivity
                     }
                 }
         );
-        overviewView.setSquads(operationDAO.getActive().getActiveSquads());
+        overviewView.setSquads(activeOperationDAO.get().getActiveSquads());
     }
 
     public void onLayoutClick(int layoutNumber){
@@ -105,15 +109,50 @@ public class MonitoringOverviewActivity extends AppCompatActivity
 
     @Override
     public void onSquadRegistered(Squad registeredSquad) {
-        operationDAO.getActive().registerSquad(registeredSquad);
-        operationDAO.updateActive();
+        activeOperationDAO.get().registerSquad(registeredSquad);
+        new UpdateOperationTask().execute();
         initView();
     }
 
     @Override
     public void onOperationEnd(String observer, String operationType, String location, String unit) {
-            operationDAO.getActive().complete(operationType, location, observer, unit);
-            operationDAO.endOperation();
-            this.finish();
+        if(activeOperationDAO.get().complete(operationType, location, observer, unit)){
+            new EndOperationTask().execute();
+        }
+    }
+
+    private class UpdateOperationTask extends AsyncTask<Void, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return activeOperationDAO.update();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(!result){
+                Toast.makeText(getApplicationContext(),
+                        R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private class EndOperationTask extends AsyncTask<Void, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean ok = completeOperationsDAO.add(activeOperationDAO.get());
+            ok = ok && activeOperationDAO.end();
+            return ok;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(!result){
+                Toast.makeText(getApplicationContext(),
+                        R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
+            }
+            MonitoringOverviewActivity.this.finish();
+        }
     }
 }

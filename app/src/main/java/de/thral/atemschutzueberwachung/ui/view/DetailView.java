@@ -1,7 +1,6 @@
 package de.thral.atemschutzueberwachung.ui.view;
 
 import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.FragmentManager;
