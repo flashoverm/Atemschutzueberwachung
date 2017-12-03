@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.activity;
+package de.thral.atemschutzueberwachung.ui;
 
 import android.content.Intent;
 import android.os.AsyncTask;

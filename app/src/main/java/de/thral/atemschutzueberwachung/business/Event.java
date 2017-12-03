@@ -33,27 +33,6 @@ public class Event {
         return remainingOperationTime;
     }
 
-    public String getTimeStampAsClock() {
-        String clock = "";
-
-        int seconds = (int)timeStamp/1000;
-        int minutes = seconds/60;
-        seconds = seconds - minutes*60;
-
-        if(minutes < 10){
-            clock = "0" + minutes;
-        } else {
-            clock = minutes+"";
-        }
-        clock += ":";
-        if(seconds <10){
-            clock += "0"+seconds;
-        } else {
-            clock += seconds+"";
-        }
-        return clock;
-    }
-
     public int getPressureLeader() {
         return pressureLeader;
     }

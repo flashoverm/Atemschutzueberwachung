@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.activity;
+package de.thral.atemschutzueberwachung.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
+import de.thral.atemschutzueberwachung.ui.administration.AdminMenuActivity;
+import de.thral.atemschutzueberwachung.ui.observation.MonitoringOverviewActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -39,7 +41,7 @@ public class MenuActivity extends AppCompatActivity {
         management.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuActivity.this, AdministrationActivity.class);
+                Intent intent = new Intent(MenuActivity.this, AdminMenuActivity.class);
                 startActivity(intent);
             }
         });

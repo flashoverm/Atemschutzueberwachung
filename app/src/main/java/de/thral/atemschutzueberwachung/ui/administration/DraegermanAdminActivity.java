@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.activity;
+package de.thral.atemschutzueberwachung.ui.administration;
 
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -20,7 +20,6 @@ import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.business.Draegerman;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
-import de.thral.atemschutzueberwachung.ui.dialog.AddDraegermanDialog;
 
 public class DraegermanAdminActivity extends AppCompatActivity
         implements AddDraegermanDialog.AddDraegermanListener, MenuItem.OnMenuItemClickListener{

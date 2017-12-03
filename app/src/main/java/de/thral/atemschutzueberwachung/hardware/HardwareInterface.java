@@ -19,33 +19,25 @@ public class HardwareInterface {
     private boolean flashEnabled;
     private Flash flash;
     private boolean vibrationEnabled;
-    private Vibrate vibrate;
+    private Vibration vibration;
     private boolean soundEnabled;
     private Sound sound;
 
     public HardwareInterface(Context context){
         this.context = context;
-        initPrefs();
+        initSettings();
         flash = new Flash(context);
-        vibrate = new Vibrate(context);
+        vibration = new Vibration(context);
         sound = new Sound();
     }
 
-    private void initPrefs(){
+    private void initSettings(){
         flashEnabled = context.getSharedPreferences(
                 PREF_ENABLE_FLASH, Context.MODE_PRIVATE).getBoolean(PREF_ENABLE_FLASH, false);
         vibrationEnabled = context.getSharedPreferences(
                 PREF_ENABLE_VIBRATION, Context.MODE_PRIVATE).getBoolean(PREF_ENABLE_VIBRATION, false);
         soundEnabled = context.getSharedPreferences(
                 PREF_ENABLE_SOUND, Context.MODE_PRIVATE).getBoolean(PREF_ENABLE_SOUND, false);
-    }
-
-    public boolean[] getAvailability(){
-        return new boolean[]{
-                flash.isAvailable(),
-                vibrate.isAvailable(),
-                sound.isAvailable()
-        };
     }
 
     public boolean[] getSettings(){
@@ -70,6 +62,13 @@ public class HardwareInterface {
         editor.commit();
     }
 
+    public boolean[] getAvailability(){
+        return new boolean[]{
+                flash.isAvailable(),
+                vibration.isAvailable(),
+                sound.isAvailable()
+        };
+    }
 
     public void turnOnReminder(){
         if(reminderState == 0){
@@ -78,7 +77,7 @@ public class HardwareInterface {
                     flash.turnOn(100, 1000);
                 }
                 if(vibrationEnabled){
-                    vibrate.turnOn(500, 3000);
+                    vibration.turnOn(500, 3000);
                 }
                 if(soundEnabled){
                     sound.turnOn(600, 6000);
@@ -97,7 +96,7 @@ public class HardwareInterface {
                 flash.turnOn(100, 100);
             }
             if(vibrationEnabled){
-                vibrate.turnOn(500, 500);
+                vibration.turnOn(500, 500);
             }
             if(soundEnabled) {
                 sound.turnOn(600, 2000);
@@ -132,7 +131,7 @@ public class HardwareInterface {
             flash.turnOff();
         }
         if(vibrationEnabled){
-            vibrate.turnOff();
+            vibration.turnOff();
         }
         if(soundEnabled){
             sound.turnOff();

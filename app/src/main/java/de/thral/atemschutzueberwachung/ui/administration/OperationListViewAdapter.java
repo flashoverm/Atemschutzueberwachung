@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.adapter;
+package de.thral.atemschutzueberwachung.ui.administration;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;

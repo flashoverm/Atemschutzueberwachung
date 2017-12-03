@@ -10,30 +10,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/administationText"
         android:layout_marginTop="30dp"
-        android:textSize="36sp" />
+        android:text="@string/administationText"
+        android:textSize="40sp" />
 
     <Button
         android:id="@+id/operationAdministrationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/administrationText"
-        android:layout_alignStart="@+id/administrationText"
+        android:layout_alignEnd="@+id/draegermanAdministrationButton"
+        android:layout_alignStart="@+id/draegermanAdministrationButton"
         android:layout_below="@+id/administrationText"
+        android:layout_marginTop="31dp"
+        android:padding="15dp"
         android:text="@string/operationAdministratoion"
-        android:layout_marginTop="30dp"
         android:textSize="14dp" />
 
     <Button
         android:id="@+id/draegermanAdministrationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/operationAdministrationButton"
-        android:layout_alignStart="@+id/operationAdministrationButton"
         android:layout_below="@+id/operationAdministrationButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:padding="15dp"
         android:text="@string/draegermanAdministratoion"
-        android:layout_marginTop="30dp"
         android:textSize="14dp" />
 
     <Button
@@ -43,7 +44,8 @@
         android:layout_alignEnd="@+id/operationAdministrationButton"
         android:layout_alignStart="@+id/operationAdministrationButton"
         android:layout_below="@+id/draegermanAdministrationButton"
-        android:text="@string/settings"
         android:layout_marginTop="30dp"
+        android:padding="15dp"
+        android:text="@string/settings"
         android:textSize="14dp" />
 </RelativeLayout>

@@ -9,10 +9,10 @@
     <string name="endOperation">Einsatz abschließen</string>
 
     <!--Administration-->
-    <string name="draegermanAdministratoion">Atemschutzträger</string>
+    <string name="draegermanAdministratoion">Atemschutzgeräteträger</string>
     <string name="operationAdministratoion">Einsatzdaten</string>
     <string name="operationAdminLabel">Verwaltung Einsatzdaten</string>
-    <string name="draegermanAdminLabel">Verwaltung Atemschutzträger</string>
+    <string name="draegermanAdminLabel">Verwaltung Atemschutzgeräteträger</string>
 
     <string name="folderNameExternal">Atemschutzueberwachung</string>
 
@@ -29,7 +29,7 @@
     <string name="vibration">Vibration</string>
     <string name="sound">Alarm-Ton</string>
 
-    <string name="noDraegermen">Keine Atemschutzträger vorhanden</string>
+    <string name="noDraegermen">Keine Atemschutzgeräteträger vorhanden</string>
     <string name="noCompletedOperations">Keine Einsatzdaten vorhanden</string>
 
     <!--Operation-->
@@ -164,6 +164,6 @@
     <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
     <string name="toastNoLastname">Kein Nachname eingetragen!</string>
     <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
-    <string name="toastDraegermanAddError">Atemschutzträger konnte nicht hinzugefügt werden!</string>
+    <string name="toastDraegermanAddError">Atemschutzgeräteträger konnte nicht hinzugefügt werden!</string>
 
 </resources>

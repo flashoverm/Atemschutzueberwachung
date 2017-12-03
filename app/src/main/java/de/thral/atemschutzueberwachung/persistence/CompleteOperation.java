@@ -42,7 +42,7 @@ public class CompleteOperation implements Comparable<CompleteOperation>{
         return false;
     }
 
-    public static boolean copy(File src, File dst){
+    private static boolean copy(File src, File dst){
         try (InputStream in = new FileInputStream(src)) {
             try (OutputStream out = new FileOutputStream(dst)) {
                 byte[] buf = new byte[1024];

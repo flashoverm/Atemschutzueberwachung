@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.dialog;
+package de.thral.atemschutzueberwachung.ui.observation.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,7 +21,6 @@ import de.thral.atemschutzueberwachung.business.Draegerman;
 import de.thral.atemschutzueberwachung.business.OperatingTime;
 import de.thral.atemschutzueberwachung.business.Order;
 import de.thral.atemschutzueberwachung.business.Squad;
-import de.thral.atemschutzueberwachung.ui.adapter.DraegermanSpinnerAdapter;
 
 public class RegisterSquadDialog extends DialogFragment {
 

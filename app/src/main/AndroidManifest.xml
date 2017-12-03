@@ -13,32 +13,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.activity.StartActivity"
+        <activity android:name=".ui.StartActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MenuActivity"
+        <activity android:name=".ui.MenuActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.activity.MonitoringOverviewActivity"
+        <activity android:name=".ui.observation.MonitoringOverviewActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.activity.MonitoringDetailActivity"
+        <activity android:name=".ui.observation.MonitoringDetailActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.activity.AdministrationActivity"
+        <activity android:name=".ui.administration.AdminMenuActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.activity.OperationAdminActivity"
+        <activity android:name=".ui.administration.OperationAdminActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.activity.DraegermanAdminActivity"
+        <activity android:name=".ui.administration.DraegermanAdminActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.activity.SettingsActivity"
+        <activity android:name=".ui.administration.SettingsActivity"
             android:screenOrientation="landscape">
         </activity>
     </application>

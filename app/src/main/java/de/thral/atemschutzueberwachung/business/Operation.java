@@ -18,8 +18,6 @@ public class Operation {
 
     private List<Squad> squadList;
 
-    private boolean isExported;
-
     public Operation(){
         this.startTime = System.currentTimeMillis();
         this.squadList = new ArrayList<>();
@@ -68,10 +66,6 @@ public class Operation {
         return activeSquads;
     }
 
-    public boolean isExported(){
-        return isExported;
-    }
-
     public boolean isSquadActive(){
         Squad[] active = getActiveSquads();
         for(int i=0; i<MAX_SQUAD_COUNT; i++){
@@ -104,10 +98,6 @@ public class Operation {
             return true;
         }
         return false;
-    }
-
-    public void export(){
-        this.isExported = true;
     }
 
     public String getFilename() {

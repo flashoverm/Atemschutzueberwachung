@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.view;
+package de.thral.atemschutzueberwachung.ui.observation.view;
 
 public interface LayoutClickListener {
 

@@ -7,6 +7,6 @@ public interface ActiveOperationDAO {
     Operation get();
     void load();
     boolean create();
-    boolean update();
+    boolean save();
     boolean end();
 }

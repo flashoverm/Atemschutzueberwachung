@@ -3,7 +3,7 @@ package de.thral.atemschutzueberwachung.hardware;
 import android.content.Context;
 import android.os.Vibrator;
 
-public class Vibrate implements Hardware {
+public class Vibration implements Hardware {
 
     private Context context;
 
@@ -12,7 +12,7 @@ public class Vibrate implements Hardware {
 
     private Vibrator vibrator;
 
-    public Vibrate(Context context){
+    public Vibration(Context context){
         this.context = context;
         init();
     }

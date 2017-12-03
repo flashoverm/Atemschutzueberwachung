@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.activity;
+package de.thral.atemschutzueberwachung.ui.observation;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,10 +14,10 @@ import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Operation;
 import de.thral.atemschutzueberwachung.business.Squad;
 import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
-import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
-import de.thral.atemschutzueberwachung.ui.view.DetailOverviewView;
-import de.thral.atemschutzueberwachung.ui.view.DetailView;
-import de.thral.atemschutzueberwachung.ui.view.LayoutClickListener;
+import de.thral.atemschutzueberwachung.ui.observation.dialog.EnterPressureDialog;
+import de.thral.atemschutzueberwachung.ui.observation.view.DetailOverviewView;
+import de.thral.atemschutzueberwachung.ui.observation.view.DetailView;
+import de.thral.atemschutzueberwachung.ui.observation.view.LayoutClickListener;
 
 public class MonitoringDetailActivity extends AppCompatActivity
         implements EnterPressureDialog.EnteredPressureListener,
@@ -112,7 +112,7 @@ public class MonitoringDetailActivity extends AppCompatActivity
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return activeOperationDAO.update();
+            return activeOperationDAO.save();
         }
 
         @Override

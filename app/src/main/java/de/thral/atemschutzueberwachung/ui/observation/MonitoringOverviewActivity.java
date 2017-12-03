@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.activity;
+package de.thral.atemschutzueberwachung.ui.observation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,10 +16,10 @@ import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Squad;
 import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
 import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAO;
-import de.thral.atemschutzueberwachung.ui.dialog.EndOperationDialog;
-import de.thral.atemschutzueberwachung.ui.dialog.RegisterSquadDialog;
-import de.thral.atemschutzueberwachung.ui.view.LayoutClickListener;
-import de.thral.atemschutzueberwachung.ui.view.OverviewView;
+import de.thral.atemschutzueberwachung.ui.observation.dialog.EndOperationDialog;
+import de.thral.atemschutzueberwachung.ui.observation.dialog.RegisterSquadDialog;
+import de.thral.atemschutzueberwachung.ui.observation.view.LayoutClickListener;
+import de.thral.atemschutzueberwachung.ui.observation.view.OverviewView;
 
 public class MonitoringOverviewActivity extends AppCompatActivity
         implements RegisterSquadDialog.SquadRegisteredListener,
@@ -125,7 +125,7 @@ public class MonitoringOverviewActivity extends AppCompatActivity
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return activeOperationDAO.update();
+            return activeOperationDAO.save();
         }
 
         @Override

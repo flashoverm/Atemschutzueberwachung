@@ -43,13 +43,14 @@ public class ActiveOperationDAOImpl implements ActiveOperationDAO {
         }
     }
 
+    @Override
     public boolean create(){
         this.activeOperation = new Operation();
-        return update();
+        return save();
     }
 
     @Override
-    public boolean update() {
+    public boolean save() {
         File active = new File(context.getFilesDir(), ACTIVE_FILE);
         Gson gson = new Gson();
         try(FileWriter writer = new FileWriter(active)){

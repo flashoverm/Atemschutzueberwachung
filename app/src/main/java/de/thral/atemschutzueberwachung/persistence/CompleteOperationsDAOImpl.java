@@ -36,7 +36,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
     private Context context;
 
-    private List<CompleteOperation> completedOperations;
+    private List<CompleteOperation> completeOperations;
 
     private File completedFolder;
     private File exportFolder;
@@ -55,22 +55,22 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
     @Override
     public List<CompleteOperation> getAll() {
         load();
-        return completedOperations;
+        return completeOperations;
     }
 
     public void load() {
-        if(completedOperations == null){
+        if(completeOperations == null){
             File completedOperationsFile = new File(context.getFilesDir(), COMPLETED_OPS);
             if(completedOperationsFile.exists()){
                 Gson gson = new Gson();
                 try(JsonReader reader = new JsonReader(new FileReader(completedOperationsFile))){
-                    completedOperations = gson.fromJson(reader, operationEntryListType);
+                    completeOperations = gson.fromJson(reader, operationEntryListType);
                     return;
                 }catch(IOException e){
                     //File not existing -> Initialize list
                 }
             }
-            completedOperations = new ArrayList<>();
+            completeOperations = new ArrayList<>();
         }
     }
 
@@ -88,13 +88,13 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
         load();
         CompleteOperation complete = new CompleteOperation(completedFile, operation.toString());
-        if(completedOperations.add(complete)){
-            Collections.sort(completedOperations);
+        if(completeOperations.add(complete)){
+            Collections.sort(completeOperations);
             try{
                 save();
                 return true;
             }catch (IOException e){
-                completedOperations.remove(complete);
+                completeOperations.remove(complete);
             }
         }
         return false;
@@ -103,7 +103,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
     @Override
     public boolean remove(CompleteOperation operation) {
         load();
-        if(completedOperations.remove(operation)){
+        if(completeOperations.remove(operation)){
             try{
                 save();
             }catch(IOException e){
@@ -119,7 +119,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
         File completedOperationsFile = new File(context.getFilesDir(), COMPLETED_OPS);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try(FileWriter writer = new FileWriter(completedOperationsFile)){
-            writer.write(gson.toJson(completedOperations));
+            writer.write(gson.toJson(completeOperations));
             writer.flush();
         } catch(IOException e){
             Log.e("PERSISTENCE", e.getMessage());
@@ -133,7 +133,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
     @Override
     public boolean export(CompleteOperation export){
-        CompleteOperation completed = completedOperations.get(completedOperations.indexOf(export));
+        CompleteOperation completed = completeOperations.get(completeOperations.indexOf(export));
         if(completed.export(exportFolder)){
             MediaScannerConnection.scanFile(
                     context, new String[] {export.getFile().getAbsolutePath()}, null, null);

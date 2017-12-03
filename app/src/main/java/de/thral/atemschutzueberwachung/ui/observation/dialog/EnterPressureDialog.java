@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.dialog;
+package de.thral.atemschutzueberwachung.ui.observation.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;

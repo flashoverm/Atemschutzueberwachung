@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.view;
+package de.thral.atemschutzueberwachung.ui.observation.view;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -20,8 +20,8 @@ import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Squad;
 import de.thral.atemschutzueberwachung.business.SquadChangeListener;
 import de.thral.atemschutzueberwachung.business.TimerChangeListener;
-import de.thral.atemschutzueberwachung.ui.dialog.EnterPressureDialog;
-import de.thral.atemschutzueberwachung.ui.dialog.PressureWarningDialog;
+import de.thral.atemschutzueberwachung.ui.observation.dialog.EnterPressureDialog;
+import de.thral.atemschutzueberwachung.ui.observation.dialog.PressureWarningDialog;
 
 public class DetailView extends SquadViewBase{
 

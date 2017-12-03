@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.activity;
+package de.thral.atemschutzueberwachung.ui.administration;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAO;
-import de.thral.atemschutzueberwachung.ui.adapter.OperationListViewAdapter;
 
 public class OperationAdminActivity extends AppCompatActivity implements
         MenuItem.OnMenuItemClickListener{
