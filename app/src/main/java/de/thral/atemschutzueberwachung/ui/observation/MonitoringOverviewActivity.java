@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -14,14 +13,13 @@ import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Squad;
-import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
 import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAO;
 import de.thral.atemschutzueberwachung.ui.observation.dialog.EndOperationDialog;
 import de.thral.atemschutzueberwachung.ui.observation.dialog.RegisterSquadDialog;
 import de.thral.atemschutzueberwachung.ui.observation.view.LayoutClickListener;
 import de.thral.atemschutzueberwachung.ui.observation.view.OverviewView;
 
-public class MonitoringOverviewActivity extends AppCompatActivity
+public class MonitoringOverviewActivity extends MonitoringBaseActivity
         implements RegisterSquadDialog.SquadRegisteredListener,
         EndOperationDialog.EndOperationListener,
         LayoutClickListener{
@@ -29,7 +27,6 @@ public class MonitoringOverviewActivity extends AppCompatActivity
     public static final String KEY_RESUMED = "OperationResumed";
 
     private OverviewView overviewView;
-    private ActiveOperationDAO activeOperationDAO;
     private CompleteOperationsDAO completeOperationsDAO;
 
     @Override

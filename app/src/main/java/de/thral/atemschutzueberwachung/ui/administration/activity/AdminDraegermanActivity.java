@@ -1,10 +1,9 @@
-package de.thral.atemschutzueberwachung.ui.administration;
+package de.thral.atemschutzueberwachung.ui.administration.activity;
 
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -12,22 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.business.Draegerman;
 import de.thral.atemschutzueberwachung.persistence.DraegermanDAO;
+import de.thral.atemschutzueberwachung.ui.administration.AddDraegermanDialog;
 
-public class DraegermanAdminActivity extends AppCompatActivity
+public class AdminDraegermanActivity extends AdminBaseActivity
         implements AddDraegermanDialog.AddDraegermanListener, MenuItem.OnMenuItemClickListener{
 
     private DraegermanDAO draegermanDAO;
-    private ListView draegermen;
-    private TextView noDraegerman;
-    private RelativeLayout progressBar;
     private ArrayAdapter<Draegerman> adapter;
 
     @Override
@@ -39,10 +34,10 @@ public class DraegermanAdminActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         draegermanDAO = ((DraegermanObservationApplication)getApplication()).getDraegermanDAO();
-        draegermen = findViewById(R.id.draegermanList);
-        noDraegerman = findViewById(R.id.noDraegerman);
+        listView = findViewById(R.id.draegermanList);
+        noEntry = findViewById(R.id.noDraegerman);
         progressBar = findViewById(R.id.draegermanProgress);
-        noDraegerman.setVisibility(View.INVISIBLE);
+        noEntry.setVisibility(View.INVISIBLE);
 
         new LoadDraegermanTask().execute();
     }
@@ -64,7 +59,7 @@ public class DraegermanAdminActivity extends AppCompatActivity
                 break;
             }
             case R.id.menuDelete: {
-                final SparseBooleanArray checked = draegermen.getCheckedItemPositions();
+                final SparseBooleanArray checked = listView.getCheckedItemPositions();
                 if(checked.size() == 0){
                     Toast.makeText(this, R.string.toastNothingSelected, Toast.LENGTH_LONG).show();
                     return true;
@@ -89,21 +84,11 @@ public class DraegermanAdminActivity extends AppCompatActivity
         return true;
     }
 
-    private void setVisibility(){
-        if(draegermanDAO.getAll().size() == 0){
-            noDraegerman.setVisibility(View.VISIBLE);
-            draegermen.setVisibility(View.INVISIBLE);
-        } else {
-            noDraegerman.setVisibility(View.INVISIBLE);
-            draegermen.setVisibility(View.VISIBLE);
-        }
-    }
-
     @Override
     public boolean onAddDraegerman(Draegerman draegerman){
         if(draegermanDAO.add(draegerman, this)){
             adapter.notifyDataSetChanged();
-            setVisibility();
+            setVisibility(draegermanDAO.getAll().size());
         }
         return false;
     }
@@ -112,7 +97,7 @@ public class DraegermanAdminActivity extends AppCompatActivity
 
         @Override
         protected Void doInBackground(Void... params) {
-            adapter = new ArrayAdapter<>(DraegermanAdminActivity.this,
+            adapter = new ArrayAdapter<>(AdminDraegermanActivity.this,
                     android.R.layout.simple_list_item_multiple_choice,
                     draegermanDAO.getAll());
             return null;
@@ -121,9 +106,9 @@ public class DraegermanAdminActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Void result) {
             progressBar.setVisibility(View.INVISIBLE);
-            draegermen.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-            draegermen.setAdapter(adapter);
-            setVisibility();
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+            listView.setAdapter(adapter);
+            setVisibility(draegermanDAO.getAll().size());
         }
     }
 
@@ -137,7 +122,7 @@ public class DraegermanAdminActivity extends AppCompatActivity
         @Override
         protected Boolean doInBackground(SparseBooleanArray... params) {
             boolean deletedAll = true;
-            for (int i = draegermen.getCount()-1; i >=0 ; i--) {
+            for (int i = listView.getCount()-1; i >=0 ; i--) {
                 if (params[0].get(i)) {
                     deletedAll = deletedAll
                             && draegermanDAO.remove(adapter.getItem(i));
@@ -152,12 +137,12 @@ public class DraegermanAdminActivity extends AppCompatActivity
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!result){
-                Toast.makeText(DraegermanAdminActivity.this,
+                Toast.makeText(AdminDraegermanActivity.this,
                         R.string.toastDeletingFailed, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
-            draegermen.clearChoices();
-            setVisibility();
+            listView.clearChoices();
+            setVisibility(draegermanDAO.getAll().size());
         }
     }
 

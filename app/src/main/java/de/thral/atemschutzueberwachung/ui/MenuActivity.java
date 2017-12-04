@@ -9,7 +9,7 @@ import android.widget.Button;
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
-import de.thral.atemschutzueberwachung.ui.administration.AdminMenuActivity;
+import de.thral.atemschutzueberwachung.ui.administration.activity.AdminMenuActivity;
 import de.thral.atemschutzueberwachung.ui.observation.MonitoringOverviewActivity;
 
 public class MenuActivity extends AppCompatActivity {

@@ -1,11 +1,8 @@
 package de.thral.atemschutzueberwachung.ui.observation;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
@@ -13,13 +10,12 @@ import de.thral.atemschutzueberwachung.business.Event;
 import de.thral.atemschutzueberwachung.business.EventType;
 import de.thral.atemschutzueberwachung.business.Operation;
 import de.thral.atemschutzueberwachung.business.Squad;
-import de.thral.atemschutzueberwachung.persistence.ActiveOperationDAO;
 import de.thral.atemschutzueberwachung.ui.observation.dialog.EnterPressureDialog;
 import de.thral.atemschutzueberwachung.ui.observation.view.DetailOverviewView;
 import de.thral.atemschutzueberwachung.ui.observation.view.DetailView;
 import de.thral.atemschutzueberwachung.ui.observation.view.LayoutClickListener;
 
-public class MonitoringDetailActivity extends AppCompatActivity
+public class MonitoringDetailActivity extends MonitoringBaseActivity
         implements EnterPressureDialog.EnteredPressureListener,
         LayoutClickListener, DetailView.StartButtonListener {
 
@@ -27,8 +23,6 @@ public class MonitoringDetailActivity extends AppCompatActivity
 
     private Squad selected;
     private Squad[] overviewSquads;
-
-    private ActiveOperationDAO activeOperationDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,19 +102,5 @@ public class MonitoringDetailActivity extends AppCompatActivity
         new UpdateOperationTask().execute();
     }
 
-    private class UpdateOperationTask extends AsyncTask<Void, Void, Boolean> {
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return activeOperationDAO.save();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if(!result){
-                Toast.makeText(MonitoringDetailActivity.this,
-                        R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.administration;
+package de.thral.atemschutzueberwachung.ui.administration.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

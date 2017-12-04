@@ -1,4 +1,4 @@
-package de.thral.atemschutzueberwachung.ui.administration;
+package de.thral.atemschutzueberwachung.ui.administration.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         operationAdministrator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminMenuActivity.this, OperationAdminActivity.class);
+                Intent intent = new Intent(AdminMenuActivity.this, AdminOperationActivity.class);
                 startActivity(intent);
             }
         });
@@ -30,7 +30,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         draegermanAdministrator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminMenuActivity.this, DraegermanAdminActivity.class);
+                Intent intent = new Intent(AdminMenuActivity.this, AdminDraegermanActivity.class);
                 startActivity(intent);
             }
         });

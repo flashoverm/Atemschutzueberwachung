@@ -16,7 +16,7 @@
 
     <string name="folderNameExternal">Atemschutzueberwachung</string>
 
-    <string name="iconUnexported">Neuer Einsatz</string>
+    <string name="iconUnexported">Neu</string>
 
     <string name="toastNothingSelected">Keine Eintrag ausgewählt!</string>
     <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>

@@ -1,32 +1,27 @@
-package de.thral.atemschutzueberwachung.ui.administration;
+package de.thral.atemschutzueberwachung.ui.administration.activity;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import de.thral.atemschutzueberwachung.DraegermanObservationApplication;
 import de.thral.atemschutzueberwachung.R;
 import de.thral.atemschutzueberwachung.persistence.CompleteOperationsDAO;
+import de.thral.atemschutzueberwachung.ui.administration.OperationListViewAdapter;
 
-public class OperationAdminActivity extends AppCompatActivity implements
-        MenuItem.OnMenuItemClickListener{
+public class AdminOperationActivity extends AdminBaseActivity
+        implements MenuItem.OnMenuItemClickListener{
 
     private CompleteOperationsDAO completeOperationsDAO;
-    private ListView completedOperations;
-    private TextView noOperations;
-    private RelativeLayout progressBar;
     private OperationListViewAdapter adapter;
 
     private SparseBooleanArray checked;
@@ -41,10 +36,10 @@ public class OperationAdminActivity extends AppCompatActivity implements
 
         completeOperationsDAO = ((DraegermanObservationApplication)getApplication())
                 .getCompleteOperationsDAO();
-        completedOperations = findViewById(R.id.operationList);
-        noOperations = findViewById(R.id.noOperations);
+        listView = findViewById(R.id.operationList);
+        noEntry = findViewById(R.id.noOperations);
         progressBar = findViewById(R.id.operationsProgress);
-        noOperations.setVisibility(View.INVISIBLE);
+        noEntry.setVisibility(View.INVISIBLE);
 
         new LoadOperationsTask().execute();
     }
@@ -94,15 +89,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
         return true;
     }
 
-    private void setVisibility(){
-        if(completeOperationsDAO.getAll().size() == 0){
-            noOperations.setVisibility(View.VISIBLE);
-            completedOperations.setVisibility(View.INVISIBLE);
-        } else {
-            noOperations.setVisibility(View.INVISIBLE);
-            completedOperations.setVisibility(View.VISIBLE);
-        }
-    }
+
 
     @Override
     public void onRequestPermissionsResult(
@@ -123,7 +110,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
         @Override
         protected Void doInBackground(Void... params) {
             adapter = new OperationListViewAdapter(
-                    OperationAdminActivity.this,
+                    AdminOperationActivity.this,
                     R.layout.listitem_operation_completed,
                     completeOperationsDAO.getAll());
             return null;
@@ -132,9 +119,9 @@ public class OperationAdminActivity extends AppCompatActivity implements
         @Override
         protected void onPostExecute(Void result) {
             progressBar.setVisibility(View.INVISIBLE);
-            completedOperations.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-            completedOperations.setAdapter(adapter);
-            setVisibility();
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+            listView.setAdapter(adapter);
+            setVisibility(completeOperationsDAO.getAll().size());
         }
     }
 
@@ -148,9 +135,9 @@ public class OperationAdminActivity extends AppCompatActivity implements
         @Override
         protected Boolean doInBackground(SparseBooleanArray... params) {
             boolean exportedAll = false;
-            if(completeOperationsDAO.setupStorage(OperationAdminActivity.this)){
+            if(completeOperationsDAO.setupStorage(AdminOperationActivity.this)){
                 exportedAll = true;
-                for (int i = completedOperations.getCount()-1; i >=0 ; i--) {
+                for (int i = listView.getCount()-1; i >=0 ; i--) {
                     if (params[0].get(i)){
                         exportedAll = exportedAll
                                 && completeOperationsDAO.export(adapter.getItem(i));
@@ -167,14 +154,14 @@ public class OperationAdminActivity extends AppCompatActivity implements
             progressBar.setVisibility(View.INVISIBLE);
             if(result != null){
                 if(result){
-                    Toast.makeText(OperationAdminActivity.this,
+                    Toast.makeText(AdminOperationActivity.this,
                             R.string.toastExportSucceeded, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(OperationAdminActivity.this,
+                    Toast.makeText(AdminOperationActivity.this,
                             R.string.toastExportFailed, Toast.LENGTH_LONG).show();
                 }
                 adapter.notifyDataSetChanged();
-                completedOperations.clearChoices();
+                listView.clearChoices();
             }
         }
     }
@@ -189,7 +176,7 @@ public class OperationAdminActivity extends AppCompatActivity implements
         @Override
         protected Boolean doInBackground(SparseBooleanArray... params) {
             boolean deletedAll = true;
-            for (int i = completedOperations.getCount()-1; i >=0 ; i--) {
+            for (int i = listView.getCount()-1; i >=0 ; i--) {
                 if (params[0].get(i)) {
                     deletedAll = deletedAll
                             && completeOperationsDAO.remove(adapter.getItem(i));
@@ -204,12 +191,12 @@ public class OperationAdminActivity extends AppCompatActivity implements
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!result){
-                Toast.makeText(OperationAdminActivity.this,
+                Toast.makeText(AdminOperationActivity.this,
                         R.string.toastDeletingFailed, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
-            completedOperations.clearChoices();
-            setVisibility();
+            listView.clearChoices();
+            setVisibility(completeOperationsDAO.getAll().size());
         }
     }
 }

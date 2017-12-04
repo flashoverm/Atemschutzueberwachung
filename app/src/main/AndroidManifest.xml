@@ -29,16 +29,16 @@
         <activity android:name=".ui.observation.MonitoringDetailActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.AdminMenuActivity"
+        <activity android:name=".ui.administration.activity.AdminMenuActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.OperationAdminActivity"
+        <activity android:name=".ui.administration.activity.AdminOperationActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.DraegermanAdminActivity"
+        <activity android:name=".ui.administration.activity.AdminDraegermanActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.SettingsActivity"
+        <activity android:name=".ui.administration.activity.SettingsActivity"
             android:screenOrientation="landscape">
         </activity>
     </application>
