@@ -15,19 +15,20 @@
 
     <ListView
         android:id="@+id/operationList"
-        android:layout_below="@id/toolbarOperationAdmin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarOperationAdmin"
+        android:visibility="invisible"></ListView>
 
     <TextView
         android:id="@+id/noOperations"
-        android:layout_below="@id/toolbarOperationAdmin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbarOperationAdmin"
+        android:gravity="center_vertical"
         android:text="@string/noCompletedOperations"
         android:textAlignment="center"
-        android:gravity="center_vertical"/>
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:id="@+id/operationsProgress"

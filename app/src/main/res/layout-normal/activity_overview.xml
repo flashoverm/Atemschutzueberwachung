@@ -4,9 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <de.thral.atemschutzueberwachung.ui.observation.view.OverviewView
+    <de.thral.draegermanObservation.ui.view.OverviewView
         android:id="@+id/overview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/operationProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparentGrey"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="false" />
+    </RelativeLayout>
 
 </RelativeLayout>

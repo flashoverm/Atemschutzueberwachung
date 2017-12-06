@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.thral.atemschutzueberwachung">
+    package="de.thral.draegermanObservation">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
-        android:name=".DraegermanObservationApplication"
+        android:name="de.thral.draegermanObservation.DraegermanObservationApplication"
         android:icon="@drawable/atemschutz"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.StartActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.SplashActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MenuActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.MenuActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.observation.MonitoringOverviewActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.MonitoringOverviewActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.observation.MonitoringDetailActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.MonitoringDetailActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.activity.AdminMenuActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.AdminMenuActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.activity.AdminOperationActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.AdminOperationActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.activity.AdminDraegermanActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.AdminDraegermanActivity"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ui.administration.activity.SettingsActivity"
+        <activity android:name="de.thral.draegermanObservation.ui.activity.SettingsActivity"
             android:screenOrientation="landscape">
         </activity>
     </application>

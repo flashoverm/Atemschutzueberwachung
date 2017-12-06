@@ -1,0 +1,39 @@
+package de.thral.draegermanObservation.persistence;
+
+import android.content.Context;
+
+import java.util.List;
+
+import de.thral.draegermanObservation.business.Draegerman;
+
+public interface DraegermanDAO {
+
+    /** Gets all draegermen
+     *
+     * @return list of Draegerman objects
+     */
+    List<Draegerman> getAll();
+
+    /** Prepares add of draegerman. Set complete name if lastname is already existing
+     *
+     * @param firstname of draegerman
+     * @param lastname of draegerman
+     * @return new draegerman object
+     */
+    Draegerman prepareAdd(String firstname, String lastname);
+
+    /** Adds draegerman to the list
+     *
+     * @param draegerman to be added
+     * @param context to show Toast
+     * @return true of added, false if not, Toast of writing to storage fails
+     */
+    boolean add(Draegerman draegerman, Context context);
+
+    /** Removes draegerman from the list
+     *
+     * @param draegerman to be removed
+     * @return true of removed, false if not
+     */
+    boolean remove(Draegerman draegerman);
+}

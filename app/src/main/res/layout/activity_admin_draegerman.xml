@@ -15,18 +15,20 @@
 
     <ListView
         android:id="@+id/draegermanList"
-        android:layout_below="@id/toolbarDraegermanAdmin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarDraegermanAdmin"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/noDraegerman"
-        android:layout_below="@id/toolbarDraegermanAdmin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbarDraegermanAdmin"
+        android:gravity="center_vertical"
         android:text="@string/noDraegermen"
         android:textAlignment="center"
-        android:gravity="center_vertical"/>
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:id="@+id/draegermanProgress"
