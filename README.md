@@ -1,5 +1,12 @@
 # Atemschutzueberwachung
 
+ToDo:
+-   Hard coded values as constants
+-   Style: Front and colors
+-   Unit tests
+
+
+
 Improvements:
 
 - If Text is to long for TextView -> Animate horizontal translation
@@ -23,4 +30,4 @@ Future Updates:
 - V1.2 Live backup on SD-card to switch devices on hardware failure
 
 - V1.3  Enter situation reports (Dt. Lagemeldungen) from squad with textEdit or from list? (+ timestamp, operation time).
-  I.e. "Feuer aus", "Person gefunden", "Person an RD übergeben" ...
+            I.e. "Feuer aus", "Person gefunden", "Person an RD übergeben" ...
