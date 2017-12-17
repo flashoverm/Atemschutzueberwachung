@@ -1,6 +1,7 @@
 package de.thral.draegermanObservation.ui.view;
 
 import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
@@ -39,7 +41,7 @@ public class DetailView extends SquadViewBase{
     private Button start, arrive, enterPressure, retreat, end;
 
     private AlertDialog.Builder startBuilder;
-    private ValueAnimator buttonAnimation;
+    private ObjectAnimator buttonAnimation;
 
     public DetailView(Context context) {
         super(context);
@@ -89,6 +91,8 @@ public class DetailView extends SquadViewBase{
         pressureTime3 = infoView.findViewById(R.id.pressureTime3);
         leaderPressure3 = infoView.findViewById(R.id.leaderPressure3);
         memberPressure3 = infoView.findViewById(R.id.memberPressure3);
+
+        detailView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
     }
 
     private void initButtons(){
@@ -98,17 +102,12 @@ public class DetailView extends SquadViewBase{
         retreat = detailView.findViewById(R.id.buttonRetreat);
         end = detailView.findViewById(R.id.buttonEnd);
 
-        buttonAnimation = ValueAnimator.ofInt(Color.RED, Color.LTGRAY);
+        buttonAnimation = ObjectAnimator.ofInt(enterPressure, "backgroundColor",
+                ContextCompat.getColor(getContext(), R.color.red),
+                ContextCompat.getColor(getContext(), R.color.blue));
         buttonAnimation.setDuration(1500);
         buttonAnimation.setRepeatCount(ValueAnimator.INFINITE);
         buttonAnimation.setEvaluator(new ArgbEvaluator());
-        buttonAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                enterPressure.getBackground().setColorFilter(
-                        (int)valueAnimator.getAnimatedValue(), PorterDuff.Mode.MULTIPLY);
-            }
-        });
 
         startBuilder = new AlertDialog.Builder(getContext());
         startBuilder.setTitle(R.string.timerInfoTitle)

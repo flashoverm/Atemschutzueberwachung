@@ -80,12 +80,7 @@ public class EnterPressureDialog extends DialogFragment {
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String leader = leaderPressure.getText().toString();
-                                String member = memberPressure.getText().toString();
-                                String event = spinner.getSelectedItem().toString();
-
-                                if(enterPressure(leader, member,
-                                        EventType.getEventType(getActivity(), event))){
+                                if(attempEnterPressure()){
                                     enterPressure.dismiss();
                                 }
                             }
@@ -95,26 +90,49 @@ public class EnterPressureDialog extends DialogFragment {
         return dialog;
     }
 
-    private boolean enterPressure(String leader, String member, EventType event){
+    private boolean attempEnterPressure(){
+        String leader = leaderPressure.getText().toString();
+        String member = memberPressure.getText().toString();
+
+        leaderPressure.setError(null);
+        memberPressure.setError(null);
+
+        EventType event = EventType.getEventType(
+                getActivity(), spinner.getSelectedItem().toString());
+
         if(leader.equals("")){
-            Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
-                    Toast.LENGTH_LONG).show();
+            leaderPressure.setError(getString(R.string.toastNoPressureLeader));
             return false;
         }
         if(member.equals("")){
-            Toast.makeText(getActivity(), R.string.toastNoPressureMember,
-                    Toast.LENGTH_LONG).show();
+            memberPressure.setError(getString(R.string.toastNoPressureMember));
             return false;
         }
-        int leaderPressure = Integer.parseInt(leader);
-        int memberPressure = Integer.parseInt(member);
-        if(leaderPressure < 0 || memberPressure < 0){
-            Toast.makeText(getActivity(), R.string.toastPressureUnderZero,
-                    Toast.LENGTH_LONG).show();
+        int leaderPressureValue;
+        int memberPressureValue;
+        try{
+            leaderPressureValue = Integer.parseInt(leader);
+        } catch(NumberFormatException e){
+            leaderPressure.setError(getString(R.string.errorInvalidPressure));
             return false;
         }
-        if(!listener.onEnteredPressure(event, leaderPressure, memberPressure)){
-            Toast.makeText(getActivity(), R.string.toastInvalidPressure, Toast.LENGTH_LONG).show();
+        try{
+            memberPressureValue = Integer.parseInt(member);
+        } catch(NumberFormatException e){
+            memberPressure.setError(getString(R.string.errorInvalidPressure));
+            return false;
+        }
+
+        if(leaderPressureValue < 0 ){
+            leaderPressure.setError(getString(R.string.toastPressureUnderZero));
+            return false;
+        }
+        if(memberPressureValue < 0){
+            memberPressure.setError(getString(R.string.toastPressureUnderZero));
+            return false;
+        }
+        if(!listener.onEnteredPressure(event, leaderPressureValue, memberPressureValue)){
+            Toast.makeText(getActivity(), R.string.toastHigherPressure, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

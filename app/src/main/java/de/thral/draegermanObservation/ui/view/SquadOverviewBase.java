@@ -1,5 +1,8 @@
 package de.thral.draegermanObservation.ui.view;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -22,24 +25,20 @@ public abstract class SquadOverviewBase extends SquadViewBase {
 
     @Override
     protected void activateViewReminder(){
-        final AnimationDrawable drawable = new AnimationDrawable();
-        final Handler handler = new Handler();
-        drawable.addFrame(
-                new ColorDrawable(ContextCompat.getColor(getContext(), R.color.ral3024)), 500);
-        drawable.addFrame(new ColorDrawable(Color.WHITE), 500);
-        drawable.setOneShot(false);
-        infoView.setBackground(drawable);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                drawable.start();
-            }
-        }, 100);
+        System.out.println("ANIMATION START");
+        infoView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red));
+        final ValueAnimator valueAnimator = ObjectAnimator.ofInt(infoView, "backgroundColor",
+                ContextCompat.getColor(getContext(), R.color.red),
+                ContextCompat.getColor(getContext(), R.color.white));
+        valueAnimator.setDuration(800);
+        valueAnimator.setEvaluator(new ArgbEvaluator());
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        valueAnimator.start();
     }
 
     @Override
     protected void deactivateViewReminder(){
-        infoView.setBackground(new ColorDrawable(Color.WHITE));
+        infoView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
     }
 
     @Override
@@ -52,7 +51,6 @@ public abstract class SquadOverviewBase extends SquadViewBase {
         if (squad.isTimerExpired()) {
             if(squad.isAlarmUnconfirmed()){
                 activateViewReminder();
-                //TODO if alarm is not confirmed after restart -> activate and show message in detailview
             } else {
                 deactivateViewReminder();
             }

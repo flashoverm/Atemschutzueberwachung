@@ -9,8 +9,6 @@
         android:id="@+id/toolbarSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkgrey"
-        app:titleTextColor="@color/lighgrey"
         app:title="@string/settings" />
 
     <CheckBox

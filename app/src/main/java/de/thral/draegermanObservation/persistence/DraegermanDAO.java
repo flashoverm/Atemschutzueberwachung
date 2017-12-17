@@ -25,10 +25,9 @@ public interface DraegermanDAO {
     /** Adds draegerman to the list
      *
      * @param draegerman to be added
-     * @param context to show Toast
-     * @return true of added, false if not, Toast of writing to storage fails
+     * @return true of added, false if not
      */
-    boolean add(Draegerman draegerman, Context context);
+    boolean add(Draegerman draegerman);
 
     /** Removes draegerman from the list
      *

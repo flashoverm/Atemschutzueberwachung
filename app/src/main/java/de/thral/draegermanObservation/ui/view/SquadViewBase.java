@@ -5,12 +5,14 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
+import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.Squad;
 import de.thral.draegermanObservation.hardware.HardwareInterface;
 
@@ -70,7 +72,9 @@ public abstract class SquadViewBase extends LinearLayout {
     }
 
     protected void activateViewAlarm(){
-        colorAnimator = ObjectAnimator.ofInt(timer, "textColor", Color.RED, Color.GRAY);
+        colorAnimator = ObjectAnimator.ofInt(timer, "textColor",
+                ContextCompat.getColor(getContext(), R.color.red),
+                ContextCompat.getColor(getContext(), R.color.black));
         colorAnimator.setDuration(800);
         colorAnimator.setEvaluator(new ArgbEvaluator());
         colorAnimator.setRepeatCount(ValueAnimator.INFINITE);

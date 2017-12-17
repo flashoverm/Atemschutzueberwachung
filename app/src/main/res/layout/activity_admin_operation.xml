@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,16 +8,14 @@
         android:id="@+id/toolbarOperationAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkgrey"
-        app:title="@string/operationAdminLabel"
-        app:titleTextColor="@color/lighgrey"/>
+        app:title="@string/operationAdminLabel"/>
 
     <ListView
         android:id="@+id/operationList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbarOperationAdmin"
-        android:visibility="invisible"></ListView>
+        android:visibility="gone"></ListView>
 
     <TextView
         android:id="@+id/noOperations"
@@ -28,18 +25,14 @@
         android:gravity="center_vertical"
         android:text="@string/noCompletedOperations"
         android:textAlignment="center"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
-    <RelativeLayout
-        android:id="@+id/operationsProgress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/transparentGrey"
-        android:gravity="center">
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="false" />
-    </RelativeLayout>
 </RelativeLayout>

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="ral3000">#a72920</color>
-    <color name="ral3024">#ff2d21</color>
-    <color name="ral3026">#ff2a1b</color>
-    <color name="background">#259b9b9b</color>
-    <color name="white">#ffffff</color>
-    <color name="darkgrey">#444444</color>
-    <color name="lighgrey">#ffcccccc</color>
-    <color name="transparentGrey">#bbcccccc</color>
+    <color name="black">#12233b</color>
+    <color name="transparentBlack">#2512233b</color>
 
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="lightblue">#ecf1f7</color>
+    <color name="blue">#3469af</color>
+    <color name="darkblue">#264d80</color>
+
+    <color name="lightred">#d9655f</color>
+    <color name="red">#cc2c24</color>
+    <color name="darkred">#a7251e</color>
+
+    <color name="white">#fdfdfd</color>
+
+
 </resources>

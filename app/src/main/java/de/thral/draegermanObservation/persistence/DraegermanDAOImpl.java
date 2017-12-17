@@ -1,6 +1,7 @@
 package de.thral.draegermanObservation.persistence;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
 
     public DraegermanDAOImpl(Context context){
         this.context = context;
+        new InitDraegermenTask().execute();
     }
 
     @Override
@@ -82,21 +84,15 @@ public class DraegermanDAOImpl implements DraegermanDAO {
     }
 
     @Override
-    public boolean add(final Draegerman newDraegerman, final Context context){
+    public boolean add(final Draegerman newDraegerman){
         if(draegermen.add(newDraegerman)){
             Collections.sort(draegermen);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try{
-                        save();
-                    }catch(IOException e){
-                        draegermen.remove(newDraegerman);
-                        Toast.makeText(context,
-                                R.string.toastDraegermanAddError, Toast.LENGTH_LONG).show();
-                    }
-                }
-            }).start();
+            try{
+                save();
+            }catch(IOException e){
+                draegermen.remove(newDraegerman);
+                return false;
+            }
             return true;
         }
         return false;
@@ -137,6 +133,15 @@ public class DraegermanDAOImpl implements DraegermanDAO {
         }catch(IOException e) {
             Log.e("PERSISTENCE", e.getMessage());
             throw e;
+        }
+    }
+
+    private class InitDraegermenTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            load();
+            return null;
         }
     }
 }

@@ -10,5 +10,5 @@
         android:layout_height="match_parent"
         android:layout_margin="45dp"
         android:text="@string/endOperation"
-        android:textSize="@dimen/buttonTextSize" />
+        android:textAllCaps="false" />
 </RelativeLayout>

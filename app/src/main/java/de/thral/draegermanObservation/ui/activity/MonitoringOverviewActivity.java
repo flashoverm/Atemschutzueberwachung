@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.EventType;
 import de.thral.draegermanObservation.business.Squad;
+import de.thral.draegermanObservation.hardware.HardwareInterface;
 import de.thral.draegermanObservation.persistence.CompleteOperationsDAO;
 import de.thral.draegermanObservation.ui.dialog.EndOperationDialog;
 import de.thral.draegermanObservation.ui.dialog.RegisterSquadDialog;
@@ -29,7 +31,8 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
 
     private OverviewView overviewView;
     private CompleteOperationsDAO completeOperationsDAO;
-    private RelativeLayout progressBar;
+    private HardwareInterface hardwareInterface;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,24 +45,37 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
                 .getActiveOperationDAO();
         completeOperationsDAO = ((DraegermanObservationApplication)getApplication())
                 .getCompleteOperationsDAO();
+        hardwareInterface = ((DraegermanObservationApplication)getApplication())
+                .getHardwareInterface();
 
-        progressBar = findViewById(R.id.operationProgress);
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar = findViewById(R.id.progress);
+        progressBar.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         if(intent.getBooleanExtra(KEY_RESUMED, false)){
-            for(Squad squad : activeOperationDAO.get().getActiveSquads()){
-                if(squad != null){
-                    if(!squad.getState().equals(EventType.PauseTimer)
-                            && !squad.getState().equals(EventType.Register)){
-                        squad.resumeAfterError();
-                    }
-                }
-            }
-            Toast.makeText(getApplicationContext(),
-                    R.string.toastOperationResumed, Toast.LENGTH_LONG ).show();
+            resumeAfterError();
         }
         initView();
+    }
+
+    private void resumeAfterError(){
+        for(Squad squad : activeOperationDAO.get().getActiveSquads()){
+            if(squad != null){
+                if(!squad.getState().equals(EventType.PauseTimer)
+                        && !squad.getState().equals(EventType.Register)){
+                    squad.resumeAfterError();
+                }
+                //TODO remove or update operation file after reminder or alarm is triggered
+                if(squad.isReminderActive()){
+                    hardwareInterface.turnOnReminder();
+                }
+                if(squad.isAlarmUnconfirmed()){
+                    hardwareInterface.turnOnAlarm();
+                }
+            }
+        }
+        Toast.makeText(getApplicationContext(),
+                R.string.toastOperationResumed, Toast.LENGTH_LONG ).show();
     }
 
     @Override
@@ -127,6 +143,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
 
         @Override
         protected void onPreExecute() {
+            overviewView.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -144,8 +161,6 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
             if(!result){
                 Toast.makeText(getApplicationContext(),
                         R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
-            } else {
-                System.out.println("SAVED!!!!!");
             }
             MonitoringOverviewActivity.this.finish();
         }

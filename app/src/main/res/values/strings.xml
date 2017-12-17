@@ -34,7 +34,7 @@
 
     <!--Operation-->
     <string name="stateListRegister">Registriert</string>
-    <string name="stateListBegin">Gerät angeschlossen</string>
+    <string name="stateListBegin">Angeschlossen</string>
     <string name="stateListArrive">Am Ziel</string>
     <string name="stateListTimer">Einsatzzeitmarke erreicht</string>
     <string name="stateListRetreat">Auf Rückzug</string>
@@ -46,7 +46,7 @@
     <string name="memberShortText">TM:</string>
 
     <string name="startButton">Einsatzbeginn</string>
-    <string name="pauseButton">Pause</string>
+    <string name="pauseButton">Pausieren</string>
     <string name="resumeButton">Fortsetzen</string>
     <string name="arriveButton">Ankunft Ziel</string>
     <string name="enterPressureButton">Druck eingeben</string>
@@ -57,7 +57,7 @@
     <string name="leaderText">Truppführer:</string>
     <string name="memberText">Truppmann:</string>
     <string name="pressureText">Druck bei:</string>
-    <string name="retreatText">Rückzug:</string>
+    <string name="retreatText">Rückzug</string>
     <string name="orderTextShort">Auftrag:</string>
 
     <string name="minutesShort">Min</string>
@@ -138,7 +138,8 @@
     <string name="eventListPause">Pausieren</string>
     <string name="eventListResume">Fortsetzen</string>
 
-    <string name="toastInvalidPressure">Druck ungültig - Höher als aktueller Wert!</string>
+    <string name="toastHigherPressure">Druck ungültig - Höher als aktueller Wert!</string>
+    <string name="errorInvalidPressure">Druck-Format ungültig!</string>
     <string name="toastPressureUnderZero">Druck kann nicht negativ sein!</string>
     <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
     <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>

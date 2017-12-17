@@ -20,7 +20,7 @@ import de.thral.draegermanObservation.persistence.DraegermanDAO;
 public class AddDraegermanDialog extends DialogFragment {
 
     public interface AddDraegermanListener{
-        boolean onAddDraegerman(Draegerman draegerman) ;
+        void onAddDraegerman(Draegerman draegerman) ;
     }
 
     private DraegermanDAO draegermanDAO;
@@ -73,39 +73,42 @@ public class AddDraegermanDialog extends DialogFragment {
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String firstnameString = firstname.getText().toString();
-                                String lastnameString = lastname.getText().toString();
-
-                                if(firstnameString.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoFirstname,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
+                                Draegerman add = attemptDraegermanAdd();
+                                if (add != null) {
+                                    enterPressure.dismiss();
+                                    listener.onAddDraegerman(add);
                                 }
-                                if(lastnameString.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoLastname,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                Draegerman add = draegermanDAO.prepareAdd(
-                                        firstnameString, lastnameString);
-                                if(add == null) {
-                                    String toast = firstnameString + " " + lastnameString + " "
-                                            + getString(R.string.toastDraegermanAlreadyExisiting);
-                                    Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                if (!listener.onAddDraegerman(add)) {
-                                    System.out.println("TEST");
-                                    Toast.makeText(getActivity(), R.string.toastDraegermanAddError,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                enterPressure.dismiss();
                             }
                         });
             }
         });
         return dialog;
+    }
+
+    private Draegerman attemptDraegermanAdd(){
+        String firstnameString = firstname.getText().toString();
+        String lastnameString = lastname.getText().toString();
+        firstname.setError(null);
+        lastname.setError(null);
+
+        if(firstnameString.equals("")){
+            firstname.setError(getString(R.string.toastNoFirstname));
+            return null;
+        }
+        if(lastnameString.equals("")){
+            lastname.setError(getString(R.string.toastNoFirstname));
+            return null;
+        }
+
+        Draegerman add = draegermanDAO.prepareAdd(
+                firstnameString, lastnameString);
+        
+        if(add == null) {
+            String toast = firstnameString + " " + lastnameString + " "
+                    + getString(R.string.toastDraegermanAlreadyExisiting);
+            Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
+        }
+        return add;
     }
 
     @Override

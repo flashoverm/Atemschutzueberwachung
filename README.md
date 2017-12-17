@@ -2,7 +2,6 @@
 
 ToDo:
 -   Hard coded values as constants
--   Style: Front and colors
 -   Unit tests
 
 

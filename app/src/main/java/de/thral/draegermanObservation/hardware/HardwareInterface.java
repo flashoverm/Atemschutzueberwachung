@@ -7,6 +7,7 @@ public class HardwareInterface {
 
     public enum Settings {flash, vibration, sound};
 
+    //TODO read/write shared prefs in own thread?
     private static final String PREF_ENABLE_FLASH = "de.thral.atemschutzueberwachung.flash";
     private static final String PREF_ENABLE_VIBRATION = "de.thral.atemschutzueberwachung.vibration";
     private static final String PREF_ENABLE_SOUND = "de.thral.atemschutzueberwachung.sound";

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.persistence.ActiveOperationDAO;
+import de.thral.draegermanObservation.persistence.DraegermanDAO;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -21,10 +22,10 @@ public class SplashActivity extends AppCompatActivity {
         this.activeOperationDAO = ((DraegermanObservationApplication)getApplication())
                 .getActiveOperationDAO();
 
-        new LoadOperationTask().execute();
+        new LoadDataTask().execute();
     }
 
-    private class LoadOperationTask extends AsyncTask<Void, Void, Void>{
+    private class LoadDataTask extends AsyncTask<Void, Void, Void>{
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -36,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             Intent intent = new Intent(SplashActivity.this, MenuActivity.class);
             SplashActivity.this.startActivity(intent);
+            finish();
         }
     }
 }

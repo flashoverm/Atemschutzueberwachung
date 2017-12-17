@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +25,8 @@
                 android:id="@+id/register_1"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
         </ViewFlipper>
         <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +45,8 @@
                 android:id="@+id/register_2"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
         </ViewFlipper>
     </LinearLayout>
@@ -71,7 +72,8 @@
                 android:id="@+id/register_3"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
         </ViewFlipper>
         <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
@@ -90,13 +92,15 @@
                 android:id="@+id/register_4"
                 layout="@layout/monitor_overview_register"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
             <include
                 android:id="@+id/end_4"
                 layout="@layout/monitor_overview_end"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dataViewMargin"/>
 
         </ViewFlipper>
     </LinearLayout>

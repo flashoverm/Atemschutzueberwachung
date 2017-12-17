@@ -60,34 +60,40 @@ public class EndOperationDialog extends DialogFragment {
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String observer = observerEdit.getText().toString();
-                                String operation = operationEdit.getText().toString();
-                                String location = locationEdit.getText().toString();
-                                String unit = unitEdit.getText().toString();
-
-
-                                if(observer.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoObserver,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
+                                if(attempEndOperation()){
+                                    endOperation.dismiss();
                                 }
-                                if(operation.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoOperation,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                if(location.equals("")){
-                                    Toast.makeText(getActivity(), R.string.toastNoLocation,
-                                            Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                listener.onOperationEnd(observer, operation, location, unit);
-                                endOperation.dismiss();
                             }
                         });
             }
         });
         return dialog;
+    }
+
+    private boolean attempEndOperation(){
+        String observer = observerEdit.getText().toString();
+        String operation = operationEdit.getText().toString();
+        String location = locationEdit.getText().toString();
+        String unit = unitEdit.getText().toString();
+
+        observerEdit.setError(null);
+        operationEdit.setError(null);
+        locationEdit.setError(null);
+
+        if(observer.equals("")){
+            observerEdit.setError(getString(R.string.toastNoObserver));
+            return false;
+        }
+        if(operation.equals("")){
+            operationEdit.setError(getString(R.string.toastNoOperation));
+            return false;
+        }
+        if(location.equals("")){
+            locationEdit.setError(getString(R.string.toastNoLocation));
+            return false;
+        }
+        listener.onOperationEnd(observer, operation, location, unit);
+        return true;
     }
 
     @Override

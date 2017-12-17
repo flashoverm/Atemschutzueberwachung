@@ -7,26 +7,24 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:padding="40dp"
+        android:layout_height="@dimen/logo_height"
+        android:padding="@dimen/logo_padding"
         app:srcCompat="@drawable/atemschutz" />
 
     <Button
         android:id="@+id/startOperation"
-        android:layout_width="400dp"
-        android:layout_height="100dp"
+        android:layout_width="280dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/startOperationButton"
-        android:textSize="24dp" />
+        android:text="@string/startOperationButton" />
 
     <Button
         android:id="@+id/administration"
-        android:layout_width="220dp"
-        android:layout_height="80dp"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="@string/administationText"
-        android:textSize="22dp" />
+        android:layout_margin="4dp"
+        android:text="@string/administationText" />
 </RelativeLayout>

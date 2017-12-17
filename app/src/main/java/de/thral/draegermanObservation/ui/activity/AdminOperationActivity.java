@@ -37,7 +37,7 @@ public class AdminOperationActivity extends AdminBaseActivity
                 .getCompleteOperationsDAO();
         listView = findViewById(R.id.operationList);
         noEntry = findViewById(R.id.noOperations);
-        progressBar = findViewById(R.id.operationsProgress);
+        progressBar = findViewById(R.id.progress);
 
         new LoadOperationsTask().execute();
     }
@@ -85,8 +85,6 @@ public class AdminOperationActivity extends AdminBaseActivity
         return true;
     }
 
-
-
     @Override
     public void onRequestPermissionsResult(
             int requestCode, String permissions[], int[] grantResults) {
@@ -105,7 +103,7 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected void onPreExecute() {
-            showProgressBar();
+            showProgress(true);
         }
 
         @Override
@@ -119,10 +117,10 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected void onPostExecute(Void result) {
-            hideProgressBar();
+            showProgress(false);
             listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             listView.setAdapter(adapter);
-            setVisibility(completeOperationsDAO.getAll().size());
+            setVisibility(completeOperationsDAO.getAll().size() >0);
         }
     }
 
@@ -130,7 +128,7 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected void onPreExecute() {
-            showProgressBar();
+            showProgress(true);
         }
 
         @Override
@@ -152,7 +150,7 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected void onPostExecute(Boolean result) {
-            hideProgressBar();
+            showProgress(false);
             if(result != null){
                 if(result){
                     Toast.makeText(AdminOperationActivity.this,
@@ -163,6 +161,7 @@ public class AdminOperationActivity extends AdminBaseActivity
                 }
                 adapter.notifyDataSetChanged();
                 listView.clearChoices();
+                setVisibility(completeOperationsDAO.getAll().size() >0);
             }
         }
     }
@@ -171,7 +170,7 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected void onPreExecute() {
-            showProgressBar();
+            showProgress(true);
         }
 
         @Override
@@ -189,14 +188,14 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected void onPostExecute(Boolean result) {
-            hideProgressBar();
+            showProgress(false);
             if(!result){
                 Toast.makeText(AdminOperationActivity.this,
                         R.string.toastDeletingFailed, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
             listView.clearChoices();
-            setVisibility(completeOperationsDAO.getAll().size());
+            setVisibility(completeOperationsDAO.getAll().size() >0);
         }
     }
 }

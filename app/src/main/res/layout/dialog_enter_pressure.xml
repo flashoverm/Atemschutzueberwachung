@@ -19,9 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/leaderpressure"
         android:layout_toEndOf="@+id/leaderpressure"
-        android:ems="4"
+        android:ems="5"
         android:hint="@string/leaderPressureHint"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:textSize="14sp" />
 
     <EditText
@@ -30,9 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/leaderpressure"
         android:layout_toEndOf="@+id/leaderpressure"
-        android:ems="4"
+        android:ems="5"
         android:hint="@string/memberPressureHint"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:textSize="14sp" />
 
     <TextView

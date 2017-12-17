@@ -35,7 +35,7 @@ public class AdminDraegermanActivity extends AdminBaseActivity
         draegermanDAO = ((DraegermanObservationApplication)getApplication()).getDraegermanDAO();
         listView = findViewById(R.id.draegermanList);
         noEntry = findViewById(R.id.noDraegerman);
-        progressBar = findViewById(R.id.draegermanProgress);
+        progressBar = findViewById(R.id.progress);
 
         new LoadDraegermanTask().execute();
     }
@@ -82,20 +82,15 @@ public class AdminDraegermanActivity extends AdminBaseActivity
     }
 
     @Override
-    public boolean onAddDraegerman(Draegerman draegerman){
-        if(draegermanDAO.add(draegerman, this)){
-            adapter.notifyDataSetChanged();
-            setVisibility(draegermanDAO.getAll().size());
-            return true;
-        }
-        return false;
+    public void onAddDraegerman(Draegerman draegerman){
+        new AddDraegermanTask().execute(draegerman);
     }
 
     private class LoadDraegermanTask extends AsyncTask<Void, Void, Void>{
 
         @Override
         protected void onPreExecute() {
-            showProgressBar();
+            showProgress(true);
         }
 
         @Override
@@ -108,10 +103,33 @@ public class AdminDraegermanActivity extends AdminBaseActivity
 
         @Override
         protected void onPostExecute(Void result) {
-            hideProgressBar();
+            showProgress(false);
             listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             listView.setAdapter(adapter);
-            setVisibility(draegermanDAO.getAll().size());
+            setVisibility(draegermanDAO.getAll().size() >0);
+        }
+    }
+
+    private class AddDraegermanTask extends AsyncTask<Draegerman, Void, Boolean>{
+        @Override
+        protected void onPreExecute() {
+            showProgress(true);
+        }
+
+        @Override
+        protected Boolean doInBackground(Draegerman... params) {
+            return draegermanDAO.add(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            showProgress(false);
+            if(!result){
+                Toast.makeText(AdminDraegermanActivity.this,
+                        R.string.toastDraegermanAddError, Toast.LENGTH_LONG).show();
+            }
+            adapter.notifyDataSetChanged();
+            setVisibility(draegermanDAO.getAll().size() >0);
         }
     }
 
@@ -119,7 +137,7 @@ public class AdminDraegermanActivity extends AdminBaseActivity
 
         @Override
         protected void onPreExecute() {
-            showProgressBar();
+            showProgress(true);
         }
 
         @Override
@@ -137,15 +155,14 @@ public class AdminDraegermanActivity extends AdminBaseActivity
 
         @Override
         protected void onPostExecute(Boolean result) {
-            hideProgressBar();
-
+            showProgress(false);
             if(!result){
                 Toast.makeText(AdminDraegermanActivity.this,
                         R.string.toastDeletingFailed, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
             listView.clearChoices();
-            setVisibility(draegermanDAO.getAll().size());
+            setVisibility(draegermanDAO.getAll().size() >0);
         }
     }
 

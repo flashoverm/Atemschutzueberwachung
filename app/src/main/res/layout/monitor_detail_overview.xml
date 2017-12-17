@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/dataViewPadding"
+    android:paddingRight="@dimen/dataViewPadding"
+    android:paddingLeft="@dimen/dataViewPadding"
+    android:background="@drawable/border"
     android:weightSum="1.0">
 
     <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.48">
+        android:layout_weight="0.5">
 
         <TextView
             android:id="@+id/timer"
@@ -50,7 +52,7 @@
     <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.52">
+        android:layout_weight="0.5">
 
         <TextView
             android:id="@+id/leaderText"

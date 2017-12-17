@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dataViewPadding">3dp</dimen>
+    <dimen name="dataViewPadding">4dp</dimen>
     <dimen name="dataViewMargin">2dp</dimen>
     <dimen name="textMargin">10dp</dimen>
     <dimen name="textMarginHalf">5dp</dimen>
@@ -10,16 +10,19 @@
     <dimen name="textSizeDetailBig">24dp</dimen>
     <dimen name="textSizeDetailTimer">50dp</dimen>
 
-    <dimen name="textSizeDetailOverview">13dp</dimen>
-    <dimen name="textSizeDetailOverviewMedium">13dp</dimen>
+    <dimen name="textSizeDetailOverview">12dp</dimen>
+    <dimen name="textSizeDetailOverviewMedium">12dp</dimen>
     <dimen name="textSizeDetailOverviewBig">15dp</dimen>
     <dimen name="textSizeDetailOverviewTimer">28dp</dimen>
 
     <dimen name="textSizeOverview">14dp</dimen>
     <dimen name="textSizeOverviewMedium">16dp</dimen>
     <dimen name="textSizeOverviewBig">26dp</dimen>
-    <dimen name="textSizeOverviewTimer">38dp</dimen>
+    <dimen name="textSizeOverviewTimer">42dp</dimen>
 
-    <dimen name="buttonTextSize">14dp</dimen>
+    <dimen name="buttonTextSize">16dp</dimen>
+
+    <dimen name="logo_height">250dp</dimen>
+    <dimen name="logo_padding">25dp</dimen>
 
 </resources>

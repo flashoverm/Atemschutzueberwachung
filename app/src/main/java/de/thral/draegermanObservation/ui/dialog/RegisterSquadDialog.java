@@ -85,7 +85,7 @@ public class RegisterSquadDialog extends DialogFragment {
                         .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Squad squad = checkInputs();
+                        Squad squad = attemptRegistration();
                         if(squad != null){
                             listener.onSquadRegistered(squad);
                             registerDialog.dismiss();
@@ -176,27 +176,30 @@ public class RegisterSquadDialog extends DialogFragment {
         }
     }
 
-    private Squad checkInputs(){
+    private Squad attemptRegistration(){
         String squadnameText = squadName.getText().toString();
         String initLeaderPressure = leaderPressure.getText().toString();
         String initMemberPressure = memberPressure.getText().toString();
         String operatingTime = operatingTimeSpinner.getSelectedItem().toString();
         String order = orderSpinner.getSelectedItem().toString();
 
+        squadName.setError(null);
+        leaderPressure.setError(null);
+        memberPressure.setError(null);
+
         Draegerman leader;
         Draegerman member;
 
-
         if(squadnameText.equals("")){
-            Toast.makeText(getActivity(), R.string.toastNoSquadname,
-                    Toast.LENGTH_LONG).show();
+            squadName.setError(getString(R.string.toastNoSquadname));
             return null;
         }
+
         if(leaderEditEnabled){
+            leaderEdit.setError(null);
             String leaderName = leaderEdit.getText().toString();
             if(leaderName.equals("")){
-                Toast.makeText(getActivity(), R.string.toastNoLeaderName,
-                        Toast.LENGTH_LONG).show();
+                leaderEdit.setError(getString(R.string.toastNoLeaderName));
                 return null;
             }
             leader = new Draegerman(leaderName);
@@ -209,11 +212,12 @@ public class RegisterSquadDialog extends DialogFragment {
                 leader = (Draegerman)leaderSpinner.getSelectedItem();
             }
         }
+
         if(memberEditEnabled){
+            memberEdit.setError(null);
             String memberName = memberEdit.getText().toString();
             if(memberName.equals("")){
-                Toast.makeText(getActivity(), R.string.toastNoMemberName,
-                        Toast.LENGTH_LONG).show();
+                memberEdit.setError(getString(R.string.toastNoMemberName));
                 return null;
             }
             member = new Draegerman(memberName);
@@ -234,24 +238,39 @@ public class RegisterSquadDialog extends DialogFragment {
         }
 
         if(initLeaderPressure.equals("")){
-            Toast.makeText(getActivity(), R.string.toastNoPressureLeader,
-                    Toast.LENGTH_LONG).show();
+            leaderPressure.setError(getString(R.string.toastNoPressureLeader));
             return null;
         }
         if(initMemberPressure.equals("")){
-            Toast.makeText(getActivity(), R.string.toastNoPressureMember,
-                    Toast.LENGTH_LONG).show();
+            memberPressure.setError(getString(R.string.toastNoPressureMember));
             return null;
         }
-        int leaderPressure = Integer.parseInt(initLeaderPressure);
-        int memberPressure = Integer.parseInt(initMemberPressure);
-        if(leaderPressure < 0 || memberPressure < 0){
-            Toast.makeText(getActivity(), R.string.toastPressureUnderZero,
-                    Toast.LENGTH_LONG).show();
+
+        int leaderPressureValue;
+        int memberPressureValue;
+        try{
+            leaderPressureValue = Integer.parseInt(initLeaderPressure);
+        } catch(NumberFormatException e){
+            leaderPressure.setError(getString(R.string.errorInvalidPressure));
+            return null;
+        }
+        try{
+            memberPressureValue = Integer.parseInt(initMemberPressure);
+        } catch(NumberFormatException e){
+            memberPressure.setError(getString(R.string.errorInvalidPressure));
+            return null;
+        }
+
+        if(leaderPressureValue < 0 ){
+            leaderPressure.setError(getString(R.string.toastPressureUnderZero));
+            return null;
+        }
+        if(memberPressureValue < 0){
+            memberPressure.setError(getString(R.string.toastPressureUnderZero));
             return null;
         }
         return new Squad(
-                squadnameText, leader, leaderPressure, member, memberPressure,
+                squadnameText, leader, leaderPressureValue, member, memberPressureValue,
                 OperatingTime.getOperatingTime(getActivity(), operatingTime),
                 Order.getOrder(getActivity(), order)
         );

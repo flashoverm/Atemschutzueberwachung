@@ -47,9 +47,8 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
         completedFolder = new File(context.getFilesDir(), COMPLETED_FOLDER);
         if(!completedFolder.exists()){
-            if(!completedFolder.mkdirs()){
-                //TODO Ordner konnte nicht angelegt werden
-            }
+            completedFolder.mkdirs();
+            //TODO Ordner konnte nicht angelegt werden
         }
     }
 

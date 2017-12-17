@@ -3,6 +3,7 @@ package de.thral.draegermanObservation;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.widget.Toast;
 
 import de.thral.draegermanObservation.hardware.HardwareInterface;
 import de.thral.draegermanObservation.persistence.ActiveOperationDAO;
@@ -14,7 +15,8 @@ import de.thral.draegermanObservation.persistence.DraegermanDAOImpl;
 
 public class DraegermanObservationApplication extends Application {
 
-    public static final int DEBUG_IO_DELAY = 5000;
+    //TODO remove delay
+    public static final int DEBUG_IO_DELAY = 1500;
 
     private ActiveOperationDAO activeOperationDAO;
     private DraegermanDAO draegermanDAO;
