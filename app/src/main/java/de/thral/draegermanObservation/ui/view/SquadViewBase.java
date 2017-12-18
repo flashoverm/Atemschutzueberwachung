@@ -50,10 +50,13 @@ public abstract class SquadViewBase extends LinearLayout {
         if (squad.isReminderActive()) {
             activateViewReminder();
         } else {
-            deactivateViewReminder();
-        }
+            if(squad.isReminderActive()){
+                deactivateViewReminder();
+            }        }
         if (squad.isTimerExpired()) {
-            deactivateViewReminder();
+            if(squad.isReminderActive()){
+                deactivateViewReminder();
+            }
             activateViewAlarm();
         } else {
             deactivateViewAlarm();
