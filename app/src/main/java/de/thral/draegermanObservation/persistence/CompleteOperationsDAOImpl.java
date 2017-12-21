@@ -44,12 +44,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
     public CompleteOperationsDAOImpl(Context context){
         this.context = context;
-
         completedFolder = new File(context.getFilesDir(), COMPLETED_FOLDER);
-        if(!completedFolder.exists()){
-            completedFolder.mkdirs();
-            //TODO Ordner konnte nicht angelegt werden
-        }
     }
 
     @Override
@@ -86,6 +81,12 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
     @Override
     public boolean add(Operation operation){
+        if(!completedFolder.exists()){
+            if(!completedFolder.mkdirs()){
+                Log.e("PERSISTENCE", "Could not generate complete operations folder");
+                return false;
+            }
+        }
         File completedFile = new File(completedFolder, operation.getFilename()+".json");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try(FileWriter writer = new FileWriter(completedFile)){
