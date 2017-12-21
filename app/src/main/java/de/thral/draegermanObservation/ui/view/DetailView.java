@@ -102,12 +102,12 @@ public class DetailView extends SquadViewBase{
         retreat = detailView.findViewById(R.id.buttonRetreat);
         end = detailView.findViewById(R.id.buttonEnd);
 
-        //buttonAnimation = ObjectAnimator.ofInt(enterPressure, "backgroundColor",
-        //        ContextCompat.getColor(getContext(), R.color.red),
-        //        ContextCompat.getColor(getContext(), R.color.blue));
-        //buttonAnimation.setDuration(1500);
-        //buttonAnimation.setRepeatCount(ValueAnimator.INFINITE);
-        //buttonAnimation.setEvaluator(new ArgbEvaluator());
+        buttonAnimation = ObjectAnimator.ofInt(enterPressure, "backgroundColor",
+                ContextCompat.getColor(getContext(), R.color.red),
+                ContextCompat.getColor(getContext(), R.color.blue));
+        buttonAnimation.setDuration(1500);
+        buttonAnimation.setRepeatCount(ValueAnimator.INFINITE);
+        buttonAnimation.setEvaluator(new ArgbEvaluator());
 
         startBuilder = new AlertDialog.Builder(getContext());
         startBuilder.setTitle(R.string.timerInfoTitle)
