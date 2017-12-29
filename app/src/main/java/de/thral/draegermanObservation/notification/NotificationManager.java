@@ -1,9 +1,9 @@
-package de.thral.draegermanObservation.deviceNotification;
+package de.thral.draegermanObservation.notification;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class DeviceNotificationInterface {
+public class NotificationManager {
 
     public enum Settings {flash, vibration, sound};
 
@@ -23,7 +23,7 @@ public class DeviceNotificationInterface {
     private boolean soundEnabled;
     private Sound sound;
 
-    public DeviceNotificationInterface(Context context){
+    public NotificationManager(Context context){
         this.context = context;
         initSettings();
         flash = new Flash(context);

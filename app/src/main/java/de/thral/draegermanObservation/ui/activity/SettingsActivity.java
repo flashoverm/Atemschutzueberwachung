@@ -7,11 +7,11 @@ import android.widget.CompoundButton;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
-import de.thral.draegermanObservation.deviceNotification.DeviceNotificationInterface;
+import de.thral.draegermanObservation.notification.NotificationManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private DeviceNotificationInterface deviceNotificationInterface;
+    private NotificationManager notificationManager;
 
     private CheckBox enableFlash;
     private CheckBox enableVibration;
@@ -22,19 +22,19 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_settings);
 
-        deviceNotificationInterface = ((DraegermanObservationApplication)getApplication())
-                .getDeviceNotificationInterface();
+        notificationManager = ((DraegermanObservationApplication)getApplication())
+                .getNotificationManager();
 
         enableFlash = findViewById(R.id.enableFlash);
         enableVibration = findViewById(R.id.enableVibration);
         enableSound = findViewById(R.id.enableSound);
 
-        boolean[] availability = deviceNotificationInterface.getAvailability();
+        boolean[] availability = notificationManager.getAvailability();
         enableFlash.setEnabled(availability[0]);
         enableVibration.setEnabled(availability[1]);
         enableSound.setEnabled(availability[2]);
 
-        boolean[] preferences = deviceNotificationInterface.getSettings();
+        boolean[] preferences = notificationManager.getSettings();
         enableFlash.setChecked(preferences[0]);
         enableVibration.setChecked(preferences[1]);
         enableSound.setChecked(preferences[2]);
@@ -42,19 +42,19 @@ public class SettingsActivity extends AppCompatActivity {
         enableFlash.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                deviceNotificationInterface.setSetting(DeviceNotificationInterface.Settings.flash, b);
+                notificationManager.setSetting(NotificationManager.Settings.flash, b);
             }
         });
         enableVibration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                deviceNotificationInterface.setSetting(DeviceNotificationInterface.Settings.vibration, b);
+                notificationManager.setSetting(NotificationManager.Settings.vibration, b);
             }
         });
         enableSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                deviceNotificationInterface.setSetting(DeviceNotificationInterface.Settings.sound, b);
+                notificationManager.setSetting(NotificationManager.Settings.sound, b);
             }
         });
     }

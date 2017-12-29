@@ -1,4 +1,4 @@
-package de.thral.draegermanObservation.deviceNotification;
+package de.thral.draegermanObservation.notification;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -7,7 +7,7 @@ import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.util.Log;
 
-public class Flash implements DeviceNotification {
+public class Flash implements Notification {
 
     private Context context;
 

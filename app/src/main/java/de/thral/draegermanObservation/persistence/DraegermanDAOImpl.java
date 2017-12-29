@@ -3,7 +3,6 @@ package de.thral.draegermanObservation.persistence;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
-import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.Draegerman;
 
 public class DraegermanDAOImpl implements DraegermanDAO {

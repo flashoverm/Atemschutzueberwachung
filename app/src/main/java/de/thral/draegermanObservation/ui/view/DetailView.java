@@ -142,7 +142,7 @@ public class DetailView extends SquadViewBase{
 
     private void showEnterPressure(EventType type){
         if(squad.isReminderActive()){
-            deviceNotificationInterface.turnOffReminder();
+            notificationManager.turnOffReminder();
         }
         EnterPressureDialog dialog = EnterPressureDialog.newInstance(
                 getContext(), type);
@@ -333,7 +333,7 @@ public class DetailView extends SquadViewBase{
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             squad.confirmAlarm();
-                            deviceNotificationInterface.turnOffAlarm();
+                            notificationManager.turnOffAlarm();
                             if(getContext() instanceof MonitoringBaseActivity){
                                 ((MonitoringDetailActivity)getContext()).updateOperation();
                             }

@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
@@ -73,10 +72,10 @@ public abstract class SquadOverviewBase extends SquadViewBase {
                 deactivateViewReminder();
             }
             activateViewAlarm();
-            deviceNotificationInterface.turnOnAlarm();
+            notificationManager.turnOnAlarm();
         } else {
             activateViewReminder();
-            deviceNotificationInterface.turnOnReminder();
+            notificationManager.turnOnReminder();
         }
     }
 }

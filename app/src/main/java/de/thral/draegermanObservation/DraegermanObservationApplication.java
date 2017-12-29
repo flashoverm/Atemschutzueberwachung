@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import de.thral.draegermanObservation.deviceNotification.DeviceNotificationInterface;
+import de.thral.draegermanObservation.notification.NotificationManager;
 import de.thral.draegermanObservation.persistence.ActiveOperationDAO;
 import de.thral.draegermanObservation.persistence.ActiveOperationDAOImpl;
 import de.thral.draegermanObservation.persistence.CompleteOperationsDAO;
@@ -21,7 +21,7 @@ public class DraegermanObservationApplication extends Application {
     private DraegermanDAO draegermanDAO;
     private CompleteOperationsDAO completeOperationsDAO;
 
-    private DeviceNotificationInterface deviceNotificationInterface;
+    private NotificationManager notificationManager;
 
     @Override
     public void onCreate() {
@@ -30,17 +30,17 @@ public class DraegermanObservationApplication extends Application {
         activeOperationDAO = new ActiveOperationDAOImpl(context);
         draegermanDAO = new DraegermanDAOImpl(context);
         completeOperationsDAO = new CompleteOperationsDAOImpl(context);
-        deviceNotificationInterface = new DeviceNotificationInterface(context);
+        notificationManager = new NotificationManager(context);
     }
 
-    public DeviceNotificationInterface getDeviceNotificationInterface(){
-        return deviceNotificationInterface;
+    public NotificationManager getNotificationManager(){
+        return notificationManager;
     }
 
-    public static DeviceNotificationInterface getDeviceNotificationInterface(Context context){
+    public static NotificationManager getNotificationManager(Context context){
         DraegermanObservationApplication activity
                 = (DraegermanObservationApplication)((Activity)context).getApplication();
-        return activity.getDeviceNotificationInterface();
+        return activity.getNotificationManager();
     }
 
     public ActiveOperationDAO getActiveOperationDAO(){

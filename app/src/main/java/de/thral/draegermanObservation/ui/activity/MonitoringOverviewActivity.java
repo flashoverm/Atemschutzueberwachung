@@ -14,7 +14,6 @@ import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.EventType;
 import de.thral.draegermanObservation.business.Squad;
-import de.thral.draegermanObservation.deviceNotification.DeviceNotificationInterface;
 import de.thral.draegermanObservation.persistence.CompleteOperationsDAO;
 import de.thral.draegermanObservation.ui.dialog.EndOperationDialog;
 import de.thral.draegermanObservation.ui.dialog.RegisterSquadDialog;

@@ -1,10 +1,10 @@
-package de.thral.draegermanObservation.deviceNotification;
+package de.thral.draegermanObservation.notification;
 
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.util.Log;
 
-public class Sound implements DeviceNotification {
+public class Sound implements Notification {
 
     private boolean soundState;
 

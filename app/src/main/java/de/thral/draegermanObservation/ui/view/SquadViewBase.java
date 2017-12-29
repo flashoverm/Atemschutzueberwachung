@@ -6,16 +6,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.Squad;
-import de.thral.draegermanObservation.deviceNotification.DeviceNotificationInterface;
+import de.thral.draegermanObservation.notification.NotificationManager;
 import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
 
 public abstract class SquadViewBase extends LinearLayout {
@@ -25,7 +23,7 @@ public abstract class SquadViewBase extends LinearLayout {
 
     protected ValueAnimator colorAnimator;
 
-    protected DeviceNotificationInterface deviceNotificationInterface;
+    protected NotificationManager notificationManager;
 
     protected TextView timer, squadname, state, leaderName, memberName;
 
@@ -40,8 +38,8 @@ public abstract class SquadViewBase extends LinearLayout {
     }
 
     private void init(){
-        this.deviceNotificationInterface = DraegermanObservationApplication
-                .getDeviceNotificationInterface(getContext());
+        this.notificationManager = DraegermanObservationApplication
+                .getNotificationManager(getContext());
         initView();
     }
 
@@ -72,10 +70,10 @@ public abstract class SquadViewBase extends LinearLayout {
         if (expired) {
             deactivateViewReminder();
             activateViewAlarm();
-            deviceNotificationInterface.turnOnAlarm();
+            notificationManager.turnOnAlarm();
         } else {
             activateViewReminder();
-            deviceNotificationInterface.turnOnReminder();
+            notificationManager.turnOnReminder();
         }
     }
 
