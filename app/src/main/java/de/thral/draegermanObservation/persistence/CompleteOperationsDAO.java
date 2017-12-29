@@ -8,6 +8,8 @@ import de.thral.draegermanObservation.business.Operation;
 
 public interface CompleteOperationsDAO {
 
+    String LOG_TAG = "PERSISTENCE_COMPLETE";
+
     /** Returns all completed operations
      *
      * @return list of CompleteOperation objects

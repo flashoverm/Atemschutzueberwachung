@@ -28,7 +28,7 @@ public class MenuActivity extends MonitoringBaseActivity {
                 if(activeOperationDAO.get() == null){
                     ((DraegermanObservationApplication)getApplication())
                             .getActiveOperationDAO().add();
-                    new UpdateOperationTask().execute();
+                    updateOperation();
                 }
                 startActivity(intent);
             }

@@ -7,8 +7,6 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
@@ -22,6 +20,8 @@ import de.thral.draegermanObservation.business.EventType;
 import de.thral.draegermanObservation.business.Squad;
 import de.thral.draegermanObservation.business.SquadChangeListener;
 import de.thral.draegermanObservation.business.TimerChangeListener;
+import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
+import de.thral.draegermanObservation.ui.activity.MonitoringDetailActivity;
 import de.thral.draegermanObservation.ui.dialog.EnterPressureDialog;
 import de.thral.draegermanObservation.ui.dialog.PressureWarningDialog;
 
@@ -73,6 +73,7 @@ public class DetailView extends SquadViewBase{
 
     private void initInfoView() {
         detailView = inflate(getContext(), R.layout.monitor_detail, this);
+        detailView.setBackgroundColor(getResources().getColor(R.color.white));
         infoView = detailView.findViewById(R.id.infoScreen);
         timer = infoView.findViewById(R.id.timer);
         squadname = infoView.findViewById(R.id.squadname);
@@ -91,8 +92,6 @@ public class DetailView extends SquadViewBase{
         pressureTime3 = infoView.findViewById(R.id.pressureTime3);
         leaderPressure3 = infoView.findViewById(R.id.leaderPressure3);
         memberPressure3 = infoView.findViewById(R.id.memberPressure3);
-
-        detailView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
     }
 
     private void initButtons(){
@@ -101,13 +100,6 @@ public class DetailView extends SquadViewBase{
         enterPressure = detailView.findViewById(R.id.buttonEnterPressure);
         retreat = detailView.findViewById(R.id.buttonRetreat);
         end = detailView.findViewById(R.id.buttonEnd);
-
-        buttonAnimation = ObjectAnimator.ofInt(enterPressure, "backgroundColor",
-                ContextCompat.getColor(getContext(), R.color.red),
-                ContextCompat.getColor(getContext(), R.color.blue));
-        buttonAnimation.setDuration(1500);
-        buttonAnimation.setRepeatCount(ValueAnimator.INFINITE);
-        buttonAnimation.setEvaluator(new ArgbEvaluator());
 
         startBuilder = new AlertDialog.Builder(getContext());
         startBuilder.setTitle(R.string.timerInfoTitle)
@@ -150,7 +142,7 @@ public class DetailView extends SquadViewBase{
 
     private void showEnterPressure(EventType type){
         if(squad.isReminderActive()){
-            hardwareInterface.turnOffReminder();
+            deviceNotificationInterface.turnOffReminder();
         }
         EnterPressureDialog dialog = EnterPressureDialog.newInstance(
                 getContext(), type);
@@ -341,7 +333,10 @@ public class DetailView extends SquadViewBase{
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             squad.confirmAlarm();
-                            hardwareInterface.turnOffAlarm();
+                            deviceNotificationInterface.turnOffAlarm();
+                            if(getContext() instanceof MonitoringBaseActivity){
+                                ((MonitoringDetailActivity)getContext()).updateOperation();
+                            }
                         }
                     }).create();
             alarmMessage.show();
@@ -350,12 +345,22 @@ public class DetailView extends SquadViewBase{
 
     @Override
     protected void activateViewReminder(){
+        if(buttonAnimation == null){
+            buttonAnimation = ObjectAnimator.ofInt(enterPressure, "backgroundColor",
+                    ContextCompat.getColor(getContext(), R.color.red),
+                    ContextCompat.getColor(getContext(), R.color.blue));
+            buttonAnimation.setDuration(1500);
+            buttonAnimation.setRepeatCount(ValueAnimator.INFINITE);
+            buttonAnimation.setEvaluator(new ArgbEvaluator());
+        }
         buttonAnimation.start();
     }
 
     @Override
     protected void deactivateViewReminder(){
-        buttonAnimation.end();
+        if(buttonAnimation != null){
+            buttonAnimation.end();
+        }
     }
 
 }

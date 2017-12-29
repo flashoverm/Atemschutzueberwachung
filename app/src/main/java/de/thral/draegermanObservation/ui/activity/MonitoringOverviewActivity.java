@@ -8,14 +8,13 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.EventType;
 import de.thral.draegermanObservation.business.Squad;
-import de.thral.draegermanObservation.hardware.HardwareInterface;
+import de.thral.draegermanObservation.deviceNotification.DeviceNotificationInterface;
 import de.thral.draegermanObservation.persistence.CompleteOperationsDAO;
 import de.thral.draegermanObservation.ui.dialog.EndOperationDialog;
 import de.thral.draegermanObservation.ui.dialog.RegisterSquadDialog;
@@ -31,7 +30,6 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
 
     private OverviewView overviewView;
     private CompleteOperationsDAO completeOperationsDAO;
-    private HardwareInterface hardwareInterface;
     private ProgressBar progressBar;
 
     @Override
@@ -45,8 +43,6 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
                 .getActiveOperationDAO();
         completeOperationsDAO = ((DraegermanObservationApplication)getApplication())
                 .getCompleteOperationsDAO();
-        hardwareInterface = ((DraegermanObservationApplication)getApplication())
-                .getHardwareInterface();
 
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.GONE);
@@ -64,13 +60,6 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
                 if(!squad.getState().equals(EventType.PauseTimer)
                         && !squad.getState().equals(EventType.Register)){
                     squad.resumeAfterError();
-                }
-                //TODO remove or update operation file after reminder or alarm is triggered
-                if(squad.isReminderActive()){
-                    hardwareInterface.turnOnReminder();
-                }
-                if(squad.isAlarmUnconfirmed()){
-                    hardwareInterface.turnOnAlarm();
                 }
             }
         }
@@ -128,7 +117,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
     @Override
     public void onSquadRegistered(Squad registeredSquad) {
         activeOperationDAO.get().registerSquad(registeredSquad);
-        new UpdateOperationTask().execute();
+        updateOperation();
         initView();
     }
 

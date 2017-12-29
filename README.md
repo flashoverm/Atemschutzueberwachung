@@ -1,11 +1,5 @@
 # Atemschutzueberwachung
 
-ToDo:
--   Hard coded values as constants
--   Unit tests
-
-
-
 Improvements:
 
 - If Text is to long for TextView -> Animate horizontal translation

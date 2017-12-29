@@ -1,10 +1,10 @@
-package de.thral.draegermanObservation.hardware;
+package de.thral.draegermanObservation.deviceNotification;
 
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.util.Log;
 
-public class Sound implements Hardware {
+public class Sound implements DeviceNotification {
 
     private boolean soundState;
 
@@ -39,7 +39,7 @@ public class Sound implements Hardware {
                             Thread.sleep(pauseMillis);
                         }
                     } catch (InterruptedException e){
-                        Log.e("HARDWARE", e.getMessage());
+                        Log.e(LOG_TAG, e.getMessage());
                         Thread.currentThread().interrupt();
                     }
                 }

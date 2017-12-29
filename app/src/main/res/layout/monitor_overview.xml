@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/dataViewPadding"
-    android:background="@drawable/border"
+    android:background="@drawable/background_border"
     android:weightSum="1.0">
 
     <android.support.v7.widget.GridLayout
@@ -58,16 +58,15 @@
 
         <TextView
             android:id="@+id/leaderText"
-            android:layout_marginEnd="@dimen/textMargin"
+            android:paddingEnd="@dimen/textMargin"
             android:text="@string/leaderText"
-            android:textSize="@dimen/textSizeOverview"
             app:layout_column="0"
             app:layout_row="1"
             app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/memberText"
-            android:layout_marginEnd="@dimen/textMargin"
+            android:paddingEnd="@dimen/textMargin"
             android:text="@string/memberText"
             android:textSize="@dimen/textSizeOverview"
             app:layout_column="0"
@@ -77,7 +76,7 @@
         <TextView
             android:id="@+id/lastPressureText"
             android:layout_width="0dp"
-            android:layout_marginEnd="@dimen/textMargin"
+            android:paddingEnd="@dimen/textMargin"
             android:text="@string/pressureText"
             android:textAlignment="textEnd"
             android:textSize="@dimen/textSizeOverview"
@@ -113,7 +112,7 @@
 
         <TextView
             android:id="@+id/lastPressureTime"
-            android:layout_marginStart="@dimen/textMarginHalf"
+            android:paddingStart="@dimen/textMarginHalf"
             android:text="20 Min."
             android:textSize="@dimen/textSizeOverview"
             app:layout_column="2"
@@ -122,7 +121,7 @@
 
         <TextView
             android:id="@+id/leaderPressure"
-            android:layout_marginStart="@dimen/textMargin"
+            android:paddingStart="@dimen/textMargin"
             android:text="180"
             android:textSize="@dimen/textSizeOverview"
             app:layout_column="2"
@@ -131,7 +130,7 @@
 
         <TextView
             android:id="@+id/memberPressure"
-            android:layout_marginStart="@dimen/textMargin"
+            android:paddingStart="@dimen/textMargin"
             android:text="180"
             android:textSize="@dimen/textSizeOverview"
             app:layout_column="2"
@@ -140,7 +139,7 @@
 
         <TextView
             android:id="@+id/returnText"
-            android:layout_marginStart="@dimen/textMargin"
+            android:paddingStart="@dimen/textMargin"
             android:text="@string/retreatText"
             android:textSize="@dimen/textSizeOverview"
             app:layout_column="3"

@@ -24,6 +24,7 @@ public class DetailOverview extends SquadOverviewBase {
     @Override
     protected void initView(){
         infoView = inflate(getContext(), R.layout.monitor_detail_overview, this);
+        infoView.setBackgroundColor(getResources().getColor(R.color.white));
         timer = infoView.findViewById(R.id.timer);
         squadname = infoView.findViewById(R.id.squadname);
         state = infoView.findViewById(R.id.state);

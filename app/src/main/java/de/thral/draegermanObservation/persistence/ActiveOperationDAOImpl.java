@@ -46,6 +46,7 @@ public class ActiveOperationDAOImpl implements ActiveOperationDAO {
             try(JsonReader reader = new JsonReader(new FileReader(active))) {
                 activeOperation = gson.fromJson(reader, Operation.class);
             }catch (IOException e){
+                Log.e(LOG_TAG, e.getMessage());
                 //File not existing -> No active operation
             }
         }
@@ -71,7 +72,7 @@ public class ActiveOperationDAOImpl implements ActiveOperationDAO {
             writer.flush();
             return true;
         }catch(IOException e) {
-            Log.e("PERSISTENCE", e.getMessage());
+            Log.e(LOG_TAG, e.getMessage());
             return false;
         }
     }

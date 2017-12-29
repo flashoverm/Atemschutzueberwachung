@@ -4,17 +4,19 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.Squad;
-import de.thral.draegermanObservation.hardware.HardwareInterface;
+import de.thral.draegermanObservation.deviceNotification.DeviceNotificationInterface;
+import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
 
 public abstract class SquadViewBase extends LinearLayout {
 
@@ -23,7 +25,7 @@ public abstract class SquadViewBase extends LinearLayout {
 
     protected ValueAnimator colorAnimator;
 
-    protected HardwareInterface hardwareInterface;
+    protected DeviceNotificationInterface deviceNotificationInterface;
 
     protected TextView timer, squadname, state, leaderName, memberName;
 
@@ -38,7 +40,8 @@ public abstract class SquadViewBase extends LinearLayout {
     }
 
     private void init(){
-        this.hardwareInterface = DraegermanObservationApplication.getHardwareInterface(getContext());
+        this.deviceNotificationInterface = DraegermanObservationApplication
+                .getDeviceNotificationInterface(getContext());
         initView();
     }
 
@@ -50,9 +53,8 @@ public abstract class SquadViewBase extends LinearLayout {
         if (squad.isReminderActive()) {
             activateViewReminder();
         } else {
-            if(squad.isReminderActive()){
-                deactivateViewReminder();
-            }        }
+            deactivateViewReminder();
+        }
         if (squad.isTimerExpired()) {
             if(squad.isReminderActive()){
                 deactivateViewReminder();
@@ -64,13 +66,16 @@ public abstract class SquadViewBase extends LinearLayout {
     }
 
     protected void timerReachedMark(boolean expired) {
+        if(getContext() instanceof MonitoringBaseActivity){
+            ((MonitoringBaseActivity)getContext()).updateOperation();
+        }
         if (expired) {
             deactivateViewReminder();
             activateViewAlarm();
-            hardwareInterface.turnOnAlarm();
+            deviceNotificationInterface.turnOnAlarm();
         } else {
             activateViewReminder();
-            hardwareInterface.turnOnReminder();
+            deviceNotificationInterface.turnOnReminder();
         }
     }
 
@@ -87,7 +92,6 @@ public abstract class SquadViewBase extends LinearLayout {
     protected void deactivateViewAlarm(){
         if(colorAnimator != null){
             colorAnimator.end();
-
         }
     }
 

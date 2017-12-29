@@ -60,6 +60,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
                     draegermen =  gson.fromJson(reader, DRAEGERMEN_TYPE);
                     return;
                 } catch(IOException e){
+                    Log.e(LOG_TAG, e.getMessage());
                     //File not existing -> Initialize list
                 }
             }
@@ -90,6 +91,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
             try{
                 save();
             }catch(IOException e){
+                Log.e(LOG_TAG, e.getMessage());
                 draegermen.remove(newDraegerman);
                 return false;
             }
@@ -106,6 +108,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
                 save();
                 return true;
             }catch(IOException e){
+                Log.e(LOG_TAG, e.getMessage());
                 draegermen.add(draegerman);
             }
         }
@@ -131,7 +134,7 @@ public class DraegermanDAOImpl implements DraegermanDAO {
             writer.append(gson.toJson(draegermen));
             writer.flush();
         }catch(IOException e) {
-            Log.e("PERSISTENCE", e.getMessage());
+            Log.e(LOG_TAG, e.getMessage());
             throw e;
         }
     }

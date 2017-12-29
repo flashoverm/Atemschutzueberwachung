@@ -2,6 +2,7 @@ package de.thral.draegermanObservation.ui.activity;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import de.thral.draegermanObservation.R;
@@ -11,7 +12,7 @@ public abstract class MonitoringBaseActivity extends AppCompatActivity {
 
     protected ActiveOperationDAO activeOperationDAO;
 
-    protected class UpdateOperationTask extends AsyncTask<Void, Void, Boolean> {
+    private class UpdateOperationTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -24,6 +25,12 @@ public abstract class MonitoringBaseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    public void updateOperation(){
+        if(activeOperationDAO != null){
+            new UpdateOperationTask().execute();
         }
     }
 

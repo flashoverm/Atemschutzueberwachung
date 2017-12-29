@@ -7,8 +7,8 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/logo_height"
-        android:padding="@dimen/logo_padding"
+        android:layout_height="@dimen/logoHeight"
+        android:padding="@dimen/logoPadding"
         app:srcCompat="@drawable/atemschutz" />
 
     <Button

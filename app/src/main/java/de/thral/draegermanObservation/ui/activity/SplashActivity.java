@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.persistence.ActiveOperationDAO;
-import de.thral.draegermanObservation.persistence.DraegermanDAO;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_splash);
 
         this.activeOperationDAO = ((DraegermanObservationApplication)getApplication())
                 .getActiveOperationDAO();

@@ -4,16 +4,15 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import de.thral.draegermanObservation.R;
+import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
 
 public abstract class SquadOverviewBase extends SquadViewBase {
+
+    private ObjectAnimator backgroundAnimation;
 
     public SquadOverviewBase(Context context) {
         super(context);
@@ -25,20 +24,22 @@ public abstract class SquadOverviewBase extends SquadViewBase {
 
     @Override
     protected void activateViewReminder(){
-        System.out.println("ANIMATION START");
-        infoView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red));
-        final ValueAnimator valueAnimator = ObjectAnimator.ofInt(infoView, "backgroundColor",
-                ContextCompat.getColor(getContext(), R.color.red),
-                ContextCompat.getColor(getContext(), R.color.white));
-        valueAnimator.setDuration(800);
-        valueAnimator.setEvaluator(new ArgbEvaluator());
-        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        valueAnimator.start();
+        if(backgroundAnimation == null){
+            backgroundAnimation = ObjectAnimator.ofInt(infoView, "backgroundColor",
+                    getResources().getColor(R.color.red),
+                    getResources().getColor(R.color.white));
+            backgroundAnimation.setDuration(800);
+            backgroundAnimation.setEvaluator(new ArgbEvaluator());
+            backgroundAnimation.setRepeatCount(ValueAnimator.INFINITE);
+        }
+        backgroundAnimation.start();
     }
 
     @Override
     protected void deactivateViewReminder(){
-        infoView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+        if(backgroundAnimation != null){
+            backgroundAnimation.end();
+        }
     }
 
     @Override
@@ -62,6 +63,9 @@ public abstract class SquadOverviewBase extends SquadViewBase {
 
     @Override
     protected void timerReachedMark(boolean expired) {
+        if(getContext() instanceof MonitoringBaseActivity){
+            ((MonitoringBaseActivity)getContext()).updateOperation();
+        }
         if (expired) {
             if(squad.isAlarmUnconfirmed()){
                 activateViewReminder();
@@ -69,10 +73,10 @@ public abstract class SquadOverviewBase extends SquadViewBase {
                 deactivateViewReminder();
             }
             activateViewAlarm();
-            hardwareInterface.turnOnAlarm();
+            deviceNotificationInterface.turnOnAlarm();
         } else {
             activateViewReminder();
-            hardwareInterface.turnOnReminder();
+            deviceNotificationInterface.turnOnReminder();
         }
     }
 }

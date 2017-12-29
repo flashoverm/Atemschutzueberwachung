@@ -1,4 +1,4 @@
-package de.thral.draegermanObservation.hardware;
+package de.thral.draegermanObservation.deviceNotification;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -7,7 +7,7 @@ import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.util.Log;
 
-public class Flash implements Hardware {
+public class Flash implements DeviceNotification {
 
     private Context context;
 
@@ -36,7 +36,7 @@ public class Flash implements Hardware {
             try {
                 cameraID = cameraManager.getCameraIdList()[0];
             } catch (CameraAccessException e) {
-                Log.e("HARDWARE", e.getMessage());
+                Log.e(LOG_TAG, e.getMessage());
                 flashAvailable = false;
             }
         }
@@ -67,9 +67,9 @@ public class Flash implements Hardware {
                                 }
                             }
                         } catch (CameraAccessException e) {
-                            Log.e("HARDWARE", e.getMessage());
+                            Log.e(LOG_TAG, e.getMessage());
                         } catch (InterruptedException e){
-                            Log.e("HARDWARE", e.getMessage());
+                            Log.e(LOG_TAG, e.getMessage());
                             Thread.currentThread().interrupt();
                         }
                     }

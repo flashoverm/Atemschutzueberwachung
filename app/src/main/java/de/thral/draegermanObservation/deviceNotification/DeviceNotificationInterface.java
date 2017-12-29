@@ -1,13 +1,12 @@
-package de.thral.draegermanObservation.hardware;
+package de.thral.draegermanObservation.deviceNotification;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class HardwareInterface {
+public class DeviceNotificationInterface {
 
     public enum Settings {flash, vibration, sound};
 
-    //TODO read/write shared prefs in own thread?
     private static final String PREF_ENABLE_FLASH = "de.thral.atemschutzueberwachung.flash";
     private static final String PREF_ENABLE_VIBRATION = "de.thral.atemschutzueberwachung.vibration";
     private static final String PREF_ENABLE_SOUND = "de.thral.atemschutzueberwachung.sound";
@@ -24,7 +23,7 @@ public class HardwareInterface {
     private boolean soundEnabled;
     private Sound sound;
 
-    public HardwareInterface(Context context){
+    public DeviceNotificationInterface(Context context){
         this.context = context;
         initSettings();
         flash = new Flash(context);

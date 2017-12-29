@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingRight="@dimen/dataViewPadding"
     android:paddingLeft="@dimen/dataViewPadding"
-    android:background="@drawable/border"
+    android:background="@drawable/background_border"
     android:weightSum="1.0">
 
     <android.support.v7.widget.GridLayout
@@ -56,7 +56,7 @@
 
         <TextView
             android:id="@+id/leaderText"
-            android:layout_marginEnd="@dimen/textMargin"
+            android:paddingEnd="@dimen/textMargin"
             android:text="@string/leaderShortText"
             android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="0"
@@ -65,7 +65,7 @@
 
         <TextView
             android:id="@+id/memberText"
-            android:layout_marginEnd="@dimen/textMargin"
+            android:paddingEnd="@dimen/textMargin"
             android:text="@string/memberShortText"
             android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="0"
@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/leaderPressureInfo"
-            android:layout_marginStart="@dimen/textMargin"
+            android:paddingStart="@dimen/textMargin"
             android:text="180(30 Min)/40"
             android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="2"
@@ -107,7 +107,7 @@
 
         <TextView
             android:id="@+id/memberPressureInfo"
-            android:layout_marginStart="@dimen/textMargin"
+            android:paddingStart="@dimen/textMargin"
             android:text="180(30 Min)/50"
             android:textSize="@dimen/textSizeDetailOverview"
             app:layout_column="2"

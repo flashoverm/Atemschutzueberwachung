@@ -5,24 +5,25 @@
     <dimen name="textMargin">10dp</dimen>
     <dimen name="textMarginHalf">5dp</dimen>
 
-    <dimen name="textSizeDetail">22dp</dimen>
-    <dimen name="textSizeDetailMedium">24dp</dimen>
-    <dimen name="textSizeDetailBig">40dp</dimen>
-    <dimen name="textSizeDetailTimer">75dp</dimen>
+    <dimen name="textSizeDetail">22sp</dimen>
+    <dimen name="textSizeDetailMedium">24sp</dimen>
+    <dimen name="textSizeDetailBig">40sp</dimen>
+    <dimen name="textSizeDetailTimer">75sp</dimen>
 
-    <dimen name="textSizeDetailOverview">18dp</dimen>
-    <dimen name="textSizeDetailOverviewMedium">20dp</dimen>
-    <dimen name="textSizeDetailOverviewBig">25dp</dimen>
-    <dimen name="textSizeDetailOverviewTimer">38dp</dimen>
+    <dimen name="textSizeDetailOverview">18sp</dimen>
+    <dimen name="textSizeDetailOverviewMedium">20sp</dimen>
+    <dimen name="textSizeDetailOverviewBig">25sp</dimen>
+    <dimen name="textSizeDetailOverviewTimer">38sp</dimen>
 
-    <dimen name="textSizeOverview">20dp</dimen>
-    <dimen name="textSizeOverviewMedium">26dp</dimen>
-    <dimen name="textSizeOverviewBig">36dp</dimen>
-    <dimen name="textSizeOverviewTimer">58dp</dimen>
+    <dimen name="textSizeOverview">20sp</dimen>
+    <dimen name="textSizeOverviewMedium">26sp</dimen>
+    <dimen name="textSizeOverviewBig">36sp</dimen>
+    <dimen name="textSizeOverviewTimer">58sp</dimen>
 
-    <dimen name="buttonTextSize">24dp</dimen>
+    <dimen name="buttonPadding">5dp</dimen>
+    <dimen name="buttonTextSize">24sp</dimen>
 
-    <dimen name="logo_height">375dp</dimen>
-    <dimen name="logo_padding">38dp</dimen>
+    <dimen name="logoHeight">375dp</dimen>
+    <dimen name="logoPadding">38dp</dimen>
 
 </resources>

@@ -67,9 +67,12 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
 
     @Override
     public void onLayoutClick(int layoutNumber){
-        Intent intent = new Intent(MonitoringDetailActivity.this,
-                MonitoringOverviewActivity.class);
-        startActivity(intent);
+        this.finish();
+    }
+
+    @Override
+    public void onStartButtonClick() {
+        updateOperation();
     }
 
     @Override
@@ -79,17 +82,16 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
                 && lastPressure.getPressureMember() >= memberPressure){
             switch(event){
                 case Arrive: selected.arriveTarget(leaderPressure, memberPressure);
-                    new UpdateOperationTask().execute();
+                    updateOperation();
                     break;
-                case Timer: selected.addPressureValues(EventType.Timer, leaderPressure, memberPressure);
-                    new UpdateOperationTask().execute();
+                case Timer: selected.pressureOnTime(leaderPressure, memberPressure);
+                    updateOperation();
                     break;
                 case Retreat: selected.retreat(leaderPressure, memberPressure);
-                    new UpdateOperationTask().execute();
+                    updateOperation();
                     break;
                 case End: selected.endOperation(leaderPressure, memberPressure);
-                    new UpdateOperationTask().execute();
-
+                    updateOperation();
                     this.finish();
                     break;
             }
@@ -97,11 +99,4 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
         }
         return false;
     }
-
-    @Override
-    public void onStartButtonClick() {
-        new UpdateOperationTask().execute();
-    }
-
-
 }

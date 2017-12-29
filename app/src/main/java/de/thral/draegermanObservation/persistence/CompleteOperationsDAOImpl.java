@@ -29,6 +29,7 @@ import de.thral.draegermanObservation.business.Operation;
 
 public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
+    private static final int ID_STORAGE_PERMISSION_REQUEST = 387;
     private static final String COMPLETED_OPS = "completeOperations.json";
     private static final String COMPLETED_FOLDER = "complete/";
 
@@ -72,6 +73,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
                     completeOperations = gson.fromJson(reader, operationEntryListType);
                     return;
                 }catch(IOException e){
+                    Log.e(LOG_TAG, e.getMessage());
                     //File not existing -> Initialize list
                 }
             }
@@ -83,7 +85,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
     public boolean add(Operation operation){
         if(!completedFolder.exists()){
             if(!completedFolder.mkdirs()){
-                Log.e("PERSISTENCE", "Could not generate complete operations folder");
+                Log.e(LOG_TAG, "Could not generate complete operations folder");
                 return false;
             }
         }
@@ -93,18 +95,19 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
             writer.append(gson.toJson(operation));
             writer.flush();
         } catch(IOException e){
-            Log.e("PERSISTENCE", e.getMessage());
+            Log.e(LOG_TAG, e.getMessage());
             return false;
         }
 
         load();
         CompleteOperation complete = new CompleteOperation(completedFile, operation.toString());
         if(completeOperations.add(complete)){
-            Collections.sort(completeOperations);
+            Collections.sort(completeOperations, Collections.reverseOrder());
             try{
                 save();
                 return true;
             }catch (IOException e){
+                Log.e(LOG_TAG, e.getMessage());
                 completeOperations.remove(complete);
             }
         }
@@ -118,6 +121,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
             try{
                 save();
             }catch(IOException e){
+                Log.e(LOG_TAG, e.getMessage());
                 return false;
             }
             File completed = new File(operation.getFile().getAbsolutePath());
@@ -144,7 +148,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
             writer.write(gson.toJson(completeOperations));
             writer.flush();
         } catch(IOException e){
-            Log.e("PERSISTENCE", e.getMessage());
+            Log.e(LOG_TAG, e.getMessage());
             throw e;
         }
     }
@@ -163,6 +167,7 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
                 save();
                 return true;
             } catch(IOException e){
+                Log.e(LOG_TAG, e.getMessage());
                 return false;
             }
         }
@@ -174,7 +179,8 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 387);
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    ID_STORAGE_PERMISSION_REQUEST);
             return false;
         }
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -182,7 +188,10 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
                     Environment.getExternalStorageDirectory(),
                     context.getString(R.string.folderNameExternal) + "/");
             if(!exportFolder.exists()){
-                return exportFolder.mkdir();
+                if(!exportFolder.mkdirs()){
+                    Log.e(LOG_TAG, "Could not generate export folder");
+                    return false;
+                }
             }
             return true;
         }

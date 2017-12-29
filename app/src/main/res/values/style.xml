@@ -2,7 +2,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="DraegermanTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/lightblue</item>
-
         <item name="android:buttonStyle">@style/Button</item>
         <item name="alertDialogTheme">@style/Dialog</item>
         <item name="toolbarStyle">@style/ActionBar</item>
@@ -10,11 +9,10 @@
         <item name="progressBarStyle">@style/Progress</item>
         <item name="android:textViewStyle">@style/TextAppearance</item>
         <item name="android:statusBarColor">@color/darkblue</item>
-
     </style>
 
     <style name="Button" parent="android:style/Widget.Button">
-        <item name="android:padding">5dp</item>
+        <item name="android:padding">@dimen/buttonPadding</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="android:colorAccent">@color/white</item>
         <item name="android:textColor">@color/white</item>
@@ -40,5 +38,4 @@
     <style name="TextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/black</item>
     </style>
-
 </resources>

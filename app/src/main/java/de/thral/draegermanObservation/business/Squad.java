@@ -171,31 +171,11 @@ public class Squad {
                             RETURN_SAFETY_FACTOR * (event.getPressureLeader()-pressureLeader);
                     this.memberReturnPressure =
                             RETURN_SAFETY_FACTOR * (event.getPressureMember()-pressureMember);
+                    this.checkPressureValues(pressureLeader, pressureMember);
                     break;
                 }
             }
             changeListener.onCalculatedReturnPressure(Squad.this);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean addPressureValues(EventType eventType, int pressureLeader, int pressureMember){
-        if(!isEventExisting(eventType) || eventType == EventType.Timer){
-            eventList.add(0, new Event(eventType, pressureLeader, pressureMember, operationTimer.getValue()));
-            operationTimer.deactivateReminder();
-            if(changeListener != null){
-                changeListener.onStateUpdate(this);
-                changeListener.onPressureUpdate(Squad.this);
-            }
-
-            if(pressureLeader < leaderReturnPressure
-                    || pressureMember < memberReturnPressure){
-                changeListener.onPressureInfo(Squad.this, true);
-            } else if(pressureLeader <= (leaderReturnPressure*RETURN_WARNING_PERCENTAGE/100)
-                    || pressureMember <= (memberReturnPressure*RETURN_WARNING_PERCENTAGE/100)){
-                changeListener.onPressureInfo(Squad.this, false);
-            }
             return true;
         }
         return false;
@@ -216,7 +196,11 @@ public class Squad {
     }
 
     public boolean retreat(int pressureLeader, int pressureMember){
-        return addPressureValues(EventType.Retreat, pressureLeader, pressureMember);
+        if(addPressureValues(EventType.Retreat, pressureLeader, pressureMember)){
+            checkPressureValues(pressureLeader, pressureMember);
+            return true;
+        }
+        return false;
     }
 
     public boolean endOperation(int pressureLeader, int pressureMember){
@@ -225,5 +209,36 @@ public class Squad {
             return true;
         }
         return false;
+    }
+
+    public boolean pressureOnTime(int pressureLeader, int pressureMember){
+        if(addPressureValues(EventType.Timer, pressureLeader, pressureMember)){
+            checkPressureValues(pressureLeader, pressureMember);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean addPressureValues(EventType eventType, int pressureLeader, int pressureMember){
+        if(!isEventExisting(eventType) || eventType == EventType.Timer){
+            eventList.add(0, new Event(eventType, pressureLeader, pressureMember, operationTimer.getValue()));
+            operationTimer.deactivateReminder();
+            if(changeListener != null){
+                changeListener.onStateUpdate(this);
+                changeListener.onPressureUpdate(Squad.this);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private void checkPressureValues(int pressureLeader, int pressureMember){
+        if(pressureLeader < leaderReturnPressure
+                || pressureMember < memberReturnPressure){
+            changeListener.onPressureInfo(Squad.this, true);
+        } else if(pressureLeader <= (leaderReturnPressure*RETURN_WARNING_PERCENTAGE/100)
+                || pressureMember <= (memberReturnPressure*RETURN_WARNING_PERCENTAGE/100)){
+            changeListener.onPressureInfo(Squad.this, false);
+        }
     }
 }

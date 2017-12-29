@@ -51,7 +51,7 @@ public class AdminDraegermanActivity extends AdminBaseActivity
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuAddDraegerman: {
-                AddDraegermanDialog dialog = new AddDraegermanDialog();
+                AddDraegermanDialog dialog = AddDraegermanDialog.newInstance();
                 dialog.show(getFragmentManager(), "AddDraegermanDialog");
                 break;
             }

@@ -1,9 +1,9 @@
-package de.thral.draegermanObservation.hardware;
+package de.thral.draegermanObservation.deviceNotification;
 
 import android.content.Context;
 import android.os.Vibrator;
 
-public class Vibration implements Hardware {
+public class Vibration implements DeviceNotification {
 
     private Context context;
 

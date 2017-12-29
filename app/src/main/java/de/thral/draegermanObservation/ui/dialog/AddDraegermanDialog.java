@@ -121,4 +121,9 @@ public class AddDraegermanDialog extends DialogFragment {
                     + " must implement AddDraegermanListener");
         }
     }
+
+    public static AddDraegermanDialog newInstance() {
+        AddDraegermanDialog fragment = new AddDraegermanDialog();
+        return fragment;
+    }
 }

@@ -1,12 +1,12 @@
 package de.thral.draegermanObservation.persistence;
 
-import android.content.Context;
-
 import java.util.List;
 
 import de.thral.draegermanObservation.business.Draegerman;
 
 public interface DraegermanDAO {
+
+    String LOG_TAG = "PERSISTENCE_DRAEGERMAN";
 
     /** Gets all draegermen
      *

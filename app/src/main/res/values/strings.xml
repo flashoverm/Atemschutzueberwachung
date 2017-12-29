@@ -25,6 +25,7 @@
     <string name="toastDeletingFailed">Fehler beim Löschen!</string>
 
     <string name="settings">Einstellungen</string>
+    <string name="settingsReminderAlarm">Einstellungen: Erinnerung/Alarm</string>
     <string name="flash">Blitzlicht</string>
     <string name="vibration">Vibration</string>
     <string name="sound">Alarm-Ton</string>

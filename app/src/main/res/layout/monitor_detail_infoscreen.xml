@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -85,25 +86,25 @@
 
         <TextView
             android:id="@+id/leaderText"
+            android:paddingEnd="@dimen/textMargin"
+            android:text="@string/leaderText"
             app:layout_column="0"
             app:layout_row="1"
-            app:layout_rowWeight="1"
-            android:layout_marginEnd="@dimen/textMargin"
-            android:textSize="@dimen/textSizeDetail"
-            android:text="@string/leaderText" />
+            app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/memberText"
+            android:paddingEnd="@dimen/textMargin"
+            android:text="@string/memberText"
+            android:textSize="@dimen/textSizeDetail"
             app:layout_column="0"
             app:layout_row="2"
-            app:layout_rowWeight="1"
-            android:textSize="@dimen/textSizeDetail"
-            android:text="@string/memberText" />
+            app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/pressureText"
             android:layout_width="0dp"
-            android:layout_marginEnd="@dimen/textMargin"
+            android:paddingEnd="@dimen/textMarginHalf"
             android:text="@string/pressureText"
             android:textAlignment="textEnd"
             android:textSize="@dimen/textSizeDetail"
@@ -117,7 +118,7 @@
             android:layout_width="0dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="MüllerMüllerMüllerMüllerMüllerMüllerMüllerMüllerMüllerMüllerMüller"
+            android:text="MüllerMüller"
             android:textSize="@dimen/textSizeDetail"
             app:layout_column="1"
             app:layout_gravity="fill_horizontal"
@@ -138,7 +139,8 @@
 
         <TextView
             android:id="@+id/pressureTime1"
-            android:layout_marginStart="@dimen/textMarginHalf"
+            android:paddingEnd="@dimen/textMarginHalf"
+            android:paddingStart="@dimen/textMarginHalf"
             android:text="10 Min"
             android:textSize="@dimen/textSizeDetail"
             app:layout_column="2"
@@ -165,12 +167,13 @@
 
         <TextView
             android:id="@+id/pressureTime2"
+            android:paddingEnd="@dimen/textMarginHalf"
+            android:paddingStart="@dimen/textMarginHalf"
+            android:text="20 Min"
+            android:textSize="@dimen/textSizeDetail"
             app:layout_column="3"
             app:layout_row="0"
-            app:layout_rowWeight="1"
-            android:text="20 Min"
-            android:layout_marginStart="@dimen/textMarginHalf"
-            android:textSize="@dimen/textSizeDetail"/>
+            app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/leaderPressure2"
@@ -192,12 +195,13 @@
 
         <TextView
             android:id="@+id/pressureTime3"
+            android:paddingEnd="@dimen/textMarginHalf"
+            android:paddingStart="@dimen/textMarginHalf"
+            android:text="30 Min"
+            android:textSize="@dimen/textSizeDetail"
             app:layout_column="4"
             app:layout_row="0"
-            app:layout_rowWeight="1"
-            android:text="30 Min"
-            android:layout_marginStart="@dimen/textMarginHalf"
-            android:textSize="@dimen/textSizeDetail"/>
+            app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/leaderPressure3"
@@ -219,12 +223,12 @@
 
         <TextView
             android:id="@+id/returnText"
+            android:paddingStart="@dimen/textMarginHalf"
+            android:text="@string/retreatText"
+            android:textSize="@dimen/textSizeDetail"
             app:layout_column="5"
             app:layout_row="0"
-            app:layout_rowWeight="1"
-            android:layout_marginStart="@dimen/textMargin"
-            android:text="@string/retreatText"
-            android:textSize="@dimen/textSizeDetail"/>
+            app:layout_rowWeight="1" />
 
         <TextView
             android:id="@+id/leaderReturnPressure"

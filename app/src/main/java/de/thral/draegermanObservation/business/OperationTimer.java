@@ -11,7 +11,7 @@ public class OperationTimer {
     private final int secOneThird;
     private final int secTwoThird;
 
-    private boolean reminder;
+    private boolean reminderActive;
     private boolean alarmUnconfirmed;
     private transient TimerChangeListener timerListener;
 
@@ -20,7 +20,7 @@ public class OperationTimer {
 
         this.secOneThird = operatingTime.getTime()*20;
         this.secTwoThird = operatingTime.getTime()*40;
-        this.reminder = false;
+        this.reminderActive = false;
         this.timestampTimerStart = -1;
     }
 
@@ -50,7 +50,7 @@ public class OperationTimer {
     }
 
     public boolean isReminderActive(){
-        return reminder;
+        return reminderActive;
     }
 
     public boolean isAlarmUnconfirmed(){
@@ -62,7 +62,7 @@ public class OperationTimer {
     }
 
     public void deactivateReminder(){
-        this.reminder = false;
+        this.reminderActive = false;
     }
 
     public void confirmAlarm(){
@@ -79,7 +79,7 @@ public class OperationTimer {
                     }
 
                     if((timerValue/1000) == secTwoThird || (timerValue/1000) == secOneThird){
-                        reminder = true;
+                        reminderActive = true;
                         if(timerListener != null){
                             timerListener.onTimerReachedMark(false);
                         }

@@ -4,6 +4,8 @@ import de.thral.draegermanObservation.business.Operation;
 
 public interface ActiveOperationDAO {
 
+    String LOG_TAG = "PERSISTENCE_ACTIVE";
+
     /** Gets active operation (run load() once before use)
      *
      * @return active operation
