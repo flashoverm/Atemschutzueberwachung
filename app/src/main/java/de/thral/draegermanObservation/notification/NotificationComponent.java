@@ -1,6 +1,6 @@
 package de.thral.draegermanObservation.notification;
 
-public interface Notification {
+public interface NotificationComponent {
 
     String LOG_TAG = "NOTIFICATION_MANAGEMENT";
 

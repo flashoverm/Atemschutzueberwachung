@@ -20,8 +20,6 @@ import de.thral.draegermanObservation.business.EventType;
 import de.thral.draegermanObservation.business.Squad;
 import de.thral.draegermanObservation.business.SquadChangeListener;
 import de.thral.draegermanObservation.business.TimerChangeListener;
-import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
-import de.thral.draegermanObservation.ui.activity.MonitoringDetailActivity;
 import de.thral.draegermanObservation.ui.dialog.EnterPressureDialog;
 import de.thral.draegermanObservation.ui.dialog.PressureWarningDialog;
 
@@ -298,7 +296,7 @@ public class DetailView extends SquadViewBase{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.beginOperation();
-                                startButtonListener.onStartButtonClick();
+                                updateOperation();
                             }
                         });
                 break;
@@ -307,7 +305,7 @@ public class DetailView extends SquadViewBase{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.pauseOperation();
-                                startButtonListener.onStartButtonClick();
+                                updateOperation();
                             }
                         });
                 break;
@@ -316,7 +314,7 @@ public class DetailView extends SquadViewBase{
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 squad.resumeOperation();
-                                startButtonListener.onStartButtonClick();
+                                updateOperation();
                             }
                         });
                 break;
@@ -334,9 +332,7 @@ public class DetailView extends SquadViewBase{
                         public void onClick(DialogInterface dialog, int id) {
                             squad.confirmAlarm();
                             notificationManager.turnOffAlarm();
-                            if(getContext() instanceof MonitoringBaseActivity){
-                                ((MonitoringDetailActivity)getContext()).updateOperation();
-                            }
+                            updateOperation();
                         }
                     }).create();
             alarmMessage.show();

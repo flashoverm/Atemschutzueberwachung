@@ -64,9 +64,7 @@ public abstract class SquadViewBase extends LinearLayout {
     }
 
     protected void timerReachedMark(boolean expired) {
-        if(getContext() instanceof MonitoringBaseActivity){
-            ((MonitoringBaseActivity)getContext()).updateOperation();
-        }
+        this.updateOperation();
         if (expired) {
             deactivateViewReminder();
             activateViewAlarm();
@@ -90,6 +88,12 @@ public abstract class SquadViewBase extends LinearLayout {
     protected void deactivateViewAlarm(){
         if(colorAnimator != null){
             colorAnimator.end();
+        }
+    }
+
+    protected void updateOperation(){
+        if(getContext() instanceof MonitoringBaseActivity){
+            ((MonitoringBaseActivity)getContext()).updateOperation();
         }
     }
 

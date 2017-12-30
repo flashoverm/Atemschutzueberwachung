@@ -44,10 +44,6 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
     }
-
-    protected void showInfo(int stringId) {
-
-    }
 }
 
 

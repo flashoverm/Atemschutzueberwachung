@@ -21,8 +21,7 @@ public abstract class MonitoringBaseActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             if(!result){
-                Toast.makeText(getApplicationContext(),
-                        R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
+                displayInfo(R.string.toastOperationNotSaved);
             }
         }
     }
@@ -33,4 +32,7 @@ public abstract class MonitoringBaseActivity extends AppCompatActivity {
         }
     }
 
+    protected void displayInfo(int resId){
+        Toast.makeText(getApplicationContext(), resId, Toast.LENGTH_LONG).show();
+    }
 }

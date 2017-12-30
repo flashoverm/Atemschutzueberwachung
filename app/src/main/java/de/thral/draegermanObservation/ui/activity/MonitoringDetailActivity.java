@@ -16,8 +16,7 @@ import de.thral.draegermanObservation.ui.view.DetailView;
 import de.thral.draegermanObservation.ui.view.LayoutClickListener;
 
 public class MonitoringDetailActivity extends MonitoringBaseActivity
-        implements EnterPressureDialog.EnteredPressureListener,
-        LayoutClickListener, DetailView.StartButtonListener {
+        implements EnterPressureDialog.EnteredPressureListener, LayoutClickListener {
 
     public static final String DETAIL_KEY = "DETAIL";
 
@@ -61,7 +60,6 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
 
     private void initDetailView(){
         DetailView detailView = findViewById(R.id.detail);
-        detailView.setStartButtonClickListener(this);
         detailView.setSquad(selected);
     }
 
@@ -71,30 +69,23 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
     }
 
     @Override
-    public void onStartButtonClick() {
-        updateOperation();
-    }
-
-    @Override
     public boolean onEnteredPressure(EventType event, int leaderPressure, int memberPressure) {
         Event lastPressure = selected.getLastPressureValues(1)[0];
         if(lastPressure.getPressureLeader() >= leaderPressure
                 && lastPressure.getPressureMember() >= memberPressure){
+
             switch(event){
                 case Arrive: selected.arriveTarget(leaderPressure, memberPressure);
-                    updateOperation();
                     break;
                 case Timer: selected.pressureOnTime(leaderPressure, memberPressure);
-                    updateOperation();
                     break;
                 case Retreat: selected.retreat(leaderPressure, memberPressure);
-                    updateOperation();
                     break;
                 case End: selected.endOperation(leaderPressure, memberPressure);
-                    updateOperation();
                     this.finish();
                     break;
             }
+            updateOperation();
             return true;
         }
         return false;

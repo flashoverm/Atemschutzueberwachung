@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
@@ -62,8 +61,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
                 }
             }
         }
-        Toast.makeText(getApplicationContext(),
-                R.string.toastOperationResumed, Toast.LENGTH_LONG ).show();
+        displayInfo(R.string.toastOperationResumed);
     }
 
     @Override
@@ -147,8 +145,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
         @Override
         protected void onPostExecute(Boolean result) {
             if(!result){
-                Toast.makeText(getApplicationContext(),
-                        R.string.toastOperationNotSaved, Toast.LENGTH_LONG).show();
+                displayInfo(R.string.toastOperationNotSaved);
             }
             MonitoringOverviewActivity.this.finish();
         }

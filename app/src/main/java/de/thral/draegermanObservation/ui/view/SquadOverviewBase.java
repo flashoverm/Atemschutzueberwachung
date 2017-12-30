@@ -7,7 +7,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import de.thral.draegermanObservation.R;
-import de.thral.draegermanObservation.ui.activity.MonitoringBaseActivity;
 
 public abstract class SquadOverviewBase extends SquadViewBase {
 
@@ -62,9 +61,7 @@ public abstract class SquadOverviewBase extends SquadViewBase {
 
     @Override
     protected void timerReachedMark(boolean expired) {
-        if(getContext() instanceof MonitoringBaseActivity){
-            ((MonitoringBaseActivity)getContext()).updateOperation();
-        }
+        updateOperation();
         if (expired) {
             if(squad.isAlarmUnconfirmed()){
                 activateViewReminder();

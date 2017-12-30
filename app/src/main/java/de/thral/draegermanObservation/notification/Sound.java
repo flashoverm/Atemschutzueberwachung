@@ -4,7 +4,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.util.Log;
 
-public class Sound implements Notification {
+public class Sound implements NotificationComponent {
 
     private boolean soundState;
 

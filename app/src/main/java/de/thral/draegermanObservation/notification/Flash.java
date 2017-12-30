@@ -7,7 +7,7 @@ import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.util.Log;
 
-public class Flash implements Notification {
+public class Flash implements NotificationComponent {
 
     private Context context;
 

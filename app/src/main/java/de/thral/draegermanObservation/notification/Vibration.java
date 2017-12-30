@@ -3,7 +3,7 @@ package de.thral.draegermanObservation.notification;
 import android.content.Context;
 import android.os.Vibrator;
 
-public class Vibration implements Notification {
+public class Vibration implements NotificationComponent {
 
     private Context context;
 
