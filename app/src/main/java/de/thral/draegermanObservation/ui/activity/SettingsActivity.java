@@ -22,8 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_settings);
 
-        notificationManager = ((DraegermanObservationApplication)getApplication())
-                .getNotificationManager();
+        notificationManager = DraegermanObservationApplication.getNotificationManager(this);
 
         enableFlash = findViewById(R.id.enableFlash);
         enableVibration = findViewById(R.id.enableVibration);

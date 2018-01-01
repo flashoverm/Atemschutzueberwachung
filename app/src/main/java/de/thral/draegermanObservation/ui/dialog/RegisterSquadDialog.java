@@ -127,8 +127,7 @@ public class RegisterSquadDialog extends DialogFragment {
 
         DraegermanSpinnerAdapter draegermanSpinnerAdapter = new DraegermanSpinnerAdapter(
                 getActivity(), R.layout.listitem_spinner,
-                ((DraegermanObservationApplication)getActivity().getApplication())
-                        .getDraegermanDAO().getAll());
+                DraegermanObservationApplication.getDraegermanDAO(getActivity()).getAll());
         leaderSpinner.setAdapter(draegermanSpinnerAdapter);
         leaderSpinner.setSelection(draegermanSpinnerAdapter.getCount()+1);
         memberSpinner.setAdapter(draegermanSpinnerAdapter);

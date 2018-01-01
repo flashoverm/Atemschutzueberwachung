@@ -33,8 +33,7 @@ public class AdminOperationActivity extends AdminBaseActivity
         Toolbar toolbar = findViewById(R.id.toolbarOperationAdmin);
         setSupportActionBar(toolbar);
 
-        completeOperationsDAO = ((DraegermanObservationApplication)getApplication())
-                .getCompleteOperationsDAO();
+        completeOperationsDAO = DraegermanObservationApplication.getCompleteOperationsDAO(this);
         listView = findViewById(R.id.operationList);
         noEntry = findViewById(R.id.noOperations);
         progressBar = findViewById(R.id.progress);

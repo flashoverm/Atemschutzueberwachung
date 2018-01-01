@@ -31,8 +31,7 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         Intent intent = getIntent();
-        this.activeOperationDAO = ((DraegermanObservationApplication)getApplication())
-                .getActiveOperationDAO();
+        this.activeOperationDAO = DraegermanObservationApplication.getActiveOperationDAO(this);
         initSquads(intent.getExtras().getInt(DETAIL_KEY));
         initOverviews();
         initDetailView();

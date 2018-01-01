@@ -32,7 +32,7 @@ public class AdminDraegermanActivity extends AdminBaseActivity
         Toolbar toolbar = findViewById(R.id.toolbarDraegermanAdmin);
         setSupportActionBar(toolbar);
 
-        draegermanDAO = ((DraegermanObservationApplication)getApplication()).getDraegermanDAO();
+        draegermanDAO = DraegermanObservationApplication.getDraegermanDAO(this);
         listView = findViewById(R.id.draegermanList);
         noEntry = findViewById(R.id.noDraegerman);
         progressBar = findViewById(R.id.progress);

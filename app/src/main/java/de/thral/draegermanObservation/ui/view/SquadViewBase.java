@@ -3,6 +3,7 @@ package de.thral.draegermanObservation.ui.view;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -39,7 +40,7 @@ public abstract class SquadViewBase extends LinearLayout {
 
     private void init(){
         this.notificationManager = DraegermanObservationApplication
-                .getNotificationManager(getContext());
+                .getNotificationManager((Activity)getContext());
         initView();
     }
 

@@ -1,7 +1,6 @@
 package de.thral.draegermanObservation.persistence;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -30,7 +29,6 @@ public class DraegermanDAOImpl implements DraegermanDAO {
 
     public DraegermanDAOImpl(Context context){
         this.context = context;
-        new InitDraegermenTask().execute();
     }
 
     @Override
@@ -134,15 +132,6 @@ public class DraegermanDAOImpl implements DraegermanDAO {
         }catch(IOException e) {
             Log.e(LOG_TAG, e.getMessage());
             throw e;
-        }
-    }
-
-    private class InitDraegermenTask extends AsyncTask<Void, Void, Void>{
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            load();
-            return null;
         }
     }
 }

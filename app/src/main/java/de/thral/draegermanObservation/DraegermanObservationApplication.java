@@ -15,7 +15,7 @@ import de.thral.draegermanObservation.persistence.DraegermanDAOImpl;
 public class DraegermanObservationApplication extends Application {
 
     //TODO remove delay
-    public static final int DEBUG_IO_DELAY = 800;
+    public static final int DEBUG_IO_DELAY = 2000;
 
     private ActiveOperationDAO activeOperationDAO;
     private DraegermanDAO draegermanDAO;
@@ -33,25 +33,23 @@ public class DraegermanObservationApplication extends Application {
         notificationManager = new NotificationManager(context);
     }
 
-    public NotificationManager getNotificationManager(){
-        return notificationManager;
+    public static NotificationManager getNotificationManager(Activity activity){
+        return getApplication(activity).notificationManager;
     }
 
-    public static NotificationManager getNotificationManager(Context context){
-        DraegermanObservationApplication activity
-                = (DraegermanObservationApplication)((Activity)context).getApplication();
-        return activity.getNotificationManager();
+    public static ActiveOperationDAO getActiveOperationDAO(Activity activity){
+        return getApplication(activity).activeOperationDAO;
     }
 
-    public ActiveOperationDAO getActiveOperationDAO(){
-        return activeOperationDAO;
+    public static DraegermanDAO getDraegermanDAO(Activity activity){
+        return getApplication(activity).draegermanDAO;
     }
 
-    public DraegermanDAO getDraegermanDAO(){
-        return draegermanDAO;
+    public static CompleteOperationsDAO getCompleteOperationsDAO(Activity activity){
+        return getApplication(activity).completeOperationsDAO;
     }
 
-    public CompleteOperationsDAO getCompleteOperationsDAO() {
-        return completeOperationsDAO;
+    private static DraegermanObservationApplication getApplication(Activity activity){
+        return (DraegermanObservationApplication)activity.getApplication();
     }
 }

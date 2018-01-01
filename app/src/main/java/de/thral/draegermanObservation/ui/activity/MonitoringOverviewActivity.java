@@ -37,10 +37,8 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        activeOperationDAO = ((DraegermanObservationApplication)getApplication())
-                .getActiveOperationDAO();
-        completeOperationsDAO = ((DraegermanObservationApplication)getApplication())
-                .getCompleteOperationsDAO();
+        activeOperationDAO = DraegermanObservationApplication.getActiveOperationDAO(this);
+        completeOperationsDAO = DraegermanObservationApplication.getCompleteOperationsDAO(this);
 
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.GONE);

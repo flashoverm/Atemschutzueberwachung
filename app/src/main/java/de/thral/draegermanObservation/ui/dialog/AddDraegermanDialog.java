@@ -45,8 +45,7 @@ public class AddDraegermanDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_add_draegerman, null);
 
-        draegermanDAO = ((DraegermanObservationApplication)getActivity().getApplication())
-                .getDraegermanDAO();
+        draegermanDAO = DraegermanObservationApplication.getDraegermanDAO(getActivity());
 
         firstname = dialogView.findViewById(R.id.edit_firstname);
         lastname = dialogView.findViewById(R.id.edit_lastname);

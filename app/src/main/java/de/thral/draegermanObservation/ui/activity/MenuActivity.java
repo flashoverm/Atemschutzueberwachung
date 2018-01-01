@@ -15,8 +15,7 @@ public class MenuActivity extends MonitoringBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        this.activeOperationDAO = ((DraegermanObservationApplication)getApplication())
-                .getActiveOperationDAO();
+        this.activeOperationDAO = DraegermanObservationApplication.getActiveOperationDAO(this);
 
         Button startOperation = findViewById(R.id.startOperation);
         Button management = findViewById(R.id.administration);
@@ -26,8 +25,7 @@ public class MenuActivity extends MonitoringBaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MenuActivity.this, MonitoringOverviewActivity.class);
                 if(activeOperationDAO.get() == null){
-                    ((DraegermanObservationApplication)getApplication())
-                            .getActiveOperationDAO().add();
+                    activeOperationDAO.add();
                     updateOperation();
                 }
                 startActivity(intent);
