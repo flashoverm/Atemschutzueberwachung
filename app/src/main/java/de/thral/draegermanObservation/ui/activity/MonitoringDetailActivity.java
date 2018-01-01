@@ -2,9 +2,7 @@ package de.thral.draegermanObservation.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
 
-import de.thral.draegermanObservation.DraegermanObservationApplication;
 import de.thral.draegermanObservation.R;
 import de.thral.draegermanObservation.business.Event;
 import de.thral.draegermanObservation.business.EventType;
@@ -28,10 +26,7 @@ public class MonitoringDetailActivity extends MonitoringBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         Intent intent = getIntent();
-        this.activeOperationDAO = DraegermanObservationApplication.getActiveOperationDAO(this);
         initSquads(intent.getExtras().getInt(DETAIL_KEY));
         initOverviews();
         initDetailView();

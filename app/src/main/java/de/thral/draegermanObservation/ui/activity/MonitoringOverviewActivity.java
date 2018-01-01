@@ -35,9 +35,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        activeOperationDAO = DraegermanObservationApplication.getActiveOperationDAO(this);
         completeOperationsDAO = DraegermanObservationApplication.getCompleteOperationsDAO(this);
 
         progressBar = findViewById(R.id.progress);
