@@ -56,7 +56,6 @@ public class AdminDraegermanActivity extends AdminBaseActivity
                 break;
             }
             case R.id.menuDelete: {
-                //TODO better in a single run over checked?
                 final SparseBooleanArray checked = listView.getCheckedItemPositions();
                 for(int i=0; i<listView.getCount(); i++){
                     if(checked.get(i)){
