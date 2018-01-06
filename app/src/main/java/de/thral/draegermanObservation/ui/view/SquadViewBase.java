@@ -22,7 +22,7 @@ public abstract class SquadViewBase extends LinearLayout {
     protected View infoView;
     protected Squad squad;
 
-    protected ValueAnimator colorAnimator;
+    protected ObjectAnimator colorAnimator;
 
     protected NotificationManager notificationManager;
 

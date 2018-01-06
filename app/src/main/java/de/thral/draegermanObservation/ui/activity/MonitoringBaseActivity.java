@@ -33,7 +33,7 @@ public abstract class MonitoringBaseActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             if(!result){
-                displayInfo(R.string.toastOperationNotSaved);
+                displayInfo(R.string.errorOperationNotSaved);
             }
         }
     }

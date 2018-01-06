@@ -80,15 +80,15 @@ public class EndOperationDialog extends DialogFragment {
         locationEdit.setError(null);
 
         if(observer.equals("")){
-            observerEdit.setError(getString(R.string.toastNoObserver));
+            observerEdit.setError(getString(R.string.errorNoObserver));
             return false;
         }
         if(operation.equals("")){
-            operationEdit.setError(getString(R.string.toastNoOperation));
+            operationEdit.setError(getString(R.string.errorNoOperation));
             return false;
         }
         if(location.equals("")){
-            locationEdit.setError(getString(R.string.toastNoLocation));
+            locationEdit.setError(getString(R.string.errorNoLocation));
             return false;
         }
         listener.onOperationEnd(observer, operation, location, unit);

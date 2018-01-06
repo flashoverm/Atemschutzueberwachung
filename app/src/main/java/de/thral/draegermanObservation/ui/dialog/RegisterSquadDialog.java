@@ -190,7 +190,7 @@ public class RegisterSquadDialog extends DialogFragment {
         Draegerman member;
 
         if(squadnameText.equals("")){
-            squadName.setError(getString(R.string.toastNoSquadname));
+            squadName.setError(getString(R.string.errorNoSquadname));
             return null;
         }
 
@@ -198,13 +198,14 @@ public class RegisterSquadDialog extends DialogFragment {
             leaderEdit.setError(null);
             String leaderName = leaderEdit.getText().toString();
             if(leaderName.equals("")){
-                leaderEdit.setError(getString(R.string.toastNoLeaderName));
+                leaderEdit.setError(getString(R.string.errorNoLeaderName));
                 return null;
             }
             leader = new Draegerman(leaderName);
         } else {
-            if(leaderSpinner.getSelectedItemPosition() > leaderSpinner.getCount()){
-                Toast.makeText(getActivity(), R.string.toastNoLeader,
+            if(leaderSpinner.getSelectedItemPosition() > leaderSpinner.getCount()
+                    || leaderSpinner.getSelectedItemPosition() < 0){
+                Toast.makeText(getActivity(), R.string.errorNoLeader,
                         Toast.LENGTH_LONG).show();
                 return null;
             } else {
@@ -216,13 +217,14 @@ public class RegisterSquadDialog extends DialogFragment {
             memberEdit.setError(null);
             String memberName = memberEdit.getText().toString();
             if(memberName.equals("")){
-                memberEdit.setError(getString(R.string.toastNoMemberName));
+                memberEdit.setError(getString(R.string.errorNoMemberName));
                 return null;
             }
             member = new Draegerman(memberName);
         } else {
-            if(memberSpinner.getSelectedItemPosition() > memberSpinner.getCount()) {
-                Toast.makeText(getActivity(), R.string.toastNoMember,
+            if(memberSpinner.getSelectedItemPosition() > memberSpinner.getCount()
+                    || memberSpinner.getSelectedItemPosition() < 0) {
+                Toast.makeText(getActivity(), R.string.errorNoMember,
                         Toast.LENGTH_LONG).show();
                 return null;
             } else {
@@ -231,19 +233,21 @@ public class RegisterSquadDialog extends DialogFragment {
         }
 
         if(!leaderEditEnabled && !memberEditEnabled && leader.equals(member)){
-            Toast.makeText(getActivity(), R.string.toastLeaderMemberEqual,
+            Toast.makeText(getActivity(), R.string.errorLeaderMemberEqual,
                     Toast.LENGTH_LONG).show();
             return null;
         }
 
+
         if(initLeaderPressure.equals("")){
-            leaderPressure.setError(getString(R.string.toastNoPressureLeader));
+            leaderPressure.setError(getString(R.string.errorNoPressureLeader));
             return null;
         }
         if(initMemberPressure.equals("")){
-            memberPressure.setError(getString(R.string.toastNoPressureMember));
+            memberPressure.setError(getString(R.string.errorNoPressureMember));
             return null;
         }
+
 
         int leaderPressureValue;
         int memberPressureValue;
@@ -261,11 +265,11 @@ public class RegisterSquadDialog extends DialogFragment {
         }
 
         if(leaderPressureValue < 0 ){
-            leaderPressure.setError(getString(R.string.toastPressureUnderZero));
+            leaderPressure.setError(getString(R.string.errorPressureUnderZero));
             return null;
         }
         if(memberPressureValue < 0){
-            memberPressure.setError(getString(R.string.toastPressureUnderZero));
+            memberPressure.setError(getString(R.string.errorPressureUnderZero));
             return null;
         }
         return new Squad(

@@ -21,7 +21,7 @@
         android:layout_toEndOf="@+id/leaderpressure"
         android:ems="5"
         android:hint="@string/leaderPressureHint"
-        android:inputType="numberSigned|numberDecimal"
+        android:inputType="number"
         android:textSize="14sp" />
 
     <EditText
@@ -32,7 +32,7 @@
         android:layout_toEndOf="@+id/leaderpressure"
         android:ems="5"
         android:hint="@string/memberPressureHint"
-        android:inputType="numberSigned|numberDecimal"
+        android:inputType="number"
         android:textSize="14sp" />
 
     <TextView

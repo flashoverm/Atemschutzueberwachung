@@ -1,9 +1,11 @@
 package de.thral.draegermanObservation.ui.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
@@ -19,6 +21,8 @@ import de.thral.draegermanObservation.ui.adapter.OperationListViewAdapter;
 
 public class AdminOperationActivity extends AdminBaseActivity
         implements MenuItem.OnMenuItemClickListener{
+
+    private static final int ID_STORAGE_PERMISSION_REQUEST = 387;
 
     private CompleteOperationsDAO completeOperationsDAO;
     private OperationListViewAdapter adapter;
@@ -52,15 +56,28 @@ public class AdminOperationActivity extends AdminBaseActivity
     public boolean onMenuItemClick(MenuItem menuItem) {
         super.onOptionsItemSelected(menuItem);
 
+        boolean oneChecked = false;
         checked = adapter.getCheckedItemPositions();
-        if(checked.size() == 0){
-            Toast.makeText(this, R.string.toastNothingSelected, Toast.LENGTH_LONG).show();
+        for(int i=0; i<listView.getCount(); i++){
+            if(checked.get(i)){
+                oneChecked = true;
+                break;
+            }
+        }
+        if(!oneChecked){
+            Toast.makeText(this, R.string.infoNothingSelected, Toast.LENGTH_LONG).show();
             return true;
         }
-
         switch (menuItem.getItemId()) {
             case R.id.menuExport: {
-                new ExportOperationsTask().execute(checked);
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            ID_STORAGE_PERMISSION_REQUEST);
+                } else {
+                    new ExportOperationsTask().execute(checked);
+                }
                 break;
             }
             case R.id.menuDelete: {
@@ -86,13 +103,14 @@ public class AdminOperationActivity extends AdminBaseActivity
 
     @Override
     public void onRequestPermissionsResult(
-            int requestCode, String permissions[], int[] grantResults) {
+            int requestCode, String permissions[], final int[] grantResults) {
         if(requestCode == 387) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 new ExportOperationsTask().execute(checked);
             } else {
-                Toast.makeText(this, R.string.toastExportDeactivated, Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminOperationActivity.this,
+                        R.string.errorExportDeactivated, Toast.LENGTH_LONG).show();
             }
             return;
         }
@@ -132,7 +150,7 @@ public class AdminOperationActivity extends AdminBaseActivity
 
         @Override
         protected Boolean doInBackground(SparseBooleanArray... params) {
-            boolean exportedAll = false;
+            boolean exportedAll;
             if(completeOperationsDAO.setupStorage(AdminOperationActivity.this)){
                 exportedAll = true;
                 for (int i = listView.getCount()-1; i >=0 ; i--) {
@@ -153,10 +171,10 @@ public class AdminOperationActivity extends AdminBaseActivity
             if(result != null){
                 if(result){
                     Toast.makeText(AdminOperationActivity.this,
-                            R.string.toastExportSucceeded, Toast.LENGTH_LONG).show();
+                            R.string.infoExportSucceeded, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(AdminOperationActivity.this,
-                            R.string.toastExportFailed, Toast.LENGTH_LONG).show();
+                            R.string.errorExportFailed, Toast.LENGTH_LONG).show();
                 }
                 adapter.notifyDataSetChanged();
                 listView.clearChoices();
@@ -190,7 +208,7 @@ public class AdminOperationActivity extends AdminBaseActivity
             showProgress(false);
             if(!result){
                 Toast.makeText(AdminOperationActivity.this,
-                        R.string.toastDeletingFailed, Toast.LENGTH_LONG).show();
+                        R.string.errorDeletingFailed, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
             listView.clearChoices();

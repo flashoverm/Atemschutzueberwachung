@@ -18,11 +18,11 @@
 
     <string name="iconUnexported">Neu</string>
 
-    <string name="toastNothingSelected">Keine Eintrag ausgewählt!</string>
-    <string name="toastExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher!</string>
-    <string name="toastExportSucceeded">Einsätze exportiert</string>
-    <string name="toastExportFailed">Fehler beim Export!</string>
-    <string name="toastDeletingFailed">Fehler beim Löschen!</string>
+    <string name="infoNothingSelected">Keine Eintrag ausgewählt</string>
+    <string name="errorExportDeactivated">Export nicht möglich\nKein Zugriff auf Speicher</string>
+    <string name="infoExportSucceeded">Einsätze exportiert</string>
+    <string name="errorExportFailed">Fehler beim Export</string>
+    <string name="errorDeletingFailed">Fehler beim Löschen</string>
 
     <string name="settings">Einstellungen</string>
     <string name="settingsReminderAlarm">Einstellungen: Erinnerung/Alarm</string>
@@ -71,7 +71,7 @@
     <string name="no">Nein</string>
 
     <!--Alarm- and Warning-Dialogs-->
-    <string name="toastOperationNotSaved">Warnung: Der Einsatz wird nicht gespeichert</string>
+    <string name="errorOperationNotSaved">Warnung: Der Einsatz wird nicht gespeichert</string>
 
     <string name="timerInfoTitle">Einsatz</string>
     <string name="startSquadText">Einsatz beginnen?</string>
@@ -83,7 +83,7 @@
     <string name="returnPressureAlarmText">Achtung!\n\nMindestdruck für Rückzugsweg unterschritten!\nSicherungstrupp alamieren!</string>
 
     <string name="endOperationTitle">Einsatz abschließen</string>
-        <string name="endOperationWarning">Noch nicht alle Trupps haben ihren Einsatz beendet!</string>
+        <string name="endOperationWarning">Noch nicht alle Trupps haben ihren Einsatz beendet</string>
 
     <string name="deleteWarningTitle">Löschen</string>
     <string name="deleteWarningText">Wirklich löschen?</string>
@@ -118,13 +118,13 @@
     <string name="orderListProtection">Sicherungstrupp</string>
     <string name="orderListOther">Sonstiges/Zubringer</string>
 
-    <string name="toastOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
-    <string name="toastNoSquadname">Funkrufnamen eingeben!</string>
-    <string name="toastNoLeader">Truppführer auswählen!</string>
-    <string name="toastNoMember">Truppmann auswählen!</string>
-    <string name="toastLeaderMemberEqual">Truppführer und Truppmann identisch!</string>
-    <string name="toastNoLeaderName">Truppführer eintragen oder Auswahl verwenden!</string>
-    <string name="toastNoMemberName">Truppmann eintragen oder Auswahl verwenden!</string>
+    <string name="infoOperationResumed">Atemschutzeinsatz wird fortgesetzt</string>
+    <string name="errorNoSquadname">Funkrufname eingeben</string>
+    <string name="errorNoLeader">Truppführer auswählen oder Eingabe verwenden</string>
+    <string name="errorNoMember">Truppmann auswählen oder Eingabe verwenden</string>
+    <string name="errorLeaderMemberEqual">Truppführer und Truppmann identisch</string>
+    <string name="errorNoLeaderName">Truppführer eintragen oder Auswahl verwenden</string>
+    <string name="errorNoMemberName">Truppmann eintragen oder Auswahl verwenden</string>
 
     <!--Pressure Dialog-->
     <string name="enterPressureTitle">Druck eingeben</string>
@@ -139,11 +139,11 @@
     <string name="eventListPause">Pausieren</string>
     <string name="eventListResume">Fortsetzen</string>
 
-    <string name="toastHigherPressure">Druck ungültig - Höher als aktueller Wert!</string>
-    <string name="errorInvalidPressure">Druck-Format ungültig!</string>
-    <string name="toastPressureUnderZero">Druck kann nicht negativ sein!</string>
-    <string name="toastNoPressureLeader">Druck Truppführer eingeben!</string>
-    <string name="toastNoPressureMember">Druck Truppmann eingeben!</string>
+    <string name="errorHigherPressure">Druck ungültig - Höher als aktueller Wert</string>
+    <string name="errorInvalidPressure">Druck-Format ungültig</string>
+    <string name="errorPressureUnderZero">Druck negativ</string>
+    <string name="errorNoPressureLeader">Druck Truppführer eingeben</string>
+    <string name="errorNoPressureMember">Druck Truppmann eingeben</string>
 
     <!--End Operation Dialog-->
     <string name="oberserverText">Überwacher:</string>
@@ -154,18 +154,18 @@
     <string name="locationHint">Einsatzort</string>
     <string name="unitText">Einheit:</string>
     <string name="unitHint">Einheit (Optional)</string>
-    <string name="toastNoObserver">Namen des Überwachers eingeben!</string>
-    <string name="toastNoOperation">Einsatz eingeben!</string>
-    <string name="toastNoLocation">Einsatzort eingeben!</string>
+    <string name="errorNoObserver">Namen des Überwachers eingeben</string>
+    <string name="errorNoOperation">Einsatz eingeben</string>
+    <string name="errorNoLocation">Einsatzort eingeben</string>
 
     <!--Add Draegerman Dialog-->
     <string name="firstnameText">Vorname:</string>
     <string name="firstnameHint">Vorname</string>
     <string name="lastnameText">Nachname:</string>
     <string name="lastnameHint">Nachname</string>
-    <string name="toastNoFirstname">Kein Vorname eingetragen!</string>
-    <string name="toastNoLastname">Kein Nachname eingetragen!</string>
-    <string name="toastDraegermanAlreadyExisiting">existiert bereits!</string>
-    <string name="toastDraegermanAddError">Atemschutzgeräteträger konnte nicht hinzugefügt werden!</string>
+    <string name="errorNoFirstname">Vorname eingeben</string>
+    <string name="errorNoLastname">Nachname eingeben</string>
+    <string name="errorDraegermanAlreadyExisiting">existiert bereits</string>
+    <string name="errorDraegermanAddError">Atemschutzgeräteträger konnte nicht hinzugefügt werden</string>
 
 </resources>

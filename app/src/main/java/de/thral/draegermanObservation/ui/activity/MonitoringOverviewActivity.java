@@ -57,7 +57,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
                 }
             }
         }
-        displayInfo(R.string.toastOperationResumed);
+        displayInfo(R.string.infoOperationResumed);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class MonitoringOverviewActivity extends MonitoringBaseActivity
         @Override
         protected void onPostExecute(Boolean result) {
             if(!result){
-                displayInfo(R.string.toastOperationNotSaved);
+                displayInfo(R.string.errorOperationNotSaved);
             }
             MonitoringOverviewActivity.this.finish();
         }

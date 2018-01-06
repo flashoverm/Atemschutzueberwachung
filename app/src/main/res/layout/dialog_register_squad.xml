@@ -103,13 +103,13 @@
         android:id="@+id/edit_leaderpressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/leaderText"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/leaderText"
         android:layout_toEndOf="@+id/leaderPressureText"
-        android:layout_alignBottom="@+id/leaderText"
         android:ems="4"
         android:hint="@string/leaderPressureHint"
-        android:inputType="numberSigned"
+        android:inputType="number"
         android:textSize="16dp" />
 
 
@@ -183,7 +183,7 @@
         android:layout_toEndOf="@+id/memberPressureText"
         android:ems="4"
         android:hint="@string/memberPressureHint"
-        android:inputType="numberSigned"
+        android:inputType="number"
         android:textSize="16dp" />
 
 

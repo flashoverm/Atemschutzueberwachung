@@ -29,7 +29,6 @@ import de.thral.draegermanObservation.business.Operation;
 
 public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
-    private static final int ID_STORAGE_PERMISSION_REQUEST = 387;
     private static final String COMPLETED_OPS = "completeOperations.json";
     private static final String COMPLETED_FOLDER = "complete/";
 
@@ -176,13 +175,13 @@ public class CompleteOperationsDAOImpl implements CompleteOperationsDAO {
 
     @Override
     public boolean setupStorage(Activity activity){
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    ID_STORAGE_PERMISSION_REQUEST);
-            return false;
+
+        try {
+            Thread.sleep(DraegermanObservationApplication.DEBUG_IO_DELAY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             exportFolder = new File(
                     Environment.getExternalStorageDirectory(),

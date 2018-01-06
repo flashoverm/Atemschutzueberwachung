@@ -90,21 +90,22 @@ public class AddDraegermanDialog extends DialogFragment {
         firstname.setError(null);
         lastname.setError(null);
 
-        if(firstnameString.equals("")){
-            firstname.setError(getString(R.string.toastNoFirstname));
-            return null;
-        }
         if(lastnameString.equals("")){
-            lastname.setError(getString(R.string.toastNoFirstname));
+            lastname.setError(getString(R.string.errorNoLastname));
+            return null;
+
+        }
+        if(firstnameString.equals("")){
+            firstname.setError(getString(R.string.errorNoFirstname));
             return null;
         }
 
         Draegerman add = draegermanDAO.prepareAdd(
                 firstnameString, lastnameString);
-        
+
         if(add == null) {
             String toast = firstnameString + " " + lastnameString + " "
-                    + getString(R.string.toastDraegermanAlreadyExisiting);
+                    + getString(R.string.errorDraegermanAlreadyExisiting);
             Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
         }
         return add;

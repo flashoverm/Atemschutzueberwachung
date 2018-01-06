@@ -156,7 +156,9 @@ public class Squad {
     public boolean beginOperation(){
         if(!isEventExisting(EventType.Begin)){
             eventList.add(0, new Event(EventType.Begin, operationTimer.getValue()));
-            changeListener.onStateUpdate(this);
+            if(changeListener != null){
+                changeListener.onStateUpdate(this);
+            }
             operationTimer.start();
             return true;
         }
@@ -175,7 +177,9 @@ public class Squad {
                     break;
                 }
             }
-            changeListener.onCalculatedReturnPressure(Squad.this);
+            if(changeListener != null){
+                changeListener.onCalculatedReturnPressure(Squad.this);
+            }
             return true;
         }
         return false;
@@ -183,7 +187,9 @@ public class Squad {
 
     public boolean pauseOperation(){
         eventList.add(0, new Event(EventType.PauseTimer, operationTimer.getValue()));
-        changeListener.onStateUpdate(this);
+        if(changeListener != null){
+            changeListener.onStateUpdate(this);
+        }
         operationTimer.cancel();
         return true;
     }
@@ -191,7 +197,9 @@ public class Squad {
     public boolean resumeOperation(){
         eventList.add(0, new Event(EventType.ResumeTimer, operationTimer.getValue()));
         operationTimer.start();
-        changeListener.onStateUpdate(this);
+        if(changeListener != null){
+            changeListener.onStateUpdate(this);
+        }
         return true;
     }
 
@@ -235,10 +243,14 @@ public class Squad {
     private void checkPressureValues(int pressureLeader, int pressureMember){
         if(pressureLeader < leaderReturnPressure
                 || pressureMember < memberReturnPressure){
-            changeListener.onPressureInfo(Squad.this, true);
+            if(changeListener != null){
+                changeListener.onPressureInfo(Squad.this, true);
+            }
         } else if(pressureLeader <= (leaderReturnPressure*RETURN_WARNING_PERCENTAGE/100)
                 || pressureMember <= (memberReturnPressure*RETURN_WARNING_PERCENTAGE/100)){
-            changeListener.onPressureInfo(Squad.this, false);
+            if(changeListener != null){
+                changeListener.onPressureInfo(Squad.this, false);
+            }
         }
     }
 }

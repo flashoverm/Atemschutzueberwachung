@@ -101,11 +101,11 @@ public class EnterPressureDialog extends DialogFragment {
                 getActivity(), spinner.getSelectedItem().toString());
 
         if(leader.equals("")){
-            leaderPressure.setError(getString(R.string.toastNoPressureLeader));
+            leaderPressure.setError(getString(R.string.errorNoPressureLeader));
             return false;
         }
         if(member.equals("")){
-            memberPressure.setError(getString(R.string.toastNoPressureMember));
+            memberPressure.setError(getString(R.string.errorNoPressureMember));
             return false;
         }
         int leaderPressureValue;
@@ -124,15 +124,15 @@ public class EnterPressureDialog extends DialogFragment {
         }
 
         if(leaderPressureValue < 0 ){
-            leaderPressure.setError(getString(R.string.toastPressureUnderZero));
+            leaderPressure.setError(getString(R.string.errorPressureUnderZero));
             return false;
         }
         if(memberPressureValue < 0){
-            memberPressure.setError(getString(R.string.toastPressureUnderZero));
+            memberPressure.setError(getString(R.string.errorPressureUnderZero));
             return false;
         }
         if(!listener.onEnteredPressure(event, leaderPressureValue, memberPressureValue)){
-            Toast.makeText(getActivity(), R.string.toastHigherPressure, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.errorHigherPressure, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

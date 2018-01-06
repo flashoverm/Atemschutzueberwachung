@@ -56,25 +56,28 @@ public class AdminDraegermanActivity extends AdminBaseActivity
                 break;
             }
             case R.id.menuDelete: {
+                //TODO better in a single run over checked?
                 final SparseBooleanArray checked = listView.getCheckedItemPositions();
-                if(checked.size() == 0){
-                    Toast.makeText(this, R.string.toastNothingSelected, Toast.LENGTH_LONG).show();
-                    return true;
+                for(int i=0; i<listView.getCount(); i++){
+                    if(checked.get(i)){
+                        AlertDialog deleteDialog = new AlertDialog.Builder(this)
+                                .setTitle(R.string.deleteWarningTitle)
+                                .setMessage(R.string.deleteWarningText)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        new DeleteDraegermanTask().execute(checked);
+                                    }
+                                })
+                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                    }
+                                }).create();
+                        deleteDialog.show();
+                        return true;
+                    }
                 }
-                AlertDialog deleteDialog = new AlertDialog.Builder(this)
-                        .setTitle(R.string.deleteWarningTitle)
-                        .setMessage(R.string.deleteWarningText)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                new DeleteDraegermanTask().execute(checked);
-                            }
-                        })
-                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                            }
-                        }).create();
-                deleteDialog.show();
+                Toast.makeText(this, R.string.infoNothingSelected, Toast.LENGTH_LONG).show();
                 break;
             }
         }
@@ -126,7 +129,7 @@ public class AdminDraegermanActivity extends AdminBaseActivity
             showProgress(false);
             if(!result){
                 Toast.makeText(AdminDraegermanActivity.this,
-                        R.string.toastDraegermanAddError, Toast.LENGTH_LONG).show();
+                        R.string.errorDraegermanAddError, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
             setVisibility(draegermanDAO.getAll().size() >0);
@@ -158,7 +161,7 @@ public class AdminDraegermanActivity extends AdminBaseActivity
             showProgress(false);
             if(!result){
                 Toast.makeText(AdminDraegermanActivity.this,
-                        R.string.toastDeletingFailed, Toast.LENGTH_LONG).show();
+                        R.string.errorDeletingFailed, Toast.LENGTH_LONG).show();
             }
             adapter.notifyDataSetChanged();
             listView.clearChoices();
