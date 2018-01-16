@@ -13,18 +13,18 @@
 
     <Button
         android:id="@+id/startOperation"
-        android:layout_width="280dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/startOpWidth"
+        android:layout_height="@dimen/startOpHeight"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:text="@string/startOperationButton" />
 
     <Button
         android:id="@+id/administration"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/adminWidth"
+        android:layout_height="@dimen/adminHeight"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="4dp"
+        android:layout_margin="@dimen/buttonPadding"
         android:text="@string/administationText" />
 </RelativeLayout>

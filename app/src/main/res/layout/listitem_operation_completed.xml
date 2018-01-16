@@ -12,10 +12,10 @@
         android:layout_alignBottom="@+id/operationCheckBox"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
-        android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/round_red"
         android:gravity="center"
         android:paddingLeft="4dp"
@@ -23,7 +23,7 @@
         android:text="@string/iconUnexported"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="11dp"
+        android:textSize="11sp"
         android:textStyle="bold" />
 
     <TextView
@@ -35,7 +35,8 @@
         android:layout_toStartOf="@+id/operationCheckBox"
         android:gravity="center_vertical"
         android:text="TextView23456+"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textSize="16sp" />
 
     <CheckBox
         android:id="@+id/operationCheckBox"

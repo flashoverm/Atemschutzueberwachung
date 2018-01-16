@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="@dimen/menuMargin"
         android:text="@string/administationText"
-        android:textSize="40sp" />
+        android:textSize="@dimen/menuTitleSize" />
 
     <Button
         android:id="@+id/operationAdministrationButton"
@@ -21,8 +21,8 @@
         android:layout_alignEnd="@+id/draegermanAdministrationButton"
         android:layout_alignStart="@+id/draegermanAdministrationButton"
         android:layout_below="@+id/administrationText"
-        android:layout_marginTop="33dp"
-        android:padding="10dp"
+        android:layout_marginTop="@dimen/menuMargin"
+        android:padding="@dimen/listMargin"
         android:text="@string/operationAdministratoion" />
 
     <Button
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/operationAdministrationButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
-        android:padding="10dp"
+        android:layout_marginTop="@dimen/menuMargin"
+        android:padding="@dimen/listMargin"
         android:text="@string/draegermanAdministratoion" />
 
     <Button
@@ -42,7 +42,7 @@
         android:layout_alignEnd="@+id/operationAdministrationButton"
         android:layout_alignStart="@+id/operationAdministrationButton"
         android:layout_below="@+id/draegermanAdministrationButton"
-        android:layout_marginTop="33dp"
-        android:padding="10dp"
+        android:layout_marginTop="@dimen/menuMargin"
+        android:padding="@dimen/listMargin"
         android:text="@string/settings" />
 </RelativeLayout>

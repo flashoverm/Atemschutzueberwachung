@@ -2,7 +2,6 @@
 <resources>
 
     <color name="black">#12233b</color>
-    <color name="transparentBlack">#2512233b</color>
 
     <color name="lightblue">#ecf1f7</color>
     <color name="blue">#3469af</color>

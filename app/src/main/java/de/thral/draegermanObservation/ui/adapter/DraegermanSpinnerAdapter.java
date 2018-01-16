@@ -32,7 +32,6 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
 
         View rowView = inflater.inflate(R.layout.listitem_spinner, parent, false);
         TextView displayname = rowView.findViewById(R.id.displayname);
-        displayname.setTextSize(16);
 
         if(position == getCount()+1){
             displayname.setText("");
@@ -55,7 +54,6 @@ public class DraegermanSpinnerAdapter extends ArrayAdapter<Draegerman> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.listitem_spinner, parent, false);
         TextView displayname = rowView.findViewById(R.id.displayname);
-        displayname.setTextSize(16);
 
         Draegerman draegerman = getItem(position);
         displayname.setText(draegerman.toString());

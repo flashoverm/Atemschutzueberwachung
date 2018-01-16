@@ -7,12 +7,6 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import de.thral.draegermanObservation.business.Draegerman;
-import de.thral.draegermanObservation.business.EventType;
-import de.thral.draegermanObservation.business.OperatingTime;
-import de.thral.draegermanObservation.business.Order;
-import de.thral.draegermanObservation.business.Squad;
-
 import static org.junit.Assert.assertEquals;
 
 /**

@@ -25,12 +25,7 @@ import de.thral.draegermanObservation.ui.dialog.PressureWarningDialog;
 
 public class DetailView extends SquadViewBase{
 
-    public interface StartButtonListener {
-        void onStartButtonClick();
-    }
-
     private View detailView;
-    private StartButtonListener startButtonListener;
 
     private TextView order, leaderReturnPressure, memberReturnPressure,
             pressureTime1, leaderPressure1, memberPressure1,
@@ -57,10 +52,6 @@ public class DetailView extends SquadViewBase{
         } catch (ClassCastException e) {
             throw new ClassCastException("Can't get the fragment manager with this");
         }
-    }
-
-    public void setStartButtonClickListener(StartButtonListener listener){
-        this.startButtonListener = listener;
     }
 
     @Override

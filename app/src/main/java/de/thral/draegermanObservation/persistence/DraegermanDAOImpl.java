@@ -65,22 +65,6 @@ public class DraegermanDAOImpl implements DraegermanDAO {
     }
 
     @Override
-    public Draegerman prepareAdd(String firstname, String lastname) {
-        load();
-        Draegerman draegerman = new Draegerman(firstname, lastname);
-        for(Draegerman existing : draegermen){
-            if(existing.equals(draegerman)){
-                return null;
-            }
-            if(existing.getLastName().equals(draegerman.getLastName())){
-                existing.setDisplayName(existing.toString());
-                draegerman.setDisplayName(draegerman.toString());
-            }
-        }
-        return draegerman;
-    }
-
-    @Override
     public boolean add(final Draegerman newDraegerman){
         if(draegermen.add(newDraegerman)){
             Collections.sort(draegermen);

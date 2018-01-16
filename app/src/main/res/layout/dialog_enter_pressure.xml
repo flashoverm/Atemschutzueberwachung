@@ -22,7 +22,7 @@
         android:ems="5"
         android:hint="@string/leaderPressureHint"
         android:inputType="number"
-        android:textSize="14sp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_memberpressure"
@@ -33,7 +33,7 @@
         android:ems="5"
         android:hint="@string/memberPressureHint"
         android:inputType="number"
-        android:textSize="14sp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <TextView
         android:id="@+id/event"
@@ -42,7 +42,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:padding="11dp"
-        android:text="@string/eventText" />
+        android:text="@string/eventText"
+        android:textSize="@dimen/normalTextSize" />
 
     <TextView
         android:id="@+id/leaderpressure"
@@ -51,7 +52,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/event"
         android:padding="11dp"
-        android:text="@string/leaderText" />
+        android:text="@string/leaderText"
+        android:textSize="@dimen/normalTextSize" />
 
     <TextView
         android:id="@+id/memberpressure"
@@ -61,6 +63,7 @@
         android:layout_below="@+id/leaderpressure"
         android:padding="11dp"
         android:text="@string/memberText"
+        android:textSize="@dimen/normalTextSize"
         tools:layout_editor_absoluteX="16dp" />
 
 </RelativeLayout>

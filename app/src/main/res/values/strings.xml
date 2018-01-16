@@ -101,7 +101,7 @@
     <string name="membernameHint">Truppmann</string>
     <string name="spinnerHint">Namen auswählen</string>
 
-    <string name="operationTimeDebug">3 Minuten</string>
+    <string name="operationTimeDebug">6 Minuten</string>
     <string name="operationTimeShort">20 Minuten</string>
     <string name="operationTimeNormal">30 Minuten</string>
     <string name="operationTimeLong">60 Minuten</string>

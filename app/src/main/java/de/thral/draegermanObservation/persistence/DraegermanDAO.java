@@ -14,14 +14,6 @@ public interface DraegermanDAO {
      */
     List<Draegerman> getAll();
 
-    /** Prepares add of draegerman. Set complete name if lastname is already existing
-     *
-     * @param firstname of draegerman
-     * @param lastname of draegerman
-     * @return new draegerman object
-     */
-    Draegerman prepareAdd(String firstname, String lastname);
-
     /** Adds draegerman to the list
      *
      * @param draegerman to be added

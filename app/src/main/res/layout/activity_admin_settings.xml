@@ -15,26 +15,26 @@
         android:id="@+id/enableFlash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_margin="@dimen/listMargin"
+        android:padding="@dimen/listMargin"
         android:text="@string/flash"
-        android:textSize="@dimen/buttonTextSize" />
+        android:textSize="@dimen/settingsTextSize" />
 
     <CheckBox
         android:id="@+id/enableVibration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_margin="@dimen/listMargin"
+        android:padding="@dimen/listMargin"
         android:text="@string/vibration"
-        android:textSize="@dimen/buttonTextSize" />
+        android:textSize="@dimen/settingsTextSize" />
 
     <CheckBox
         android:id="@+id/enableSound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_margin="@dimen/listMargin"
+        android:padding="@dimen/listMargin"
         android:text="@string/sound"
-        android:textSize="@dimen/buttonTextSize" />
+        android:textSize="@dimen/settingsTextSize" />
 </LinearLayout>

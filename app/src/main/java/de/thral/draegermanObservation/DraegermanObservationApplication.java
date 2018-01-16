@@ -15,7 +15,7 @@ import de.thral.draegermanObservation.persistence.DraegermanDAOImpl;
 public class DraegermanObservationApplication extends Application {
 
     //TODO remove delay
-    public static final int DEBUG_IO_DELAY = 2000;
+    public static final int DEBUG_IO_DELAY = 600;
 
     private ActiveOperationDAO activeOperationDAO;
     private DraegermanDAO draegermanDAO;

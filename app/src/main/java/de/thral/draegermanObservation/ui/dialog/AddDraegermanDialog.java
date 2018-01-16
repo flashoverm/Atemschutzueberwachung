@@ -100,15 +100,27 @@ public class AddDraegermanDialog extends DialogFragment {
             return null;
         }
 
-        Draegerman add = draegermanDAO.prepareAdd(
-                firstnameString, lastnameString);
-
+        Draegerman add = prepareAdd(firstnameString, lastnameString);
         if(add == null) {
             String toast = firstnameString + " " + lastnameString + " "
                     + getString(R.string.errorDraegermanAlreadyExisiting);
             Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
         }
         return add;
+    }
+
+    public Draegerman prepareAdd(String firstname, String lastname) {
+        Draegerman draegerman = new Draegerman(firstname, lastname);
+        for(Draegerman existing : draegermanDAO.getAll()){
+            if(existing.equals(draegerman)){
+                return null;
+            }
+            if(existing.getLastName().equals(draegerman.getLastName())){
+                existing.setDisplayName(existing.toString());
+                draegerman.setDisplayName(draegerman.toString());
+            }
+        }
+        return draegerman;
     }
 
     @Override

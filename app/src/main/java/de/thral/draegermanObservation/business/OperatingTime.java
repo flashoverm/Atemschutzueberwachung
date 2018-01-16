@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import de.thral.draegermanObservation.R;
 
 public enum OperatingTime {
-    Debug(R.string.operationTimeDebug, 3),
+    Debug(R.string.operationTimeDebug, 6),
     Short(R.string.operationTimeShort, 20),
     Normal(R.string.operationTimeNormal, 30),
     Long(R.string.operationTimeLong, 60);

@@ -1,12 +1,9 @@
 package de.thral.draegermanObservation.persistence;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.google.gson.Gson;

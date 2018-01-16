@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:padding="12dp"
         android:text="@string/squadnameText"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_squadname"
@@ -27,7 +27,7 @@
         android:ems="14"
         android:hint="@string/squadnameHint"
         android:inputType="textPersonName"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <Spinner
         android:id="@+id/spinner_operatingtime"
@@ -39,9 +39,6 @@
         android:layout_toEndOf="@+id/edit_squadname" />
 
 
-
-
-
     <TextView
         android:id="@+id/leaderText"
         android:layout_width="wrap_content"
@@ -51,19 +48,19 @@
         android:gravity="bottom"
         android:padding="12dp"
         android:text="@string/leaderText"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_leadername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/leaderText"
         android:layout_alignStart="@+id/edit_membername"
         android:layout_alignTop="@+id/leaderText"
         android:layout_toStartOf="@+id/leaderEditButton"
-        android:layout_alignBottom="@+id/leaderText"
         android:hint="@string/leadernameHint"
         android:inputType="textPersonName"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <Spinner
         android:id="@+id/spinner_leader"
@@ -97,7 +94,7 @@
         android:layout_toEndOf="@+id/leaderEditButton"
         android:padding="11dp"
         android:text="@string/initialPressure"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_leaderpressure"
@@ -110,10 +107,7 @@
         android:ems="4"
         android:hint="@string/leaderPressureHint"
         android:inputType="number"
-        android:textSize="16dp" />
-
-
-
+        android:textSize="@dimen/normalTextSize" />
 
 
     <TextView
@@ -125,7 +119,7 @@
         android:gravity="bottom"
         android:padding="12dp"
         android:text="@string/memberText"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_membername"
@@ -137,7 +131,7 @@
         android:layout_toStartOf="@+id/memberEditButton"
         android:hint="@string/membernameHint"
         android:inputType="textPersonName"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <Spinner
         android:id="@+id/spinner_member"
@@ -167,12 +161,12 @@
         android:id="@+id/memberPressureText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/memberText"
         android:layout_alignTop="@+id/memberText"
         android:layout_toEndOf="@+id/memberEditButton"
-        android:layout_alignBottom="@+id/memberText"
         android:padding="11dp"
         android:text="@string/initialPressure"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_memberpressure"
@@ -184,11 +178,7 @@
         android:ems="4"
         android:hint="@string/memberPressureHint"
         android:inputType="number"
-        android:textSize="16dp" />
-
-
-
-
+        android:textSize="@dimen/normalTextSize" />
 
 
     <TextView
@@ -200,11 +190,11 @@
         android:gravity="bottom"
         android:padding="12dp"
         android:text="@string/orderText"
-        android:textSize="16dp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <Spinner
         android:id="@+id/spinner_order"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/orderText"
         android:layout_alignParentEnd="true"

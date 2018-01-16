@@ -1,6 +1,7 @@
 package de.thral.draegermanObservation.ui.view;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class Overview extends SquadOverviewBase {
     public void setSquad(Squad squad){
         this.squad = squad;
         timer.setText(squad.getTimerValueAsClock());
+        timer.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
         squadname.setText(squad.getName());
         state.setText(squad.getState().getStateDescription(getContext()));
         leaderName.setText(squad.getLeader().getDisplayName());

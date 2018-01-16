@@ -60,6 +60,7 @@
             android:id="@+id/leaderText"
             android:paddingEnd="@dimen/textMargin"
             android:text="@string/leaderText"
+            android:textSize="@dimen/textSizeOverview"
             app:layout_column="0"
             app:layout_row="1"
             app:layout_rowWeight="1" />

@@ -21,9 +21,22 @@
     <dimen name="textSizeOverviewTimer">42sp</dimen>
 
     <dimen name="buttonPadding">5dp</dimen>
-    <dimen name="buttonTextSize">16sp</dimen>
+
+    <dimen name="normalTextSize">16sp</dimen>
 
     <dimen name="logoHeight">250dp</dimen>
     <dimen name="logoPadding">25dp</dimen>
+
+    <dimen name="listMargin">10dp</dimen>
+    <dimen name="menuTitleSize">40sp</dimen>
+    <dimen name="menuMargin">33dp</dimen>
+    <dimen name="settingsTextSize">16sp</dimen>
+
+    <dimen name="startOpHeight">70dp</dimen>
+    <dimen name="startOpWidth">280dp</dimen>
+    <dimen name="adminHeight">55dp</dimen>
+    <dimen name="adminWidth">150dp</dimen>
+
+    <dimen name="exportNewTextSize">11sp</dimen>
 
 </resources>

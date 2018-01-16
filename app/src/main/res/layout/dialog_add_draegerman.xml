@@ -16,7 +16,7 @@
         android:hint="@string/firstnameHint"
         android:inputType="text"
         android:maxLines="1"
-        android:textSize="14sp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <EditText
         android:id="@+id/edit_lastname"
@@ -30,14 +30,15 @@
         android:hint="@string/lastnameHint"
         android:inputType="text"
         android:maxLines="1"
-        android:textSize="14sp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <TextView
         android:id="@+id/firstnameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="11dp"
-        android:text="@string/firstnameText" />
+        android:text="@string/firstnameText"
+        android:textSize="@dimen/normalTextSize" />
 
     <TextView
         android:id="@+id/lastnameText"
@@ -46,6 +47,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/edit_firstname"
         android:padding="11dp"
-        android:text="@string/lastnameText" />
+        android:text="@string/lastnameText"
+        android:textSize="@dimen/normalTextSize" />
 
 </RelativeLayout>
