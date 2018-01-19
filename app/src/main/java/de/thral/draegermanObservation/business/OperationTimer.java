@@ -7,9 +7,11 @@ public class OperationTimer {
     private transient CountDownTimer timer;
 
     private long timerValue;
-    private long timestampTimerStart;
     private final int secOneThird;
     private final int secTwoThird;
+
+    private long timestampTimerStart;
+    private long timerValueStart;
 
     private boolean reminderActive;
     private boolean alarmUnconfirmed;
@@ -21,7 +23,9 @@ public class OperationTimer {
         this.secOneThird = operatingTime.getTime()*20;
         this.secTwoThird = operatingTime.getTime()*40;
         this.reminderActive = false;
+
         this.timestampTimerStart = -1;
+        this.timerValueStart = -1;
     }
 
     public long getValue() {
@@ -95,23 +99,26 @@ public class OperationTimer {
                 }
             };
             timestampTimerStart = System.currentTimeMillis();
+            timerValueStart = timerValue;
             timer.start();
         }
     }
 
     public void cancel(){
         timestampTimerStart = -1;
+        timerValue = -1;
         if(timer != null){
             timer.cancel();
         }
     }
 
-    /** Resumes timer after error if its running before the error
+    /** Resumes timer after error if it ran before the error
      *
      */
     public void resumeAfterError(){
-        if(timestampTimerStart != -1) {
-            timerValue = Math.max(timerValue-(System.currentTimeMillis()-timestampTimerStart),0);
+        if(timestampTimerStart != -1 && timerValueStart != -1) {
+            timerValue = Math.max(0,
+                    timerValueStart-(System.currentTimeMillis()-timestampTimerStart));
             start();
         }
     }
